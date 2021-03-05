@@ -1,0 +1,95 @@
+# Image, name, profession in the sidebar
+
+image: /assets/images/author-image.jpg
+name: Sergio Martin Rubio
+profession: A Software Engineer
+
+#   ,-----.       ,--.                   ,---.  ,--.
+#  '  .--./ ,---. |  | ,---. ,--.--.    '   .-' |  ,---.  ,---. ,--,--,--. ,---.
+#  |  |    | .-. ||  || .-. ||  .--'    `.  `-. |  .-.  || .-. :|        || .-. :
+#  '  '--'\' '-' '|  |' '-' '|  |       .-'    ||  | |  |\   --.|  |  |  |\   --.
+#   `-----' `---' `--' `---' `--'       `-----' `--' `--' `----'`--`--`--' `----'
+#
+# There are 5 color schemes to choose from.
+# The one at the bottom takes precedence.
+color-scheme: orange
+color-scheme: pink
+color-scheme: purple
+color-scheme: blue
+color-scheme: green
+
+
+# Set this to false in production
+color-scheme-changer-widget: false
+
+
+
+
+# Menu items in the sidebar
+# Use a maximum of 3 items
+menu:
+  - title: Projects
+    link: /projects/
+
+  - title: Blog
+    link: /blog/
+
+  - title: Contact
+    link: /contact/
+
+
+formspree-url: https://formspree.io/f/mbjpvwvd
+
+# Social icons in the sidebar
+# use font awesome icon code in the 'icon:' value
+social:
+  # facebook:
+  #      icon: fa-facebook-square
+  #      link: https://facebook.com
+
+  twitter:
+      icon: fa-twitter
+      link: https://twitter.com/smartinrubio
+
+  linkedin:
+      icon: fa-linkedin
+      link: https://linkedin.com/in/sergiomartinrubio
+
+  github:
+      icon: fa-github
+      link: https://github.com/smartinrub
+
+
+
+expertise:
+  - title: Java 8+
+    level: 100
+    color: rgb(247, 205, 182)
+
+  - title: Spring Framework
+    level: 90
+    color: rgb(80, 185, 185)
+
+  - title: DevOps
+    level: 80
+    color: rgb(222, 184, 135)
+
+  - title: SQL/NoSQL
+    level: 90
+    color: rgb(124, 142, 222)
+
+  - title: NoSQL
+    level: 75
+    color: rgb(160, 158, 158)
+
+  - title: RESTful
+    level: 90
+    color: rgb(112, 195, 148)
+
+  - title: Security
+    level: 70
+    color: rgb(230, 133, 172)
+
+  - title: React
+    level: 40
+    color: rgb(113, 178, 222)

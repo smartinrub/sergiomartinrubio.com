@@ -1,0 +1,114 @@
+title: Sergio Martin Rubio
+description: I am a Software Engineer who specializes in high performance and scalable web applications.
+url: https://sergiomartinrubio.com
+# For more customizations, go to  _data/main.yml
+
+
+# Kramdown is the default markdown processor used. It is supported by Github.
+markdown: kramdown
+
+# Mathjax setting
+enable-mathjax: yes
+
+# Charts
+enable-chartjs: yes
+
+
+# This defines how the URLs should look like.
+permalink: /blog/:title/
+
+# Pagination - Posts per page in the blog index.
+paginate: 4
+paginate_path: /blog/page:num/
+
+
+# Jekyll will read contents inside _pages only if we tell it to.
+include:
+    - _pages
+
+# Google Ananlytics Tracker.
+# Sign up with Google analytics and replce with your analytics ID.
+analytics: UA-137749111-1
+
+# FullStory is an analytics engine
+fulstory: W6Z0Y
+
+# Table of contents in each post
+# Change the value to 'no' if Table of Contents is not required.
+toc:  yes
+
+# Share buttons
+# Change it to `no` to remove share buttons.
+share: yes
+
+
+# Comments by Disqus
+# Sign up with Disqus to get your shortcode. Leave it blank if you do not want to run diqus code on the website.
+# Leave it blank to remove disqus completely.
+disqus:
+
+
+# Define whether recent posts should be shown at the bottom of each post.
+# Change it to `no` to remove recent posts.
+recent-posts: yes
+
+
+
+# Editing items below this line can break the site
+##################################################
+
+
+#
+#   ,-----.                                                    ,--.
+#  '  .--./ ,---. ,--,--,--. ,---. ,--.--. ,---.  ,---.  ,---. `--' ,---. ,--,--,
+#  |  |    | .-. ||        || .-. ||  .--'| .-. :(  .-' (  .-' ,--.| .-. ||      \
+#  '  '--'\' '-' '|  |  |  || '-' '|  |   \   --..-'  `).-'  `)|  |' '-' '|  ||  |
+#   `-----' `---' `--`--`--'|  |-' `--'    `----'`----' `----' `--' `---' `--''--'
+#                           `--'
+# All compression variables are declared here.
+
+sass:
+ sass_dir: /assets/css/_sass
+ style: compressed
+
+#compress.html
+compress_html:
+  clippings: [html, head, meta, title, link, body, div, script, header, footer]
+  comments: ["<!-- ", " -->"]
+  endings: [all]
+  ignore:
+    envs: [local]
+  blanklines: false
+  profile: false
+  startings: []
+
+
+collections:
+    projects:
+      output: true
+      permalink: /projects/:path/
+    privacy_policy: 
+      output: true
+      permalink: /privacy-policy/
+    copyright_policy: 
+      output: true
+      permalink: /copyright-policy/
+
+# Exclude from processing #
+exclude:
+  - README.md
+  - .git
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+
+
+# These plugins are supported by github by default and can be installed locally using ruby gems
+plugins:
+    - jekyll-sitemap    # Adds sitemap to the website at /sitemap.xml
+    # - jekyll-feed       # Adds feed to the website at /feed.xml
+    - jekyll-paginate   # Used for sorting posts by page numbers.
+    - jekyll-seo-tag    # Adds all the important SEO meta tags by default.
+    - jemoji            # emojis cheat sheet: https://www.webfx.com/tools/emoji-cheat-sheet/
+    - jekyll-include-cache   # replace include with include_cached
+    - jekyll-gist
