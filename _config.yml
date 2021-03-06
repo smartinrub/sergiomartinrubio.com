@@ -15,11 +15,11 @@ enable-chartjs: yes
 
 
 # This defines how the URLs should look like.
-permalink: /blog/:title/
+permalink: /articles/:title/
 
-# Pagination - Posts per page in the blog index.
+# Pagination - Posts per page in the articles index.
 paginate: 4
-paginate_path: /blog/page:num/
+paginate_path: /articles/page:num/
 
 
 # Jekyll will read contents inside _pages only if we tell it to.

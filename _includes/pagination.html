@@ -11,7 +11,7 @@
   paginator.page %}
   <span class="active">{{ page }}</span>
   {% elsif page == 1 %}
-  <a href="{{'/blog/' | relative_url}}">{{ page }}</a>
+  <a href="{{'/articles/' | relative_url}}">{{ page }}</a>
   {% else %}
   <a
     href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}"

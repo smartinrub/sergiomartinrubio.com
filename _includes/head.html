@@ -14,13 +14,13 @@
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
 
-  {% if page.url contains 'blog' %}
+  {% if page.url contains 'articles' %}
   <!-- Prefetch disqus DNS for faster page speed -->
   <link rel="dns-prefetch" href="https://{{site.disqus}}.disqus.com/" />
   {% endif %} {% if page.url == '/' %}
   <!-- Prerender next pages for faster page speed -->
   <link rel="prerender" href="{{'/contact/' | relative_url }}" />
-  <link rel="prerender" href="{{'/blog/' | relative_url }}" />
+  <link rel="prerender" href="{{'/articles/' | relative_url }}" />
   {% endif %}
 
   <!-- SEO meta tags -->
