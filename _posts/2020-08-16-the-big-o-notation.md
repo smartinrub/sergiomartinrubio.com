@@ -1,6 +1,6 @@
 ---
 title: The Big O Notation
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/q6w7i-2W90gaP2_n26iz_bNf7HrOch6DzEXNW3w80P6FeVR7vhSLspYJ4hKptAoGcg25Bzw9QvWHycqyjdTsRgc0qQ-aPv7HjF39mruAukf39bjk1nWc34ikKFTDm-pBmGzo5iwPRuetsmjhPrX9MYYxgfSjfJRsMP4cLMO1RGeqJxxXFFeDsfQbync3td9-dgschXsaKEEFmzykZVxmsLh1tw6f1PqjRN9Eep2vLGwQvxr-BhC30uzRw54ja9KfXoOG9TRHOdu8n27mNbSM8_DR7kR1gh6lWrBeXnV4QbD0G4uHmZKpaszabFYyiUlZCI7q0KLowzxQJfKEzyJ9D31HWR7MqoZVqv2QTy0yUXqepM_WxCiIk9v5qxbVETJEF0QtC3zulSycDp4saDqCUB1vxmEGpbnD7RdJOVmVJGkHZCld7kAULUb3SY-vmuUIPGT1_LxnNfH_HX5iaqwsMbRdMLED5Ne3CeKeliEzZyJnVLqU_RLwDPE9x6rSxGt1hOPp1qqERr8KDPKfb0vakve4sPbQEppD-9H7tg97TOe-6vFfkB5FL3kClYiitJ6Qoebf7MNm0gpQLghJLy9MMCPpfCl4GON44PLG6QnoM9IUyLSWPBXeM9twA8wSZTJMcqjONIflXhobY5pDdY036xCfnImBBsygNCDwa51xksI6Os8FGIj59mXrFAMKT8N-UzG207Krl5K8PgBGjGJVAz8=w640-h480-no?authuser=0
 categories:
     - Algorithm
 mermaid: false
@@ -40,3 +40,4 @@ Algorithms can be classified by three running time cases:
 | $$O(n^2)$$      | Quadratic    | Bubble Sort         |
 | $$O(2^n)$$      | Exponential  | Recursive Fibonacci |
 
+Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1209820">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1209820">Pixabay</a>

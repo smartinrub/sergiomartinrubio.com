@@ -1,6 +1,6 @@
 ---
 title: JPA. Introduction to Java Persistence API
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/kxHuPaW_W2T8G4IyStnd3km5HAad5HAA0jOYEyF04Zus_C-GHXjgbOzHS36u4He6UwPVfA53F2Hr3U-BoRRMXj8-09vrShnwX0PIL7lcDQYcJUwp1sH9G_6nYxNDbo8yy9fVxXv7d-84SXlBnPHTSWw8pNAdQWEwfbMpxeARlqKMj2RHydPVjCx1u7jKVriEpHOv8nmMDJW5BFISDBt8wnzbl8qKRN7l-RExBJ1EG3r-mYq2lMpy3L3Ke16KNnmto5R5j8ApeGpvyr1Ia7xV-cWdXUjCXvV9AV1rKqPCM31bVOPuDrIYu-E-YhR-gyoLAEAGcI5xGTHXhKqx9plmiEvtr6wU80J6T30vRwVbkKbRWaAkQ3l1trv5Y0ZiVz3aqXWXE2s84LiV7Pgkb7uBnl-DIOLj09JAXKdOedk5ABhnCvpWu5ljYd8Ml_lUkBRVmm8p4YX9i2rN5BnNA2jpMJSdgU2DptOky3J08OeKGt_Psyi-DFWB6YVDV761EEGdfePMiYlWDGdjAyxZ_ajq58lyaBFxSfKHrtm7wZ5KM_hA7lWXzZ1uDbT9C-nxEqACXb-yY13zpGLIuLpiiMy6nJKtB4KMhhxJYF3k24_s5mAhHijbTLlhh4SimA_6Rr-RYUuSqpBUch8ksJ0JNghOpM116wKKj_3BBbXWtFMQ-k0LgmctOX6e8_VVMbYAp7gKVkvGPmv8zUv1Wad37UFTomc=w640-h426-no?authuser=0
 categories:
     - Java Framework
     - Database
@@ -397,3 +397,4 @@ You can bind parameters with `:` followed by the parameter name or `?` followed 
 {% include elements/button.html link="https://github.com/smartinrub/jpa-javaee8.git" text="Examples" %}
 </p>
 
+Image by <a href="https://pixabay.com/users/pexels-2286921/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1850170">Pexels</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1850170">Pixabay</a>

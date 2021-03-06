@@ -1,6 +1,6 @@
 ---
 title: Contexts and Dependency Injection in Java EE
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/1-q8fr3LePunCNwVG6jOKluL9PWPnv7bW5Bj5d972xoOtCk-lBvRyizYa8CRaszmUhkBB_knqjb8nJNj_br3C_d8G1eR4TNJHI2DFfI3Wb8MLL9W1Y8DUx3oSDtGtMNSA7T64ocgt4M9rQtzufk_ltzo9wnnWExlQVkROdLUcy2elTFYJQWV28Jk7AT9KvEg1trfe6jNSVPQcQ3C_46z6RvnHxXPFmteKkuPybqFGWXvor4wyvaJmM9rKOn-ACHOlAxj-UMgbqavWf_51FNrjhdIZPxYJyJ5HUWBCn5CffvApIebMgOBy0G6JhQVc1Pm68kb7dXx0B_hqkZQdHfXeGPKhR007imcYreu_9Ig9KkQEvvhMEKCpllUpWqc1fF8ahLymsGqh7BEQMQfj-N0j2C2UWN4dNdZl6ClxjAx2pywpG6p1qoxYSwBzUoIuWRD6DR9Fzq0FlKtuIRRxxpG1SkCgFup1sjqPt_bdKOcL61VKw08WpuUnLuh93wzxz-OCCIE1n00dtUt1cZyaoyzbmM7iF4y8URBgAu8THf1KC4PBG-nmiHgZFI0epNfSVZkNRnntJGR7TIt1whSTdpviXtlmQ7MBciW-5xQJWR4fLthUeoqfI73E2U6MQB-REg5jr7633hdshAJsvOo6mVi_Bn1zX7jWXrMNzE1xB0A1SJQkroiNoXi0PriKojn=w640-h422-no?authuser=1
 categories:
     - Java Framework
 mermaid: false
@@ -225,3 +225,4 @@ By default all session beans have `@Dependant`. You can also combine session bea
 {% include elements/button.html link="https://github.com/smartinrub/cdi-javaee-example.git" text="Examples" %}
 </p>
 
+Image by <a href="https://pixabay.com/users/alfcermed-3552488/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3539566">Alfonso Cerezo</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3539566">Pixabay</a>
