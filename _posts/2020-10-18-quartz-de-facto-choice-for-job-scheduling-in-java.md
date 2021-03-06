@@ -1,6 +1,6 @@
 ---
 title: Quartz. De-facto Choice for Job Scheduling in Java
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dtMF4Fq3oJlZjZixXvAB2bcqips9fS4uw1GiojzP_abjKiydIM4nwzdUllMzr3obBHl4K7Q2pubs--TMxXRvUdW9M45oO6UgPSgCSJcrpfQa8IUnfSWlGgCkpd1nNcuZTellCeTxiKOUpqrI4m7KSF=w640-h426-no?authuser=0
 categories:
     - Java Framework
     - Spring
