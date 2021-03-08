@@ -37,8 +37,8 @@ menu:
   - title: Contact
     link: /contact/
 
-
-formspree-url: https://formspree.io/f/mbjpvwvd
+smart-forms: https://smartforms.dev/submit/60453f2ab81854118fd4172f
+# formspree-url: https://formspree.io/f/mbjpvwvd
 
 # Social icons in the sidebar
 # use font awesome icon code in the 'icon:' value
