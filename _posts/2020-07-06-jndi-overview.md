@@ -1,6 +1,6 @@
 ---
 title: JNDI Overview
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3ciqiQg04bzCEnq_EtgW0Sro4CyAGPOjw4Vmvlw5dmodzhSKnyUHzmECrd_fMNwKn4sQIXnuRWupLQ8b2nJYuw_kYehuKCrqYEENFUVu1x2XetmwTYXos0gFm2Bb9Ac-NMOdij1YTVKjPtBsjKG7CqQ=w640-h426-no?authuser=1
 categories:
     - Java Framework
 mermaid: false
@@ -391,3 +391,5 @@ MyService myServiceFromJNDI = (MyService) jndi.lookup("my-service");
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/jndi-example.git" text="Examples" %}
 </p>
+
+Image by <a href="https://pixabay.com/users/roma1880-2180741/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3859388">Ro Ma</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3859388">Pixabay</a>

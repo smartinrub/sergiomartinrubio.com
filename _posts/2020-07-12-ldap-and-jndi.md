@@ -1,6 +1,6 @@
 ---
 title: LDAP and JNDI
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3ebRPlCr5Fne_iw6aHJPHnX27cDe8_QN5Mwh6AkAVKD4-i2-N_giATb7nj3bvL53BhmAScSBkaTS_YuDvKQzcc1deNsOLwx1FeRSOeIgzaM-j8IDTt0IkqJD3fWyq2S0CBU-xKtUIZNYbT9qkuosA-K=w640-h426-no?authuser=1
 categories:
     - Java Framework
     - Data Store
@@ -145,3 +145,5 @@ bob.smith@example.com
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/ldap-jndi-example.git" text="Examples" %}
 </p>
+
+Image by <a href="https://pixabay.com/users/roma1880-2180741/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3859388">Ro Ma</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3859388">Pixabay</a>
