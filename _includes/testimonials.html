@@ -1,0 +1,23 @@
+<h2 class="m0a">Testimonials:</h2>
+<div class="py-3">
+  {% for item in site.data.testimonials %}
+  <div class="min-w-screen flex items-center justify-center mb-5" data-aos="fade-up">
+    <div class="w-full mx-auto rounded-lg bg-white border shadow-lg px-5 pt-5 pb-10 p-3" style="max-width: 500px">
+      <div class="w-full mb-10">
+        <h1 class="text-gray-300 text-left">
+          <i class="fas fa-quote-left"></i>
+        </h1>
+        <p class="text-sm md:text-base italic text-gray-600 text-center px-5">{{item.review}}</p>
+        <h1 class="text-gray-300 text-right">
+          <i class="fas fa-quote-right"></i>
+        </h1>
+      </div>
+      <div class="w-full">
+        <p class="text-md font-weight-bold text-center">
+          {{item.name}}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
