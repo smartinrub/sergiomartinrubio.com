@@ -1,6 +1,7 @@
 ---
 title: Take Unit Testing to the Next Level with JUnit 5
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Testing
     - Java Framework

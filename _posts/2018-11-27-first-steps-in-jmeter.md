@@ -1,6 +1,7 @@
 ---
 title: First Steps in JMeter
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Testing
     - Performance

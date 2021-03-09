@@ -1,6 +1,7 @@
 ---
 title: Get Started with Java Servlets
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Java Framework
 mermaid: false

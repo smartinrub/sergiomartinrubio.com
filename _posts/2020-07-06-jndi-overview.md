@@ -1,6 +1,7 @@
 ---
 title: JNDI Overview
 image: https://lh3.googleusercontent.com/pw/ACtC-3ciqiQg04bzCEnq_EtgW0Sro4CyAGPOjw4Vmvlw5dmodzhSKnyUHzmECrd_fMNwKn4sQIXnuRWupLQ8b2nJYuw_kYehuKCrqYEENFUVu1x2XetmwTYXos0gFm2Bb9Ac-NMOdij1YTVKjPtBsjKG7CqQ=w640-h426-no?authuser=1
+author: Sergio Martin Rubio
 categories:
     - Java Framework
 mermaid: false

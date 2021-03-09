@@ -1,6 +1,7 @@
 ---
 title: Start using Aspect Oriented Programming with Spring AOP
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Design Pattern
     - Spring

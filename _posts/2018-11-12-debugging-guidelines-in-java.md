@@ -1,6 +1,7 @@
 ---
 title: Debugging Guidelines in Java
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Troubleshooting
     - Testing

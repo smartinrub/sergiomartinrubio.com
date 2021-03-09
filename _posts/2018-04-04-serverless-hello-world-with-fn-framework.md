@@ -1,6 +1,7 @@
 ---
 title: Serverless “Hello World” with Fn Framework
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - DevOps
     - Serverless

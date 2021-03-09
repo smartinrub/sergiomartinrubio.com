@@ -1,6 +1,7 @@
 ---
 title: Creational Patterns
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Design Pattern
 mermaid: true

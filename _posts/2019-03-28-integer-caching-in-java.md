@@ -1,6 +1,7 @@
 ---
 title: Integer Caching in Java
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Java
 mermaid: false

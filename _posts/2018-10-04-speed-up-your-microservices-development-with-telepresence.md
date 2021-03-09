@@ -1,6 +1,7 @@
 ---
 title: Speed Up Your Microservices Development with Telepresence
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - DevOps
     - Testing

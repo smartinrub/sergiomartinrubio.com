@@ -1,6 +1,7 @@
 ---
 title: LDAP and JNDI
 image: https://lh3.googleusercontent.com/pw/ACtC-3ebRPlCr5Fne_iw6aHJPHnX27cDe8_QN5Mwh6AkAVKD4-i2-N_giATb7nj3bvL53BhmAScSBkaTS_YuDvKQzcc1deNsOLwx1FeRSOeIgzaM-j8IDTt0IkqJD3fWyq2S0CBU-xKtUIZNYbT9qkuosA-K=w640-h426-no?authuser=1
+author: Sergio Martin Rubio
 categories:
     - Java Framework
     - Data Store

@@ -1,6 +1,7 @@
 ---
 title: Quick Introduction to Reactive Programming
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Design Pattern
     - Spring

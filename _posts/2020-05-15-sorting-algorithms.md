@@ -1,6 +1,7 @@
 ---
 title: Sorting Algorithms
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Algorithm
 mermaid: false

@@ -1,6 +1,7 @@
 ---
 title: Working with JDBC API
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Database
     - Java Framework

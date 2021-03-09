@@ -1,6 +1,7 @@
 ---
 title: Data Migration with Spring Batch
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Java Framework
     - Spring

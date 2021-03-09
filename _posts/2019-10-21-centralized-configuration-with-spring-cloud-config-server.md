@@ -1,6 +1,7 @@
 ---
 title: Centralized Configuration with Spring Cloud Config Server
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Java Framework
     - Spring

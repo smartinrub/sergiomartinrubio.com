@@ -1,6 +1,7 @@
 ---
 title: Getting Started with DynamoDB and Spring
 image: /assets/images/shubham-beeharry-223969.jpg
+author: Sergio Martin Rubio
 categories:
     - Database
     - NoSQL
