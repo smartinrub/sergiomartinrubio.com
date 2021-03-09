@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The **Java Persistence API** (*JPA*) is responsible for performing CRUD operations and is built on top of *Hibernate*. JPA has been designed to replace EJB 2.1 entity beans and has started as a part of the EJB 3 specification. JPA is now outside of an [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) container and has its own specification, but it's still part of the [EJB specification](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works), since a compliant EJB 3 container has to provide a JPA implementation, which integrates into the transaction handling of the container.
 
 ## Entities

@@ -8,7 +8,7 @@ layout: post
 
 ## Single Node Kubernetes Cluster on Raspberry Pi
 
-### Introduction
+#
 
 **Kubernetes** is the most popular container orchestrator and is now a mature project created originally by _Google_ and finally announced as an open source project in 2014.
 

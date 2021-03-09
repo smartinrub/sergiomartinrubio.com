@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Bean** is one of the angular stones in the **Spring Framework** and it is very important to know how it works. However, the concept of _bean_ it is not very clear and the [Bean definition given by the official Spring documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-introduction){:target="_blank"} is not easy to understand.
 
 >In Spring, the **objects** that form the backbone of your application and that are **managed by the Spring IoC container** are called beans. **A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container**. Otherwise, **a bean is simply one of many objects in your application**. Beans, and the dependencies among them, are reflected in the configuration metadata used by a container.

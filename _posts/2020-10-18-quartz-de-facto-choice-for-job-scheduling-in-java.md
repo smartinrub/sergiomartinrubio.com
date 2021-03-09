@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Schedulers are sometimes required for recurring tasks like reminding customers that they have to pay before a deadline, and [Quartz](http://www.quartz-scheduler.org){:target="_blank"}  is one of the best options out there when looking for a scheduling library for a Java enterprise application.
 
 **Why Quartz?** There are other good alternatives like [db-scheduler](https://github.com/kagkarlsson/db-scheduler){:target="_blank"}  that provides a simpler API however Quartz is a more mature library with a larger community.

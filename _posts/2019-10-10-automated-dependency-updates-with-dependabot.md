@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Dependabot](https://dependabot.com){:target="_blank"} is a free and open source tool that has been bought by _GitHub_ and allows you to check for updates on you dependency files.
 
 It can be used to update dependencies in _Ruby_, _JavaScript_, _Python_, _PHP_, _Elixir_, _Elm_, _Go_, _Rust_, _Java_ and _.NET_, as well as, git submodules, _Docker_ files and _Terraform_ files.

@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [ThreadLocal](https://docs.oracle.com/javase/7/docs/api/java/lang/ThreadLocal.html){:target="_blank"} variables are usually private static fields in classes and maintain its state inside a thread and generate unique identifiers local to each thread. This means that every time a different thread accesses the same instance, a new `ThreadLocal` variable is created. Therefore, information saved in a `ThreadLocal` can only be accessed by a single thread for a particular instance.
 
 ## Lifecycle

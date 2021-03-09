@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The **Java Class Loader** is a fundamental component of the **JVM**, so it is important to have a basic understanding of how it works and how you can create your own `ClassLoader`.
 
 ## What is the Java Class Loader?

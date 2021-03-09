@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [JWT](https://jwt.io/){:target="_blank"} (_JSON Web Token_) is an open source standard commonly used to transmit data between two services in a compact and secure way. This standard offers a wide range of libraries to generate _JWTs_ and includes libraries for platforms such as _.NET_, _Python_, _Node.js_, _Java_, _JavaScript_, _Perl_, _Ruby_, _Elixir_, _Golang_, _Groovy_, and _Haskell_.
 
 ## Features

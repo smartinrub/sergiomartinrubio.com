@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Before **microservices** became popular, we did not have to worry about making sure that different components of your application were using the same POJO class, and any change in a particular entity will affect all its users straight away.
 
 In a microservices architecture, some **testing** aspects have changed, and now our applications **require a different strategy**. **Contract Testing** is one of the solutions which consists of writing tests to ensure that the contracts of our microservices are satisfied and work as expected.

@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Storing passwords is a difficult task when we need to satisfy all the data protection laws, and it is getting even tougher with the rise of [GDPR](https://eugdpr.org/){:target="_blank"}, the new European regulation in data privacy. Therefore, we have to make sure all your sensitive data is encrypted and, to do that, we can use hashing algorithms.
 
 When we want to hash passwords to store them in a database, Bcrypt is the way to go and there are many libraries for different languages.

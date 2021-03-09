@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The Java Naming and Directory Interface is a Java API that allows Java applications to look up resources via name. It is basically an interface to get instances of objects like data sources (e.g. `javax.sql.DataSource`), [JMS](https://sergiomartinrubio.com/articles/understanding-messaging-pattern-with-jms) resources (e.g. `javax.jms.ConnectionFactory`) or Java objects of any type.
 
 **JNDI** is used to access remote resources without having to know the details of the configuration. For instance, you can use `org.apache.activemq.jndi.ActiveMQInitialContextFactory` resource to connect to the _ActiveMQ_ server without having to know the connection details, like url or port. Therefore, JNDI allows distributed applications to look up services in an abstract and resource-independent way, so you do not need to keep the configuration hardcoded in your application or in a configuration file.

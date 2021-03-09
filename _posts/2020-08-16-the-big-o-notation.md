@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **O-notation** (pronounced _big-oh notation_) is a way of describing the performance of an algorithm and provides an upper bound or worst case on a function. Using O-notation you can describe the running time of an algorithm by inspecting its structure.
 
 ## Upper, Lower and Tight Bound

@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 In this post we are going to go through the main **JMeter** features, but first of all, what is [JMeter](https://jmeter.apache.org/){:target="_blank"}? basically, it is a tool to perform load testing against:
 
 - Web – _HTTP, HTTPS APIs_

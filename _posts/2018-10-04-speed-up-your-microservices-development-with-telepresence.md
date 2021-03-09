@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Microservices architecture** is the way to go when you want to release new features multiple times per day, however most of the time microservices need to connect to each other. This is when _Kubernetes_ comes in to orchestrate the life and networking of _Dockerized_ microservices, and on top of that, it is reliable and performs very well. However, when developers want to debug or test a small change in a service that depends on other services located in a remote _Kubernetes_ cluster, dev cycles can become a lot slower. A developer needs to do the following to see the changes:
 
 1. Write code locally.

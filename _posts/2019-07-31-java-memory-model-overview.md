@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The _JVM_ uses its own memory model and as soon as it is launch the system allocates memory for the process, and this memory is shared by:
 
 - **Heap Memory**: _Java_ objects are stored in one of the [heap](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.3){:target="_blank"} areas.

@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **CDI** (*Contexts and Dependency Injection*) is one of the core features of *Java EE*. CDI allows you to glue the different componentes of your Java EE application in a loosely coupled way.
 
 Commonly you have a web tier, enterprise tier and persistence tier and you can use CDI to join these three layers.

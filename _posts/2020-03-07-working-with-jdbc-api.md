@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [JDBC](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html){:target="_blank"} is a [SQL](http://sergiomartinrubio.com/articles/mysql-guide){:target="_blank"} (Structured Query Language) API that was release for the first time in 1996 and since then is one of the most commonly use **Java** libraries. The purpose of this library is to allow programmers to use standard SQL statements in **Java** language.
 
 > SQL is usually pronounced as sequel and you can learn how to use this language [here](http://sergiomartinrubio.com/articles/mysql-guide){:target="_blank"}.

@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The _Java Collections_ library provides a set of interfaces and implementations in the package `java.util` to satisfy most of the data structures needs.
 
 A collection represents a group of objects or elements that can be ordered, unordered, with duplicates or without duplicates depending on the implementation. In the following sections we will cover the specific sub-interfaces like `Set` and `List`.

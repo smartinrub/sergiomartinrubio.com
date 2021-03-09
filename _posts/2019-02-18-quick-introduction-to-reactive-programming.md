@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Reactive programming** is based on async and non blocking threads, so that, it allows us to use efficiently all the needed threads.
 
 This paradigm makes use of the **Publisher-Subscriber** pattern to achieve asynchronous and event-based sequences of data.

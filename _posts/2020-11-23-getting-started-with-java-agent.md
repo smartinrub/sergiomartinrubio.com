@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Java Agent](https://docs.oracle.com/javase/1.5.0/docs/api/java/lang/instrument/package-summary.html){:target="_blank"}  is an instrumentation API which is usually overlooked and allows you to modify bytecode at runtime. This means that is a powerful feature but "with great power there must also come great responsibility".
 
  The **Java Agent** feature was added as part of *JDK 1.5* and has some use cases like metrics generation, for testing, in [Aspect Oriented Programming](https://sergiomartinrubio.com/articles/start-using-aspect-oriented-programming-with-spring-aop) and in any other scenario that requires modifying the bytecode at runtime.

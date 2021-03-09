@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Mockito](https://site.mockito.org){:target="_blank"} is a popular mocking framework for **Java** applications. This framework helps you test classes in isolation and avoids creating collaborators in your unit tests. This is a very common requirement in web applications that use the MVC pattern. For instance, you might want to test a service layer that uses a utility class to check the payment method and then will call an API to process the payment. In this situation you have to instantiate or inject the utility class and the API client, and the second one will require to start a mock server. As you can see this looks like an integration test instead of a simple unit test.
 
 ## What is a mock?

@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The hype about [serverless](https://en.wikipedia.org/wiki/Serverless_computing){:target="_blank"} applications has been growing lately, and **AWS** is the leader at the moment, however there are other alternatives such as **Fn Project** by Oracle or **OpenWhisk** by **IBM**.
 
 I found out about [Fn Project](https://github.com/fnproject/fn){:target="_blank"} during _Democratizing Serverless Talk_ at [London QCon 2018](https://dzone.com/articles/qcon-london-2018){:target="_blank"} and could not wait to try this platform since you can run your own serverless architecture on your own laptop.

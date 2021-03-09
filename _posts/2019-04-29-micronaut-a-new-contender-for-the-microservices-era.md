@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Micronaut](https://micronaut.io/){:target="_blank"} is a web framework similar to **Spring Boot**, which started at [OCI](https://objectcomputing.com/){:target="_blank"} and was initially developed by _Groovy_ and _Rails_ developers from **Pivotal**.
 
 _Micronaut_ is really a competitor for _Spring Boot_, and if you are comfortable with _Spring Boot_, _Micronaut_ provides a Spring-like way of creating web applications. It uses _JAX-RS_ annotations and specific _Micronaut_ annotations similar to the _Spring Boot_ ones (sometimes the only difference is the package name (`io.micronaut`)).

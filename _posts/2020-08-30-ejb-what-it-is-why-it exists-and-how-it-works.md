@@ -8,8 +8,6 @@ mermaid: true
 layout: post
 ---
 
-## Introduction
-
 **EJB** (*Enterprise Java Beans*) is part of the Java EE (previously called *J2EE* and *Jakarta EE* since 2018) specification and allows you to modularize your application by enabling component-based development. You can reuse and package EJBs into multiple application. EJB components always live in an EJB container that orchestrates underlying services, so you don't have to worry about writing the logic for services such as persistence, transactions, networking, security... and you can focus on the business logic.
 
 ```mermaid

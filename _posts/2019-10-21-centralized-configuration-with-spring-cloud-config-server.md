@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/reference/html/){:target="_blank"} provides remote configuration for your Spring applications or any application running in any language. This tool has been out there for a long time, so it is very mature and reliable. _Spring Cloud Config Server_ comes in handy when you need to set up configurations for microservices in multiple environments, so you can manage properties separately and avoid the hassle of triggering application builds when only the configuration is updated.
 
 ## Getting Started

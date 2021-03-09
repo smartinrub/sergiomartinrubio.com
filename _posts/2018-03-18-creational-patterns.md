@@ -8,8 +8,6 @@ mermaid: true
 layout: post
 ---
 
-## Introduction
-
 Creational patterns allow you to create objects while hiding the creational logic, which increase flexibility and code reusability, so you decide which objects need to be created for a particular case.
 
 <p class="text-center">

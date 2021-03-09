@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 A **MDB** (*Message-Driven Bean*) is a bean used by [JMS](https://sergiomartinrubio.com/articles/understanding-messaging-pattern-with-jms) to listen to new asynchronous messages. In the same way as any other Java EE enterprise bean, the [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) container in which the MDB runs takes of the bean lifecycle so you do not have to configure a listener by yourself and add all the required boilerplate.
 
 The main difference between regular session beans and MDBs is that clients don't access message-driven beans through interfaces, instead MDBs are listening to messages published by a JMS application.

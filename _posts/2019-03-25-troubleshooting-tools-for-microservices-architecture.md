@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 One of the biggest challenges when transitioning to a **microservices architecture** is **troubleshooting** and **debugging**. When the number of microservices grows, a simple _HTTP_ request can hit dozens of applications, and in case something goes wrong or the performance is not as good as expected, it might be quite tricky to know where the issue is.
 
 **Logging** and **instrumentation** are very important tools to understand what is going on in a microservices architecture.

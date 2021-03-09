@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Behavioral patterns improve communication and flexibility between objects.
 
 <p class="text-center">

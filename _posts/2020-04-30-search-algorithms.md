@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Searching** is one of the most frequent operations performed in any application, so it is important to know and understand the fundamentals of search algorithms because it will determine the performance of the application.
 
 In software engineering, searching is the process of looking up an element from a collection of elements. These elements can be stored in arrays, trees or graphs.

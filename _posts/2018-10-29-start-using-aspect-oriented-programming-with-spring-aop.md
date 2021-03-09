@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Aspect Oriented Programming (AOP)** helps us to solve specific situations in a very elegant way and is used to insert code depending on how our code looks.
 
 Why _aspects_? When we have a concern which is cross domain, _aspects_ are a good solution. e.g. logs, _exceptions_, security…

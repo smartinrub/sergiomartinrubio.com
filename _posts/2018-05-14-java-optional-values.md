@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Before _Java 8_ there were only two possible ways to gracefully exit a method when a value is not present, either you return `null` or throw an exception. This has changed since _Java 8_ with the `Optional` interface.
 
 - `null`: efficient, but risky (we have to make sure that the client is going to handle a possible `null` return value).

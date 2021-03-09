@@ -8,8 +8,6 @@ mermaid: true
 layout: post
 ---
 
-## Introduction
-
 These patters are about providing different ways to create a class structure with inheritance and composition.
 
 <p class="text-center">

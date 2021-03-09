@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Java** provides some optimizations for integers, so instances of [Integer](https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html){:target="_blank"} are cached by the _JVM_ to increase performance.
 
 ## How it works

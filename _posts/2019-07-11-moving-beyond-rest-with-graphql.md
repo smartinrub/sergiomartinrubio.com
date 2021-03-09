@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [**GraphQL**](https://graphql.org/){:target="_blank"} is a **query language** that matches up with **Domain Driven Design**, so you can use your existing entities or models in your _GraphQL_ design.
 
 This query language was created by _Facebook_ and open sourced later in 2015, and since then it has been maitained by the community.

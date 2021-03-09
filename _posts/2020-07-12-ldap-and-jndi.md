@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [LDAP](https://ldapwiki.com/wiki/LDAP){:target="_blank"} (Lightweight Directory Access Protocol) is a directory service in which you can store data. The information stored in LDAP is structured in a tree hierarchy and each directory object is called an entry. An entry contains the following components:
 
 - `DN` (_Distinguished Name_): identifies an entry and consists of single entries names separated by a comma and ordered right-to-left.

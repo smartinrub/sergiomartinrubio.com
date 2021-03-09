@@ -11,8 +11,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [DynamoDB](https://aws.amazon.com/dynamodb/?sc_channel=PS&sc_campaign=acquisition_UK&sc_publisher=google&sc_medium=dynamodb_hv_b&sc_content=dynamodb_e&sc_detail=dynamodb&sc_category=dynamodb&sc_segment=62042493529&sc_matchtype=e&sc_country=UK&s_kwcid=AL!4422!3!62042493529!e!!g!!dynamodb&ef_id=EAIaIQobChMIncaip-jP3wIVmoXVCh3v2QHsEAAYASAAEgLIzPD_BwE:G:s){:target="_blank"} is a NoSQL database provided by AWS, and in the same way as [MongoDB](https://www.mongodb.com/){:target="_blank"} or [Cassandra](http://cassandra.apache.org/){:target="_blank"}, it is very suitable to boost horizontal scalability and increase development speed.
 
 ## Main Features

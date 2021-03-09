@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 **Functional interfaces** only have one abstract method different from the public methods of `Object.class` (`equals`, `hashCode`…), so that the contract contains a single method.
 
 ## Annotation

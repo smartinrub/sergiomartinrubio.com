@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 *Behavior Driven Development* (BDD) provides techniques that can help you manage software development uncertainty and risk. BDD is about building the right software.
 
 > BDD was originally defined by [Dan North](https://dannorth.net){:target="_blank"} in 2009 in London as an extension of TDD (Test Driven Development) that describes a cycle of interactions with particular outputs.

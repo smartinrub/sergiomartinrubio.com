@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Iteration and recursion are exchangeable in most cases. In theory, every program can be rewritten to avoid iteration using recursion. However, it is important to know that when using one or the other, this decision might have severe impacts on performance or potentially raise unexpected errors.
 
 ## Getting Started

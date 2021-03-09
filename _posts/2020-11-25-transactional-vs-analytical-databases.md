@@ -8,8 +8,6 @@ mermaid: true
 layout: post
 ---
 
-## Introduction
-
 Data can be store in two different ways depending on the business goal. Most of the companies use an **OLTP** (*On-Line Transaction Processing*) database to store end user data that requires high performance, however some companies that analyze petabytes of data internally require an alternative database called **OLAP** (*On-Line Analytical Processing*).
 
 ## OLTP

@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Every developer should ensure code quality and follow language conventions, otherwise [Technical Debt](https://medium.com/existek/what-is-technical-debt-and-how-to-calculate-it-80193e4e746d){:target="_blank"} is created, and at some point in the future you will have to revisit that smelly piece of code.
 
 **Code Debt** can be created without even realizing when: 

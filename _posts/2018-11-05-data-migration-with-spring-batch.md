@@ -10,8 +10,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Spring Batch](https://docs.spring.io/spring-batch/trunk/reference/html/){:target="_blank"} is a batch framework designed to process large volumes of data. You can run either chunks or tasklets (single task per step).
 
 This framework is lightweight and very easy to use, so it is very recommended for tasks that will run for a long time and you want to forget about it.

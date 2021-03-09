@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 Sockets use _TCP/IP_ transport protocol and they are the last piece of a network communication between two hosts. You do not usually have to deal with them, since there are protocols built on top of sockets like _HTTP_ or _FTP_, however it is important to know how they work.
 
 >_TCP_: It is a reliable data transfer protocol that ensures that the data sent is complete and correct and requires to establish a connection.

@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 [Kubernetes](https://kubernetes.io){:target="_blank"} is growing in popularity and many companies use it to orchestrate their containerized microservices. Moreover, microservices are increasing the release cycle, because you do not have to build and deploy a huge monolith application every time a small change is made, therefore _DevOps_ teams should be able to deploy multiple times per day. However, the continuous integration and delivery process is becoming a bottleneck, because at the end of the development process, code changes will trigger a pipeline in a **CI tool**, and this tool is usually shared by all your microservices. So, what can we do? The answer is **Jenkins X**:
 
 **Jenkins X** allows you to create a distributed and decoupled _CI/CD system_.

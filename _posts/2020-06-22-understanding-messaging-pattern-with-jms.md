@@ -9,8 +9,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 The message design pattern is very common nowadays in distributed systems to decouple applications into smaller components, and it brings better performance, increased reliability and asynchronous communication.
 
 ## Types Of Messaging Techniques

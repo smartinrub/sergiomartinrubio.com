@@ -8,8 +8,6 @@ mermaid: false
 layout: post
 ---
 
-## Introduction
-
 There are two ways of initialize a field, eagerly and lazily. Lazy initialization is based on initializing the field when the value is needed, whereas the eager initialization is based on initializing the variable when it is declared.
 
 Both choices are compatible with _static_ and _instance fields_, however the implementations may differ when trying to achieve performance improvement.
