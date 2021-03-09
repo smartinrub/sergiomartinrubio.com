@@ -59,7 +59,9 @@ social:
       icon: fa-github
       link: https://github.com/smartinrub
 
-
+designations:
+  - Software Engineer
+  - Blogger
 
 expertise:
   - title: Java 8+

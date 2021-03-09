@@ -5,9 +5,30 @@
     <div class="about text-center">
       <h2 class="title"><a href="/">{{site.data.main.name}}</a></h2>
     </div>
-    <div class="bio text-center">
+
+    <h4 class="bio text-center">
+      <span class="m0 typed"></span>
+    </h4>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+      var options = {
+        strings: [
+          {% for item in site.data.main.designations %}
+            "{{item}} ^200",
+          {% endfor %}
+        ],
+        typeSpeed: 80,
+        loop: true,
+        loopCount: Infinity,
+      };
+
+      var typed = new Typed('.typed', options);
+    </script>
+
+    <!-- <div class="bio text-center">
       <h4 class="m0">{{site.data.main.profession}}</h4>
-    </div>
+    </div> -->
     <hr class="dashed">
     <div class="social text-center">
       <ul class="portfolio p0">
