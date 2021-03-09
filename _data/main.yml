@@ -80,12 +80,12 @@ expertise:
     level: 90
     color: rgb(124, 142, 222)
 
-  - title: NoSQL
-    level: 75
+  - title: Linux/Shell
+    level: 90
     color: rgb(160, 158, 158)
 
-  - title: RESTful
-    level: 90
+  - title: Cloud Computing
+    level: 80
     color: rgb(112, 195, 148)
 
   - title: Security
