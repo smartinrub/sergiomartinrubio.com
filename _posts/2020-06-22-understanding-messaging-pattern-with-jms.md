@@ -1,6 +1,6 @@
 ---
 title: Understanding Messaging Pattern with JMS
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cah-UPJeR4OS9_0dNeZ2dbXOc8acWHWODWLCD8smM43Oy0wghvA62RwPqNKqbCBzQV4w1uysqHyPe_Yc2hcsdMI41Wg5blzpsmeT8ZPB5pOqzvnt7TkY0Vjg83UxniRkGfkeWJ9jUrbqc92-Bhhf6H=w640-h404-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java Framework
@@ -283,3 +283,5 @@ public class MyListener implements MessageListener {
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/jms-example.git" text="Examples" %}
 </p>
+
+Image by <a href="https://pixabay.com/users/epicantus-168198/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=595854">Daria Nepriakhina</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=595854">Pixabay</a>
