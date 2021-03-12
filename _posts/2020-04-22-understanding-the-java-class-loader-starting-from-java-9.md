@@ -1,6 +1,6 @@
 ---
 title: Understanding the Java Class Loader Starting from Java 9
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3d0ue3Wg62MV2j0Gu5mDBGKUvrgbRXxUkX-Ex6s5b31yD1Dudfg1KLoeH9eEQ71C5iyITS9DjIH1opWOpzhOjHP-C__jMR6AXzpsx93QHKx8W16MIxt7uwhrDW7sh09K_n3c6U1tG1ZS764XrGHBWSh=w640-h427-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java

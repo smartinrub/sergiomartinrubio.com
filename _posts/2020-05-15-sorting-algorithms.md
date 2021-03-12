@@ -1,6 +1,6 @@
 ---
 title: Sorting Algorithms
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dyXrCkHHvH0hM1Q9i2jmT2r_kTGCBy1AzowI13kIRbmk0Jidxe2fGl5YFqcfLiz-jxlRqZ4dsvVeKXQgXetROHeVv6zqopRnt5osMgpWsDQEksvDK2gfm0IDVfkq26XwPMWCbz8GaG-1Vlj1LWQGH2=w640-h480-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Algorithm

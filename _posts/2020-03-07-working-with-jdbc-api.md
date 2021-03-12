@@ -1,6 +1,6 @@
 ---
 title: Working with JDBC API
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3coyQt-2fibTcofhkGPpRbI8JP5kr3aYKgku07ALpofYH-uEud-K-DWantHTJFk73H8SAL1uWZVMRV4lEqcbRKWKbdJjzufR6RWv96VkRf2EIJxWnbPwVlB5nPwg_P4EbepRa1neWl0IwljxB6KZRlV=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Database

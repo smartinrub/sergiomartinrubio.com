@@ -1,6 +1,6 @@
 ---
 title: Introduction to Java Collections
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cB3sXM_5ikjQ09a7dE8P1xs1-i5d_bKaBDCgyc_mSqEyfJKmHh7ds91l_cnFp0c3nOIqIC9Fnhd9sI9Fe9qCqsL8tlZTX1h9nUpSm60DvgB1aYG03O-B7JlOBv2RbYas9ZH5ceXqNBwleyiTr8zBa6=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java
