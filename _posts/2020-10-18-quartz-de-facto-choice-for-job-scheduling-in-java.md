@@ -22,7 +22,7 @@ Schedulers are sometimes required for recurring tasks like reminding customers t
 - Store jobs in a relational database via [JDBC](https://sergiomartinrubio.com/articles/working-with-jdbc-api)
 - Supports clustering
 - [Quartz Spring integration](https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/boot-features-quartz.html)
-- [Liquibase](https://github.com/liquibase/liquibase) integration
+- [Liquibase](https://github.com/liquibase/liquibase){:target="_blank"} integration
 
 ## Quartz Components
 
