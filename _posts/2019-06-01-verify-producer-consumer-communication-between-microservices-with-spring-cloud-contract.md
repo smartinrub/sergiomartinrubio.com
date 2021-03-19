@@ -1,6 +1,6 @@
 ---
 title: Verify Producer-Consumer Communication between Microservices with Spring Cloud Contract
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dpD6eAK_UWrkDrnr7UwqsMMZnKTV-0cmsJlPocdqUT68iTgW2jn8-qKEsNlpSQyVbeWlDPoHrTCXEQxCvxtmvZkkQdPrct7WFqYxLFOfyhReN-RxJEkmQ53IJhlmEcptbeDm9_vAt-v2ylvtkmnK10=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Testing
