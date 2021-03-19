@@ -1,6 +1,6 @@
 ---
 title: Micronaut, a New Contender for the Microservices Era
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cfTnx97ITRNawNlVMdb5Hrl0JQsDZ_Z5Yu7JtSel1jgn8jNRr90hgbvgJ_zHgR0XKFuQdeZLBvmH3rT_dGsk3OVlfm6FiVMMIFHM65P3HIid0CCvuAj2GcTKuXeFa6heQP3W1sP3DIxul1V_kIsKrI=w640-h390-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java Framework
