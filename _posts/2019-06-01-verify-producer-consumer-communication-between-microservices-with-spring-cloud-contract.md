@@ -63,115 +63,115 @@ Additionally, a plugin in the producer is required to generate tests and stubs f
 
 Now we can start defining the contract. Add contracts written in _Groovy_ or _YAML_ to `/src/test/resources/contracts/` package. For example:
 
-    ```groovy
-    package contracts
-    
-    import org.springframework.cloud.contract.spec.Contract
-    
-    Contract.make {
-    
-        description("should return all Reviews")
-    
-        request {
-            method(GET())
-            url("/reviews")
-        }
-    
-        response {
-    
-            status(200)
-            headers {
-                contentType(applicationJsonUtf8())
-            }
-    
-            body("""
-                [
-                    {"id":"1", "author":"Sergio", "message":"content"}
-                ]
-            """)
-        }
-    
+```groovy
+package contracts
+
+import org.springframework.cloud.contract.spec.Contract
+
+Contract.make {
+
+    description("should return all Reviews")
+
+    request {
+        method(GET())
+        url("/reviews")
     }
-    ```
+
+    response {
+
+        status(200)
+        headers {
+            contentType(applicationJsonUtf8())
+        }
+
+        body("""
+            [
+                {"id":"1", "author":"Sergio", "message":"content"}
+            ]
+        """)
+    }
+
+}
+```
 
 Base class:
 
-    ```java
-    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "server.port=0")
-    @RunWith(SpringRunner.class)
-    @Import(ProducerRestConfiguration.class)
-    public class BaseClass {
-    
-        @LocalServerPort
-        private int port;
-    
-        @MockBean
-        private ReviewRepository reviewRepository;
-    
-        @Before
-        public void setUp() {
-    
-            RestAssured.baseURI = "http://localhost:" + this.port;
-    
-            when(reviewRepository.findAll())
-                    .thenReturn(Flux.just(new Review("1", "Sergio", "content")));
-    
-        }
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "server.port=0")
+@RunWith(SpringRunner.class)
+@Import(ProducerRestConfiguration.class)
+public class BaseClass {
+
+    @LocalServerPort
+    private int port;
+
+    @MockBean
+    private ReviewRepository reviewRepository;
+
+    @Before
+    public void setUp() {
+
+        RestAssured.baseURI = "http://localhost:" + this.port;
+
+        when(reviewRepository.findAll())
+                .thenReturn(Flux.just(new Review("1", "Sergio", "content")));
+
     }
-    ```
+}
+```
 
 Once the contract and base class are defined, we can run Maven to generate tests and stubs.
 
-    ```shell
-    mvn clean install
-    ```
+```shell
+mvn clean install
+```
 
 Tests will be generated in `/target/generated-test-sources/contracts/`. For the given example the output will be:
 
-    ```java
-    public class ContractVerifierTest extends BaseClass {
-    
-        @Test
-        public void validate_shouldReturnAllReviews() throws Exception {
-            // given:
-                RequestSpecification request = given();
-    
-            // when:
-                Response response = given().spec(request)
-                        .get("/reviews");
-    
-            // then:
-                assertThat(response.statusCode()).isEqualTo(200);
-                assertThat(response.header("Content-Type")).matches("application/json;charset=UTF-8.*");
-            // and:
-                DocumentContext parsedJson = JsonPath.parse(response.getBody().asString());
-                assertThatJson(parsedJson).array().contains("['message']").isEqualTo("content");
-                assertThatJson(parsedJson).array().contains("['author']").isEqualTo("Sergio");
-                assertThatJson(parsedJson).array().contains("['id']").isEqualTo("1");
-        }
-    
+```java
+public class ContractVerifierTest extends BaseClass {
+
+    @Test
+    public void validate_shouldReturnAllReviews() throws Exception {
+        // given:
+            RequestSpecification request = given();
+
+        // when:
+            Response response = given().spec(request)
+                    .get("/reviews");
+
+        // then:
+            assertThat(response.statusCode()).isEqualTo(200);
+            assertThat(response.header("Content-Type")).matches("application/json;charset=UTF-8.*");
+        // and:
+            DocumentContext parsedJson = JsonPath.parse(response.getBody().asString());
+            assertThatJson(parsedJson).array().contains("['message']").isEqualTo("content");
+            assertThatJson(parsedJson).array().contains("['author']").isEqualTo("Sergio");
+            assertThatJson(parsedJson).array().contains("['id']").isEqualTo("1");
     }
-    ```
+
+}
+```
 
 The stub will be located under `stubs/mappings`:
 
-    ```json
-    "id" : "ba196f42-7f5f-47b3-a1ce-863fe8b96423",
-    "request" : {
-        "url" : "/reviews",
-        "method" : "GET"
+```json
+"id" : "ba196f42-7f5f-47b3-a1ce-863fe8b96423",
+"request" : {
+    "url" : "/reviews",
+    "method" : "GET"
+},
+"response" : {
+    "status" : 200,
+    "body" : "[{\"id\":\"1\",\"name\":\"Sergio\",\"text\":\"text\"}]",
+    "headers" : {
+    "Content-Type" : "application/json;charset=UTF-8"
     },
-    "response" : {
-        "status" : 200,
-        "body" : "[{\"id\":\"1\",\"name\":\"Sergio\",\"text\":\"text\"}]",
-        "headers" : {
-        "Content-Type" : "application/json;charset=UTF-8"
-        },
-        "transformers" : [ "response-template" ]
-    },
-    "uuid" : "ba196f42-7f5f-47b3-a1ce-863fe8b96423"
-    }
-    ```
+    "transformers" : [ "response-template" ]
+},
+"uuid" : "ba196f42-7f5f-47b3-a1ce-863fe8b96423"
+}
+```
 
 The _Maven Plugin_ will also create a jar with stubs to be uploaded to a central repository (e.g. `/target/review-service-0.0.1-SNAPSHOT-stubs.jar`), so you will be able to run it during the integration test phase.
 
@@ -181,34 +181,34 @@ The consumer will use a stub runner that allows you to automatically download st
 
 Consumer dependency:
 
-    ```xml
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
-        <scope>test</scope>
-    </dependency>
-    ```
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
+    <scope>test</scope>
+</dependency>
+```
 
 Consumer test suite:
 
-    ```java
-    @RunWith(SpringRunner.class)
-    @AutoConfigureStubRunner(ids = "com.sergiomartinrubio:review-service:+:8080",
-            stubsMode = StubRunnerProperties.StubsMode.LOCAL)
-    @Import({ReviewConsumerApplication.class, ReviewClient.class})
-    public class ReviewWireMockTest {
-    
-        @Autowired
-        private ReviewClient reviewClient;
-    
-        @Test
-        public void clientShouldReturnReview() {
-            StepVerifier.create(reviewClient.getAllReviews())
-                    .expectNextMatches(review -> review.getAuthor().equals("Sergio") && review.getMessage().equals("content"))
-                    .verifyComplete();
-        }
+```java
+@RunWith(SpringRunner.class)
+@AutoConfigureStubRunner(ids = "com.sergiomartinrubio:review-service:+:8080",
+        stubsMode = StubRunnerProperties.StubsMode.LOCAL)
+@Import({ReviewConsumerApplication.class, ReviewClient.class})
+public class ReviewWireMockTest {
+
+    @Autowired
+    private ReviewClient reviewClient;
+
+    @Test
+    public void clientShouldReturnReview() {
+        StepVerifier.create(reviewClient.getAllReviews())
+                .expectNextMatches(review -> review.getAuthor().equals("Sergio") && review.getMessage().equals("content"))
+                .verifyComplete();
     }
-    ```
+}
+```
 
 `@AutoconfigurationStubRunner` will set: 
 
