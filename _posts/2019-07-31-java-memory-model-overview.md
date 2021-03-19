@@ -1,6 +1,6 @@
 ---
 title: Java Memory Model Overview
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3eDuWIMt0pm7BOj4jw375yNoKYJKLa5DDeUnpdz67gh-8UmRlpKbFYFKpcn9gmK8bJExOCQc0CPYIa4QUij7oBhNzoJURM6TGo75WpmVFtJi56M9uH88-7n2ZRmsHUEGLcgNiNX-cMvcNgfjxeFnqCp=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java

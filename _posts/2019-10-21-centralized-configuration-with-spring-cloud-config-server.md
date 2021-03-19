@@ -1,6 +1,6 @@
 ---
 title: Centralized Configuration with Spring Cloud Config Server
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cwnHj1kwcQbmWj-1660ch6BYqYFza580diffJPcqUFsB-TEr1fUnUwcbgGxvVroNUQVat_fWILMwsj9toCY5vkLasf0ZTnf1HOuVH-zkww3Ls4D6QJx3Z1GzXS5gzUyMmQyI6HrD28v48BIcOGelBn=w640-h302-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java Framework

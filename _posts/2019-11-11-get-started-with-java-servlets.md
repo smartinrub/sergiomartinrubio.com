@@ -1,6 +1,6 @@
 ---
 title: Get Started with Java Servlets
-image: /assets/images/shubham-beeharry-223969.jpg
+image: [/assets/images/shubham-beeharry-223969.jpg](https://lh3.googleusercontent.com/pw/ACtC-3eSoArgtiwALhnieM2IcZ2KcLSec6QqqNOPEWZoVXEh-mvcex7nr22QOjKTr5ma8Uwyl0U327fdx5EssxOwoYRNlTrzrPh-qXfZHftDetzEL3IQ-mNMjZ0TyoNpWAsohmTegmNuNI7m5zHniotqERfH=w640-h480-no?authuser=1)
 author: Sergio Martin Rubio
 categories:
     - Java Framework
