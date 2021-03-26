@@ -1,6 +1,6 @@
 ---
 title: Quick Introduction to ThreadLocal
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cGsAf1VIlfMYA5VGHv6Sw_ApQdRJc-WzB6TR-Lgh10XbuiHfrAjAcUzahZp_uNC4Uyg0TtM-Jkp0H84RKsvAklajBp-5LYj0ecospNMSlaNRjYMHA0W3Cil0-LArwdLScKPyxXMLgNHAZSF_li8TSe=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java

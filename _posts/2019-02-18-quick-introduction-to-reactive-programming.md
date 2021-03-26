@@ -1,6 +1,6 @@
 ---
 title: Quick Introduction to Reactive Programming
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3eW7j6tUyg-rkvbl2XfKpjwB6VJz-8p9YdVgQZgTKJ9C3MlSsE182BUm0zzF1e77jwYQpI9yP1ZqBdsv81T_rg114oVXtz4hpfctgbq8V7B15TOfOZbWYoWdBQl5ag5Qvv2TbiU78Q-KhBUE-Lp_AVI=w640-h421-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Design Pattern

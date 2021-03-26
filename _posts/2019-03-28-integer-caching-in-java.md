@@ -1,6 +1,6 @@
 ---
 title: Integer Caching in Java
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dvNZ92LGJLoOCVYc1heok1NZwP0R3kcsEQuQR3p22VXdJ8bcIuq4HT2USKga3ltC3AERxsJ-gWriMSDDqP38j6qeeitFu6A5xMmNXZ7tAcQ59zSAf44KIlnPphPp7aWedoS2bxhqHzUla0AHav1s2x=w640-h458-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java

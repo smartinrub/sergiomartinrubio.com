@@ -1,6 +1,6 @@
 ---
 title: Data Migration with Spring Batch
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dfUEJZK4-4lKEVjeTMQdpUB6Sodn2_nCtxdNNONEwAE2lmB-J2bVmRrJeIH_UcFhL9br29JYLnTRidoks1WoSuhTshvydbHFALb8zjguKMlqxceJ8_LcThFN_EXE_lsHTwQXhIJE2dqRa97ZXZ12QM=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java Framework

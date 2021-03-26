@@ -1,6 +1,6 @@
 ---
 title: Debugging Guidelines in Java
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cOoxLTRm4JLaa0e8XnCJarnhaegs7W-OhELz2JJZDoUevLe6HI8FwhCNDKU5Gqcu6sxcBu9s1MjrIH25hiiEzTXzM5T1zWNArKLK0griDrR6zORnmBQGSIHUWxRZjdX6DxnzkfmVGfKfWiLYlFJu5i=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Troubleshooting

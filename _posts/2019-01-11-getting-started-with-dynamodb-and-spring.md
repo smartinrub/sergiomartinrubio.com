@@ -1,6 +1,6 @@
 ---
 title: Getting Started with DynamoDB and Spring
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3d-RsgnBAIy-vL2kmxGZNZ6OOttts7YV9MjaLSP-PiX6yBQ9Ufy8ojjopFe5IRs7jW4EaUZ5Cg7t1139GH4UWejvcgnx6V9MsBIv8sDe8RLLoPZMuRinuO3pgzwgULUGGdn_f0J01K2aHCwdXrKH9k0=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Database

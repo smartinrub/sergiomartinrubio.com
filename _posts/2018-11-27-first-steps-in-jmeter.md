@@ -1,6 +1,6 @@
 ---
 title: First Steps in JMeter
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3evY5iKRsjpTuT2EUNKX94YM7aL18FC-oiDQDuaB3PV49yy7to6KqufxXz67uUn_l3bgBZsIiVzNBt58Y-HRd2D9TVNdhN8q6qCJpInzZseYwA2PtsoL9HbVtnBy55OBG6od40tXBl8kkjgOheGT2mR=w640-h360-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Testing

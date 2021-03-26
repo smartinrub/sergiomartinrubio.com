@@ -1,6 +1,6 @@
 ---
 title: MySQL Guide
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3cjCgkYA-W-Byvwq23yIZA3y-vXvIiqwXWzfkgnQ5vGg1fUvmS-EaBIpMAa4PD24tTQRE43VretmgnO-20xxBvMG1h-wFrv1A4C3TlAQK6jNj8FbP72dnfud6eFdrKfRaK73LymkqWhVpgNOXeirDQ6=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Database
