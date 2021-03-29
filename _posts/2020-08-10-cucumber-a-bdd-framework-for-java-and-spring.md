@@ -53,7 +53,7 @@ To run Cucumber with JUnit 4 you will have to replace  `cucumber-junit-platform-
 </dependency>
 ```
 
-You can run the Cucumber tests with ` mvn clean test `.
+You can run the Cucumber tests with `mvn clean test`.
 
 ## Files Structure
 
