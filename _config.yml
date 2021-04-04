@@ -11,7 +11,7 @@ markdown: kramdown
 enable-mathjax: yes
 
 # Charts
-enable-chartjs:
+enable-chartjs: no
 
 
 # This defines how the URLs should look like.
@@ -31,6 +31,7 @@ include:
 analytics: UA-137749111-1
 
 # FullStory is an analytics engine
+enable-fullstory: no
 fulstory: W6Z0Y
 
 # Table of contents in each post
