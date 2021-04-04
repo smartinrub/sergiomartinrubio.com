@@ -44,7 +44,7 @@ SCRUM is one of the Agile frameworks which goal is to help teams develop and del
 
     You can use as story points the *Fibonacci sequence* (1, 2, 3, 5, 8, 13...), *T-shirt sizes* (e.g. S, M, L, XL...) or any other measure that establishes a proper distinction between relative sizes, so it's clear if a story is significantly smaller or bigger than others. This also gives rough estimates so it's easy for stakeholder to know how big a task is.
 
-    > The backlog contains all the tasks that are pending but are not part of the sprint because either they are not well defined or they are low priority.
+    > The backlog contains all the tasks that are pending but are not part of the sprint because either they are not well defined or are of low priority.
 
   - **Daily stand-up**. These meetings are performed everyday and are meant to keep everyone in the team updated on what other members are working on. Each team member usually provides updates in about a minute and the session shouldn't take longer than 15 minutes in total.
 
