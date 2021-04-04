@@ -1,6 +1,6 @@
 ---
 title: Structural Patterns
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dOlHYrt8Wfx6FX4WPnyQOeM-TcdXsgxqbJrjr5LwVG55eV1adTbo4V_7Ps2ZPLQoqPvuFFOLXMLQcniEcBP1uTeqvwM5nrCyj0rLcGbSqPKnqxLP4Go0ca5p--_5q8tmb7hfJfFrXojOrT7QC93QZB=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Design Pattern
@@ -414,3 +414,5 @@ Facade pattern provides a unified interface to a set of interfaces in a subsyste
     orderFacade.calculateOrderPrice(ORDER_ID);
     orderFacade.processOrder(ORDER_ID);
     ```
+
+Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=828596">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=828596">Pixabay</a>

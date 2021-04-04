@@ -1,6 +1,6 @@
 ---
 title: Speed Up Your Microservices Development with Telepresence
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3dTkDkKUbdv0VNHkYgfidkPaSTqNVbTFhWNV-b9LQJLpyGIIatRTqujwfF7s6_17jyc3kWWq0a4FDYn3bljqdqkst6wtqvY7FxqtI3IqQNH_2DQTVliF0q3S88v55pet5YcIVeC_oSqwa6L7pQVkZNV=w640-h423-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - DevOps
@@ -182,3 +182,5 @@ As you can see, from your local machine you can call the _Java_ service which wi
 ## Conclusion
 
 With **Telepresence**, testing or debugging features of an application, which depends on other services, is not a problem anymore. You can make as many changes as you want on your local application and test them out against a remote service without having to do a whole deployment process on _Kubernetes_.
+
+Image by <a href="https://pixabay.com/users/skitterphoto-324082/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1132528">Rudy and Peter Skitterians</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1132528">Pixabay</a>

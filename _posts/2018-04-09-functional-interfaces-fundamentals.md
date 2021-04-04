@@ -1,6 +1,6 @@
 ---
 title: Functional Interfaces Fundamentals
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3eIXeU8xN1k2UWvQELWznFx7U9Jq4rllrxT73xi1vXjOWKGNGbJBrrekMzpCFoghMCNDR3JI54wFn9zzDbmx0nZD7xHl8df3i8VyahbY1dLKALrpmbCTKsQjQ0Ay8lNaZfxmOik_qCuGbDswTcmG7Sy=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java
@@ -62,3 +62,5 @@ interface Foo {
 ```
 
 Although you are allowed to define default methods in functional interfaces, it is not a good practice to overuse this technique, because default methods might clash with each other when your interface extends several interfaces with default methods.
+
+Image by <a href="https://pixabay.com/users/donterase-1070369/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=789628">donterase</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=789628">Pixabay</a>

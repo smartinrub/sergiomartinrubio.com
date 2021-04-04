@@ -1,6 +1,6 @@
 ---
 title: Take Unit Testing to the Next Level with JUnit 5
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3fjpwVbcsuGSngOeMW6hoXEKgZG45g4ijs5hFaVhag8SnDIMQJLXO5xIP62sYj6OIBsVwimiaDFGyoBxSpCFiptJpDvV0ye2ZBVLvlTN5SGHaTj0fJ4QsJ-y6hiWuVZT2AYXmpye0iMKV0jsk5Z85WW=w640-h423-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Testing
@@ -381,3 +381,5 @@ As you can see, JUnit 5 is a huge improvement over previous versions and introdu
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/junit5-features" text="Source Code" %}
 </p>
+
+Image by <a href="https://pixabay.com/users/publicdomainpictures-14/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=214185">PublicDomainPictures</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=214185">Pixabay</a>

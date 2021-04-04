@@ -1,6 +1,6 @@
 ---
 title: Creational Patterns
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3ehuLoULrZN2ARD62wXJs8guE2fM-37rqNNoRJWbTZEYZE4rX7H5cIjBPLmwJzs-TpV8OmceNMaVPdThQ8U2qLrrBv9ta-8n86VRsfjQHRjkKUfUKNeaAYcoBsMq04J1iuFXzGru10NNVjjNCAqzzkR=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Design Pattern
@@ -461,3 +461,5 @@ This is the preferred way.
 ### Prototype
 
 // TODO
+
+Image by <a href="https://pixabay.com/users/foundry-923783/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=869221">Foundry Co</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=869221">Pixabay</a>

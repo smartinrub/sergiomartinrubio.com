@@ -1,6 +1,6 @@
 ---
 title: Recipes to @Override “equals” and “hashCode” methods
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3fsJ5Uy_ZUq-vUJQBsgEaeXBlT_3oSGxSM5RInX02BB6JG1jkm5wrwG62gzLlEriElPnLCS1V_MHkJjO4yg5-DYA16_wdXOLGQVqTI-ZcQy3TA_LOxU6m0ouVrr1J4Iu644fc4_Next-BQm8WJpdYc9=w640-h423-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java
@@ -63,3 +63,5 @@ public int hashCode() {
 - Use `@Override` annotation.
 - If there is no need to create a custom _equals_ or _hashCode_ method you only need to use [@Autovalue](https://github.com/google/auto/blob/master/value/userguide/index.md){:target="_blank"} or [@EqualsAndHashCode](https://projectlombok.org/features/EqualsAndHashCode){:target="_blank"} from **Google** and [**Lombok**](https://projectlombok.org/){:target="_blank"} libraries respectively.
 - Alternatively, you can use autogeneration provided by your _IDE_.
+
+Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=498199">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=498199">Pixabay</a>

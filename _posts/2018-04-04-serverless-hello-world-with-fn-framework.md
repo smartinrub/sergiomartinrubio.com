@@ -1,6 +1,6 @@
 ---
 title: Serverless “Hello World” with Fn Framework
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3fsQpwfnY6RpVKYQyt5E337C_Yao1fWRrbwX_yOOhO4kIqYNpK3Aor5j-Q9kQednj1Dw4tqxYO2c6-Hy6qknZ_q52fGeT-axqFmCnemutMwAZZhivrqHRNdsJ-dpK_Mdx1WpY6hAQoKo1IN64TtOM96=w640-h480-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - DevOps
@@ -121,3 +121,5 @@ fn apps list # shows applications registered on your Fn server
 fn routes list myapp # shows application endpoints
 fn apps delete myapp # deletes application
 ```
+
+Image by <a href="https://pixabay.com/users/bru-no-1161770/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2064090">Bruno /Germany</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2064090">Pixabay</a>

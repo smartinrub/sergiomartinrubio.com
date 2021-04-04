@@ -1,6 +1,6 @@
 ---
 title: Hands-On CI/CD for Microservices with Jenkins X
-image: /assets/images/shubham-beeharry-223969.jpg
+image: https://lh3.googleusercontent.com/pw/ACtC-3f1jCFFYbP4f7W0builne-cnT5hTqUal6vOWCouSr-MegxwXr1tItp7JuWQfKDugyyZEetNaFWU8SLUrAdjfjeG9O06u5LJEzutaIgQ5Y8rrNyRrs4N2kHpby7EpadKddanOFyaa7BmyE980MUxu4V2=w640-h428-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - DevOps
@@ -133,3 +133,5 @@ helm init --upgrade
 ## Conclusion
 
 As you can see, _Jenkins X_ will take care of your microservices deployment pipeline and will save you the time of creating pipelines for each microservice.
+
+Image by <a href="https://pixabay.com/users/publicdomainpictures-14/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=17666">PublicDomainPictures</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=17666">Pixabay</a>
