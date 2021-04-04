@@ -11,7 +11,7 @@ markdown: kramdown
 enable-mathjax: yes
 
 # Charts
-enable-chartjs: yes
+enable-chartjs:
 
 
 # This defines how the URLs should look like.
