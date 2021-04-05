@@ -1,5 +1,5 @@
 ---
-title: Top Agile Development Best Practices
+title: Agile Development Best Practices
 image: https://lh3.googleusercontent.com/pw/ACtC-3e7ZsCnA6WQAIx0d1cFDmCzKg2IshqL5CfVgJ61wANZ-tbokGccHjt04V1ddeLRMiJ1QBTaIiUaHyyl-751lXNfPDC4mDNz9Qgd2IrL741SL2gGo9Czu-YHNAIzS3TmVLfj9qCWxOzDu4sbROAySB9f=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
