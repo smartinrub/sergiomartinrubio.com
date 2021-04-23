@@ -116,130 +116,130 @@ Some of the most common Liquibase directives are:
 - [Create a table](https://docs.liquibase.com/change-types/community/create-table.html){:target="_blank"}:
 
   ```yaml
-    - changeSet:
-        id: craete-person-table
-        author: Sergio Martin Rubio
-        changes:
-          - createTable:
-              tableName: person
-              columns:
-                - column:
-                    name: id
-                    type: varchar(255)
-                    constraints:
-                      primaryKey: true
-                      nullable: false
-                - column:
-                    name: customer_id
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                      foreignKeyName: fk_person_document
-                      references: document(customer_id)
-                - column:
-                    name: last_name
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: first_name
-                    type: varchar(255)
-                    constraints:
-                      nullable: true
-                - column:
-                    name: aliases
-                    type: varchar(255)
-                    constraints:
-                      nullable: true
-                - column:
-                    name: category
-                    type: varchar(255)
-                    constraints:
-                      nullable: true
-                - column:
-                    name: position
-                    type: varchar(255)
-                    constraints:
-                      nullable: true
-                - column:
-                    name: keywords
-                    type: varchar(255)
-                    constraints:
-                      nullable: true
-                - column:
-                    name: entered
-                    type: date
-                    constraints:
-                      nullable: true
-                - column:
-                    name: updated
-                    type: date
-                    constraints:
-                      nullable: true
+  - changeSet:
+      id: craete-person-table
+      author: Sergio Martin Rubio
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person_document
+                    references: document(customer_id)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aliases
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: category
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: position
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: keywords
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: entered
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updated
+                  type: date
+                  constraints:
+                    nullable: true
   ```
 
 - [Modify a column](https://docs.liquibase.com/change-types/community/modify-data-type.html){:target="_blank"}:
 
   ```yaml
-    - changeSet:
-        id: change-aliases-column-type
-        author: Sergio Martin Rubio
-        changes:
-          - modifyDataType:
-              columnName: aliases
-              newDataType: clob
-              tableName: person
+  - changeSet:
+      id: change-aliases-column-type
+      author: Sergio Martin Rubio
+      changes:
+        - modifyDataType:
+            columnName: aliases
+            newDataType: clob
+            tableName: person
   ```
 
 - [Add primary key](https://docs.liquibase.com/change-types/community/add-primary-key.html){:target="_blank"}: 
 
   ```yaml
-    - changeSet:
-        id: add-primary-key
-        author: Sergio Martin Rubio
-        changes:
-          - addPrimaryKey:
-              columnNames: id
-              tableName: person
+  - changeSet:
+      id: add-primary-key
+      author: Sergio Martin Rubio
+      changes:
+        - addPrimaryKey:
+            columnNames: id
+            tableName: person
   ```
 
 - [Drop primary key](https://docs.liquibase.com/change-types/community/drop-primary-key.html){:target="_blank"}:
 
   ```yaml
-    - changeSet:
-        id: drop-primary-key
-        author: Sergio Martin Rubio
-        changes:
-          - dropPrimaryKey:
-              dropIndex: true
-              tableName: person
+  - changeSet:
+      id: drop-primary-key
+      author: Sergio Martin Rubio
+      changes:
+        - dropPrimaryKey:
+            dropIndex: true
+            tableName: person
   ```
 
 - [Add foreign key](https://docs.liquibase.com/change-types/community/add-foreign-key-constraint.html){:target="_blank"}: 
 
   ```yaml
-    - changeSet:
-        id: add-foreign-key
-        author: Sergio Martin Rubio
-        changes:
-          - dropForeignKeyConstraint:
-          		baseColumnNames: customer_id
-          		baseTableName: person
-              constraintName: fk_person_document
-              referencedColumnNames: customer_id
-              referencedTableName: customer
+  - changeSet:
+      id: add-foreign-key
+      author: Sergio Martin Rubio
+      changes:
+        - dropForeignKeyConstraint:
+          baseColumnNames: customer_id
+          baseTableName: person
+          constraintName: fk_person_document
+          referencedColumnNames: customer_id
+          referencedTableName: customer
   ```
 
 - [Drop foreign key](https://docs.liquibase.com/change-types/community/drop-foreign-key-constraint.html){:target="_blank"}: 
 
   ```yaml
-    - changeSet:
-        id: drop-foreign-key
-        author: Sergio Martin Rubio
-        changes:
-          - dropForeignKeyConstraint:
-              baseTableName: person
-              constraintName: fk_person_document
+  - changeSet:
+      id: drop-foreign-key
+      author: Sergio Martin Rubio
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: person
+            constraintName: fk_person_document
   ```
 
 > A full list of changes that can be applied can be found on the [official Liquibase documentation](https://docs.liquibase.com/change-types/home.html){:target="_blank"}.
