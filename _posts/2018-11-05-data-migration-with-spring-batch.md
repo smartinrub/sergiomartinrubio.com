@@ -52,7 +52,7 @@ Spring Batch allows us to run database migrations without hassle. For this examp
     }
     ```
 
-The data source is set up on the property file to point to your _MySQL_ database. A row mapper is also required, so you can map the database columns with your `Credentials` object.
+    The data source is set up on the property file to point to your _MySQL_ database. A row mapper is also required, so you can map the database columns with your `Credentials` object.
 
 3. **Create writer**: writers are responsible for saving the modified data into a data source.
 
@@ -75,7 +75,7 @@ The data source is set up on the property file to point to your _MySQL_ database
     }
     ```
 
-The first writer is responsible for saving the plain text password on the backup table, and the second one replaces the plain text password with the hashed password. The `itemSqlParameterSourceProvider` allows you to use database columns name to match object names.
+    The first writer is responsible for saving the plain text password on the backup table, and the second one replaces the plain text password with the hashed password. The `itemSqlParameterSourceProvider` allows you to use database columns name to match object names.
 
 4. **Create steps**: steps define the flow of the batch.
 
@@ -99,7 +99,7 @@ The first writer is responsible for saving the plain text password on the backup
     }
     ```
 
-Both of the steps will run chunks of 4 rows. During the `step1` it will first use the previous reader and the writer to save the plain text password into the db; on the other hand the `step2` you will also apply a processor to do the hashing before updating the password.
+    Both of the steps will run chunks of 4 rows. During the `step1` it will first use the previous reader and the writer to save the plain text password into the db; on the other hand the `step2` you will also apply a processor to do the hashing before updating the password.
 
 5. **Create processor**: processors are responsible for making changes on the data.
 
