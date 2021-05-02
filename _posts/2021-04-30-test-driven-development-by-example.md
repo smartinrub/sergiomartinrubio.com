@@ -1,6 +1,6 @@
 ---
 title: Test-driven Development by Example
-image: 
+image: https://lh3.googleusercontent.com/pw/ACtC-3ePXwza8pvlQgfenEDyYMRWaaOdi6vX9l-jOzOyuIXSoFxvd5vQIqC7wG6oKeuK5b1m7Og3hWBJ7Tl422kIhn0NA75pyAJyI6AprtczqhqOVKyMHd2L4WCz879kfZNm8djth07kpFVzbxmfRGARocrl=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Testing
@@ -33,4 +33,3 @@ You can start using TDD by following the next steps:
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/add-by-example.git" text="Source Code" %}
 </p>
-
