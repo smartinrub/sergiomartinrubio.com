@@ -31,12 +31,12 @@ e.g.
 }
 ```
 
->Remember that URLs can only sent over the internet using the _ASCII_ character-set.
+>Remember that URLs can only be sent over the internet using the _ASCII_ character-set.
 
 ## Operations
 ### Query
 
-Queries are used to retrieved data, and you should use them to perform read operations in your service. Here is an example:
+Queries are used to retrieved data, and you should use them to perform read operations in your service. Here there is an example:
 
 ```graphql
 query {
