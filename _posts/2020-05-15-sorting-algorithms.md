@@ -78,7 +78,7 @@ public class BubbleSort {
 
 **Selection sort** algorithm sorts arrays by finding and swapping the minimum value with the value in the current position in each iteration. This algorithm is easy to implement and is memory efficient, since it does not require an additional array for sorting. This algorithm is called _Selection sort_ because it keeps _selecting_ the smallest value.
 
-Time complexity of bubble sort is $$O(n^2)$$. Even though _bubble sort_ and _insertion sort_ have the same time complexity in the worst case, bubble sort is outperformed most of the time by insertion sort, due to the less number of swaps required by insertion sort.
+Time complexity of bubble sort is $$O(n^2)$$. Even though _bubble sort_ and _selection sort_ have the same time complexity in the worst case, bubble sort is outperformed most of the time by insertion sort, due to the less number of swaps required by insertion sort.
 
 Implementation:
 
