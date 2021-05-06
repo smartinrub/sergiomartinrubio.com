@@ -36,7 +36,7 @@ e.g.
 ## Operations
 ### Query
 
-Queries are used to retrieved data, and you should use them to perform read operations in your service. Here there is an example:
+Queries are used to fetch data, and you should use them to perform read operations in your service. Here there is an example:
 
 ```graphql
 query {
