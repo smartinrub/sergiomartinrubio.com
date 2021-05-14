@@ -28,7 +28,7 @@ We've been thinking about improving my _Kubernetes_ skills and we thought that s
 
 Once you have all the required components you can start setting up you Raspberry Pi with the [latest Ubuntu Server image](https://ubuntu.com/download/raspberry-pi) compatible with your Raspberry Pi version.
 
-> 25/03/2020: We chose _Ubuntu 19.10_ after trying _Ubuntu 18.04.4 LTS_ and having some issues.
+> 25/03/2020: We chose _Ubuntu 20.04.2_ after trying _Ubuntu 18.04.4 LTS_ and having some issues.
 
 Now you can copy the Ubuntu image into the micro SD card (**on MacOS**):
 
@@ -42,9 +42,54 @@ diskutil unmountDisk /dev/disk2
 sudo sh -c 'gunzip -c ~/Downloads/ubuntu-19.10.1-preinstalled-server-arm64+raspi3.img.xz | sudo dd of=/dev/disk2 bs=32m'
 ```
 
-The next step is to plug the Raspberry Pi and change the default password. From now on you can access the Raspberry Pi through SSH.
+​	The next step is to plug the Raspberry Pi and change the default password.
 
-> Default username/password for _Ubuntu 19.10.1_ is ubuntu/ubuntu.
+> Default username/password for _Ubuntu 20.04.2_ is ubuntu/ubuntu.
+
+4. Configure the WIFI connection:
+
+   ```shell
+   ip link show # Find out the wifi adapter name
+   cd /etc/netplan
+   sudo cp 50-cloud-init.yaml 50-cloud-init.yaml.backup # backup
+   sudo nano 50-cloud-init.yaml 
+   ```
+
+   now add the following configuration:
+
+   ```yaml
+   network:
+       version: 2
+       ethernets:
+           eth0:
+               optional: true
+               dhcp4: true
+       # add wifi setup information here ...
+       wifis:
+           wlan0:
+               optional: true
+               access-points:
+                   "YOUR-SSID-NAME":
+                       password: "<YOUR-NETWORK-PASSWORD>"
+               # for static IP
+               dhcp4: no
+               addresses: [192.168.1.107/24]
+               gateway4: 192.168.1.1
+               nameservers:
+                   addresses: [8.8.8.8,8.8.4.4]
+   ```
+
+   You can run `sudo netplan --debug try` to apply the changes. If an error is shown you can run `sudo netplan --debug generate` to get more info about the error.
+
+   Now it should have access to the internet.
+
+   Run `ip a` to find out the IP of your Rasbperry Pi.
+
+   From now on you can access the Raspberry Pi through SSH.
+
+   ```shell
+   ssh ubuntu@<RASPBERRY_PI_IP>
+   ```
 
 To take the security a step further you can use SSH public key authentication:
 
@@ -83,7 +128,7 @@ Installation & configuration:
 1. Install it through a snap command:
 
    ```shell
-   sudo snap install microk8s --classic --channel=1.17/stable
+   sudo snap install microk8s --classic
    ```
 
 2. (Optional) Add your user to the microk8s group:
@@ -91,6 +136,8 @@ Installation & configuration:
    ```shell
    sudo usermod -a -G microk8s $USER
    ```
+
+   > A restart is required for the changes to be applied.
 
 3. (Optional) Create an alias for `kubectl`. Add to `~/.bash_aliases` or `~/.zshrc` an alias.
 
@@ -100,16 +147,18 @@ Installation & configuration:
 
    > In my case we are also using ZSH shell so we had to uncomment `export PATH=$HOME/bin:/usr/local/bin:$PATH` and add `export PATH=$PATH:/snap/bin` in the `~/.zshrc` file.
 
-4. Edit boot parameters:
+4. Run `microk8s inspect` and it will show `The memory cgroup is not enabled`. You can enable this by editing the boot parameters:
 
    ```shell
-   sudo vi /boot/firmware/nobtcmd.txt
+   sudo nano /boot/firmware/cmdline.txt
    ```
+
+   > For Ubuntu 20.04.2
 
    and prepend the following:
 
    ```shell
-   cgroup_enable=memory cgroup_memory=1
+   cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1
    ```
 
    finally reboot the system:
@@ -141,7 +190,7 @@ Installation & configuration:
    pi401   Ready    <none>   7d23h   v1.17.3
    ```
 
-7. Install and configure `kubectl` on your local machine:
+7. Install and configure `kubectl` on your local machine (this is for *MacOS*):
 
    ```shell
    brew install kubectl
@@ -154,40 +203,42 @@ Installation & configuration:
    clusters:
    - cluster:
        insecure-skip-tls-verify: true
-       server: https://<raspberrpi_ip>:16443
-       name: raspberrypi
+       server: https://192.168.1.107:16443
+     name: microk8s-cluster
    contexts:
    - context:
-       cluster: raspberrypi
-       user: raspberrypiadmin
-       name: raspberrypi
-   current-context: raspberrypi
+       cluster: microk8s-cluster
+       user: admin
+     name: microk8s
+   current-context: microk8s
    kind: Config
    preferences: {}
    users:
-   - name: raspberrypiadmin
-       user:
-       password: <admin_password>
-       username: admin
+   - name: admin
+     user:
+       token: <token>
    ```
-
+   
    You can find the Raspberry Pi IP and cluster port with:
-
+   
    ```shell
    kubectl cluster-info
    ```
-
-   Admin password can be found by running:
-
+   
+   Get the token:
+   
    ```shell
-   kubectl config view
+   kubectl -n kube-system get secret
+   kubectl -n kube-system describe secret deployment-controller-token-<REPLACE>
    ```
 
-   now the current context should be `raspberry`
+   now the current context should be `microk8s`
 
    ```shell
    kubectl config current-context
    ```
+   
+   You can run `kubectl get nodes` from your remote machine to check that everything works.
 
 #### Add-ons
 
