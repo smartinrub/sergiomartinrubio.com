@@ -497,8 +497,9 @@ sudo ufw enable
 3. Run a daemon to keep our dynamic ip address updated on Dynu:
 
    ```shell
-   /usr/sbin/ddclient -daemon 300 -syslog
+   sudo /usr/sbin/ddclient -daemon 300 -syslog
    ```
 
 4. Now you can hit your app with the chosen domain name `https://<domain_name>/uppercase/hello`.
 
+> Remember that you have to upate your NAT Forwarding configuration on your router to point to your raspberry pi on a specific port.
