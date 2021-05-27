@@ -35,7 +35,7 @@ Operations:
     BCrypt.hashpw(plainTextPassword, BCrypt.gensalt())
     ```
 
-    where `plainTextPassword` is the password we want to hash and `BCrypt.gensalt()` is a salt to autogenerate every time.
+    where `plainTextPassword` is the password we want to hash and `BCrypt.gensalt()` is a salt generated randomly.
 
     In case we want to increment the complexity, an optional parameter (`log_rounds`) has to be provided to `BCrypt.gensalt()`, which determines the computational complexity of the hashing. `log_rounds` is exponential ($$2^{log\_rounds}$$) and it specifies how many times to run the internal hash function. The default value is 10, and the valid values are between 4 and 31.
 
@@ -54,6 +54,10 @@ Operations:
     This method checks that an unencrypted password matches the one that was previously hashed and ensures that it is stored somewhere.
 
 ## Conclusion
+
+*BCrypt* is very good hash algorithm for preventing **rainbow table attacks** by keeping the *salt* as part of the output from the *BCrypt* function. The idea is that every password has an unique *salt* that is incorporated in the password hash so a hacker cannot create a rainbow table for every password, since a rainbow table works on the principle that more than one plain text password can have the same hash value. If a rainbow table wants to be generated, it will take an enormous amount of time, so it makes brute-forcing pointless.
+
+> A Rainbow table is a precomputed table that contains plaintext passwords and their corresponding hash values that can be used to find the text that generates a particular hash. Hackers can use it for cracking hashed passwords stored in a database.
 
 **Bcrypt** is 10,000 times slower than _sha1_ to run. If we have a machine that is able to run it in 100ms, this is probably fast enough for login, but it might be too slow if we want to execute _Bcrypt_ against a long list of passwords. In consequence, if a hacker wants to run _Bcrypt_ a billion times by using the same computational power, it will take 27,777 hours.
 
