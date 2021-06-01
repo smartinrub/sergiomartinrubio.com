@@ -18,6 +18,21 @@ TDD can be also combined with other techniques like **pair programming** and thi
 
 **ATDD** (*Accentance Test Driven Development*) is a variant of TDD and is focused on starting testing from the user's point of view. Testing frameworks like [Cucumber](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java-and-spring/) are commonly used for these kind of tests. This is also called [Behaviour Driven Development (BDD)](https://sergiomartinrubio.com/articles/bdd-fundamentals/).
 
+## Key Factors for Using TDD
+
+These are some takeaways from [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U) by *Uncle Bob*.
+
+- Produces **documentation**. Tests are examples of how to use the code you write.
+- **Decouples the code**. You will write testable code and as a result you will have to decouple your code to make it testable.
+- You make sure **your system works**.
+
+## "Reasons for not Using TDD"
+
+- **We have to go fast** because maybe we have deadlines, but this means <u>you will pay for the shortcuts later on</u> (and with interests!).
+- **We want to simply solve the problem** and <u>leave a mess behind us</u>. We probably won't go back and clean it up.
+
+As you can assume, these reasons are not really good reasons for not using TDD, and <u>they will result in future headaches and fear of refactoring the code</u> because we might break the existing code and there is no a test suite that ensures that the changes are not breking the original business logic.
+
 ## Getting Started
 
 You can start using TDD by following the next steps:
