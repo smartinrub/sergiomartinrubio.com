@@ -1,6 +1,6 @@
 ---
 name: Build your Own Web Chat Application with XMPP
-image: https://lh3.googleusercontent.com/etHW-kunMUhV9XRiwEez7g_Nhw5WLS_IMIzj4hFGI5A0eHtzFIXHhBBsLRZFqHoKTkv5-N_HC7xZIbdGCpgpaQVmYUzgczOi3Z3TKHJBeA2h__8WCbd4QKViwdOuI6ISg0KlafaqpvWFsfDeAdox-adU1DVKgyQGK81sVPGbVjRvtxpBsinBm6zTZt8tJN5QcEzVrGHPV8RjbwpQGnHo2dJ5f2YgElcdIwXFMx9RIH9VDN_yRa9m7RAqxSotS6hvuGoQRYTd6cZ4iJCjNK7C1zXwFnEi6dNIWgkgLHp2Hz1w8u-u9bjf8pc5pdPz-sON_OkpSrGDhO-UP0g0Q4RmOgsiCz4q1J7c0qo_6rDSbBqKKOh2_cun1y_AVac_bQyBMRpSp-6vHUiLw2k4Z5Ht7RSvmUoz2flLnAkYttQtaTPzzjFj6FJ0Ns-jOGcN7dHwBGFexmKC3zD6m050ax9eac7eX_q5f9Dj69r8ODI5ruRMuY7e7ZUCNwydpZNGQ5GKy5EQ-L16xGf_-vsNVMwnLXdlLKJ9maa0mdOclfzkYjTBilfBmIgEVtZ84gXSVV9RC8IfzLc4QVeVWplxb2Kzq_uh4EhoqFq7Grzzn7QQLTvtGM8wbQkyzjo6N62EiuIeeBwILhf88H9yvI0DtYesJyt0EgraIBV5tThkyiNt07EluO7NvKCHVHQhNr3APhZ8YZwsa2bBsC5v_KoLoeDrLV0=w853-h711-no?authuser=1
+image: https://lh3.googleusercontent.com/pw/AM-JKLUy-M8aXv7j5uoW706ppG678IwT1YOYK1qVTgOMeeKQ_ngKnXGgk5x9y0exkDXSNfcln_ZeERUCui4eZZedLU0U5MajzSi1frZKLDp-wil1F7LqnbdbIi5Ik4WwEg1Qbc2jTMCcQ-nPm30wVsmbtMXu=w2798-h1562-no?authuser=1
 company: Side Project
 date:  2021-05-27
 layout: post
@@ -8,19 +8,30 @@ layout: post
 
 ## XMPP Smack Chat
 
-In this project I want to show you how to build a web chat with **XMPP** and **Smack**. XMPP is instant messaging protocol used by companies like **WhatsApp** or **Telegram** to orchestrate the message delivery system. XMPP, which is also refered as **Jabber** (the original name), is open source and extensable and  uses XML to exchange data between client and server.
+In this project I want to show you how to build an **Instant Messaging** (IM) system with **XMPP** and **Smack**. XMPP is instant messaging protocol used by companies like **WhatsApp** or **Telegram** to orchestrate the message delivery system. XMPP, which is also referred as **Jabber** (the original name), is open source and extensible and uses XML to exchange data between client and server.
+
+XMPP follows a client/server architecture and XMPP clients can only communicate other clients on the same domain and most of the processing and IM logic is happening on the server.
 
 ### XMPP highlights
 
 - It's robust and powerful.
 - You can use it for text, pictures, videos or audios.
 - Clients available for many device types.
-- It's decentrilized and anyone can run their own XMPP server.
+- It's decentralized and anyone can run their own XMPP server.
 
 ### XMPP Drawbacks
 
 - It uses XML and this makes messages complex and verbose.
 - It doesn't provide a default way to know if a message was delivered.
+- It lacks standard enterprise features like transactions and quality of service support, so you cannot build mission-control applications on top of XMPP.
+
+### XMPP core concepts
+
+- **XMPP domain**: XMPP domains provide local control over parts of the XMPP network as well as communicating with users outside the XMPP domain. A domain consist of an internet address name.
+- **Users and resources**: a XMPP user is a logical messaging endpoint which represents a user account. XMPP users are addressed by their username. The username consist of a *name + @ + domain*, like the email guidelines. XMPP supports multiple client access by using the concept of *XMPP resources*. If a single user access the XMPP server from different clients the packets are sent to distinct messaging endpoints for the same user and the XMPP server is responsible for properly routing packets sent to a user to the best resource available for that user. i.e. if a messages is sent to "foo" user, the user checks what clients for that users are connected, if any. If none are, the message is stored for later delivery. If two clients are connected, the server detects this and determines which one is the preferred resource and sends the message to that client.
+- **Jabber IDs**: also referred as JID. It has the following structure: *user@domain/resource*. The resource is usually omitted. The most common usage of server addresses is to send messages to XMPP servers outside of your own XMPP domain.
+- **Presence**: This gives users visibility to indicate if a user is available/unavailable. Presence provide users a more instant communication since they indicate if they are away or they are online. Presence also provides a permission mechanism to approve or disapprove presence subscription requests from other users.
+- **Roster**: rosters are similar to a list of friends and they allow you to maintain a list of users and their current presence status.
 
 ## Getting started
 
@@ -43,7 +54,7 @@ The technologies that will be used on the backend web application will be:
 
 We will structure our Spring Boot application in multiple layers to separate the different concerns:
 
-- **Websocket layer**: exposes the websocker endpoint and it will contains the methods for opening a session, handling incomming messages, closing a session and handling errors. We will also create a helper class for returning responses to the client given a websocket session. We also need decoders and encoders for parsing incoming message to a pojo class.
+- **Websocket layer**: exposes the websocker endpoint and it will contains the methods for opening a session, handling incoming messages, closing a session and handling errors. We will also create a helper class for returning responses to the client given a websocket session. We also need decoders and encoders for parsing incoming message to a pojo class.
 
   ```java
   @ServerEndpoint(value = "/chat/{username}/{password}", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
@@ -87,7 +98,7 @@ We will structure our Spring Boot application in multiple layers to separate the
 
 - **XMPP facade layer**: will contain most of the business logic of the application and will be responsible for orchestrating the creation of XMPP connections, sending messages and ending XMPP connections. Also we will store the websocket sessions associated to XMPP connections on this layer.
 
-  - **Start session**: We will start a session by checking if the credentials are correct, and then we will create an XMPP connection for the given user. In case the user does not exist we will create on on the fly and we will use it to log in to XMPP. Then we will store the websocker session for the XMPP connection we have just created and add an incoming XMPP message listener for the connection. Finally we return with a succesful message.
+  - **Start session**: We will start a session by checking if the credentials are correct, and then we will create an XMPP connection for the given user. In case the user does not exist we will create on on the fly and we will use it to log in to XMPP. Then we will store the websocket session for the XMPP connection we have just created and add an incoming XMPP message listener for the connection. Finally we return with a successful message.
 
     ```java
         private static final Map<Session, XMPPTCPConnection> CONNECTIONS = new HashMap<>();
@@ -134,8 +145,8 @@ We will structure our Spring Boot application in multiple layers to separate the
         }
     ```
 
-  - **Send message**: given a message, a recepient and a websocket session it will talk to the XMPP client layer to send a message to the XMPP server. If something goes wrong we will disconnect the user and remove the websocket session.
-  -  **Disconnecting user**: disconnecting a user will involve sending the user status *unvailable*, disconnecting from the XMPP server and removing the websocker session.
+  - **Send message**: given a message, a recipient and a websocket session it will talk to the XMPP client layer to send a message to the XMPP server. If something goes wrong we will disconnect the user and remove the websocket session.
+  -  **Disconnecting user**: disconnecting a user will involve sending the user status *unavailable*, disconnecting from the XMPP server and removing the websocket session.
 
 - **XMPP client layer**: on this layer we will handle all the communication with the XMPP server, from creating the connection to sending user statuses (*stanza*).
 
