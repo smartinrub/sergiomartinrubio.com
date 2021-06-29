@@ -8,6 +8,8 @@ layout: post
 
 ## XMPP Smack Chat
 
+{% include elements/video.html id="Wp8gXDY6cfk" %}
+
 In this project I want to show you how to build an **Instant Messaging** (IM) system with **XMPP** and **Smack**. XMPP is instant messaging protocol used by companies like **WhatsApp** or **Telegram** to orchestrate the message delivery system. XMPP, which is also referred as **Jabber** (the original name), is open source and extensible and uses XML to exchange data between client and server.
 
 XMPP follows a client/server architecture and XMPP clients can only communicate other clients on the same domain and most of the processing and IM logic is happening on the server.
