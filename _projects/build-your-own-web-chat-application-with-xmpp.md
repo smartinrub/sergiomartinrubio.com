@@ -37,6 +37,8 @@ XMPP follows a client/server architecture and XMPP clients can only communicate 
 
 {% include elements/video.html id="Wp8gXDY6cfk" %}
 
+{% include elements/figure.html image="https://lh3.googleusercontent.com/pw/AM-JKLUWlfZQqIw1eoFmyT9r97djSjoypIlh94qRU9k4XAdIHAPlg_p_H3EXQ5ns5NJWFg7HC-xpe-XCFdq867y55MCtviKktqsHcQZqJ4WQTtojucg3NksWk5H7cVJmKLDTWeBMiq91VXMf9MWjMlFLaTch=w1201-h558-no?authuser=1" caption="Fitzing Diagram" %}
+
 ### XMPP Server
 
 You can find [a list of XMPP servers at the official XMPP site](https://xmpp.org/software/servers.html). For this project we are going to use [Openfire](https://hub.docker.com/r/quantumobject/docker-openfire)
