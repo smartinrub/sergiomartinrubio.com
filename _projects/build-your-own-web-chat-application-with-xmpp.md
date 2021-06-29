@@ -57,33 +57,35 @@ We will structure our Spring Boot application in multiple layers to separate the
 - **Websocket layer**: exposes the websocker endpoint and it will contains the methods for opening a session, handling incoming messages, closing a session and handling errors. We will also create a helper class for returning responses to the client given a websocket session. We also need decoders and encoders for parsing incoming message to a pojo class.
 
   ```java
+  @Slf4j
   @ServerEndpoint(value = "/chat/{username}/{password}", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
   public class ChatWebSocket {
   
-      private final XMPPService xmppService;
+      private final XMPPFacade xmppFacade;
   
       public ChatWebSocket() {
-          this.xmppService = (XMPPService) SpringContext.getApplicationContext().getBean("XMPPService");
+          this.xmppFacade = (XMPPFacade) SpringContext.getApplicationContext().getBean("XMPPFacade");
       }
   
       @OnOpen
       public void open(Session session, @PathParam("username") String username, @PathParam("password") String password) {
-          xmppService.startSession(session, username, password);
+          xmppFacade.startSession(session, username, password);
       }
   
       @OnMessage
-      public void handleMessage(TextMessage message, Session session) {
-          xmppService.sendMessage(message.getContent(), message.getTo(), session);
+      public void handleMessage(WebsocketMessage message, Session session) {
+          xmppFacade.sendMessage(message, session);
       }
   
       @OnClose
       public void close(Session session) {
-          xmppService.disconnect(session);
+          xmppFacade.disconnect(session);
       }
   
       @OnError
-      public void onError(Throwable e) {
-          throw new WebSocketException(e);
+      public void onError(Throwable e, Session session) {
+          log.debug(e.getMessage());
+          xmppFacade.disconnect(session);
       }
   }
   ```
@@ -101,52 +103,111 @@ We will structure our Spring Boot application in multiple layers to separate the
   - **Start session**: We will start a session by checking if the credentials are correct, and then we will create an XMPP connection for the given user. In case the user does not exist we will create on on the fly and we will use it to log in to XMPP. Then we will store the websocket session for the XMPP connection we have just created and add an incoming XMPP message listener for the connection. Finally we return with a successful message.
 
     ```java
-        private static final Map<Session, XMPPTCPConnection> CONNECTIONS = new HashMap<>();
+    public void startSession(Session session, String username, String password) {
+      Optional<Account> account = accountService.getAccount(username);
     
-        private final AccountService accountService;
-        private final WebSocketTextMessageHelper webSocketTextMessageHelper;
-        private final XMPPClient xmppClient;
+      if (account.isPresent() && !BCryptUtils.isMatch(password, account.get().getPassword())) {
+        log.warn("Invalid password for user {}.", username);
+        webSocketTextMessageHelper.send(session, WebsocketMessage.builder().messageType(FORBIDDEN).build());
+        return;
+      }
     
-        public void startSession(Session session, String username, String password) {
-            Optional<Account> account = accountService.getAccount(username);
+      Optional<XMPPTCPConnection> connection = xmppClient.connect(username, password);
     
-            if (account.isPresent() && !BCryptUtils.isMatch(password, account.get().getPassword())) {
-                log.warn("Invalid password for user {}.", username);
-                webSocketTextMessageHelper.send(session, TextMessage.builder().messageType(FORBIDDEN).build());
-                return;
-            }
+      if (connection.isEmpty()) {
+        webSocketTextMessageHelper.send(session, WebsocketMessage.builder().messageType(ERROR).build());
+        return;
+      }
     
-            Optional<XMPPTCPConnection> connection = xmppClient.connect(username, password);
-    
-            if (connection.isEmpty()) {
-                webSocketTextMessageHelper.send(session, TextMessage.builder().messageType(ERROR).build());
-                return;
-            }
-    
-            try {
-                if (account.isEmpty()) {
-                    xmppClient.createAccount(connection.get(), username, password);
-                }
-                xmppClient.login(connection.get());
-            } catch (XMPPGenericException e) {
-                log.error("XMPP error. Disconnecting and removing session...", e);
-                xmppClient.disconnect(connection.get());
-                webSocketTextMessageHelper.send(session, TextMessage.builder().messageType(ERROR).build());
-                CONNECTIONS.remove(session);
-                return;
-            }
-    
-            CONNECTIONS.put(session, connection.get());
-            log.info("Session was stored.");
-    
-            xmppClient.addIncomingMessageListener(connection.get(), session);
-    
-            webSocketTextMessageHelper.send(session, TextMessage.builder().messageType(JOIN_SUCCESS).build());
+      try {
+        if (account.isEmpty()) {
+          xmppClient.createAccount(connection.get(), username, password);
         }
+        xmppClient.login(connection.get());
+      } catch (XMPPGenericException e) {
+        handleXMPPGenericException(session, connection.get(), e);
+        return;
+      }
+    
+      CONNECTIONS.put(session, connection.get());
+      log.info("Session was stored.");
+    
+      xmppClient.addIncomingMessageListener(connection.get(), session);
+    
+      webSocketTextMessageHelper.send(session, WebsocketMessage.builder().to(username).messageType(JOIN_SUCCESS).build());
+    }
+    ```
+    
+  - **Send message**: given a message, a recipient and a websocket session it will talk to the XMPP client layer to send a message to the XMPP server. If something goes wrong we will disconnect the user and remove the websocket session. Apart from a message sent to another user other type of messages are supported like, adding a user to a *Roster* or getting all the users from a *Roster*.
+
+    ```java
+    public void sendMessage(WebsocketMessage message, Session session) {
+      XMPPTCPConnection connection = CONNECTIONS.get(session);
+    
+      if (connection == null) {
+        return;
+      }
+    
+      switch (message.getMessageType()) {
+        case NEW_MESSAGE -> {
+          try {
+            xmppClient.sendMessage(connection, message.getContent(), message.getTo());
+          } catch (XMPPGenericException e) {
+            handleXMPPGenericException(session, connection, e);
+          }
+        }
+        case ADD_CONTACT -> {
+          try {
+            xmppClient.addContact(connection, message.getTo());
+          } catch (XMPPGenericException e) {
+            handleXMPPGenericException(session, connection, e);
+          }
+        }
+        case GET_CONTACTS -> {
+          Set<RosterEntry> contacts = Set.of();
+          try {
+            contacts = xmppClient.getContacts(connection);
+          } catch (XMPPGenericException e) {
+            handleXMPPGenericException(session, connection, e);
+          }
+    
+          JSONArray jsonArray = new JSONArray();
+          for (RosterEntry entry : contacts) {
+            jsonArray.put(entry.getName());
+          }
+          WebsocketMessage responseMessage = WebsocketMessage.builder()
+            .content(jsonArray.toString())
+            .messageType(GET_CONTACTS)
+            .build();
+          log.info("Returning list of contacts {} for user {}.", jsonArray, connection.getUser());
+          webSocketTextMessageHelper.send(session, responseMessage);
+        }
+        default -> log.warn("Message type not implemented.");
+      }
+    }
     ```
 
-  - **Send message**: given a message, a recipient and a websocket session it will talk to the XMPP client layer to send a message to the XMPP server. If something goes wrong we will disconnect the user and remove the websocket session.
-  -  **Disconnecting user**: disconnecting a user will involve sending the user status *unavailable*, disconnecting from the XMPP server and removing the websocket session.
+  - **Disconnecting user**: disconnecting a user will involve sending the user status *unavailable*, disconnecting from the XMPP server and removing the websocket session.
+
+    ```java
+    public void disconnect(Session session) {
+      XMPPTCPConnection connection = CONNECTIONS.get(session);
+    
+      if (connection == null) {
+        return;
+      }
+    
+      try {
+        xmppClient.sendStanza(connection, Presence.Type.unavailable);
+      } catch (XMPPGenericException e) {
+        log.error("XMPP error.", e);
+        webSocketTextMessageHelper.send(session, WebsocketMessage.builder().messageType(ERROR).build());
+      }
+    
+      xmppClient.disconnect(connection);
+      CONNECTIONS.remove(session);
+    }
+    ```
 
 - **XMPP client layer**: on this layer we will handle all the communication with the XMPP server, from creating the connection to sending user statuses (*stanza*).
 
@@ -206,7 +267,10 @@ We will structure our Spring Boot application in multiple layers to separate the
           try {
               connection.login();
           } catch (XMPPException | SmackException | IOException | InterruptedException e) {
-              throw new XMPPGenericException(connection.getUser().toString(), e);
+              log.error("Login to XMPP server with user {} failed.", connection.getUser(), e);
+  
+              EntityFullJid user = connection.getUser();
+              throw new XMPPGenericException(user == null ? "unknown" : user.toString(), e);
           }
           log.info("User '{}' logged in.", connection.getUser());
       }
@@ -227,6 +291,46 @@ We will structure our Spring Boot application in multiple layers to separate the
           } catch (XmppStringprepException | SmackException.NotConnectedException | InterruptedException e) {
               throw new XMPPGenericException(connection.getUser().toString(), e);
           }
+      }
+    
+      public void addContact(XMPPTCPConnection connection, String to) {
+          Roster roster = Roster.getInstanceFor(connection);
+  
+          if (!roster.isLoaded()) {
+              try {
+                  roster.reloadAndWait();
+              } catch (SmackException.NotLoggedInException | SmackException.NotConnectedException | InterruptedException e) {
+                  log.error("XMPP error. Disconnecting and removing session...", e);
+                  throw new XMPPGenericException(connection.getUser().toString(), e);
+              }
+          }
+  
+          try {
+              BareJid contact = JidCreate.bareFrom(to + "@" + xmppProperties.getDomain());
+              roster.createItemAndRequestSubscription(contact, to, null);
+              log.info("Contact '{}' added to user '{}'.", to, connection.getUser());
+          } catch (XmppStringprepException | XMPPException.XMPPErrorException
+                  | SmackException.NotConnectedException | SmackException.NoResponseException
+                  | SmackException.NotLoggedInException | InterruptedException e) {
+              log.error("XMPP error. Disconnecting and removing session...", e);
+              throw new XMPPGenericException(connection.getUser().toString(), e);
+          }
+      }
+    
+      public Set<RosterEntry> getContacts(XMPPTCPConnection connection) {
+          Roster roster = Roster.getInstanceFor(connection);
+  
+          if (!roster.isLoaded()) {
+              try {
+                  roster.reloadAndWait();
+              } catch (SmackException.NotLoggedInException | SmackException.NotConnectedException
+                      | InterruptedException e) {
+                  log.error("XMPP error. Disconnecting and removing session...", e);
+                  throw new XMPPGenericException(connection.getUser().toString(), e);
+              }
+          }
+  
+          return roster.getEntries();
       }
   
       public void disconnect(XMPPTCPConnection connection) {
@@ -264,7 +368,7 @@ We are going to use docker to run all the backend services:
 
 1. Build your Spring Boot application: `mvn clean install`
 
-2. Run `docker-compose` with the following file:
+2. Run `docker-compose up` with the following file:
 
    ```yml
    services:
@@ -341,7 +445,9 @@ We are going to use docker to run all the backend services:
 
 ### Front-end
 
-TODO
+For the frontend we have chosen [ReactJS](https://reactjs.org) with [Redux](https://redux.js.org). React allows you to create a frontend application by components that manage their state and to get a little help with managing the state of all the components we decided to use Redux, which basically centralize the application's state.
+
+In order to run the fronent application we need NPM. NPM comes with Node, so on a MacOs we can simply run `brew install node`. Then to start the application we have to run `npm start`.
 
 
 
