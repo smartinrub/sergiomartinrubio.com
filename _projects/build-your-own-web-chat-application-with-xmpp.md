@@ -451,9 +451,149 @@ We are going to use docker to run all the backend services:
 
 For the frontend we have chosen [ReactJS](https://reactjs.org) with [Redux](https://redux.js.org). React allows you to create a frontend application by components that manage their state and to get a little help with managing the state of all the components we decided to use Redux, which basically centralize the application's state.
 
-In order to run the fronent application we need NPM. NPM comes with Node, so on a MacOs we can simply run `brew install node`. Then to start the application we have to run `npm start`.
+In order to run the fronent application we need *NPM*. NPM comes with *Node*, so on a *MacOs* we can simply run `brew install node`. Then to start the application we have to run `npm start`.
 
+The React application files are structured by features:
 
+- **User**: includes the components related to login and logout.
+- **Home**: this is the parent component for the rest of components.
+- **Contacts**: includes the components for displaying the list of users returned by the J *roster* and the component for adding new users to the *roster*.
+- **Messages**: here we have all the components that are responsible for displaying the messages and sending new messages.
+
+The React applicatiion is using **React Router** for the navigation between components. 
+
+The communication with the backend application is handled by **Redux Middleware**. This middleware intercepts actions and runs side effects before or after an action occurs. i.e. when you the button login is pressed an action called `WS_CONNECT` is propagated, the middleware intercepts this action, is handled inside a switch statement and the Websocket connection is created. A middleware is very convinient for handling the websocket communication because you don't have to worry about wiring things up.
+
+*websocketMiddleware.js*
+
+```react
+const websocketMiddleware = () => {
+  let socket = null;
+
+  const onOpen = (store) => (event) => {
+  };
+
+  const onClose = (store) => () => {
+    store.dispatch(logout());
+    history.push("/login");
+  };
+
+  const onMessage = (store) => (event) => {
+    const payload = JSON.parse(event.data);
+    switch (payload.messageType) {
+      case "JOIN_SUCCESS":
+        store.dispatch(
+          login({
+            username: payload.to,
+            loggedIn: true,
+          })
+        );
+
+        store.dispatch(disableAlert());
+
+        history.push("/home");
+
+        const msg = {
+          messageType: "GET_CONTACTS",
+        };
+
+        socket.send(JSON.stringify(msg));
+        break;
+      case "NEW_MESSAGE":
+        const message = {
+          content: payload.content,
+          type: payload.messageType,
+        };
+        store.dispatch(addMessage(message));
+        break;
+      case "ERROR":
+        store.dispatch(logout());
+        history.push("/login");
+        socket = null;
+        break;
+      case "LEAVE":
+        console.log(payload);
+        socket = null;
+        break;
+      case "FORBIDDEN":
+        store.dispatch(
+          enableAlert({ message: "Invalid password", enabled: true })
+        );
+        console.log("Invalid password");
+        break;
+      case "GET_CONTACTS":
+        store.dispatch(add(JSON.parse(payload.content)));
+        break;
+      default:
+        console.log(payload);
+        break;
+    }
+  };
+
+  const onError = (store) => (event) => {
+    const msg = {
+      message:
+        "Something went wrong when connecting to the Chat Server. Please contact support if the error persists.",
+      enabled: true,
+    };
+    store.dispatch(enableAlert(msg));
+  };
+
+  return (store) => (next) => (action) => {
+    switch (action.type) {
+      case "WS_CONNECT":
+        if (socket !== null) {
+          socket.close();
+        }
+
+        socket = new WebSocket(
+          "ws://localhost:8080/chat/" + action.username + "/" + action.password
+        );
+
+        // websocket handlers
+        socket.onmessage = onMessage(store);
+        socket.onclose = onClose(store);
+        socket.onopen = onOpen(store);
+        socket.onerror = onError(store);
+
+        break;
+      case "WS_DISCONNECT":
+        if (socket !== null) {
+          socket.close();
+        }
+        socket = null;
+        store.dispatch(logout());
+        history.push("/login");
+        break;
+      case "NEW_MESSAGE":
+        socket.send(JSON.stringify(action.msg));
+        break;
+      case "ADD_CONTACT":
+        socket.send(JSON.stringify(action.msg));
+
+        const msg = {
+          messageType: "GET_CONTACTS",
+        };
+
+        socket.send(JSON.stringify(msg));
+        break;
+      default:
+        return next(action);
+    }
+  };
+};
+
+export default websocketMiddleware();
+```
+
+## Future Improvements
+
+- Deploy the entire system to Kubernetes.
+- Store sessions.
+- Store messages from sender and recipient.
+- Show user status (presence).
+- Add frontend unit tests.
+- Add end to end tests with a framework like Cypress.
 
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/spring-xmpp-websocket-reactjs.git" text="Download Source Code from this repository" %}
