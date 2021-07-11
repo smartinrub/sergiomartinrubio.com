@@ -1,5 +1,5 @@
 ---
-title: Java Class Manipulation with Byte Buddy
+title: Java Code Manipulation with Byte Buddy
 image: https://lh3.googleusercontent.com/pw/AM-JKLUPY3ogCqAGtp-fxvhjXAiP5sZZ_snDV_SAsVLBe0sNQkvPDFUqdyZZ2OyGVKBYNb8ysg3SPI0vumW3vUl3A-L7DMvFY81LanCWKt46kmGRxFYIt2Oi-KCWwcMc-wvy6AirHtcgUsrjWH2dbfMpOfBk=w2760-h1640-no?authuser=1
 author: Sergio Martin Rubio
 categories:
