@@ -77,9 +77,13 @@ expertise:
     level: 80
     color: rgb(80, 185, 185)
 
-  - title: Data structure and algorithms
+  - title: Data structures
     level: 90
     color: rgb(222, 184, 135)
+  
+  - title: Algorithms
+    level: 90
+    color: rgb(255, 182, 46)
 
   - title: Databases (SQL/NoSQL)
     level: 90
