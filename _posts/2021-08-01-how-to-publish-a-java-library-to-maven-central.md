@@ -1,6 +1,6 @@
 ---
 title: How to Publish a Java Library to Maven Central
-image: https://lh3.googleusercontent.com/pw/AM-JKLXIJE7ME0lqx19I-tPQCKryFhmZiyQKk-W7DU35x6gA9B72B-pJtBBdKAZU1xSSZRu3AYfV66BEwKCB5OND7kddnt9TSTH6LTFYd7LXC3yPJo7ARkcj9M_VQIrfX_oTRsbclQoxofut1_mIXUKIkVxP=w2458-h1640-no?authuser=1
+image: https://lh3.googleusercontent.com/pw/AM-JKLWs1y4SUelbTO5rb2dSjCQzyTnk_8nKx-1VlFobEXQG0vK1Iav28bN-Tr_QA-bJcwrUJrGecUwzil1n2UIH0Q6huHJxtZ5Cpfqs6GP0CkstgrWDOPRd_tJe6Bj4AzBrus_sWR64qMCvC1k-8mRIgzIv=w1920-h1282-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java
