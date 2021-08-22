@@ -1,5 +1,5 @@
 ---
-title: Centralized Configuration with Spring Cloud Config Server
+ftitle: Centralized Configuration with Spring Cloud Config Server
 image: https://lh3.googleusercontent.com/pw/ACtC-3cwnHj1kwcQbmWj-1660ch6BYqYFza580diffJPcqUFsB-TEr1fUnUwcbgGxvVroNUQVat_fWILMwsj9toCY5vkLasf0ZTnf1HOuVH-zkww3Ls4D6QJx3Z1GzXS5gzUyMmQyI6HrD28v48BIcOGelBn=w640-h302-no?authuser=1
 author: Sergio Martin Rubio
 categories:
@@ -138,11 +138,11 @@ To configure a symmetric key, you need to set `encrypt.key` to a plain text stri
 
 >Note: `ENCRYPT_KEY` overrides `encrypt.key` value.
 
-You can also disable decryption of properties before sending them to the client. To do this you have to set `spring.cloud.config.server.encrypt.enabled` to `false` (`true` is the default value). When this property is set to `false`, `encrypt.key` is required in the client for decryption during start up.
+You can also disable decryption of properties before sending them to the client. To do this you have to set `spring.cloud.config.server.encrypt.enabled` to `false` (`true` is the default value). When this property is set to `false`, `encrypt.key` is required on the client side for decryption during start up.
 
 #### Asymmetric
 
-The symmetric key is superior in terms of security, but it is usually less convenient since you have to set a few properties.
+The asymmetric key is superior in terms of security, but it is usually less convenient since you have to set a few properties.
 
 A keystore is needed to set up an asymmetric key. This requires a password which itself would have to be stored unencrypted and then set the keystore password as an environment variable.
 
@@ -184,7 +184,7 @@ Once the endpoint is enabled on the client you can hit the `/refresh` endpoint:
 curl -X POST localhost:8080/actuator/refresh
 ```
 
->Note: **What's happening under the hood?** The `ContextRefresher` class is called, then it iterates through all the property sources and searches for changes, publishes an event to signal a change in the environment and finally it destroys the current instance of all beans in this scope and forces a refresh on next method execution.
+>Note: **What's happening under the hood?** The `ContextRefresher` class is called, then it iterates through all the property sources and searches for changes, publishes an event to signal a change in the environment and finally it destroys the current instance of all beans in this scope and forces a refresh on the next method execution.
 
 As you can see this is a very nice feature, however it is not very convenient out-of-the-box, because once you start having many services running refreshing on each one will become a hassle, that is why _Spring_ provides a practical way to trigger the refresh event for all related services when property change, and this can be achieved with [Spring Cloud Bus](https://cloud.spring.io/spring-cloud-bus/reference/html/){:target="_blank"}. **How does it work?** When the refresh event of one of the services is triggered, this event is automatically broadcasted through all the other services by using a message broker, and this can be translated as a distributed **Actuator**.
 
@@ -229,7 +229,7 @@ The broker message configuration can be shared by creating a `application.yml` o
 
 #### What's next?
 
-You can go a step further by automating the task of hitting the bus refresh endpoint. Many source code repositories like _GitHub_, _Gitlab_ or _Bitbucket_ notify you of changes in a repository through a [web-hook](https://developer.github.com/webhooks/){:target="_blank"}. The [web-hook can be configured to listen changes in your config repo and broadcasting the refresh event for the all connected services through Spring Cloud Bus](https://cloud.spring.io/spring-cloud-config/multi/multi__push_notifications_and_spring_cloud_bus.html){:target="_blank"}.
+You can go a step further by automating the task of hitting the bus refresh endpoint. Many source code repositories like _GitHub_, _Gitlab_ or _Bitbucket_ notify you of changes in a repository through a [web-hook](https://developer.github.com/webhooks/){:target="_blank"}. The [web-hook can be configured to listen to changes on your config repo and broadcast the refresh event to every connected service with Spring Cloud Bus](https://cloud.spring.io/spring-cloud-config/multi/multi__push_notifications_and_spring_cloud_bus.html){:target="_blank"}.
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/SNicX8hqYJ_D_WMTQiE3fMc88PYqfe5NWn7gffw3xXxxZLDsqVhYKOxu7MWrQ17GhUEvJ1qYN66UBjOijojPXySYZxFPcrkn8cudR4BZQM616P88mWdfw-P0DfXhC5hl1slyBKlJLQ=w1000" caption="Spring Cloud Config Server With Web-hook Diagram" %}
 
