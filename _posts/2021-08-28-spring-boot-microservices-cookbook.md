@@ -52,7 +52,7 @@ There are many testing libraries for Java and I would like to highlight some of 
 - [Wiremock](http://wiremock.org){:target="_blank"}: for mocking external APIs.
 - [Cucumber](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java-and-spring/): if you want to use BDD (Behavior Driven Design) this is an excellent tool.
 
-> [TDD (Test Driven Development)](https://sergiomartinrubio.com/articles/test-driven-development-by-example/) is quite advised and that's why this sections is added to the top!
+> [TDD (Test Driven Development)](https://sergiomartinrubio.com/articles/test-driven-development-by-example/) is quite advised and that's why this section is added to the top!
 
 ### Project Structure
 
