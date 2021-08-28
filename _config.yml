@@ -13,6 +13,8 @@ enable-mathjax: yes
 # Charts
 enable-chartjs: no
 
+# Google AddSense
+enable-addsense: yes
 
 # This defines how the URLs should look like.
 permalink: /articles/:title/
