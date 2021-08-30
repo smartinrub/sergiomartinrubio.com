@@ -30,6 +30,8 @@ This layout is used for posts. Changing anything here will affect all posts(not 
 <div class="featured-image rounded shadow" style="background-image: url({{page.image | relative_url }})"
   data-aos="zoom-in"></div>
 
+{% include horizontal-ad.html %}
+
 <div class="container">
   <article>
     {% if site.toc %} {% include toc.html html=content class="toc rev clearfix"
