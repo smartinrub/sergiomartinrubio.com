@@ -8,8 +8,6 @@ layout: post
 
 ## Single Node Kubernetes Cluster on Raspberry Pi
 
-#
-
 **Kubernetes** is the most popular container orchestrator and is now a mature project created originally by _Google_ and finally announced as an open source project in 2014.
 
 We've been thinking about improving my _Kubernetes_ skills and we thought that setting up my own _Kubernetes_ cluster would be a good opportunity to learn more about this amazing technology. There are a few options out there to run a _Kubernetes_ cluster. You can install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on _macOS_, _Linux_ or _Windows_, which is a one node _Kubernetes_ cluster running in a VM on top of a host; use [Google Cloud GKE](https://cloud.google.com/kubernetes-engine/) or [Amazon EKS](https://aws.amazon.com/eks/); or self host your _Kubernetes_ cluster. We already tried _Minikube_ in the past and we wanted to get a full fledged experience without worrying about account trials, so we decided to acquire the most powerful **Raspberry Pi** at the moment.
