@@ -6,6 +6,8 @@ layout: default
 This layout is used for posts. Changing anything here will affect all posts(not pages)
  -->
 
+{% include horizontal-ad.html %}
+
 {% include breadcrumbs.html %}
 
 <div class="meta" data-aos="fade-up">
@@ -29,8 +31,6 @@ This layout is used for posts. Changing anything here will affect all posts(not 
 
 <div class="featured-image rounded shadow" style="background-image: url({{page.image | relative_url }})"
   data-aos="zoom-in"></div>
-
-{% include horizontal-ad.html %}
 
 <div class="container">
   <article>
