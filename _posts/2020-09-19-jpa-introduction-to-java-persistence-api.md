@@ -156,7 +156,7 @@ public class Bar {
 }
 ```
 
-> Hibernate `@OneToMany` relationship causes infinite loop. This happens because Jackson will try to map each returned POJO recursively. You can fix this by ignoring the nested properties on each side of the on to many relationship. Also you should not use `FetchType.LAZY` on the `@ManyToOne` in order to make this fix work.
+> Hibernate `@OneToMany` relationship causes infinite loop. This happens because Jackson will try to map each returned POJO recursively. You can fix this by ignoring the nested properties on each side of the on to many relationship. Also you should not use `FetchType.LAZY` on the `@ManyToOne` side and set `fetch = FetchType.EAGER` on the `@OneToMany` side in order to make this fix work.
 >
 > ```java
 > @Entity
@@ -182,7 +182,7 @@ public class Bar {
 >     
 >     // fetch strategy is lazy by default
 >     @JsonIgnoreProperties("bar")
->     @OneToMany(mappedBy = "bar")
+>     @OneToMany(mappedBy = "bar", , fetch = FetchType.EAGER)
 >     private List<Foo> foos;
 >     
 >     // getters, setters...
