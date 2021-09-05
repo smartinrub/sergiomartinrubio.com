@@ -156,6 +156,39 @@ public class Bar {
 }
 ```
 
+> Hibernate `@OneToMany` relationship causes infinite loop. This happens because Jackson will try to map each returned POJO recursively. You can fix this by ignoring the nested properties on each side of the on to many relationship. Also you should not use `FetchType.LAZY` on the `@ManyToOne` in order to make this fix work.
+>
+> ```java
+> @Entity
+> @Table(name = "FOO")
+> public class Foo {
+> 
+>     // attributes
+>     
+>     // fetch strategy is eager by default
+>     @ManyToOne
+>     @JsonIgnoreProperties("foos")
+>     @JoinColumn(name = "bar_id", nullable = false)
+>     private Bar bar;
+>     
+>     // getters, setters...
+> }
+> 
+> @Entity
+> @Table(name = "BAR")
+> public class Bar {
+>     
+>     // attributes
+>     
+>     // fetch strategy is lazy by default
+>     @JsonIgnoreProperties("bar")
+>     @OneToMany(mappedBy = "bar")
+>     private List<Foo> foos;
+>     
+>     // getters, setters...
+> }
+> ```
+
 ### Many to Many Relationship
 
 A many-to-many relationship is joining two collections from two different entities. This requires a `@ManyToMany` annotation in both sides.
@@ -239,7 +272,7 @@ JPA provides cascade types to propagate an operation from a parent to a child en
 
 ## Persistence Unit
 
-A persistence unit is the configuration required by JPA and allows you to instantiate an entity manager. Persistence units are declared in a file `META-INF/persistence.xml` where you can configure things like the name of each persistence unit, managed classes included in your persistence unit, how classes are mapped to database tables, the datasource use to connect to the database... however, you can also configure a persistence unit programatically by implementing the `PersistenceUnitInfo` interface.
+A persistence unit is the configuration required by JPA and allows you to instantiate an entity manager. Persistence units are declared in a file `META-INF/persistence.xml` where you can configure things like the name of each persistence unit, managed classes included in your persistence unit, how classes are mapped to database tables, the datasource use to connect to the database... however, you can also configure a persistence unit programmatically by implementing the `PersistenceUnitInfo` interface.
 
 There are two transaction types:
 
