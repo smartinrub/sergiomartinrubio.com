@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Spring Boot and Java 9 Modules
-image: https://lh3.googleusercontent.com/pw/AM-JKLU6KACiAJ19nHeNqGn1GJ1FRv-cQabXbcAazY5WqheeZJncydOi902Bht9j7AmhovBvmQY7dkwMXsnewvIyBnqePFsblnDkGkjgIrp0grEyUC9x0bkA8rvj5ayrfzoiT6uQ4TPSDxrnifA3Wla4wZ7h=w640-h512-no?authuser=1
+image: https://lh3.googleusercontent.com/pw/AM-JKLUuQmgrDB34YhNXwk7rKlAqIDjYQYuvx0uwwpnBb5ORcHL_n2qNGZ3iJpVB6BC6MOvFLZYYH9i1YEkMgKLbbkaMOcFpYP9bKUZ7XfknzX1JzN0DjaNeT-MjWDA9tbrnz9XKCXjcbedTSHaL36ZUJx4u=w1280-h853-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java
@@ -333,6 +333,3 @@ For small microservices the Java Module System might be overkilling and it would
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/spring-boot-java-modules.git" text="Source Code" %}
 </p>
-
-Photo by [Derek Sutton](https://unsplash.com/@dereksutton?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/modules?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
