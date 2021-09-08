@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Spring Boot and Java 9 Modules
-image: https://lh3.googleusercontent.com/pw/AM-JKLWl4KMC3rUAKVRTz4U11TqwWAB91rfwvJhOGNyLHELkZgEum4jUFCaINmPtKzGb0uPJ67PeIvXXdmiIK_ZcLAzlG5VjyIOntBELP1tajMgtPM6xKV1TiCIWYJWEtYAL38kPb2ZztMzo_91GEozVR-eY=w640-h512-no?authuser=1
+image: https://lh3.googleusercontent.com/pw/AM-JKLVlwAS-QsxgSZf9zsygWlY24S_rtKsray2c4Fm7bckRXKJQiNp4b_UW69WpT6JdDGlukq4j52vk2SyDIB2LfBFJEd3oCbiZUXoswK9XvbSKKaOGla0-yuyVRErVrz_LJb1gq4ZpVTe6lNjKt8Nsqoad=w640-h512-no?authuser=1
 author: Sergio Martin Rubio
 categories:
     - Java
