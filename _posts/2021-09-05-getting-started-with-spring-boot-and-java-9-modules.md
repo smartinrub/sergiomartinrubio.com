@@ -74,7 +74,7 @@ We can generate the byte-code for the `model` module as follows:
 javac -d target/mods/com.sergiomartinrubio.model model/src/main/java/module-info.java model/src/main/java/com/sergiomartinrubio/model/service/PlayerService.java --module-path target/mods
 ```
 
-in this case we have to specify `--module-path ` which contains the module required by the `player` module.
+in this case we have to specify `--module-path` which contains the module required by the `player` module.
 
 Then we can run it:
 
@@ -86,27 +86,27 @@ java --module-path target/mods -m com.sergiomartinrubio.model/com.sergiomartinru
 
 So far only `requires` and `exports` clauses were mentioned, however the Java Modules System provides other directives.
 
-### requires
+### "requires" keyword
 
-`requires` defines what modules are needed for a particular module. Required modules must be defined as `exports` in the external module in order to be able to use it.
+The `requires` statement defines what modules are needed for a particular module. Required modules must be defined as `exports` in the external module in order to be able to use it.
 
-### exports
+### "exports" keyword
 
-`exports` makes packages public to other modules. By default, no package is exported.
+The `exports` statement makes packages public to other modules. By default, no package is exported.
 
-### requires transitive
+### "requires transitive" keyword
 
-By using `requires transitive` you don't have to declare two modules, instead you simply declare the module that already declares the other required module.
+By using `requires transitive` you do not have to declare two modules, instead you simply declare the module that already declares the other required module.
 
-### exports to
+### "exports to" keyword
 
 This is a directive to have an extra level of visibility control. It allows you to restrict which modules can use a particular module.
 
-### open
+### "open" keyword
 
 This is to give a module reflective access to all its packages.
 
-### opens to
+### "opens to" keyword
 
 This is similar to `open` but with an extra level of visibility control. Instead of opening an entire module to reflection, you can specify which packages within a module you want to open for reflection.
 
