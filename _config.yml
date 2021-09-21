@@ -57,6 +57,7 @@ recent-posts: yes
 
 future: true
 
+timezone: Europe/Madrid
 
 # Editing items below this line can break the site
 ##################################################
