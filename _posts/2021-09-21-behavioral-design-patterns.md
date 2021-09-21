@@ -1,5 +1,5 @@
 ---
-title: Behavioral Patterns
+title: Behavioral Design Patterns
 image: https://lh3.googleusercontent.com/pw/ACtC-3er58cI_OzBxVrz2sjv-E67YRikX8ZFS-SZBhCIPzcuiv0o3KGYR_h07uhehxPr8Sw39jKteJbPMegOFhhmVQ0g441kd2IU3suTiADkQaBSecZOzZKad2gyyNFqTp7f7RRPMk8paC-bwUMNukZiSfNG=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:

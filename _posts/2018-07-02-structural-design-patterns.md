@@ -1,5 +1,5 @@
 ---
-title: Structural Patterns
+title: Structural Design Patterns
 image: https://lh3.googleusercontent.com/pw/ACtC-3dOlHYrt8Wfx6FX4WPnyQOeM-TcdXsgxqbJrjr5LwVG55eV1adTbo4V_7Ps2ZPLQoqPvuFFOLXMLQcniEcBP1uTeqvwM5nrCyj0rLcGbSqPKnqxLP4Go0ca5p--_5q8tmb7hfJfFrXojOrT7QC93QZB=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:

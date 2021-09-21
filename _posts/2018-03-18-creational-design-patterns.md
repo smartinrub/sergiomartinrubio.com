@@ -1,5 +1,5 @@
 ---
-title: Creational Patterns
+title: Creational Design Patterns
 image: https://lh3.googleusercontent.com/pw/ACtC-3ehuLoULrZN2ARD62wXJs8guE2fM-37rqNNoRJWbTZEYZE4rX7H5cIjBPLmwJzs-TpV8OmceNMaVPdThQ8U2qLrrBv9ta-8n86VRsfjQHRjkKUfUKNeaAYcoBsMq04J1iuFXzGru10NNVjjNCAqzzkR=w640-h426-no?authuser=1
 author: Sergio Martin Rubio
 categories:
