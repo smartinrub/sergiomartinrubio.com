@@ -343,10 +343,93 @@ Client ..> Visitor
 
 ```
 
-1. Assuming we have a hierarchy of classes like `Computer` and `DishWasher` that implement a common interface `Visitable`.
-2. We create a `Visitor` that declares a `visit` method for each concrete visitor class. In the previous diagram we can see we have two visit operations, one for the `Computer` class and another one for the `DishWasher` class. The signature of the `visit` method contains the classe to be visited, and this lets the visitor determine the concrete class to be visited, so the concrete visitor will be able to access the visitable class directly.
-3. We create concrete visitor classes like `RewardPointsVisitor` that implements each method declared by the `Visitor`. The concrete class allows you to define new operations of the visitable classes and stores its local state.
-4. The client can now iterate through the hierarchy and apply the visitors.
+1. Assuming we have a hierarchy of classes like `Computer` and `DishWasher` that implement a common interface `Visitable` that has an operation called `accept`.
+
+   ```java
+   public interface Visitable {
+       void accept(Visitor visitor);
+   }
+   ```
+
+   ```java
+   public class Computer implements Visitable {
+       private final double price;
+   
+       public Computer(double price) {
+           this.price = price;
+       }
+   
+       @Override
+       public void accept(Visitor visitor) {
+           visitor.visit(this);
+       }
+   
+       public double getPrice() {
+           return price;
+       }
+   
+   }
+   ```
+
+1. We create a `Visitor` that declares a `visit` method for each concrete visitor class. In the previous diagram we can see we have two visit operations, one for the `Computer` class and another one for the `DishWasher` class. The signature of the `visit` method contains the classe to be visited, and this lets the visitor determine the concrete class to be visited, so the concrete visitor will be able to access the visitable class directly.
+
+   ```java
+   public interface Visitor {
+       void visit(DishWasher dishWasher);
+   
+       void visit(Computer computer);
+   }
+   ```
+
+1. We create concrete visitor classes like `RewardPointsVisitor` that implements each method declared by the `Visitor`. The concrete class allows you to define new operations of the visitable classes and stores its local state.
+
+   ```java
+   public class RewardPointsVisitor implements Visitor {
+       private double rewardPoints; // stores local state
+   
+       @Override
+       public void visit(DishWasher dishWasher) {
+           if (dishWasher.getPrice() > 500) {
+               rewardPoints += dishWasher.getPrice() * 2;
+           } else {
+               rewardPoints += dishWasher.getPrice();
+           }
+       }
+   
+       @Override
+       public void visit(Computer computer) {
+           if (computer.getPrice() > 1000) {
+               rewardPoints += computer.getPrice() * 3;
+           } else {
+               rewardPoints += computer.getPrice();
+           }
+       }
+   
+       public double getRewardPoints() {
+           return rewardPoints;
+       }
+   }
+   ```
+
+2. The client can now iterate through the hierarchy and apply the visitors.
+
+   ```java
+   public class Client {
+       public static void main(String[] args) {
+           List<Visitable> products = new ArrayList<>();
+           products.add(new Computer(600));
+           products.add(new DishWasher(600));
+           products.add(new Computer(1200));
+           products.add(new Computer(300));
+   
+           RewardPointsVisitor rewardPointsVisitor = new RewardPointsVisitor();
+   
+           products.forEach(product -> product.accept(rewardPointsVisitor));
+   
+           System.out.println(rewardPointsVisitor.getRewardPoints());
+       }
+   }
+   ```
 
 As you can see the visitor pattern allows you to add operations to classes without chaing them. This is achieved by using a technique called **double-dispatch**. This technique consist of providing two types of receivers, in this case the concrete `Visitor`  and the concrete visitable class.
 
