@@ -55,6 +55,7 @@ disqus:
 # Change it to `no` to remove recent posts.
 recent-posts: yes
 
+future: true
 
 
 # Editing items below this line can break the site
