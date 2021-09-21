@@ -4,7 +4,7 @@ image: https://lh3.googleusercontent.com/pw/ACtC-3er58cI_OzBxVrz2sjv-E67YRikX8ZF
 author: Sergio Martin Rubio
 categories:
     - Design Pattern
-mermaid: false
+mermaid: true
 layout: post
 ---
 
@@ -16,11 +16,11 @@ Behavioral patterns improve communication and flexibility between objects.
 
 ## Observer
 
-Observer pattern establishes a one to many relationship, so if an observable object is modified all the observers listening to changes on that object get notified.
+The <u>observer</u> pattern establishes a one to many relationship, so if an observable object is modified, all the observers listening to changes on that object get notified.
 
-This pattern is used to reflect changes in an object, when there are changes in another object without having these two objects coupled. This pattern allows you to add additional observers in the future with minimal changes.
+This pattern **is used to reflect changes in an object when there are changes in another object**, without having these two objects coupled. The observer pattern allows you to add additional observers in the future with minimal changes.
 
-If we have many observers and observables, the communication between them can become complex.
+It's important to highlight that if we have many observers and observables, the communication between them can become complex.
 
 An Observable object needs to be created and then, the observers subscribe to the observable. Each time the observable state changes, attached observers are notified .
 
@@ -126,13 +126,13 @@ An Observable object needs to be created and then, the observers subscribe to th
     messageNotifier.register(observerOne);
     messageNotifier.register(observerTwo);
     messageNotifier.register(observerThree);
-
+    
     new Thread(messageNotifier).start();
     ```
 
 ## Command
 
-Command pattern is a data driven design pattern that allows you to create a set of behaviors for a particular subject. It decouples the object that invokes the action from the object that performs the action.
+The <u>command</u> pattern is a data driven design pattern that allows you to create a set of behaviors for a particular subject. It decouples the object that invokes the action from the object that performs the action.
 
 It is used to queue commands and keep a history of them to do and undo actions. 
 
@@ -208,22 +208,22 @@ It is used to queue commands and keep a history of them to do and undo actions.
 
     ```java
     Policy policy = new Policy();
-
+    
     CreatePolicy createPolicy = new CreatePolicy(policy);
     UpdatePolicy updatePolicy = new UpdatePolicy(policy);
     CancelPolicy cancelPolicy = new CancelPolicy(policy);
-
+    
     PolicyCommandsInvoker policyCommandsInvoker = new PolicyCommandsInvoker();
     policyCommandsInvoker.takeCommand(createPolicy);
     policyCommandsInvoker.takeCommand(updatePolicy);
     policyCommandsInvoker.takeCommand(cancelPolicy);
-
+    
     policyCommandsInvoker.runCommands(UUID.randomUUID());
     ```
 
 ## Strategy
 
-Strategy pattern defines a family of behaviors which are interchangeable. This pattern allows you to change at runtime the way an object behaves. Therefore, instead of having multiple instances, there will be only one that is able to interchange different behaviors, and the only requirement for these strategies or behaviors is having a common interface required by the context object. 
+The <u>strategy</u> pattern defines a family of behaviors which are interchangeable. This pattern allows you to change at runtime the way an object behaves. Therefore, instead of having multiple instances, there will be only one that is able to interchange different behaviors, and the only requirement for these strategies or behaviors is having a common interface required by the context object. 
 
 ### Implementation
 
@@ -273,18 +273,83 @@ Strategy pattern defines a family of behaviors which are interchangeable. This p
     System.out.println("Do Addition Operation...");
     CalculatorContext calculator = new CalculatorContext(new Addition());
     System.out.println(NUM1 + " + " + NUM2 + ": " + calculator.executeStrategy(NUM1, NUM2));
-
+    
     System.out.println("Do Substration Operation...");
     calculator = new CalculatorContext(new Subtraction());
     System.out.println(NUM1 + " - " + NUM2 + ": " + calculator.executeStrategy(NUM1, NUM2));
-
+    
     System.out.println("Do Division Operation...");
     calculator = new CalculatorContext(new Division());
     System.out.println(NUM1 + " / " + NUM2 + ": " + calculator.executeStrategy(NUM1, NUM2));
-
+    
     System.out.println("Do Multiplication Operation...");
     calculator = new CalculatorContext(new Multiplication());
     System.out.println(NUM1 + " * " + NUM2 + ": " + calculator.executeStrategy(NUM1, NUM2));
     ```
+
+## Visitor
+
+The <u>visitor</u> pattern allows you to define operations on existing objects without having to change the structure of the class.
+
+One of the most common use cases of this pattern is when the same interface is used by multiple classes and adding additional operations to the target class will require changing the interface definition, and as a result we will have the other classes implementing the interface accordingly.
+
+### Implementation
+
+```mermaid
+classDiagram
+
+class Client {
+	
+}
+
+class Visitor {
+	<<interface>>
+	visit(Computer)
+	visit(DishWasher)
+}
+
+class RewardPointsVisitor {
+  -double rewardPoints
+  +visit(Computer)
+  +visit(DishWasher)
+  +getRewardPoints()
+}
+
+class Visitable {
+	<<interface>>
+	accept(Visitor)
+}
+
+class Computer {
+  -double price
+  +accept(Visitor)
+  +getPrice()
+}
+
+class DishWasher {
+  -double price
+  +accept(Visitor)
+  +getPrice()
+}
+
+Visitable <|-- Computer : implements
+Visitable <|-- DishWasher : implements
+Client ..> Visitable
+
+Visitor <|-- RewardPointsVisitor : implements
+Client ..> Visitor
+
+
+
+```
+
+1. Assuming we have a hierarchy of classes like `Computer` and `DishWasher` that implement a common interface `Visitable`.
+2. We create a `Visitor` that declares a `visit` method for each concrete visitor class. In the previous diagram we can see we have two visit operations, one for the `Computer` class and another one for the `DishWasher` class. The signature of the `visit` method contains the classe to be visited, and this lets the visitor determine the concrete class to be visited, so the concrete visitor will be able to access the visitable class directly.
+3. We create concrete visitor classes like `RewardPointsVisitor` that implements each method declared by the `Visitor`. The concrete class allows you to define new operations of the visitable classes and stores its local state.
+4. The client can now iterate through the hierarchy and apply the visitors.
+
+As you can see the visitor pattern allows you to add operations to classes without chaing them. This is achieved by using a technique called **double-dispatch**. This technique consist of providing two types of receivers, in this case the concrete `Visitor`  and the concrete visitable class.
+
+When applying this pattern it is important to remember that each visitor has to visit each concrete class of the object hierarchy.
 
 Image by <a href="https://pixabay.com/users/pexels-2286921/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1283693">Pexels</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1283693">Pixabay</a>
