@@ -15,18 +15,18 @@ The process of publishing a Java library to Maven Central is not as straightforw
 
 ### Nexus Account Setup
 
-Maven central requires having a unique Group ID that is usually a domain name reversed. If you own a domain, you can use it i.e. `com.sergiomartinrubio`, otherwise you can simply use your GitHub account i.e. `com.github.sergiomartinrubio`.
+Maven central requires having a unique Group ID that is usually a domain name reversed. If you own a domain, you can use it e.g. `com.sergiomartinrubio`, otherwise you can simply use your GitHub account e.g. `com.github.sergiomartinrubio`.
 
 1. Create a [Sonatype Jira account](https://issues.sonatype.org/secure/Signup!default.jspa){:target="_blank"}. Use your email address from your domain if possible.
 2. [Create Create a new Jira Issue](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134){:target="_blank"} as follows:
    - **Summary**: can be something like `Create new com.sergiomartinrubio project`.
    - **Group Id**: will be something like `com.sergiomartinrubio` or `com.github.sergiomartinrubio`.
-   - **Project URL**: can be your website or where you document the library (i.e. GitHub account).
-   - **SCM url**: is the host where the library is uploaded. i.e. `https://github.com/smartinrub`
-   - **Username**: is the chosen username. i.e. `sergiomartinrubio`
+   - **Project URL**: can be your website or where you document the library (e.g. GitHub account).
+   - **SCM url**: is the host where the library is uploaded. e.g. `https://github.com/smartinrub`
+   - **Username**: is the chosen username. e.g. `sergiomartinrubio`
    - **Description**: can be something like `I intend to publish open source projects.`
 
-3. **Wait for a Reply for the domain verification**. If you own a domain you can verify the domain by [adding a `TXT` record to the resource records](https://central.sonatype.org/faq/how-to-set-txt-record/){:target="blank"}. The resource record must include the Jira ticket ID. i.e. [OSSRH-71520](https://issues.sonatype.org/browse/OSSRH-71520){:target="blank"}. In case you don't own the domain you'll have to [setup some coordinates](https://central.sonatype.org/publish/requirements/coordinates/){:target="_blank"}. The response is usually quick.
+3. **Wait for a Reply for the domain verification**. If you own a domain you can verify the domain by [adding a `TXT` record to the resource records](https://central.sonatype.org/faq/how-to-set-txt-record/){:target="blank"}. The resource record must include the Jira ticket ID. e.g. [OSSRH-71520](https://issues.sonatype.org/browse/OSSRH-71520){:target="blank"}. In case you don't own the domain you'll have to [setup some coordinates](https://central.sonatype.org/publish/requirements/coordinates/){:target="_blank"}. The response is usually quick.
 
 > If everything went well a comment with a guide for publishing your library is added.
 
