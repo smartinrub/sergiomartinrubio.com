@@ -151,7 +151,7 @@ Installation & configuration:
    sudo nano /boot/firmware/cmdline.txt
    ```
 
-   > For Ubuntu 20.04.2
+   > For Ubuntu 20.04.2. This is not required for Ubuntu Server 22.04
 
    and prepend the following:
 
@@ -226,8 +226,7 @@ Installation & configuration:
    Get the token:
    
    ```shell
-   kubectl -n kube-system get secret
-   kubectl -n kube-system describe secret deployment-controller-token-<REPLACE>
+   kubectl config view --raw
    ```
 
    now the current context should be `microk8s`
