@@ -260,7 +260,7 @@ kubectl get deployments --all-namespaces
     ```
     kubectl proxy
     ```
-  - Open your browser and go to `http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default`
+  - Open your browser and go to `http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/`
   - Get the token:
     ```
     token=$(microk8s.kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
@@ -406,20 +406,24 @@ If the image contains _RPI_ or _ARM_ in the name or description, it can usually 
    _ingress.yaml_
 
    ```yaml
-   apiVersion: networking.k8s.io/v1beta1
+   apiVersion: networking.k8s.io/v1
    kind: Ingress
    metadata:
-     name: spring-boot-demo-ingress
-     annotations:
-       nginx.ingress.kubernetes.io/rewrite-target: /
+   name: spring-boot-demo-ingress
+   annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
    spec:
-     rules:
-     - http:
+   ingressClassName: spring-boot-demo-ingress
+   rules:
+      - http:
          paths:
-         - path: /
-           backend:
-             serviceName: spring-boot-demo-service
-             servicePort: 8080
+            - path: /
+               pathType: Prefix
+               backend:
+               service:
+                  name: spring-boot-demo-service
+                  port:
+                     number: 8080
    ```
 
 Now you should be able to hit the service at `https://<raspberry_pi_ip>/uppercase/hello` from your home local network.
