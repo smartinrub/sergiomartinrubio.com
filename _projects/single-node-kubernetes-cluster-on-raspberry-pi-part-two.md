@@ -10,7 +10,7 @@ layout: post
 
 In the [first part](https://sergiomartinrubio.com/projects/single-node-kubernetes-cluster-on-raspberry-pi/) we configured a Kubernetes cluster, deployed a Spring Boot application, configured a firewall and exposed the cluster to the world. However, there was something else I would like to cover. Kubernetes generates a self signed SSL/TSL certificate for HTTPS requests and this is not very nice, specially because you will see an ugly warning on your browser saying that the certificate is not trusted 😢.
 
-On this part we will conver how to issue a trusted SSL/TSL certificate with cert-manager and Let's Encrypt! 🚀
+On this part we will cover how to issue a trusted SSL/TSL certificate with cert-manager and Let's Encrypt! 🚀
 
 ### Issue trusted SSL/TLS certificate 
 
@@ -18,7 +18,7 @@ We are going to use [cert-manager](https://cert-manager.io) for issuing trusted 
 
 cert-manager will also make sure that our certificates are valid and up to date.
 
-### cert-manager instalation
+### cert-manager installation
 
 There are [multiple ways of installing cert-manager](https://cert-manager.io/docs/installation/) in our Kubernetes cluster and for this guide we will use [Helm](https://helm.sh).
 
