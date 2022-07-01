@@ -12,13 +12,13 @@ In the [first part](https://sergiomartinrubio.com/projects/single-node-kubernete
 
 On this part we will conver how to issue a trusted SSL/TSL certificate with cert-manager and Let's Encrypt! 🚀
 
-#### Issue trusted SSL/TLS certificate 
+### Issue trusted SSL/TLS certificate 
 
 We are going to use [cert-manager](https://cert-manager.io) for issuing trusted SSL/TLS certificates for our Kubernetes cluster. cert-manager is able to generate certificates from some of the most popular certificate authorities like [Let's Encrypt](https://letsencrypt.org), [Vault](https://www.vaultproject.io) or [Venafi](https://www.venafi.com). 
 
 cert-manager will also make sure that our certificates are valid and up to date.
 
-##### cert-manager instalation
+### cert-manager instalation
 
 There are [multiple ways of installing cert-manager](https://cert-manager.io/docs/installation/) in our Kubernetes cluster and for this guide we will use [Helm](https://helm.sh).
 
@@ -42,15 +42,13 @@ There are [multiple ways of installing cert-manager](https://cert-manager.io/doc
 	helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.8.0
 	```
 
-##### Issue an ACME certificate using HTTP validation
+### Issue an ACME certificate using HTTP validation
 
 Now that cert-manager is running in our Kubernetes cluster we can start issues our certificates.
 
 We are going to create to issuers, one for stating and one for production, so we can test the one for staging before issuing production certification, since there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
 
 1. Create `ClusterIssuer` resource definition.
-
-
 
 	staging-issuer.yaml
 	
