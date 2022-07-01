@@ -501,6 +501,8 @@ sudo ufw enable
    sudo /usr/sbin/ddclient -daemon 300 -syslog
    ```
 
-4. Now you can hit your app with the chosen domain name `https://<domain_name>/uppercase/hello`.
+4. Now you can hit your app with the chosen domain name `https://<domain_name>/uppercase/hello`. However Kubernetes generated a self signed SSL/TLS certificate and browsers will warn you about this. Therefore, next is to generate a trusted SSL/TSL certificate and attach it to the ingress.
 
 > Remember that you have to upate your NAT Forwarding configuration on your router to point to your raspberry pi on a specific port.
+
+Check out [Part Two](https://sergiomartinrubio.com/projects/single-node-kubernetes-cluster-on-raspberry-pi-part-two/) for issuing a trusted SSL/TLS certificate!
