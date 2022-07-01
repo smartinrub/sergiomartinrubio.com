@@ -12,7 +12,7 @@ In the [first part](https://sergiomartinrubio.com/projects/single-node-kubernete
 
 On this part we will cover how to issue a trusted SSL/TSL certificate with cert-manager and Let's Encrypt! 🚀
 
-### Issue trusted SSL/TLS certificate 
+### Quick intro
 
 We are going to use [cert-manager](https://cert-manager.io) for issuing trusted SSL/TLS certificates for our Kubernetes cluster. cert-manager is able to generate certificates from some of the most popular certificate authorities like [Let's Encrypt](https://letsencrypt.org), [Vault](https://www.vaultproject.io) or [Venafi](https://www.venafi.com). 
 
