@@ -13,9 +13,7 @@ layout: post
 
 This language is used for implementing smart contracts that are deployed on blockchains platforms like Ethereum. Therefore, Solidity has a very specific purpose that is focused on consistency and security.
 
-## What is a Smart Contract?
-
-Smart contracts are simply applications stored on a blockchain that run when particular conditions are met. The idea is that smart contracts automate a workflow in which participants can be immediately certain of the outcome.
+A Smart Contract? What is that? Smart contracts are simply applications stored on a blockchain that run when particular conditions are met. The idea is that smart contracts automate a workflow in which participants can be immediately certain of the outcome.
 
 But wait, What is a *blockchain*? Basically it's like a database where the information is stored in a way that makes it difficult or almost impossible to change, hack, or cheat the system.
 
