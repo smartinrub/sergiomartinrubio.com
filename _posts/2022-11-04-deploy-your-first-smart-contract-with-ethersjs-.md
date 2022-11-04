@@ -1,6 +1,6 @@
 ---
 title: Deploy Your First Smart Contract With Ethers.js
-image: 
+image: https://lh3.googleusercontent.com/pw/AL9nZEWIjfI1anNniOVDDidhCDq8RGARA621876bUVWHCk4QjPSibk59WNYN1ERep3BJcpiX1q62ByvL2mr-vlHqxcY4mf882FWWL6NsPvXQnTalO4aGGzhs-MqVESU7X4pfwHyN8ymh9b6eR-svDpK5SJ4D=w2152-h1434-no?authuser=0
 author: Sergio Martin Rubio
 categories:
     - JavaScript
@@ -352,7 +352,9 @@ Hello World!
 6. Encrypt the private key: `PRIVATE_KEY=<YOUR_PRIVATE_KEY> PRIVATE_KEY_PASSWORD=<YOUR_PRIVATE_KEY_PASSWORD> node encryptKey.js`
 7. Deploy contract: `PRIVATE_KEY_PASSWORD=<YOUR_PRIVATE_KEY_PASSWORD> node deploy.js`
 8. Go to the Goerli Etherscan page: https://goerli.etherscan.io and paste your public key. You should be able to see the contract creation! 🎉
-   
+
+>**Alchemy** allows you to use a node to communicate with the blockchain.
+
 ## Verify and Publish Smart Contract
 
 1. Go to the contract address (e.g. https://goerli.etherscan.io/address/0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb)
