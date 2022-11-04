@@ -357,10 +357,10 @@ Hello World!
 
 ## Verify and Publish Smart Contract
 
-1. Go to the contract address (e.g. https://goerli.etherscan.io/address/0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb)
+1. Go to the contract address (e.g. [https://goerli.etherscan.io/address/0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb](https://goerli.etherscan.io/address/0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb){:target="_blank"})
 2. Click on the *Contract* tab and *Verify and Publish*.
 3. Select the Compiler Type, Version and License Type that you used on your contract. Finally click on next.
 4. Now copy and paste the contract and click on *Verify and Publish*.
-5. Now you can click on the *Contract Source Code* to see the contract (e.g. https://goerli.etherscan.io/verifyContract-solc?a=0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb&c=v0.8.7%2bcommit.e28d00a7&lictype=3). The contract address should be the same one as the use for deploying the contract.
+5. Now you can click on the *Contract Source Code* to see the contract (e.g. [https://goerli.etherscan.io/verifyContract-solc?a=0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb&c=v0.8.7%2bcommit.e28d00a7&lictype=3](https://goerli.etherscan.io/verifyContract-solc?a=0xb7770df4fc2dd064f5867f009ce405ba3a93f5eb&c=v0.8.7%2bcommit.e28d00a7&lictype=3){:target="_blank"}). The contract address should be the same one as the use for deploying the contract.
 
 {% include elements/button.html link="https://github.com/smartinrub/ethers-smart-contract-example.git" text="Source Code" %}
