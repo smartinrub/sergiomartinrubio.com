@@ -351,7 +351,7 @@ Hello World!
 5. Get a real Wallet Private Key without real funds (DO NOT USE A PRIVATE KEY WITH REAL FUNDS!).
 6. Encrypt the private key: `PRIVATE_KEY=<YOUR_PRIVATE_KEY> PRIVATE_KEY_PASSWORD=<YOUR_PRIVATE_KEY_PASSWORD> node encryptKey.js`
 7. Deploy contract: `PRIVATE_KEY_PASSWORD=<YOUR_PRIVATE_KEY_PASSWORD> node deploy.js`
-8. Go to the Goerli Etherscan page: https://goerli.etherscan.io and paste your public key. You should be able to see the contract creation! 🎉
+8. Go to the [Goerli Etherscan page](https://goerli.etherscan.io) and paste your public key. You should be able to see the contract creation! 🎉
 
 >**Alchemy** allows you to use a node to communicate with the blockchain.
 
