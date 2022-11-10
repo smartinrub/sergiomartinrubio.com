@@ -32,6 +32,10 @@ include:
 # Sign up with Google analytics and replce with your analytics ID.
 analytics: UA-137749111-1
 
+# Google Tag
+# The Analytics tag is a snippet of JavaScript that collects and sends data to Analytics from a website.
+google-tag: G-3TE56Q1EVR
+
 # FullStory is an analytics engine
 enable-fullstory: no
 fulstory: W6Z0Y

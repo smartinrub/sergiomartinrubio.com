@@ -55,6 +55,10 @@
     {% include analytics-lite.html %} 
   {% endif %} 
 
+  {% if site.google-tag %} 
+  {% include google-tag.html %} 
+  {% endif %} 
+
   {% if site.enable-fullstory %} 
     {% include fullstory.html %}
   {% endif %} 
