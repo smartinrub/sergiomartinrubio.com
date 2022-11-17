@@ -172,3 +172,24 @@ for verification on the block explorer. Waiting for verification result...
 Successfully verified contract MyContract on Etherscan.
 https://goerli.etherscan.io/address/0x1CCd4f9a2838DBb19116224921E1B054C297E73f#code
 ```
+
+You can check the provided link to make sure the contract is actually verified.
+
+## Interacting with your Smart Contract
+
+We can call the smart contract function in the same fashion as we did [on the vanilla JavaScript Smart Contract deployment script](https://sergiomartinrubio.com/articles/deploy-your-first-smart-contract-with-ethersjs/#interacting-with-the-smart-contract).
+
+```js
+// imports
+
+async function main() {
+    // main function code
+
+    const helloWorld = await myContract.helloWorld()
+    console.log(helloWorld)
+}
+
+// other functions
+```
+
+>When an error is thrown you might need to delete the existing artifacts and cache and retry deploying again.
