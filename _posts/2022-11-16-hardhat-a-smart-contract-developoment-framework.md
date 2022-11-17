@@ -7,6 +7,8 @@ categories:
     - Solidity
     - Blockchain
     - Ethereum
+    - Testing
+    - HardHat
 mermaid: false
 layout: post
 ---
@@ -280,3 +282,35 @@ Run: `yarn hardhat console --network localhost` (assuming the local node network
 
 You can invoke the functions as the ones you run on your scripts.
 
+## Testing
+
+HardHat works with [Mocha](https://mochajs.org){:target="_blank"}, which is a *JavaScript* framework.
+
+Test are placed on the `/test` folder.
+
+`test/test-deploy.js`
+
+```js
+const { ethers } = require("hardhat")
+const { expect, assert } = require("chai")
+
+describe("MyContract", function () {
+    let myContractFactory, myContract
+
+    beforeEach(async function () {
+        myContractFactory = await ethers.getContractFactory("MyContract")
+        myContract = await myContractFactory.deploy()
+    })
+
+    it("Should print Hello World", async function () {
+        const result = await myContract.helloWorld()
+        const expected = "Hello World!"
+        // assert.equal(result, expected)
+        expect(result).to.equal(expected)
+    })
+})
+```
+
+You can run it with `yarn hardhat test`.
+
+Run a particular test with `yarn hardhat test --grep Hello`, which would run all the tests that contain `Hello` on their name. Alternatively, you can add the `only()` keyword to run a particular test (`it.only("Should print Hello World", async function () {}`).
