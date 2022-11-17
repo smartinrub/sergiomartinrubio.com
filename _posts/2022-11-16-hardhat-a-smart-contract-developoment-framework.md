@@ -72,6 +72,8 @@ Then you can run `yarn hardhat run scripts/deploy.js`.
 
 HardHat comes with an built-in testing environment called [HardHat Network](https://hardhat.org/hardhat-network/docs/overview){:target="_blank"} that is running in the background. You can use this dev environment for testing and debugging your scripts and smart contracts. Of course, you can change the default network and define new networks with its own values on the `hardhat.config.js` as shown below.
 
+`hardhat.config.js`:
+
 ```js
 require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config()
@@ -104,6 +106,8 @@ Next, we need an API key for Etherscan so we can use the Etherscan API. [Create 
 
 Install the plugin `yarn add --dev @nomiclabs/hardhat-etherscan` and add it to your HardHat config file:
 
+`hardhat.config.js`:
+
 ```js
 // other imports
 require("@nomiclabs/hardhat-etherscan")
@@ -120,6 +124,8 @@ module.exports = {
 ```
 
 Now let's create a `verify()` function on our deploying script:
+
+`scripts/deploy.js`:
 
 ```js
 const { ethers, run, network } = require("hardhat")
@@ -179,6 +185,8 @@ You can check the provided link to make sure the contract is actually verified.
 
 We can call the smart contract function in the same fashion as we did [on the vanilla JavaScript Smart Contract deployment script](https://sergiomartinrubio.com/articles/deploy-your-first-smart-contract-with-ethersjs/#interacting-with-the-smart-contract).
 
+`scripts/deploy.js`
+
 ```js
 // imports
 
@@ -192,7 +200,7 @@ async function main() {
 // other functions
 ```
 
->When an error is thrown you might need to delete the existing artifacts and cache and retry deploying again.
+>When an error is thrown you might need to delete the existing artifacts and cache (`yarn hardhat clean`) and retry deploying again.
 
 ## HardHat Tasks
 
@@ -227,4 +235,48 @@ module.exports = {}
 ```
 
 `hre` provides a wide range of operations that allows you to access network configuration, interact with Ethers.js and other cool stuff.
+
+## HardHat Node
+
+You can spin up your own node, similar to the [Ganache node](https://sergiomartinrubio.com/articles/deploy-your-first-smart-contract-with-ethersjs/#spin-up-a-local-ethereum-blockchain), by running `yarn hardhat node`. At the time of writing these lines the node comes with 20 accounts.
+
+You can give it a try by running the node and configuring an additional network.
+
+`hardhat.config.js`:
+
+```js
+module.exports = {
+  defaultNetwork: "hardhat",
+  networks: {
+    // other networks
+    localhost: {url: "http://127.0.0.1:8545/", chainId: 31337}
+  },
+  solidity: "0.8.8",
+  // other stuff
+}
+```
+
+now when you run your deploying script `yarn hardhat run scripts/deploy.js --network localhost` the contract will be created on the local node.
+
+```
+  Contract deployment: MyContract
+  Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Transaction:         0xa0a3c483d79a4dc77d602a8d7a4bb18768990570cebfe9f43856adbd077392e4
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  Value:               0 ETH
+  Gas used:            135067 of 135067
+  Block #1:            0xeb8fa4f7d50f4c1069756a939e8624823c89114a5854d69f88f87bdb90ab4663
+  
+  ...
+
+  Contract call:       MyContract#helloWorld
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+```
+
+## Interacting with Networks via CLI
+
+Run: `yarn hardhat console --network localhost` (assuming the local node network name is `localhost`) or `yarn hardhat console --network goerli`.
+
+You can invoke the functions as the ones you run on your scripts.
 
