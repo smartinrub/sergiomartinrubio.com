@@ -193,3 +193,36 @@ async function main() {
 ```
 
 >When an error is thrown you might need to delete the existing artifacts and cache and retry deploying again.
+
+## HardHat Tasks
+
+You can define HardHat tasks in addition to the existing ones that are shown when running `yarn hardhat`. Tasks are usually created as plugins, whereas scrips are for your development.
+
+Tasks are defined on the `hardhat.config.js` file.
+
+```js
+require("@nomicfoundation/hardhat-toolbox");
+
+task("my-task", "This is a custom task").setAction(async () => {console.log("Hello Task!")});
+
+// other stuff
+```
+
+now run `yarn hardhat` and you will see `my-task   This is a custom task` was added to the list of tasks. Now run it `yarn hardhat my-task` and `Hello Task!` will be printed out.
+
+>The convention is to create tasks on their own folder: `task/my-task.js`, then import those tasks on the `hardhat.config.js` file (`require("./tasks/my-task")`).
+
+You can also do more advance stuff like printing out the `chainId`:
+
+```js
+const { task } = require("hardhat/config")
+
+task("chain-id", "Prints Chain ID").setAction(async (taskArgs, hre) => {
+    console.log(hre.network.config.chainId)
+})
+
+module.exports = {}
+```
+
+`hre` provides a wide range of operations that allows you to access network configuration, interact with Ethers.js and other cool stuff.
+
