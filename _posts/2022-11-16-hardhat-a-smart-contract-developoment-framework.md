@@ -212,7 +212,9 @@ now run `yarn hardhat` and you will see `my-task   This is a custom task` was ad
 
 >The convention is to create tasks on their own folder: `task/my-task.js`, then import those tasks on the `hardhat.config.js` file (`require("./tasks/my-task")`).
 
-You can also do more advance stuff like printing out the `chainId`:
+You can also do more advance stuff like printing out the `chainId`.
+
+`tasks/chain-id.js`:
 
 ```js
 const { task } = require("hardhat/config")
