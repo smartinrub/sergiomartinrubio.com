@@ -154,6 +154,8 @@ Three things are required for deploying the contract to the Ganache Ethereum Blo
 2. A wallet private key.
 3. The ABI and binary files.
 
+`deploy.js`:
+
 ```js
 const ethers = require("ethers");
 const fs = require("fs-extra");
@@ -218,6 +220,8 @@ await sendTxResponse.wait(1);
 `sendTransaction(tx)` signs the transaction and sends it to the network.
 
 >If the deployment fails with `chainId` not found, change the Ganache Network address to 1337.
+
+`deploy.js`:
 
 ```js
 const ethers = require("ethers");
@@ -304,6 +308,8 @@ contract MyContract {
 ```
 
 so now you can call the function like this:
+
+`deploy.js`:
 
 ```js
 const ethers = require("ethers");
