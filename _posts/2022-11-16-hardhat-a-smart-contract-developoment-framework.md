@@ -314,3 +314,89 @@ describe("MyContract", function () {
 You can run it with `yarn hardhat test`.
 
 Run a particular test with `yarn hardhat test --grep Hello`, which would run all the tests that contain `Hello` on their name. Alternatively, you can add the `only()` keyword to run a particular test (`it.only("Should print Hello World", async function () {}`).
+
+## Additional HardHat Features
+
+### Gas Reporter
+
+Add the HardHat Gas Reporter plugin to see how much gas your are using.
+
+```bash
+yarn add --dev hardhat-gas-reporter
+```
+
+enable it:
+
+`hardhat.config.js`:
+
+```js
+// other imports
+require("hardhat-gas-reporter")
+
+// other constants
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
+
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+
+    // other stuff
+
+    gasReporter: {
+        enabled: process.env.REPORT_GAS ? true : false,
+        outputFile: "gas-report.txt",
+        noColors: true,
+        currency: "EUR",
+        coinmarketcap: COINMARKETCAP_API_KEY,
+        token: "BNB", // deploying to Binance. Default is ETH
+    },
+}
+```
+
+As you can see in the previous code snippet we are using [CoinMarketCap](https://coinmarketcap.com){:target="_blank"} so we can get the gas price in `EUR`. You can get an API key signing up [here](https://pro.coinmarketcap.com){:target="_blank"}.
+
+Now run your tests: `REPORT_GAS=true yarn hardhat test`. It will save into a `gas-report.txt` file something like this:
+
+```text
+·-----------------------|----------------------------|-------------|-----------------------------·
+|  Solc version: 0.8.8  ·  Optimizer enabled: false  ·  Runs: 200  ·  Block limit: 30000000 gas  │
+························|····························|·············|······························
+|  Methods              ·               12 gwei/gas                ·       260.56 eur/bnb        │
+·············|··········|··············|·············|·············|···············|··············
+|  Contract  ·  Method  ·  Min         ·  Max        ·  Avg        ·  # calls      ·  eur (avg)  │
+·············|··········|··············|·············|·············|···············|··············
+|  Deployments          ·                                          ·  % of limit   ·             │
+························|··············|·············|·············|···············|··············
+|  MyContract           ·           -  ·          -  ·     135067  ·        0.5 %  ·       0.42  │
+·-----------------------|--------------|-------------|-------------|---------------|-------------·
+```
+
+so we would spend €0.42 if we deploy our contract to the Binance network.
+
+### Code Coverage
+
+Add the Solidity HardHat code coverage plugin:
+
+```
+yarn add --dev solidity-coverage
+```
+
+then run:
+
+```
+yarn hardhat coverage
+```
+
+and it will generate a `coverage.json` file and print something like this:
+
+```
+-----------------|----------|----------|----------|----------|----------------|
+File             |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-----------------|----------|----------|----------|----------|----------------|
+ contracts/      |      100 |      100 |      100 |      100 |                |
+  MyContract.sol |      100 |      100 |      100 |      100 |                |
+-----------------|----------|----------|----------|----------|----------------|
+All files        |      100 |      100 |      100 |      100 |                |
+-----------------|----------|----------|----------|----------|----------------|
+```
+
+This is important so you make sure your code is fully tested.
