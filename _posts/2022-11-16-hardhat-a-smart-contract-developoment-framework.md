@@ -1,6 +1,6 @@
 ---
 title: Hardhat. A Smart Contract Development Framework
-image: 
+image: https://lh3.googleusercontent.com/pw/AL9nZEW8llJrYG9CDT35aVGVbAoXo-uYelmHenAuYijHUcw9iGlvw-hb59_4_wChNivxXLyI3TorBFSi0sJ0qEocMJWfKj6Z2S9MIJ5AO-cpRC-EW_W_RhM4lFC6a5ETT8k2yCijTnLxb3x2XtIGZwabsPwc=w2152-h1434-no?authuser=0
 author: Sergio Martin Rubio
 categories:
     - JavaScript
@@ -400,3 +400,5 @@ All files        |      100 |      100 |      100 |      100 |                |
 ```
 
 This is important so you make sure your code is fully tested.
+
+{% include elements/button.html link="https://github.com/smartinrub/hardhat-smart-contract-example.git" text="Source Code" %}
