@@ -32,27 +32,31 @@ There are three types of variables in Solidity:
 - **Local** variables are those present while a function is executing.
 - **Global** variables are those that exist in the global namespace used to get information about the blockchain.
 
-The main types in Solidity are:
+The types in Solidity are:
 
 - **Booleans**: `bool`
 - **Integers**: `int` or `uint`, signed and unsigned respectively. You can specify how many bits you want to use with `uint8` to `uint256`. Integers get initialized to zero.
 - **Address**: `address`. An address represents a 20 byte value, which is the size of an Ethereum address. Address can have the `payable` modifier so it includes two additional operations `transfer` and `send`.
-- Bytes: `bytes`
-- Mapping: `mapping` types define a key value structure. e.g. `mapping(uint => address) map`
-- Arrays: `uint256[]`:
+- **Byte Array**: `bytes`
+- **Arrays**: `uint256[]`:
   - Declaration: a single-dimension array `uint256 myArray[10] = [1, 2, 3]` and a dynamic array `uint256 myArray[] [1, 2, 3]`.
   - Add element: `myArray.push(1)` where `1` is a value.
   - Get element: `myArray[0]` where `0` is the index.
   - Get length: `myArray.length`.
   - Reset array: `myArray = new uint256[](0)`
+- **Mapping**: `mapping` types define a key value structure. e.g. `mapping(uint => address) map`
+- **Enum**: This is to enumerate a variable to have only some predefined values. e.g. `enum ROLES{ADMIN, USER, ENGINEER}`
+- **Struct**: Structs are used to group a number of variables together. e.g. `struct struct_type { }`
 
-Access modifiers:
+**Access modifiers:**
 
 - `public`: anyone can see what is stored in the variable. Global scope.
 - `private`: only visible inside the contract.
 - `internal`: only visible inside the contract and children contracts. The default modifier is `internal` when no modifier is specified.
-- `constant`: the variable cannot be assigned again. It saves *gas* because the value is stored directly into the bytecode of the contract. The convention is to use capital letters and underscores e.g. `MINIMUM_USD`.
-- `immutable`: the variable can only be assigned once at construction time. It saves *gas*. The convention is to prefix the variable with `i_` e.g. `i_owner`.
+
+You can declare a variable as `constant` and this means the variable cannot be assigned again. It saves *gas* because the value is stored directly into the bytecode of the contract. The convention is to use capital letters and underscores e.g. `MINIMUM_USD`.
+
+An alternative to `constant` is `immutable`. In this case the variable can only be assigned once at construction time. It saves *gas*. The convention is to prefix the variable with `i_` e.g. `i_owner`.
 
 ## Contracts
 
@@ -79,7 +83,7 @@ You can use the `public`  modifier to make variables inside the contract public.
 
 ## Constructors
 
-Simililar to Java you can also declare a constructor in Solidity.
+Similar to Java you can also declare a constructor in Solidity.
 - A constructor runs only once in the entire lifetime of the contract when it's created. 
 - It's used to initialize contract state.
 - A contract can have only one constructor.
@@ -133,7 +137,11 @@ function myFunction() internal {
 }
 ```
 
-- `view`: to make the function read-only, so the function cannot modify the state:
+- `private`: The function can only be called by other functions in the same smart contract.
+
+### Pure/View/Payable Functions
+
+- `view`: to make the function read-only, the function can access the state but can't make any modification:
 
 ```solidity
 contract MyContract {
@@ -157,7 +165,15 @@ contract MyContract {
 }
 ```
 
-Use an underscore (`_`) in front of a function attribute to differentiate it from the ones de declared on the contract scope:
+- `payable`: payable functions can change the state. Fon any function that will induce a transfer of assets, you must use the `payable` type to the function and address.
+
+```solidity
+receive() external payable {
+    
+}
+```
+
+>Use an underscore (`_`) in front of a function attribute to differentiate it from the ones de declared on the contract scope:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -194,24 +210,13 @@ Variables can be declared as `storage`, `memory` or `calldata` to explicitly spe
 
 >What is the difference between `memory` and `calldata`? `calldata` is only valid for arguments of `external` functions and behaves mostly like `memory`. Any variable defined as `calldata` cannot be modifiable, whereas a variable defined as `memory` can be modified within the function. As a result `calldata` variables definition incur in less gas fees than `memory` variables.
 
+```solidity
 function myFunction(uint256 _myNumber) returns (uint256) {
     myNumber = _myNumber;
 }
+```
 
 `storage` is used to defined variables that we want to write on the blockchain. These variables are persistent since they are written to the blockchain. `storage` variables can be accessed from anywhere inside and outside the contract. Global variables are `storage` variables by default. Variables defined as `storage` always will incur gas fee.
-
-
-{% include elements/button.html link="https://github.com/smartinrub/jre-build-example.git" text="Source Code" %}
-
-### Special Functions
-
-a. `receive()`: a receive function must be declared like this:
-
-```solidity
-receive() external payable {
-    
-}
-```
 
 ### Function Returning Values
 
@@ -280,8 +285,6 @@ contract MyContract {
 }
 ```
 
-
-
 ## Libraries
 
 Libraries look similar to contracts but they are not contracts and the purpose is different. A library contains a set of reusable functions that can be called in your contract, so you keep your code organized, reusable and easy to understand.
@@ -325,7 +328,6 @@ Solidity is a statically typed language, but sometimes you might need to convert
 value = uint256(msg.value);
 ```
 
-
 ## Funding and Withdrawing Ether
 
 ### Funding
@@ -361,6 +363,29 @@ require(sendSuccess, "Send failed"); // revert if it fails
 ```solidity
 (bool callSuccess, bytes memory data) = payable(msg.sender).call{ gas: 10000, value: address(this).balance }("");
 require(callSuccess, "Call failed"); // revert if it fails
+```
+
+## Blockchain Specific Variables
+
+You can fetch information from the blockchain itself and use that date in your functions. Two variables are used : `msg` and `block`.
+
+
+```solidity
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.7;
+
+contract MyContract {
+    // other functions
+
+    function getGasLimit() public view returns (uint256) {
+        return block.gaslimit;
+    }
+
+    function getSender() public view returns (address) {
+        return msg.sender;
+    }
+}
 ```
 
 ## Conclusion 

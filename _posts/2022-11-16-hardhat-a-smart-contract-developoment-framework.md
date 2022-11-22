@@ -32,17 +32,26 @@ A smart contract development framework makes it easy to create smart contracts f
 
 You can deploy a contract with HardHat by just writing a few lines compare to the JavaScript vanilla version.
 
-`contracts/MyContract.sol`
+`contracts/HelloWorld.sol`
 
 ```solidity
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.7;
 
-contract MyContract {
-    // using pure since we are not modifying the state
-    function helloWorld() public pure returns (string memory) {
-        return "Hello World!";
+contract HelloWorld {
+    string from;
+
+    function helloWorld() public view returns (string memory) {
+        if (bytes(from).length == 0) {
+            return "Hello World!";
+        }
+
+        return string(abi.encodePacked("Hello World from ", from, "!"));
+    }
+
+    function updateFrom(string memory _from) public {
+        from = _from;
     }
 }
 ```
@@ -53,19 +62,19 @@ contract MyContract {
 const { ethers } = require("hardhat")
 
 async function main() {
-  const MyContractFactory = await ethers.getContractFactory("MyContract")
-  console.log("Deploying...")
-  const myContract = await MyContractFactory.deploy()
-  await myContract.deployed()
-  console.log(`Deployed contract to: ${myContract.address}`)
+    const helloWorldFactory = await ethers.getContractFactory("HelloWorld")
+    console.log("Deploying...")
+    const helloWorld = await helloWorldFactory.deploy()
+    await helloWorld.deployed()
+    console.log(`Deployed contract to: ${helloWorld.address}`)
 }
 
 main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+    .then(() => process.exit(0))
+    .catch((error) => {
+      console.error(error)
+      process.exit(1)
+    })
 ```
 
 as you can see you don't even have to specify the provider URL, private key or the smart contract location - HardHat is doing all of that for you 🪄
@@ -133,14 +142,14 @@ Now let's create a `verify()` function on our deploying script:
 const { ethers, run, network } = require("hardhat")
 
 async function main() {
-    const MyContractFactory = await ethers.getContractFactory("MyContract")
+    const helloWorldFactory = await ethers.getContractFactory("HelloWorld")
     console.log("Deploying contract...")
-    const myContract = await MyContractFactory.deploy()
-    await myContract.deployed()
-    console.log(`Deployed contract to: ${myContract.address}`)
+    const helloWorld = await helloWorldFactory.deploy()
+    await helloWorld.deployed()
+    console.log(`Deployed contract to: ${helloWorld.address}`)
     if (network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY) {
-        await myContract.deployTransaction.wait(6) // make sure the contract is already on Etherscan
-        await verify(myContract.address, [])
+        await helloWorld.deployTransaction.wait(6) // make sure the contract is already on Etherscan
+        await verify(helloWorld.address, [])
     }
 }
 
@@ -174,10 +183,10 @@ Again, run `yarn hardhat run scripts/deploy.js --network goerli` and after a whi
 
 ```
 Successfully submitted source code for contract
-contracts/MyContract.sol:MyContract at 0x1CCd4f9a2838DBb19116224921E1B054C297E73f
+contracts/HelloWorld.sol:HelloWorld at 0x1CCd4f9a2838DBb19116224921E1B054C297E73f
 for verification on the block explorer. Waiting for verification result...
 
-Successfully verified contract MyContract on Etherscan.
+Successfully verified contract HelloWorld on Etherscan.
 https://goerli.etherscan.io/address/0x1CCd4f9a2838DBb19116224921E1B054C297E73f#code
 ```
 
@@ -195,8 +204,14 @@ We can call the smart contract function in the same fashion as we did [on the va
 async function main() {
     // main function code
 
-    const helloWorld = await myContract.helloWorld()
-    console.log(helloWorld)
+    const result = await helloWorld.helloWorld()
+    console.log(result)
+
+    // update hello world
+    const transactionResponse = await helloWorld.updateFrom("Sergio")
+    await transactionResponse.wait(1)
+    const updatedResult = await helloWorld.helloWorld()
+    console.log(updatedResult)
 }
 
 // other functions
@@ -261,7 +276,7 @@ module.exports = {
 now when you run your deploying script `yarn hardhat run scripts/deploy.js --network localhost` the contract will be created on the local node.
 
 ```
-  Contract deployment: MyContract
+  Contract deployment: HelloWorld
   Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
   Transaction:         0xa0a3c483d79a4dc77d602a8d7a4bb18768990570cebfe9f43856adbd077392e4
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
@@ -271,7 +286,7 @@ now when you run your deploying script `yarn hardhat run scripts/deploy.js --net
   
   ...
 
-  Contract call:       MyContract#helloWorld
+  Contract call:       HelloWorld#helloWorld
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
 ```
@@ -294,18 +309,25 @@ Test are placed on the `/test` folder.
 const { ethers } = require("hardhat")
 const { expect, assert } = require("chai")
 
-describe("MyContract", function () {
-    let myContractFactory, myContract
+describe("HelloWorld", function () {
+    let helloWorldFactory, helloWorld
 
     beforeEach(async function () {
-        myContractFactory = await ethers.getContractFactory("MyContract")
-        myContract = await myContractFactory.deploy()
+        helloWorldFactory = await ethers.getContractFactory("HelloWorld")
+        helloWorld = await helloWorldFactory.deploy()
     })
 
     it("Should print Hello World", async function () {
-        const result = await myContract.helloWorld()
+        const result = await helloWorld.helloWorld()
         const expected = "Hello World!"
         // assert.equal(result, expected)
+        expect(result).to.equal(expected)
+    })
+
+    it("Should update Hello World with from", async function () {
+        await helloWorld.updateFrom("Sergio")
+        const result = await helloWorld.helloWorld()
+        const expected = "Hello World from Sergio!"
         expect(result).to.equal(expected)
     })
 })
@@ -357,20 +379,22 @@ As you can see in the previous code snippet we are using [CoinMarketCap](https:/
 Now run your tests: `REPORT_GAS=true yarn hardhat test`. It will save into a `gas-report.txt` file something like this:
 
 ```text
-·-----------------------|----------------------------|-------------|-----------------------------·
-|  Solc version: 0.8.8  ·  Optimizer enabled: false  ·  Runs: 200  ·  Block limit: 30000000 gas  │
-························|····························|·············|······························
-|  Methods              ·               12 gwei/gas                ·       260.56 eur/bnb        │
-·············|··········|··············|·············|·············|···············|··············
-|  Contract  ·  Method  ·  Min         ·  Max        ·  Avg        ·  # calls      ·  eur (avg)  │
-·············|··········|··············|·············|·············|···············|··············
-|  Deployments          ·                                          ·  % of limit   ·             │
-························|··············|·············|·············|···············|··············
-|  MyContract           ·           -  ·          -  ·     135067  ·        0.5 %  ·       0.42  │
-·-----------------------|--------------|-------------|-------------|---------------|-------------·
+·-----------------------------|----------------------------|-------------|-----------------------------·
+|     Solc version: 0.8.8     ·  Optimizer enabled: false  ·  Runs: 200  ·  Block limit: 30000000 gas  │
+······························|····························|·············|······························
+|  Methods                    ·               13 gwei/gas                ·       254.64 eur/bnb        │
+···············|··············|··············|·············|·············|···············|··············
+|  Contract    ·  Method      ·  Min         ·  Max        ·  Avg        ·  # calls      ·  eur (avg)  │
+···············|··············|··············|·············|·············|···············|··············
+|  HelloWorld  ·  updateFrom  ·           -  ·          -  ·      44997  ·            1  ·       0.15  │
+···············|··············|··············|·············|·············|···············|··············
+|  Deployments                ·                                          ·  % of limit   ·             │
+······························|··············|·············|·············|···············|··············
+|  HelloWorld                 ·           -  ·          -  ·     381167  ·        1.3 %  ·       1.26  │
+·-----------------------------|--------------|-------------|-------------|---------------|-------------·
 ```
 
-so we would spend €0.42 if we deploy our contract to the Binance network.
+so we would spend €1.26 if we deploy our contract to the Binance network. The call to `updateFrom` has a cost of €0.15.
 
 ### Code Coverage
 
@@ -393,7 +417,7 @@ and it will generate a `coverage.json` file and print something like this:
 File             |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
 -----------------|----------|----------|----------|----------|----------------|
  contracts/      |      100 |      100 |      100 |      100 |                |
-  MyContract.sol |      100 |      100 |      100 |      100 |                |
+  HelloWorld.sol |      100 |      100 |      100 |      100 |                |
 -----------------|----------|----------|----------|----------|----------------|
 All files        |      100 |      100 |      100 |      100 |                |
 -----------------|----------|----------|----------|----------|----------------|
