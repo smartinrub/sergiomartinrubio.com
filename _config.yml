@@ -14,7 +14,7 @@ enable-mathjax: yes
 enable-chartjs: no
 
 # Google AddSense
-enable-adsense: yes
+google-adsense: 8036046892343848
 
 # This defines how the URLs should look like.
 permalink: /articles/:title/
@@ -38,7 +38,7 @@ google-tag: G-3TE56Q1EVR
 
 # FullStory is an analytics engine
 enable-fullstory: no
-fulstory: W6Z0Y
+fullstory: W6Z0Y
 
 # Table of contents in each post
 # Change the value to 'no' if Table of Contents is not required.

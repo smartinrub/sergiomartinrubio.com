@@ -64,13 +64,15 @@
   {% endif %} 
 
   {% if site.enable-mathjax %}
-  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
   {% endif %} 
+
   {% if site.enable-chartjs %}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   {% endif %}
   
-  {% if site.enable-adsense %}
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8036046892343848" crossorigin="anonymous"></script>
+  {% if site.google-adsense %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{site.google-adsense}}" crossorigin="anonymous"></script>
+    {% include ad-blocking-recovery.html %} 
   {% endif %}
 </head>
