@@ -7,7 +7,6 @@ categories:
     - Solidity
     - Blockchain
     - Ethereum
-    - Events
     - HardHat
     - Debugging
 mermaid: false
@@ -70,7 +69,7 @@ yarn add --dev hardhat-deploy
 yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
 ```
 
-Then you can include them on your HardHat config file.
+Then you can include it on your HardHat config file and configure the deployer account.
 
 `hardhat.config.js`:
 
@@ -80,8 +79,15 @@ require("hardhat-deploy")
 
 module.exports = {
     solidity: "0.8.8",
+    namedAccounts: {
+        deployer: {
+            default: 0,
+        },
+    },
 }
 ```
+
+We are selecting the first account as the default deployer account.
 
 Next, create a `deploy/` folder. This folder will be used by the `hardhat-deploy` plugin.
 
@@ -113,6 +119,8 @@ will print:
 ```bash
 deploying "HelloWorld" (tx: 0xb92b6e2217005023fcbe3265e59b3ebea9dee0359194cf2837fa8c3383f7198d)...: deployed at 0x5FbDB2315678afecb367f032d93F642f64180aa3 with 381167 gas
 ```
+
+{% include elements/button.html link="https://github.com/smartinrub/hardhat-smart-contract-example/tree/hardhat-deploy" text="Source Code" %}
 
 ## Solidity Style Guide
 
