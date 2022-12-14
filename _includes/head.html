@@ -51,12 +51,8 @@
 
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 
-  {% if site.analytics %} 
-    {% include analytics-lite.html %} 
-  {% endif %} 
-
   {% if site.google-tag %} 
-  {% include google-tag.html %} 
+    {% include google-tag.html %} 
   {% endif %} 
 
   {% if site.enable-fullstory %} 
