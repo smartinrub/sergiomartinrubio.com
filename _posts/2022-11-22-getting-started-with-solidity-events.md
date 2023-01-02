@@ -34,9 +34,11 @@ contract MyContract {
 }
 ```
 
-As you can see we used the keyword `indexed` for the sender address and this means you will be able to search for the attribute using a filter. e.g. `MessageSent({sender: <ADDRESS_TO_SEARCH>})`.
+As you can see we used the keyword `indexed` for the sender address and this means you will be able to search for the attribute using a filter. e.g. `MessageSent({sender: <ADDRESS_TO_SEARCH>})`. Non-indexed parameters are harder to search because they are ABI encoded and therefore you need the ABI.
 
-Solidity also provides another keyword for sending events named `emit`.
+> Take into consideration that indexing parameters has a cost and will take more gas fees for the transaction to be mined.
+
+Solidity also provides another keyword for sending events named `emit`, and it's similar to calling a function.
 
 `contracts/MyContract.sol`:
 
