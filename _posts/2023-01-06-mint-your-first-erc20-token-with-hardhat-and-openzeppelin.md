@@ -1,5 +1,5 @@
 ---
-title: ERC-20 Token with Hardhat
+title: Mint your First ERC-20 Token with Hardhat and OpenZeppelin
 image: https://lh3.googleusercontent.com/pw/AL9nZEUE-rZE4Ni3Dg0Q-l4Q2fsMN83OUleJwUVhmDbEZmlorMhGuH5OOwhPpgVfvy8Mct9bkBurkf1yMsMTAR3KckXdHB1kJpxfH9semKBn61aT4IbMxjx4bbH35CWTPhBvzXVFipa5raORcUYn5GwtnhBk=w2460-h1640-no?authuser=0
 author: Sergio Martin Rubio
 categories:
