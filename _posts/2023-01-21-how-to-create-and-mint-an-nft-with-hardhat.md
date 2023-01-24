@@ -95,11 +95,103 @@ The previous definition of the NFT is not linked to a particular asset, so that'
 
 First of all we are going to upload an asset to a NFT storage provider. We are going to use [NFT.STORAGE](https://nft.storage){:target="_blank"}.
 
-Once you have an account you can upload an asset by clicking on "+Upload". Now you can click on "Actions" and copy [the IPFS (Interplanetary File System)](https://sergiomartinrubio.com/articles/making-your-smart-contract-ui-decentralized/#how-does-ipfs-work) URL or the HTTPS URL.
+There are 3 options for uploading assets to *NFT.STORAGE*:
+
+1. Via the web app. Create an account and upload an asset by clicking on "+Upload". Now you can click on "Actions" and copy [the IPFS (Interplanetary File System)](https://sergiomartinrubio.com/articles/making-your-smart-contract-ui-decentralized/#how-does-ipfs-work) URL or the HTTPS URL.
+2. Via the [NFT.STORAGE app.](https://nft.storage/docs/how-to/nftup/){:target="_blank"}.
+3. Programmatically! 🤓.
+
+Since this is a coding tutorial let's go for the programmatic approach.
+
+1. Get an API token. Once logged in, go to API Keys and generate a new one.
+2. Create an environment variable `NFT_STORAGE_KEY=<key>` in your `.env` file and paste the API key.
+3. Install the NPM NFT.STORAGE library.
+
+```bash
+yarn add --dev nft.storage mime
+```
+
+3. Create a folder for the image: `mkdir images` and put the imagine inside the folder.
+4. Create the upload script as per the [NFT.STORAGE docs](https://nft.storage/docs/#using-the-javascript-api){:target="_blank"}.
+
+`utils/upload.mjs`:
+
+```javascript
+import { NFTStorage, File } from "nft.storage"
+import mime from "mime"
+import fs from "fs"
+import path from "path"
+import * as dotenv from "dotenv"
+
+dotenv.config()
+
+const NFT_STORAGE_KEY = process.env.NFT_STORAGE_KEY || "key"
+
+async function storeNFT(imagePath, name, description) {
+    const image = await fileFromPath(imagePath)
+
+    const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY })
+
+    return nftstorage.store({
+        image,
+        name,
+        description,
+    })
+}
+
+async function fileFromPath(filePath) {
+    const content = await fs.promises.readFile(filePath)
+    const type = mime.getType(filePath)
+    return new File([content], path.basename(filePath), { type })
+}
+
+async function main() {
+    const args = process.argv.slice(2)
+    if (args.length !== 3) {
+        console.error(
+            `usage: ${process.argv[0]} ${process.argv[1]} <image-path> <name> <description>`
+        )
+        process.exit(1)
+    }
+
+    const [imagePath, name, description] = args
+    const result = await storeNFT(imagePath, name, description)
+    console.log(result)
+}
+
+main().catch((err) => {
+    console.error(err)
+    process.exit(1)
+})
+```
+5. Run the script:
+
+```bash
+node utils/upload.mjs images/smr-logo.png 'SMR Logo' 'This is a logo for my blog'
+```
+
+and the response should be something like:
+
+```js
+Token {
+  ipnft: 'bafyreiggktxm4m2tnhxhx7s2fcjuvvqude3vkd73jkynwwpkitxd4bf2gq',
+  url: 'ipfs://bafyreiggktxm4m2tnhxhx7s2fcjuvvqude3vkd73jkynwwpkitxd4bf2gq/metadata.json'
+}
+```
+
+If you use the IPFS URL from above on the Brave browser you should get something like:
+
+```json
+{
+   "name":"SMR Logo",
+   "description":"This is a logo for my blog",
+   "image":"ipfs://bafybeigxde2t2koxbvj3xojtrmrwk2gxguivpvic7ujot55ptk4z6iefxy/smr-logo.png"
+}
+```
 
 ### Adding the Token URL to Your NFT Contract
 
-You just need to override the `tokenURI()` and use one of the URLs generated on the previous step.
+You just need to override the `tokenURI()` and use one of the IPFS URL with generated on the previous step.
 
 `contracts/MyNFT.sol`:
 
@@ -271,5 +363,7 @@ const { developmentChains } = require("../../helper-hardhat.config")
           })
       })
 ```
+
+Congratulations you were able to create an NFT with a decentralized image 🚀.
 
 {% include elements/button.html link="https://github.com/smartinrub/hardhat-nft-example.git" text="Source Code" %}
