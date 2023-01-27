@@ -111,8 +111,8 @@ Since this is a coding tutorial let's go for the programmatic approach.
 yarn add --dev nft.storage mime
 ```
 
-3. Create a folder for the image: `mkdir images` and put the image inside the folder.
-4. Create the upload script. [NFT.STORAGE docs](https://nft.storage/docs/#using-the-javascript-api){:target="_blank"}.
+4. Create a folder for the image: `mkdir images` and put the image inside the folder.
+5. Create the upload script. [NFT.STORAGE docs](https://nft.storage/docs/#using-the-javascript-api){:target="_blank"}.
 
 `utils/upload.mjs`:
 
@@ -306,47 +306,92 @@ Finally we can create some unit tests to make sure the NFT is working as expecte
 `test/myNFT.test.js`:
 
 ```javascript
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+const { expect } = require("chai")
+const { network } = require("hardhat")
+const { developmentChains } = require("../../helper-hardhat.config")
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+!developmentChains.includes(network.name)
+    ? describe.skip
+    : describe("My NFT Unit Tests", () => {
+          const nftImageUri = "test"
+          let myNFTFactory
+          let myNFT
+          let deployer
 
-error MyNFT__AlreadyInitialized();
+          beforeEach(async () => {
+              accounts = await ethers.getSigners()
+              deployer = accounts[0]
+              myNFTFactory = await ethers.getContractFactory("MyNFT")
+              myNFT = await myNFTFactory.deploy(nftImageUri)
+              await myNFT.deployed()
+          })
 
-contract MyNFT is ERC721 {
-    uint256 private s_tokenCounter; // if you have a collection of tokens on the same smart contract each of them needs their own unique token ID
-    string internal s_tokeUri;
-    bool private s_initialized;
+          describe("Constructor", () => {
+              it("has correct name", async () => {
+                  // WHEN
+                  const name = await myNFT.name()
 
-    constructor(string memory tokenUri) ERC721("MyNFT", "MNFT") {
-        s_tokenCounter = 0;
-        _initializeContract(tokenUri);
-    }
+                  // THEN
+                  expect(name).to.equal("MyNFT")
+              })
 
-    function mintNFT() public returns (uint256) {
-        _safeMint(msg.sender, s_tokenCounter); // this
-        s_tokenCounter++; // each time we mint an NFT we increase the token counter
-        return s_tokenCounter;
-    }
+              it("has correct symbol", async () => {
+                  // WHEN
+                  const symbol = await myNFT.symbol()
 
-    function tokenURI(
-        uint256 /*tokenId*/
-    ) public view override returns (string memory) {
-        return s_tokeUri; // using the same image for all minted tokens
-    }
+                  // THEN
+                  expect(await myNFT.symbol()).to.equal("MNFT")
+              })
+              it("has counter value zero", async () => {
+                  // WHEN
+                  const tokenCounter = await myNFT.getTokenCounter()
 
-    function _initializeContract(string memory tokenUri) private {
-        if (s_initialized) {
-            revert MyNFT__AlreadyInitialized();
-        }
-        s_tokeUri = tokenUri;
-        s_initialized = true;
-    }
+                  // THEN
+                  expect(tokenCounter.toString()).to.equal("0")
+              })
+          })
 
-    function getTokenCounter() public view returns (uint256) {
-        return s_tokenCounter;
-    }
-}
+          describe("Mint NFT", async () => {
+              beforeEach(async () => {
+                  const tokenCounter = await myNFT.getTokenCounter()
+                  expect(tokenCounter.toString()).to.equal("0")
+                  const deployerBalance = await myNFT.balanceOf(
+                      deployer.address
+                  )
+                  expect(deployerBalance.toString()).to.equal("0")
+                  const response = await myNFT.mintNFT()
+                  await response.wait(1)
+              })
+
+              it("bumps token counter", async () => {
+                  // WHEN
+                  const tokenCounter = await myNFT.getTokenCounter()
+
+                  // THEN
+                  expect(tokenCounter.toString()).to.equal("1")
+              })
+
+              it("increases owner balance", async () => {
+                  // WHEN
+                  const deployerBalance = await myNFT.balanceOf(
+                      deployer.address
+                  )
+
+                  // THEN
+                  expect(deployerBalance.toString()).to.equal("1")
+              })
+          })
+
+          describe("Token URI", () => {
+              it("return IPFS URI", async () => {
+                  // WHEN
+                  const tokeURI = await myNFT.tokenURI(0)
+
+                  // THEN
+                  expect(tokeURI.toString()).contains(nftImageUri)
+              })
+          })
+      })
 ```
 
 Congratulations you were able to create an NFT with a decentralized image 🚀.
