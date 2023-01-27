@@ -111,19 +111,18 @@ Since this is a coding tutorial let's go for the programmatic approach.
 yarn add --dev nft.storage mime
 ```
 
-3. Create a folder for the image: `mkdir images` and put the imagine inside the folder.
-4. Create the upload script as per the [NFT.STORAGE docs](https://nft.storage/docs/#using-the-javascript-api){:target="_blank"}.
+3. Create a folder for the image: `mkdir images` and put the image inside the folder.
+4. Create the upload script. [NFT.STORAGE docs](https://nft.storage/docs/#using-the-javascript-api){:target="_blank"}.
 
 `utils/upload.mjs`:
 
 ```javascript
-import { NFTStorage, File } from "nft.storage"
-import mime from "mime"
-import fs from "fs"
-import path from "path"
-import * as dotenv from "dotenv"
+const { NFTStorage, File } = require("nft.storage")
+const mime = require("mime")
+const fs = require("fs")
+const path = require("path")
 
-dotenv.config()
+require("dotenv").config()
 
 const NFT_STORAGE_KEY = process.env.NFT_STORAGE_KEY || "key"
 
@@ -132,11 +131,13 @@ async function storeNFT(imagePath, name, description) {
 
     const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY })
 
-    return nftstorage.store({
+    const response = await nftstorage.store({
         image,
         name,
         description,
     })
+    console.log(`NFT image ${response.data.name} uploaded: ${response.url}`)
+    return response
 }
 
 async function fileFromPath(filePath) {
@@ -145,53 +146,14 @@ async function fileFromPath(filePath) {
     return new File([content], path.basename(filePath), { type })
 }
 
-async function main() {
-    const args = process.argv.slice(2)
-    if (args.length !== 3) {
-        console.error(
-            `usage: ${process.argv[0]} ${process.argv[1]} <image-path> <name> <description>`
-        )
-        process.exit(1)
-    }
-
-    const [imagePath, name, description] = args
-    const result = await storeNFT(imagePath, name, description)
-    console.log(result)
-}
-
-main().catch((err) => {
-    console.error(err)
-    process.exit(1)
-})
-```
-5. Run the script:
-
-```bash
-node utils/upload.mjs images/smr-logo.png 'SMR Logo' 'This is a logo for my blog'
+module.exports = { storeNFT }
 ```
 
-and the response should be something like:
-
-```js
-Token {
-  ipnft: 'bafyreiggktxm4m2tnhxhx7s2fcjuvvqude3vkd73jkynwwpkitxd4bf2gq',
-  url: 'ipfs://bafyreiggktxm4m2tnhxhx7s2fcjuvvqude3vkd73jkynwwpkitxd4bf2gq/metadata.json'
-}
-```
-
-If you use the IPFS URL from above on the Brave browser you should get something like:
-
-```json
-{
-   "name":"SMR Logo",
-   "description":"This is a logo for my blog",
-   "image":"ipfs://bafybeigxde2t2koxbvj3xojtrmrwk2gxguivpvic7ujot55ptk4z6iefxy/smr-logo.png"
-}
-```
+We will run the previous script as part of the NFT contract deployment script.
 
 ### Adding the Token URL to Your NFT Contract
 
-You just need to override the `tokenURI()` and use one of the IPFS URL with generated on the previous step.
+Now we can update our NFT smart contract to inject the NFT image URL.
 
 `contracts/MyNFT.sol`:
 
@@ -201,13 +163,16 @@ pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract MyNFT is ERC721 {
-    string public constant TOKEN_URI =
-        "ipfs://bafkreia6pu2v77h6qdvgssaw5uljatm5hjdl3ec5d24k3isb2bna3nyfkq";
-    uint256 private s_tokenCounter; // if you have a collection of tokens on the same smart contract each of them needs their own unique token ID
+error MyNFT__AlreadyInitialized();
 
-    constructor() ERC721("MyNFT", "MNFT") {
+contract MyNFT is ERC721 {
+    uint256 private s_tokenCounter; // if you have a collection of tokens on the same smart contract each of them needs their own unique token ID
+    string internal s_tokeUri;
+    bool private s_initialized;
+
+    constructor(string memory tokenUri) ERC721("MyNFT", "MNFT") {
         s_tokenCounter = 0;
+        _initializeContract(tokenUri);
     }
 
     function mintNFT() public returns (uint256) {
@@ -219,7 +184,15 @@ contract MyNFT is ERC721 {
     function tokenURI(
         uint256 /*tokenId*/
     ) public view override returns (string memory) {
-        return TOKEN_URI;
+        return s_tokeUri; // using the same image for all minted tokens
+    }
+
+    function _initializeContract(string memory tokenUri) private {
+        if (s_initialized) {
+            revert MyNFT__AlreadyInitialized();
+        }
+        s_tokeUri = tokenUri;
+        s_initialized = true;
     }
 
     function getTokenCounter() public view returns (uint256) {
@@ -241,6 +214,10 @@ const {
     VERIFICATION_BLOCK_CONFIRMATIONS,
 } = require("../helper-hardhat.config")
 const { verify } = require("../utils/verify")
+const { storeNFT } = require("../utils/upload")
+
+let tokenUri =
+    "ipfs://bafkreia6pu2v77h6qdvgssaw5uljatm5hjdl3ec5d24k3isb2bna3nyfkq"
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
@@ -251,9 +228,15 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         ? 1
         : VERIFICATION_BLOCK_CONFIRMATIONS
     log(`----------------------------------------------------`)
+
+    if (process.env.UPLOAD_TO_NFT_STORAGE == "true") {
+        tokenUri = await uploadTokenImage()
+    }
+
+    const arguments = [tokenUri]
     const myNFT = await deploy("MyNFT", {
         from: deployer,
-        args: [],
+        args: arguments,
         log: true,
         waitConfirmations: waitBlockConfirmations,
     })
@@ -264,9 +247,55 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         process.env.ETHERSCAN_API_KEY
     ) {
         log("Verifying...")
-        await verify(myNFT.address, [])
+        await verify(myNFT.address, arguments)
     }
     log(`----------------------------------------------------`)
+}
+
+async function uploadTokenImage() {
+    const response = await storeNFT(
+        "./images/smr-logo.png",
+        "My NFT",
+        "This is an image for my NFT"
+    )
+    return response.url
+}
+
+module.exports.tags = ["all", "mynft", "main"]
+```
+
+To deploy to the *Goerli* testnet and upload the image to *NFT.STORAGE*:
+
+```bash
+UPLOAD_TO_NFT_STORAGE=true hh deploy --network goerli
+```
+
+The output should be something like:
+
+```bash
+----------------------------------------------------
+NFT image My NFT uploaded: ipfs://bafyreies6zqyooxmvc7rnpnvhglc2dvkcflboedp6exqhbiavkfmlv5vz4/metadata.json
+deploying "MyNFT" (tx: 0x4e33d8634bb9b91bc99834c94f7ca9ed20c70573480c47a4bdcd8d79d8e1f35a)...: deployed at 0xbe529C226d04bF1B44E44BDe175d422902cE8002 with 2248183 gas
+Verifying...
+Verifying contract...
+Nothing to compile
+Successfully submitted source code for contract
+contracts/MyNFT.sol:MyNFT at 0xbe529C226d04bF1B44E44BDe175d422902cE8002
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract MyNFT on Etherscan.
+https://goerli.etherscan.io/address/0xbe529C226d04bF1B44E44BDe175d422902cE8002#code
+```
+
+If you go to the Goerli Etherscan link you can the token URI which contains all the metadata associated to the NFT. See the example below:
+
+`ipfs://bafyreies6zqyooxmvc7rnpnvhglc2dvkcflboedp6exqhbiavkfmlv5vz4/metadata.json`:
+
+```json
+{
+  "name": "My NFT",
+  "description": "This is an image for my NFT",
+  "image": "ipfs://bafybeigxde2t2koxbvj3xojtrmrwk2gxguivpvic7ujot55ptk4z6iefxy/smr-logo.png"
 }
 ```
 
@@ -277,91 +306,47 @@ Finally we can create some unit tests to make sure the NFT is working as expecte
 `test/myNFT.test.js`:
 
 ```javascript
-const { expect } = require("chai")
-const { network } = require("hardhat")
-const { developmentChains } = require("../../helper-hardhat.config")
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
-!developmentChains.includes(network.name)
-    ? describe.skip
-    : describe("My NFT Unit Tests", () => {
-          let myNFTFactory
-          let myNFT
-          let deployer
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-          beforeEach(async () => {
-              accounts = await ethers.getSigners()
-              deployer = accounts[0]
-              myNFTFactory = await ethers.getContractFactory("MyNFT")
-              myNFT = await myNFTFactory.deploy()
-              await myNFT.deployed()
-          })
+error MyNFT__AlreadyInitialized();
 
-          describe("Constructor", () => {
-              it("has correct name", async () => {
-                  // WHEN
-                  const name = await myNFT.name()
+contract MyNFT is ERC721 {
+    uint256 private s_tokenCounter; // if you have a collection of tokens on the same smart contract each of them needs their own unique token ID
+    string internal s_tokeUri;
+    bool private s_initialized;
 
-                  // THEN
-                  expect(name).to.equal("MyNFT")
-              })
+    constructor(string memory tokenUri) ERC721("MyNFT", "MNFT") {
+        s_tokenCounter = 0;
+        _initializeContract(tokenUri);
+    }
 
-              it("has correct symbol", async () => {
-                  // WHEN
-                  const symbol = await myNFT.symbol()
+    function mintNFT() public returns (uint256) {
+        _safeMint(msg.sender, s_tokenCounter); // this
+        s_tokenCounter++; // each time we mint an NFT we increase the token counter
+        return s_tokenCounter;
+    }
 
-                  // THEN
-                  expect(await myNFT.symbol()).to.equal("MNFT")
-              })
-              it("has counter value zero", async () => {
-                  // WHEN
-                  const tokenCounter = await myNFT.getTokenCounter()
+    function tokenURI(
+        uint256 /*tokenId*/
+    ) public view override returns (string memory) {
+        return s_tokeUri; // using the same image for all minted tokens
+    }
 
-                  // THEN
-                  expect(tokenCounter.toString()).to.equal("0")
-              })
-          })
+    function _initializeContract(string memory tokenUri) private {
+        if (s_initialized) {
+            revert MyNFT__AlreadyInitialized();
+        }
+        s_tokeUri = tokenUri;
+        s_initialized = true;
+    }
 
-          describe("Mint NFT", async () => {
-              beforeEach(async () => {
-                  const tokenCounter = await myNFT.getTokenCounter()
-                  expect(tokenCounter.toString()).to.equal("0")
-                  const deployerBalance = await myNFT.balanceOf(
-                      deployer.address
-                  )
-                  expect(deployerBalance.toString()).to.equal("0")
-                  const response = await myNFT.mintNFT()
-                  await response.wait(1)
-              })
-
-              it("bumps token counter", async () => {
-                  // WHEN
-                  const tokenCounter = await myNFT.getTokenCounter()
-
-                  // THEN
-                  expect(tokenCounter.toString()).to.equal("1")
-              })
-
-              it("increases owner balance", async () => {
-                  // WHEN
-                  const deployerBalance = await myNFT.balanceOf(
-                      deployer.address
-                  )
-
-                  // THEN
-                  expect(deployerBalance.toString()).to.equal("1")
-              })
-          })
-
-          describe("Token URI", () => {
-              it("return IPFS URI", async () => {
-                  // WHEN
-                  const tokeURI = await myNFT.tokenURI(0)
-
-                  // THEN
-                  expect(tokeURI.toString()).contains("ipfs://")
-              })
-          })
-      })
+    function getTokenCounter() public view returns (uint256) {
+        return s_tokenCounter;
+    }
+}
 ```
 
 Congratulations you were able to create an NFT with a decentralized image 🚀.
