@@ -69,7 +69,7 @@ expertise:
     level: 100
     color: rgb(247, 205, 182)
 
-  - title: Blockchain Development
+  - title: Blockchain Dev
     level: 30
     color: rgb(230, 133, 172)
 
@@ -85,7 +85,7 @@ expertise:
     level: 100
     color: rgb(222, 184, 135)
 
-  - title: Mobile Development (iOS)
+  - title: Mobile Dev (iOS)
     level: 50
     color: rgb(160, 158, 158)
 
@@ -105,7 +105,7 @@ expertise:
     level: 60
     color: rgb(80, 185, 185)
 
-  - title: Project Management
+  - title: Management
     level: 80
     color: rgb(160, 158, 158)
   
