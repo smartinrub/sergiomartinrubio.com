@@ -22,7 +22,7 @@ On a EVM (Ethereum Virtual Machine) level there is no functions and contracts, i
 There are 3 options for invoking functions via their encoded version:
 
 - `address.call(bytes)`: invokes code from a contract given an encoded version of the operation.
-- [address.delegatecall(bytes)](https://solidity-by-example.org/delegatecall/){:target="_blank"}: same as `address.call(bytes)`, but changes are persisted on the caller smart contract and the callee's state is not modified. This is usually used for creating proxy contracts as a way of upgrading a smart contract by switching between different implementations. This requires to deploy the callee's contract first and storage slots must match between the caller and the callee, on in other words, the first storage variable in the caller contract will be used as the first storage variable in the callee contract, regardless of the variable name.
+- [address.delegatecall(bytes)](https://solidity-by-example.org/delegatecall/){:target="_blank"}: same as `address.call(bytes)`, but changes are persisted on the caller smart contract and the callee's state is not modified. This is usually used for creating proxy contracts as a way of upgrading a smart contract by switching between different implementations. This requires to deploy the callee's contract first and storage slots must match between the caller and the callee, on in other words, the first storage variable in the caller contract will be used as the first storage variable in the callee contract, regardless of the variable name. However, you have to make sure that the types between the contracts match, otherwise you might encounter unexpected results.
 
 In the example bellow when `hello` is invoked on the `A`, `sender` and `value` are set on `A`.
 
