@@ -15,6 +15,20 @@ There are two fallback functions:
  a. `received()`
  b. `fallback()`
 
+```mermaid
+flowchart TD;
+
+    CALLDATA --> A
+    A{is msg.data empty?} --> |yes|B{receive exists?};
+    A --> |no|C{function selector match?}
+    B --> |yes|G((received))
+    B --> |no|D{fallback exists?}
+    D --> |yes|H((fallback))
+    D --> |no|F((transaction is reverted))
+    C --> |no|D
+    C --> |yes|E((execute function))
+```
+
 ## receive()
 
 - This is also an unnamed external payable function without any input or output parameters. 
@@ -69,18 +83,4 @@ contract FallbackReceive {
         return value;
     }
 }
-```
-
-```mermaid
-flowchart TD;
-
-    CALLDATA --> A
-    A{is msg.data empty?} --> |yes|B{receive exists?};
-    A --> |no|C{function selector match?}
-    B --> |yes|G((received))
-    B --> |no|D{fallback exists?}
-    D --> |yes|H((fallback))
-    D --> |no|F((transaction is reverted))
-    C --> |no|D
-    C --> |yes|E((execute function))
 ```
