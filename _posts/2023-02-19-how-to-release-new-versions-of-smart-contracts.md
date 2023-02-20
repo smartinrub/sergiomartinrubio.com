@@ -12,10 +12,9 @@ layout: post
 First of all, [smart contracts](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) are immutable, once a smart contract is deployed there is no way of making modifications on the smart contract logic, and this is great news because nobody can tamper your code. However, there are scenarios where you want to upgrade your smart contract for adding new features or fixing bugs. Even though smart contracts are immutable there are some workarounds for deploying a new version of your smart contract.
 
 Three different ways of releasing a new version of your smart contract:
-
-a. **Parameterization**
-b. **Social migration**
-c. **Proxies**
+* **Parameterization**
+* **Social migration**
+* **Proxies**
 
 ## Parameterization
 
@@ -163,8 +162,8 @@ abstract contract Proxy {
 
 ### Proxy Contracts Issues
 
-a. **Storage clashes**: you can only append storage variables into new implementations since storage variables are indexed, so if you change the order of one of the storage variables in the new implementation you would store the value in the wrong variable. 
-b. **Signature selector clashes**: this happens when the proxy contract has a function with the same selector as one of the functions in the implementation.
+* **Storage clashes**: you can only append storage variables into new implementations since storage variables are indexed, so if you change the order of one of the storage variables in the new implementation you would store the value in the wrong variable. 
+* **Signature selector clashes**: this happens when the proxy contract has a function with the same selector as one of the functions in the implementation.
 
 ```solidity
 contract V2 {
@@ -184,8 +183,8 @@ contract V2 {
 
 There are proxy patterns that can get around the storage and signature selector clashes:
 
-a. **Transparent Proxy Pattern**
-b. **Universal Upgradeable Proxy Pattern**
+* **Transparent Proxy Pattern**
+* **Universal Upgradeable Proxy Pattern**
 
 ### Transparent Proxy Pattern
 

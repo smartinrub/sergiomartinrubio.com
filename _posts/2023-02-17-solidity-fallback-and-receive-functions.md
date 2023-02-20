@@ -12,8 +12,8 @@ layout: post
 [Solidity Smart contracts](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) have two built in fallback functions that are triggered when no other function in the contract matches the specified function in the call. This can happen for multiple reasons like a type, the use of [Smart Contract Proxies](https://sergiomartinrubio.com/articles/how-to-release-a-new-versions-of-smart-contracts/) or for [Re-Entrancy](https://solidity-by-example.org/hacks/re-entrancy/) attacks.
 
 There are two fallback functions:
- A.  `received()`
- B.  `fallback()`
+* `received()`
+* `fallback()`
 
 ```mermaid
 flowchart TD;
