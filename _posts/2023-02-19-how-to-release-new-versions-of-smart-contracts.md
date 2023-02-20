@@ -60,7 +60,7 @@ Again, one of the disadvantages of this strategy is that an admin user must have
 5. Create a function for encoding the implementation function signature: `getEncodedFunctionSignature(uint256)`. We will pass the encoded function selector to `CALLDATA`. 
 6. Create a function for fetching the value we are setting on the storage slot index zero (`sload(0)`): `readStorage()`. We don't even need to declare the storage variable in the proxy contract.
 
-```Solidity
+```solidity
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.7;
@@ -121,7 +121,7 @@ Now, let's take a look at the *OpenZeppelin* `Proxy` abstract contract. Basicall
 3. The [fallback](https://sergiomartinrubio.com/articles/solidity-fallback-and-receive-functions/) invokes `_fallback` and the former invokes `_delegate(_implementation())`. Given that `_implementation()` was overridden on our Proxy contract implementation, it should return the implementation smart contract address.
 4. Now `_delegate(address)` executes some assembly functions and the `delegatecall` function with the provided implementation smart contract address.
 
-```Solidity
+```solidity
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.6.0) (proxy/Proxy.sol)
 
@@ -166,7 +166,7 @@ abstract contract Proxy {
 a. **Storage clashes**: you can only append storage variables into new implementations since storage variables are indexed, so if you change the order of one of the storage variables in the new implementation you would store the value in the wrong variable. 
 b. **Signature selector clashes**: this happens when the proxy contract has a function with the same selector as one of the functions in the implementation.
 
-```Solidity
+```solidity
 contract V2 {
     uint256 public value;
 
