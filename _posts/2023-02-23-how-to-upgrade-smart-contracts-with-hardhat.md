@@ -1,6 +1,6 @@
 ---
 title: How to Upgrade Smart Contracts with Hardhat
-image: 
+image: https://lh3.googleusercontent.com/pw/AMWts8B2tkOFXUYjJX2vMg4YduAtn9a72rZkkgg9x9Jfmt3BEVyeAap2fcm6hwRYodLo7kY2ufejlNQO0KCsAxEmII6zxeonkxtEtxoFLfPo1__dCYCE6oIDnryffncd3W356_5-Pwdt7sKE0kOPOyIUmlNc=w1836-h1376-no?authuser=0
 author: Sergio Martin Rubio
 categories:
     - Solidity
