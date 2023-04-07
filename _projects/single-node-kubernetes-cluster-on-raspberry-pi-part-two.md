@@ -46,7 +46,7 @@ There are [multiple ways of installing cert-manager](https://cert-manager.io/doc
 
 Now that cert-manager is running in our Kubernetes cluster we can start issues our certificates.
 
-We are going to create to issuers, one for stating and one for production, so we can test the one for staging before issuing the production certification one because there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
+We are going to create to issuers, one for staging and one for production, so we can test the one for staging before issuing the production certification one because there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
 
 1. Create `ClusterIssuer` resource definition.
 
