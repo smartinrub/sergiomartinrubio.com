@@ -94,12 +94,33 @@ We are going to create to issuers, one for stating and one for production, so we
 	
 2. Apply the issuers:
 
+	- For staging:
+
 	```
 	kubectl apply -f staging-issuer.yaml
+	```
+
+	Check the issuer is ready:
+
+	```
+	kubectl get clusterIssuer -n cert-manager
+	```
+
+	- For production:
+
+	```
 	kubectl apply -f prod-issuer.yaml
 	```
 
-3. Update the `ingress.yaml`:
+	Check the issuer is ready:
+
+	```
+	kubectl get clusterIssuer -n cert-manager
+	```
+
+	If you see False on the `READY` field you can find more details on the official cert-manager site for [Troubleshooting Problems with ACME / Let's Encrypt Certificates ](https://cert-manager.io/docs/troubleshooting/acme/).
+
+1. Update the `ingress.yaml`:
 
 	```yaml
 	apiVersion: networking.k8s.io/v1
