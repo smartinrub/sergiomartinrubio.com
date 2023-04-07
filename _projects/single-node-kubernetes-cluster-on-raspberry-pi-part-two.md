@@ -118,6 +118,14 @@ We are going to create to issuers, one for stating and one for production, so we
 	kubectl get clusterIssuer -n cert-manager
 	```
 
+	It should print out something like:
+
+	```shell
+	NAME                  READY   AGE
+	letsencrypt-staging   True    8m14s
+	letsencrypt-prod      True    7s
+	```
+
 	If you see False on the `READY` field you can find more details on the official cert-manager site for [Troubleshooting Problems with ACME / Let's Encrypt Certificates ](https://cert-manager.io/docs/troubleshooting/acme/).
 
 1. Update the `ingress.yaml`:
