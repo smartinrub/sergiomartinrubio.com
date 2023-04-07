@@ -46,7 +46,7 @@ There are [multiple ways of installing cert-manager](https://cert-manager.io/doc
 
 Now that cert-manager is running in our Kubernetes cluster we can start issues our certificates.
 
-We are going to create to issuers, one for stating and one for production, so we can test the one for staging before issuing production certification, since there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
+We are going to create to issuers, one for stating and one for production, so we can test the one for staging before issuing the production certification one because there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
 
 1. Create `ClusterIssuer` resource definition.
 
@@ -72,22 +72,22 @@ We are going to create to issuers, one for stating and one for production, so we
 	
 	production-issuer.yaml
 	
-	```
+	```yaml
 	apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-prod
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: <your_email> # it should be a valid one
-    privateKeySecretRef:
-       name: letsencrypt-prod
-    solvers:
-     - selector: {}
-       http01:
-         ingress:
-           class: public # the built-in ingress class is called public in MicroK8s, not nginx
+	kind: ClusterIssuer
+	metadata:
+	name: letsencrypt-prod
+	spec:
+	acme:
+		server: https://acme-v02.api.letsencrypt.org/directory
+		email: <your_email> # it should be a valid one
+		privateKeySecretRef:
+		name: letsencrypt-prod
+		solvers:
+		- selector: {}
+		http01:
+			ingress:
+			class: public # the built-in ingress class is called public in MicroK8s, not nginx
 	```
 	
 > IMPORTANT: The selected ingress class is called `public` instead of `nginx`. This is specific for a MicroK8s cluster.
