@@ -14,13 +14,15 @@ On this part we will cover how to issue a trusted SSL/TSL certificate with cert-
 
 ### Quick intro
 
-We are going to use [cert-manager](https://cert-manager.io) for issuing trusted SSL/TLS certificates for our Kubernetes cluster. cert-manager is able to generate certificates from some of the most popular certificate authorities like [Let's Encrypt](https://letsencrypt.org), [Vault](https://www.vaultproject.io) or [Venafi](https://www.venafi.com). 
+We are going to use [cert-manager](https://cert-manager.io){:target="_blank"} for issuing trusted SSL/TLS certificates for our Kubernetes cluster. cert-manager is able to generate certificates from some of the most popular certificate authorities like [Let's Encrypt](https://letsencrypt.org){:target="_blank"}, [Vault](https://www.vaultproject.io){:target="_blank"} or [Venafi](https://www.venafi.com){:target="_blank"}. 
 
 cert-manager will also make sure that our certificates are valid and up to date.
 
+Additionally, we are going to install [Fail2Ban](https://www.fail2ban.org){:target="_blank"} which will prevent force brute attacks.
+
 ### cert-manager installation
 
-There are [multiple ways of installing cert-manager](https://cert-manager.io/docs/installation/) in our Kubernetes cluster and for this guide we will use [Helm](https://helm.sh).
+There are [multiple ways of installing cert-manager](https://cert-manager.io/docs/installation/){:target="_blank"} in our Kubernetes cluster and for this guide we will use [Helm](https://helm.sh){:target="_blank"}.
 
 1. First of all make sure you have `Helm` cli installed. On mac you can install it via Homebrew: `brew install helm`
 2. Install Jetstack and update repository cache:
@@ -126,7 +128,7 @@ We are going to create to issuers, one for staging and one for production, so we
 	letsencrypt-prod      True    7s
 	```
 
-	If you see False on the `READY` field you can find more details on the official cert-manager site for [Troubleshooting Problems with ACME / Let's Encrypt Certificates ](https://cert-manager.io/docs/troubleshooting/acme/).
+	If you see False on the `READY` field you can find more details on the official cert-manager site for [Troubleshooting Problems with ACME / Let's Encrypt Certificates ](https://cert-manager.io/docs/troubleshooting/acme/){:target="_blank"}.
 
 3. Update the `ingress.yaml`:
 
@@ -165,7 +167,7 @@ We are going to create to issuers, one for staging and one for production, so we
 	
 	> For the ACME challenge validation to succeed you might need to open the port 80.
 	
-	If everything went well you can now use the production certificate by updating the ingress. Otherwise I recommend to use [this troubleshooting page from cert-manager](https://cert-manager.io/docs/faq/troubleshooting/).
+	If everything went well you can now use the production certificate by updating the ingress. Otherwise I recommend to use [this troubleshooting page from cert-manager](https://cert-manager.io/docs/faq/troubleshooting/){:target="_blank"}.
 	
 	```yaml
 	apiVersion: networking.k8s.io/v1
@@ -194,3 +196,19 @@ We are going to create to issuers, one for staging and one for production, so we
 	```
 	
 Now browsers shouldn't show any warnings about self signed certificates! 🙌
+
+### Fail2Ban
+
+You can install Fail2Ban with:
+
+```bash
+sudo apt install fail2ban -y
+```
+
+then check that it's up and running:
+
+```
+sudo systemctl status fail2ban
+```
+
+If it showing as `inactive (dead)` try to restart Fail2Ban with `sudo systemctl restart fail2ban`.
