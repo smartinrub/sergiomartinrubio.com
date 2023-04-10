@@ -18,7 +18,7 @@ We are going to use [cert-manager](https://cert-manager.io){:target="_blank"} fo
 
 cert-manager will also make sure that our certificates are valid and up to date.
 
-Additionally, we are going to install [Fail2Ban](https://www.fail2ban.org){:target="_blank"} which will prevent force brute attacks.
+Additionally, we are going to install [Fail2Ban](https://www.fail2ban.org){:target="_blank"} and NGINX rate limiting rules to prevent attacks.
 
 ### cert-manager installation
 
@@ -175,7 +175,7 @@ We are going to create to issuers, one for staging and one for production, so we
 	metadata:
 	  name: spring-boot-demo-ingress
 	  annotations:
-	    nginx.ingress.kubernetes.io/rewrite-target: /
+	    nginx.ingress.kubernetes.io/rewrite-target: /$1 # this is required when having a pathType=Prefix
 	    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 	spec:
 	  tls:
@@ -212,3 +212,73 @@ sudo systemctl status fail2ban
 ```
 
 If it showing as `inactive (dead)` try to restart Fail2Ban with `sudo systemctl restart fail2ban`.
+
+Fail2Ban comes with a default configuration but you can create your own configuration for services like SSH. The convention is to create separate configuration files for each service. For example, for SSH we would create a file named `sshd.conf` under `/etc/fail2ban/fail.d/`.
+
+```shell
+sudo nano /etc/fail2ban/jail.d/sshd.conf
+```
+
+with the following content:
+
+```conf
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 120
+ignoreip = whitelist-IP
+```
+
+This configuration will ban IPs hitting the SSH service after 3 failures and for 120 seconds.
+
+To apply the configuration you just need to restart Fail2Ban:
+
+```
+sudo systemctl restart fail2ban
+```
+
+You can also check all the active bans on IPs with:
+
+```
+sudo fail2ban-client status
+```
+
+To ban a particular IP address for the SSH service run: `sudo fail2ban-client set sshd banip <IP_ADDRESS>`. Similarly, you can unban an IP with: `sudo fail2ban-client set sshd unbanip <IP_ADDRESS>`.
+
+Under the hood Fail2Ban is simply adding rules to `iptables` and you can see those rules with `sudo iptables -nL`.
+
+### Kubernetes Rate Limiting
+
+You can configure the [Kubernetes NGINX Ingress Controller with annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rate-limiting){:target="_blank"} to mitigate DDoS Attacks.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+	name: spring-boot-demo-ingress
+	annotations:
+		nginx.ingress.kubernetes.io/rewrite-target: /$1 # this is required when having a pathType=Prefix
+		nginx.ingress.kubernetes.io/limit-rps: "3"
+    	nginx.ingress.kubernetes.io/limit-rpm: "60"
+    	nginx.ingress.kubernetes.io/limit-connections: "5"
+		cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+	tls:
+	- hosts:
+		- <your_dns>
+		secretName: tls-secret
+	rules:
+	- host: <your_dns> # this is required to make the certificate work
+		http:
+		paths:
+			- path: /
+			pathType: Prefix
+			backend:
+				service:
+				name: spring-boot-demo-service
+				port:
+					number: 8080
+```
