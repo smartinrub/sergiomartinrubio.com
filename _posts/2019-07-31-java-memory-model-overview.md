@@ -66,7 +66,7 @@ When no Garbage Collector is selected via the command-line interface (e.g., `-XX
 
 3. [G1 (G1 GC)](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html){:target="_blank"}: The Garbage First collector for large heaps, providing reliable short GC pauses. It uses regions to simplify collection, avoiding fragmentation issues. G1 offers more predictable garbage collection pauses and allows users to specify desired pause targets.
 
-![Generational Garbage Collection Process Diagram](https://lh3.googleusercontent.com/wZSqu7r16KpwA2-7pbQFzorYharzcuhnLi5R21xcYpzQ2zf0F_D3HOE7aUP_sRo3TNWT6nf3XzZx5JWT0-nTnsLBubzp21BnJfJDno5fj1lzkS12CaJ9a4CKtp4l7XMxlPRPqQ9JFg=w800)
+    ![Generational Garbage Collection Process Diagram](https://lh3.googleusercontent.com/wZSqu7r16KpwA2-7pbQFzorYharzcuhnLi5R21xcYpzQ2zf0F_D3HOE7aUP_sRo3TNWT6nf3XzZx5JWT0-nTnsLBubzp21BnJfJDno5fj1lzkS12CaJ9a4CKtp4l7XMxlPRPqQ9JFg=w800)
 
 4. [_The Z Garbage Collector_ (ZGC)](https://www.opsian.com/blog/javas-new-zgc-is-very-exciting/){:target="_blank"}: Designed for low pause times on large heaps using colored pointers and load barriers.
 
