@@ -8,7 +8,7 @@ mermaid: false
 layout: post
 ---
 
-**Functional interfaces** only have one abstract method different from the public methods of `Object.class` (`equals`, `hashCode`…), so that the contract contains a single method.
+**Functional interfaces** have only one abstract method, distinct from the public methods of `Object.class` (`equals`, `hashCode`, etc.), ensuring that the contract contains a single method.
 
 ## Annotation
 
@@ -19,11 +19,11 @@ interface Foo {
 }
 ```
 
-`@FunctionalInterface` annotation is not mandatory but highly recommended, because the interface is checked at compiling time if in fact your interface is functional. Moreover, this annotation makes your architecture easier to understand.
+While the `@FunctionalInterface` annotation is not mandatory, it is highly recommended. This annotation allows the compiler to verify whether your interface is indeed functional. Moreover, using this annotation makes your architecture easier to understand.
 
 ## Use Cases
 
-Since **Java 8** has been released functional interfaces are very useful when combining with lambda expressions.
+Since the release of **Java 8**, functional interfaces have been particularly useful when combined with lambda expressions.
 
 ```java
 @FunctionalInterface
@@ -32,14 +32,14 @@ interface Foo {
 }
 ```
 
-And you can use it like this:
+Here's an example of its usage:
 
 ```java
 Foo foo = string -> string + "world!";
 System.out.println(foo.method("Hello "));
 ```
 
-It is important to mention that **Java 8** already provides some functional interfaces out-of-the-box in `Function<T,R>` from the `java.util.function`. Therefore, in same cases, as the one explained previously, we can make use of them.
+It is important to mention that **Java 8** already provides some functional interfaces out-of-the-box in `Function<T,R>` from the `java.util.function` package. Therefore, in some cases, like the one explained previously, we can make use of them.
 
 ```java
 Function<String, String> function = string -> string + "world!";
@@ -61,6 +61,6 @@ interface Foo {
 }
 ```
 
-Although you are allowed to define default methods in functional interfaces, it is not a good practice to overuse this technique, because default methods might clash with each other when your interface extends several interfaces with default methods.
+Although you are allowed to define default methods in functional interfaces, it is not a good practice to overuse this technique. Default methods might clash with each other when your interface extends several interfaces with default methods.
 
 Image by <a href="https://pixabay.com/users/donterase-1070369/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=789628">donterase</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=789628">Pixabay</a>
