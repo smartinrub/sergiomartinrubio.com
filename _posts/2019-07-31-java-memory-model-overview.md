@@ -101,7 +101,10 @@ System performance heavily depends on the available Java heap size. Follow these
 
 ## Metaspace
 
-Metaspace is memory allocated for metadata. In JDK 8, it replaced the permanent generation. Class metadata, stored in native memory, has an unlimited default allocation, but you can set an upper limit with `MaxMetaspaceSize`. GC runs on metaspace when nearing full capacity.
+Metaspace is memory allocated for metadata. In JDK 8, it replaced the permanent generation. Class metadata, stored in native memory, has an unlimited default allocation, but you can set an upper limit with `MaxMetaspaceSize`. GC runs on metaspace when nearing full capacity. Includes:
+
+- Class Metadata: Information about classes and interfaces, including the class name, methods, fields, and annotations.
+- Internal JVM Representations: It includes the resolution state (linkage to other classes/interfaces, fields, methods, and constants), interpretation state (quick access resources for resolved references and basic profile counters), and compilation state (code entry addresses, linking stubs, and sophisticated profile counters).
 
 ### Java Class Metadata
 
