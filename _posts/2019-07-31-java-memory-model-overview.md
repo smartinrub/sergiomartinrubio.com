@@ -109,7 +109,7 @@ Java Class Metadata represents the JVM's internal model of bytecode. The JVM cre
 
 ## Stack Memory
 
-Java Stack memory, allocated for static purposes, stores short-lived method-specific values and references to objects in the heap. The memory follows a last-in-first-out (LIFO) access pattern, with size depending on the OS and being relatively small compared to Heap memory. It persists as long as the method is active, throwing a `java.lang.StackOverflowException` when full.
+Java Stack memory is used for static memory allocation and during the execution of threads, stores short-lived method-specific values and references to objects in the heap. The memory follows a last-in-first-out (LIFO) access pattern, with size depending on the OS and being relatively small compared to Heap memory. It persists as long as the method is active, throwing a `java.lang.StackOverflowException` when full.
 
 ## Code Cache
 
