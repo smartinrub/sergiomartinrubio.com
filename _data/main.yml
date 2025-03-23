@@ -65,47 +65,47 @@ designations:
   - Consultant
 
 expertise:
-  - title: Java 8+
-    level: 100
-    color: rgb(247, 205, 182)
+  # - title: Java 8+
+  #   level: 100
+  #   color: rgb(247, 205, 182)
 
-  - title: Spring Framework
-    level: 90
-    color: rgb(112, 195, 148)
+  # - title: Spring Framework
+  #   level: 90
+  #   color: rgb(112, 195, 148)
 
-  - title: Testing
-    level: 100
-    color: rgb(255, 182, 46)
+  # - title: Testing
+  #   level: 100
+  #   color: rgb(255, 182, 46)
 
-  - title: SQL
-    level: 100
-    color: rgb(124, 142, 222)
+  # - title: SQL
+  #   level: 100
+  #   color: rgb(124, 142, 222)
 
-  - title: Integration Patterns
-    level: 80
-    color: rgb(222, 184, 135)
+  # - title: Integration Patterns
+  #   level: 80
+  #   color: rgb(222, 184, 135)
 
-  - title: Swift/SwiftUI
-    level: 70
-    color: rgb(160, 158, 158)
+  # - title: Swift/SwiftUI
+  #   level: 70
+  #   color: rgb(160, 158, 158)
 
-  - title: AWS, Kubernetes
-    level: 60
-    color: rgb(80, 185, 185)
+  # - title: AWS, Kubernetes
+  #   level: 60
+  #   color: rgb(80, 185, 185)
 
-  - title: Kotlin
-    level: 60
-    color: rgb(230, 133, 172)
+  # - title: Kotlin
+  #   level: 60
+  #   color: rgb(230, 133, 172)
   
-  - title: Python
-    level: 60
-    color: rgb(230, 133, 172)
+  # - title: Python
+  #   level: 60
+  #   color: rgb(230, 133, 172)
 
-  - title: ReactJS
-    level: 40
-    color: rgb(173, 255, 47)
+  # - title: ReactJS
+  #   level: 40
+  #   color: rgb(173, 255, 47)
 
-  - title: Agile
-    level: 100
-    color: rgb(160, 158, 158)
+  # - title: Agile
+  #   level: 100
+  #   color: rgb(160, 158, 158)
   
