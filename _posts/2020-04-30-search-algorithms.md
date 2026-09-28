@@ -23,16 +23,18 @@ Algorithm | Target | Worst Running Time | Average Running Time
  Unordered Linear Search | unordered arrays | $$O(n)$$ | $$O(n)$$
  Ordered Linear Search | ordered arrays | $$O(n)$$ | $$O(n)$$
  Binary Search | ordered arrays | $$O(log(n))$$ | $$O(log(n))$$
- Interpolation Search | ordered arrays | $$O(log(n))$$ | $$O(log(n))$$
- Binary Search Tree | trees | $$O(log(n))$$ | $$O(n)$$
+ Interpolation Search | ordered arrays | $$O(n)$$ | $$O(log(log(n)))$$
+ Binary Search Tree | trees | $$O(n)$$ | $$O(log(n))$$
  Depth First Search For Trees | trees | $$O(n)$$ | $$O(n)$$
  Breadth First Search For Trees | trees | $$O(n)$$ | $$O(n)$$
  Trie | strings | $$O(L)$$ | $$O(L)$$
  Ternary Search Tree | string | $$O(L)$$ | $$O(L)$$
- Depth First Search For Graphs | grapths | $$O(V + E)$$ | $$O(V + E)$$
- Breadth First Search For Graphs | grapths | $$O(V + E)$$ | $$O(V + E)$$
+ Depth First Search For Graphs | graphs | $$O(V + E)$$ | $$O(V + E)$$
+ Breadth First Search For Graphs | graphs | $$O(V + E)$$ | $$O(V + E)$$
 
- > Binary Search Tree: worst case for unbalanced tree
+ > Binary Search Tree: worst case is a completely unbalanced tree, average case a balanced one
+
+ > Interpolation Search: the average case assumes uniformly distributed data
 
  > Depth First Search For Trees: where `n` is the number of nodes
 

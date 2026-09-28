@@ -8,7 +8,7 @@ mermaid: false
 layout: post
 ---
 
-Before _Java 8_ there were only two possible ways to gracefully exit a method when a value is not present, either you return `null` or throw an exception. This has changed since _Java 8_ with the `Optional` interface.
+Before _Java 8_ there were only two possible ways to gracefully exit a method when a value is not present, either you return `null` or throw an exception. This has changed since _Java 8_ with the `Optional` class.
 
 - `null`: efficient, but risky (we have to make sure that the client is going to handle a possible `null` return value).
 - `Exception`: elegant, but expensive (the stack trace is captured).
@@ -19,7 +19,7 @@ Before _Java 8_ there were only two possible ways to gracefully exit a method wh
 
 Since **Java 8** we have a third alternative, **Optionals**, which can contain an element or nothing. `Optional` allows us to return an empty result.
 
-The optional library provides two ways to return an empty `Optional`: `Optional.Empty()` and `Optional.ofNullable(nullValue)`. But do not use `Optional.of(value)` if a null value is expected to be returned, because in that case it will throw a `NullPointerException`.
+The optional library provides two ways to return an empty `Optional`: `Optional.empty()` and `Optional.ofNullable(nullValue)`. But do not use `Optional.of(value)` if a null value is expected to be returned, because in that case it will throw a `NullPointerException`.
 
 ```java
 public class MyClass {
@@ -33,7 +33,7 @@ public class MyClass {
 		Integer result = null;
 		
 		for (Integer value : list) {
-			if (value == luckyNumber ) {
+			if (value.equals(luckyNumber)) {
 				result = value;
 			}
 		}
@@ -70,7 +70,7 @@ Optional<Integer> emptyValue = Optional.ofNullable(null);
 System.out.println(emptyValue.or(() -> defaultValue).get());
 ```
 
-You can also check if an `Optional` is empty by calling `isPresent()`, but since we have the methods mentioned above, you would rather use those for simplicity.
+You can also check whether a value is present by calling `isPresent()` (or, since _Java 11_, check the opposite with `isEmpty()`), but since we have the methods mentioned above, you would rather use those for simplicity.
 
 ## Drawbacks
 

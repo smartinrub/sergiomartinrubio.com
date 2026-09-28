@@ -10,7 +10,7 @@ layout: post
 
 ## equals
 
-- Use _==_ operator to compare object references. This is the most performance comparison.
+- Use _==_ operator to compare object references. This is the most performant comparison.
 - Use `instanceof` to check that both objects have same type.
 - Cast the argument to the class type.
 - Check desired fields in the class to return true when you consider that two objects are equals.
@@ -31,7 +31,7 @@ public boolean equals(Object o) {
     MyObject mo = (MyObject)o;
 
     return mo.mostImportantField == mostImportantField 
-        && mo.sencondField == sencondField
+        && mo.secondField == secondField
         && mo.lessImportantField == lessImportantField;
 }
 ```
@@ -49,8 +49,8 @@ public boolean equals(Object o) {
 @Override
 public int hashCode() {
     int result = Integer.hashCode(firstField);
-    result += 31 * result + sencondField.hashCode(); 
-    result += 31 * result + Integer.hashCode(thirdField); 
+    result = 31 * result + secondField.hashCode();
+    result = 31 * result + Integer.hashCode(thirdField);
     return result;
 }
 ```
@@ -58,10 +58,10 @@ public int hashCode() {
 
 ## Additional considerations
 
-- Always override **HashCode** when overriding equals.
+- Always override `hashCode` when overriding `equals`.
 - Always use `Object` type as an argument in the equals method.
 - Use `@Override` annotation.
-- If there is no need to create a custom _equals_ or _hashCode_ method you only need to use [@Autovalue](https://github.com/google/auto/blob/master/value/userguide/index.md){:target="_blank"} or [@EqualsAndHashCode](https://projectlombok.org/features/EqualsAndHashCode){:target="_blank"} from **Google** and [**Lombok**](https://projectlombok.org/){:target="_blank"} libraries respectively.
+- If there is no need to create a custom _equals_ or _hashCode_ method you only need to use [@AutoValue](https://github.com/google/auto/blob/master/value/userguide/index.md){:target="_blank"} or [@EqualsAndHashCode](https://projectlombok.org/features/EqualsAndHashCode){:target="_blank"} from **Google** and [**Lombok**](https://projectlombok.org/){:target="_blank"} libraries respectively.
 - Alternatively, you can use autogeneration provided by your _IDE_.
 
 Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=498199">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=498199">Pixabay</a>

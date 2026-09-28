@@ -39,7 +39,7 @@ The Old Generation stores long-surviving objects. To classify an object as a can
 
 The Garbage Collector is an automatic process responsible for identifying and deleting unused objects through the following steps:
 
-1. New objects are placed in the Eden and Survivor spaces, which start empty.
+1. New objects are allocated in Eden. Both survivor spaces start out empty.
 2. When Eden becomes full, a minor garbage collection is triggered. Referenced objects move to the first survivor space (S0), and unreferenced objects are removed.
 3. The next time Eden fills up, a similar process occurs, but this time, referenced objects move to the second survivor space (S1), and those from S0 also move, incrementing their age. Unreferenced objects in S0 are removed.
 4. During the subsequent minor GC, the same process repeats, with survivor spaces switching. Referenced objects move to S0, survivors age, and unreferenced objects from Eden and S1 are removed.
@@ -61,7 +61,7 @@ When no Garbage Collector is selected via the command-line interface (e.g., `-XX
 
 2. **Old Generation Collection**
    - **Serial Old**: A stop-the-world, mark-sweep-compact collector using a single GC thread.
-   - **CMS (Concurrent Mark Sweep, CMS GC)**: Mostly concurrent, low-pause collector using multiple threads, freezing threads only during marking in the tenured generation space. It uses more CPU to improve throughput.
+   - **CMS (Concurrent Mark Sweep, CMS GC)**: Mostly concurrent, low-pause collector using multiple threads, freezing threads only during marking in the tenured generation space. It uses more CPU to keep pauses short, at the cost of overall throughput.
    - **Parallel Old**: A compacting collector using multiple GC threads.
 
 3. [G1 (G1 GC)](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html){:target="_blank"}: The Garbage First collector for large heaps, providing reliable short GC pauses. It uses regions to simplify collection, avoiding fragmentation issues. G1 offers more predictable garbage collection pauses and allows users to specify desired pause targets.
@@ -79,7 +79,7 @@ java -XX:+PrintCommandLineFlags -version
 Adjusting parameters is possible for a parallel GC:
 
 - **Maximum Pause Time Goal** (`-XX:MaxGCPauseMillis=<milliseconds>`): Adjusts heap size and other GC parameters to minimize pause time. This may increase GC frequency and reduce application throughput.
-- **Throughput Goal** (`-XX:GCTimeRatio=<milliseconds>`): A ratio affecting both young and old generation time. It adjusts generation sizes to achieve the desired pause targets.
+- **Throughput Goal** (`-XX:GCTimeRatio=<N>`): A unitless ratio, not a duration. It sets a goal of spending at most $$1/(1+N)$$ of the total time in garbage collection, affecting both young and old generation time, and adjusts generation sizes to achieve it.
 
 ## Tuning Heap Memory
 
@@ -112,7 +112,7 @@ Java Class Metadata represents the JVM's internal model of bytecode. The JVM cre
 
 ## Stack Memory
 
-Java Stack memory is used for static memory allocation and during the execution of threads, stores short-lived method-specific values and references to objects in the heap. The memory follows a last-in-first-out (LIFO) access pattern, with size depending on the OS and being relatively small compared to Heap memory. It persists as long as the method is active, throwing a `java.lang.StackOverflowException` when full.
+Java Stack memory is used for static memory allocation and during the execution of threads, stores short-lived method-specific values and references to objects in the heap. The memory follows a last-in-first-out (LIFO) access pattern, with size depending on the OS and being relatively small compared to Heap memory. It persists as long as the method is active, throwing a `java.lang.StackOverflowError` when full.
 
 ## Code Cache
 

@@ -12,11 +12,11 @@ layout: post
 
 ## Upper, Lower and Tight Bound
 
-- **Lower bound**  ($$\Omega$$) functions are those that stay below $$T(n)$$ given a constant $$c$$, that is, $$T(n)\leq c n$$ for all $$n > 0$$. In other words, lower bounding is about finding a function that given a $$c$$ value always stays below $$T(n)$$.  e.g. given a quadratic function $$T(n)=n^2$$  a lower bound function would be $$f(n)=nlog(n)$$.
+- **Lower bound**  ($$\Omega$$) functions are those that stay below $$T(n)$$ given a constant $$c$$, that is, $$T(n)\geq c f(n)$$ for all $$n > 0$$. In other words, lower bounding is about finding a function that given a $$c$$ value always stays below $$T(n)$$.  e.g. given a quadratic function $$T(n)=n^2$$  a lower bound function would be $$f(n)=nlog(n)$$.
 
-- **Upper bound** ($$O$$) functions are those that stay above $$T(n)$$ given a constant $$c$$, that is, $$T(n)\geq cn$$ for all $$n > 0$$. In other words, upper bounding is about finding a function that given a $$c$$ value always stays above $$T(n)$$. e.g. given a linear function $$T(n) = n$$  an upper bound function would be $$f(n)=n^2$$.
+- **Upper bound** ($$O$$) functions are those that stay above $$T(n)$$ given a constant $$c$$, that is, $$T(n)\leq c f(n)$$ for all $$n > 0$$. In other words, upper bounding is about finding a function that given a $$c$$ value always stays above $$T(n)$$. e.g. given a linear function $$T(n) = n$$  an upper bound function would be $$f(n)=n^2$$.
 
-- **Tight bound or exact bound** ($$\Theta$$) is a combination of lower bound and upper bound. In other words, it's a function that bound $$T(n)$$ from the top and from the bottom. Tight bound functions are those that stay us much close as possible to $$T(n)$$ given a constant $$c$$, that is, $$T(n)\approx cn$$ for all $$n > 0$$. e.g. given a linear function $$T(n) = n$$ a tight bound function would be $$f(n) = n$$, since we were able to choose a value $$c$$ that satisfy the lower bound, $$f(n) = \frac12n$$ and a value $$c$$ that satisfy the upper bound, $$f(n) = 100n$$. As a result, we could find a value $$c$$ that can serve as an exact bound ($$\Theta(n)$$) for this function.
+- **Tight bound or exact bound** ($$\Theta$$) is a combination of lower bound and upper bound. In other words, it's a function that bound $$T(n)$$ from the top and from the bottom. Tight bound functions are those that stay us much close as possible to $$T(n)$$ given a constant $$c$$, that is, $$c_1 f(n)\leq T(n)\leq c_2 f(n)$$ for all $$n > 0$$. e.g. given a linear function $$T(n) = n$$ a tight bound function would be $$f(n) = n$$, since we were able to choose a value $$c$$ that satisfy the lower bound, $$f(n) = \frac12n$$ and a value $$c$$ that satisfy the upper bound, $$f(n) = 100n$$. As a result, we could find a value $$c$$ that can serve as an exact bound ($$\Theta(n)$$) for this function.
 
 >IMPORTANT:  When we talk about time complexity we usually use $$O$$ as  $$\Theta$$
 
@@ -24,15 +24,17 @@ layout: post
 
 Algorithms can be classified by three running time cases:
 
-- **Worst case**: This is the worst runtime behavior. The execution time **upper bound** uses the notation $$O(f(n))$$.
+- **Worst case**: This is the worst runtime behavior, i.e. the input that makes the algorithm do the most work.
 - **Average case**: This is the expected behavior given random input data.
-- **Best case**: This is how an algorithm performs in an ideal situation. This is also called as the **lower bound** and the notation used is this case is $$\Omega(f(n))$$
+- **Best case**: This is how an algorithm performs in an ideal situation.
+
+>IMPORTANT: Do not confuse the running time cases with the bounds above. $$O$$, $$\Omega$$ and $$\Theta$$ are bounds on *any* function, so each case has its own upper, lower and tight bound. For example, the worst case of _Quick Sort_ is $$\Theta(n^2)$$, and its best case is $$\Theta(nlog(n))$$ — it is perfectly valid to write $$\Omega$$ for a worst case or $$O$$ for a best case. In practice $$O$$ is quoted most often simply because the worst case is usually the interesting one.
 
 ## Performance Categories
 
 | O-Notation    | Name         | Example             |
 | ------------- | ------------ | ------------------- |
-| $$O(1)$$        | Constant     | Get in a hash map   |
+| $$O(1)$$        | Constant     | Get in a hash map (average) |
 | $$O(log(n))$$   | Logarithmic  | Binary Search       |
 | $$O(n)$$        | Linear       | Linear Search       |
 | $$O(n log(n))$$ | Linearithmic | Merge Sort          |

@@ -18,7 +18,7 @@ There is no silver bullet when choosing an implementation, you have to make a tr
 
 ### Arrays
 
-Arrays are the most used data structure and are implemented directly in hardware. They allow random access memory which means they are **very fast for accessing elements by index** and **for iterating over them**, but **slower for iterations and deletions** because it might require adjusting the position of other elements.
+Arrays are the most used data structure and are implemented directly in hardware. They allow random access memory which means they are **very fast for accessing elements by index** and **for iterating over them**, but **slower for insertions and deletions** because it might require adjusting the position of other elements.
 
 Some _Java Collection_ implementations like `ArrayList` or `EnumSet` use arrays. They are also used as a mechanism to create hash tables.
 
@@ -61,7 +61,7 @@ They are used for the implementations `LinkedList`, `ConcurrentLinkedQueue` or `
 
 - `Collection`: contains common methods used by all its implementations. There is no direct implementation of this interface.
 - `List`: is a collection which allows duplicates and order of insertion is preserved by its implementations.
-- `Set`: is a collection without duplicates in which the implementations do not preserve the order of insertion.
+- `Set`: is a collection without duplicates. Most implementations do not preserve the order of insertion, though `LinkedHashSet` does and `TreeSet` keeps its elements sorted.
 - `SortedSet`: automatically sorts its elements.
 - `NavigableSet`: is an extension of the `SortedSet` interface with additional methods for easy navigation of the elements.
 - `Queue`: provides first in, first out (_FIFO_) queue operations for add , poll , and so on.
@@ -124,7 +124,7 @@ for(int var4 = 0; var4 < var3; ++var4) {
 
 ## Collection Interface
 
-There are not concrete implementations of `Collection` and provides methods in four groups: adding (`add`, `addAll`), removing (`remove`, `clear`, `removeAll`, `retailAll`), querying (`contains`, `containsAll`, `isEmpty`, `size`) and transforming collection's content for further processing (`iterator`, `toArray`). Therefore, it only provides functionality common to the different concrete implementations.
+There are not concrete implementations of `Collection` and provides methods in four groups: adding (`add`, `addAll`), removing (`remove`, `clear`, `removeAll`, `retainAll`), querying (`contains`, `containsAll`, `isEmpty`, `size`) and transforming collection's content for further processing (`iterator`, `toArray`). Therefore, it only provides functionality common to the different concrete implementations.
 
 ## List Interface
 
@@ -154,7 +154,7 @@ The `LinkedList` implementation performs better than a `ArrayList` for insertion
 
 ### CopyOnWriteArrayList
 
-`CopyOnWriteArrayList` is an `ArrayList` that provides thread safety. To achieve thread safety it treats the collection as immutable, so a new copy is crate whenever any changes are made to the collection.
+`CopyOnWriteArrayList` is an `ArrayList` that provides thread safety. To achieve thread safety it treats the collection as immutable, so a new copy is created whenever any changes are made to the collection.
 
 ### Vector
 
@@ -162,11 +162,11 @@ The `Vector` implementation uses a dynamic array, so it's very similar to `Array
 
 ### Stack
 
-The `Stack` class uses a last-in-first-out (LIFO) strategy and implements the `Vector` class. A stack structure is similar to a pile of papers, new elements are added on the top, and when you pull an element it comes off the top.
+The `Stack` class uses a last-in-first-out (LIFO) strategy and extends the `Vector` class. A stack structure is similar to a pile of papers, new elements are added on the top, and when you pull an element it comes off the top.
 
 ## Set Interface
 
-A set is a collection of items without duplicates in which the implementations do not preserve the order of insertion.
+A set is a collection of items without duplicates. Most implementations do not preserve the order of insertion, though `LinkedHashSet` does and `TreeSet` keeps its elements sorted.
 
 The `Set` is implemented by 6 concrete classes.
 
@@ -211,7 +211,7 @@ As you can image this implementation is not very good for insertion and search o
 
 ### EnumSet
 
-All the elements in an `enumSet` must come from an `enum` type. This implementation is very performance since the number of possible elements is fixed and a unique index can be assigned to each element.
+All the elements in an `enumSet` must come from an `enum` type. This implementation is very performant since the number of possible elements is fixed and a unique index can be assigned to each element.
 
 Like most `Set` implementations, `EnumSet` is not synchronized.
 
@@ -229,7 +229,7 @@ The performance of this class is similar to a `TreeSet` and thread safety is the
 
 ## Queue Interface
 
-The `Queue` interface provides some specific methods: `poll`, `element`, `removed`, `peek` and `offer`.
+The `Queue` interface provides some specific methods: `poll`, `element`, `remove`, `peek` and `offer`.
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/d3XHAEPOkH1bT_Vd415I_LoBB8w1cFaw4vb93jUabnHLl4UCsLA0B535wgw8tDOtnce3yD9OUtyJ1ECxV7mYb9hPDMkDQQtI2AO6Wyw38rNyTE4tTv7h3r2qy5KjB1pam1KjwFt-jw=w800" caption="Queue Implementations" %}
 
@@ -249,11 +249,11 @@ name     | offer    |peek     | poll    |size
 
 ### PriorityQueue, PriorityBlockingQueue and DelayQueue
 
-A `PriorityQueue` is used when the priority of processing objects matters. You can use the natural order o supply a `Comparator` at queue construction time. A `PriorityQueue` is recommended to be used when you want to define a new ordering that only depends on priorities.
+A `PriorityQueue` is used when the priority of processing objects matters. You can use the natural order or supply a `Comparator` at queue construction time. A `PriorityQueue` is recommended to be used when you want to define a new ordering that only depends on priorities.
 
 The `PriorityQueue` is based on the _priority heap_.
 
->A Priority Heap is a binary tree with to requirements: each node in the tree should be larger than either of its children and all the level on the tree must be complete except the lowest.
+>A Priority Heap is a binary tree with two requirements: every node must order before either of its children, and all the levels of the tree must be complete except the lowest. Java's `PriorityQueue` is a *min*-heap, so with natural ordering the smallest element sits at the head.
 
 This implementation does not support thread safety and its iterator is fail-fast. If concurrency is a must, you can use `PriorityBlockingQueue` instead.
 
@@ -263,13 +263,13 @@ When none of the elements are ready to be taken it will return null. On the othe
 
 ### ConcurrentLinkedQueue
 
-This `Queue` implementation uses a linked structure, so `ConcurrentLinkedQueue` is very good at insertion and removal operations at the end of the queue, so nodes do not need to be located using a sequential search.
+This `Queue` implementation uses a linked structure, so `ConcurrentLinkedQueue` is very good at insertion at the tail and removal at the head, so nodes do not need to be located using a sequential search.
 
 `ConcurrentLinkedQueue` is _thread-safe_ and uses a compare-and-swap (CAS) mechanism for insertion and removal.
 
 >CAS is an algorithm used in multithreading to achieve synchronization.
 
-### LinkedBloquingQueue
+### LinkedBlockingQueue
 
 This implementation of `BlockingQueue` is also based on a linked structure, so it guarantees that the queue operations are thread-safe and atomic. Again, insertion and removal perform at constant time whereas search operations runs in linear time.
 
@@ -289,7 +289,7 @@ Insertion and removal operations are executed in constant time, whereas search o
 
 ### SynchronousQueue
 
-A `SynchronousQueue` only allows one element at a time in the queue, so each insert operation must wait for a thread to take the element of the queue. The same happens when an element wants to be taken, it has to wait until a thread puts an element.
+A `SynchronousQueue` has no internal capacity at all, not even a capacity of one — `size()` always returns 0. Each insert operation must wait for another thread to take the element. The same happens when an element wants to be taken, it has to wait until a thread puts an element.
 
 This class is very convenient when you want to synchronize two threads running in different objects and one of them wants to pass some information to the other thread.
 
@@ -320,6 +320,7 @@ name  |get      |  containsKey |next     |Notes
 ---------|----------|---------|---------|---------
 `HashMap` |`O(1)` |  `O(1)`|`O(h/n)`|h is the table capacity
 `LinkedHashMap` |`O(1)` |  `O(1)`|`O(1) `|
+`WeakHashMap` |`O(1)` |  `O(1)`|`O(h/n)`|h is the table capacity
 `IdentityHashMap` |`O(1)` |  `O(1)`|`O(h/n)`|h is the table capacity 
 `EnumMap` |`O(1)` |  `O(1)`|`O(1) `|
 `TreeMap` |`O(log n)` |  `O(log n)`|`O(log n)`|
@@ -328,7 +329,7 @@ name  |get      |  containsKey |next     |Notes
 
 ### HashMap and LinkedHashMap
 
-`HashMap` implementation has all the properties of a hash table and provides constant time performance on put and get operations if there is no _collisions_.
+`HashMap` implementation has all the properties of a hash table and provides constant time performance on put and get operations if there are no _collisions_.
 
 `LinkedHashMap` guarantees the insertion order by using internally a linked list for the keys. Additionally, this implementation provides a special constructor to switch the iteration order to a last access order in which its entries are ordered from least-recently accessed to most-recently.
 
@@ -346,7 +347,7 @@ Performance is similar to `HashMap`.
 
 ### IdentityHashMap
 
-This is an implementation of `Map` that uses a hash table as the `HashMap` implementation, but in this case instead of comparing keys by object equality, it uses reanference-equality. This means two keys are the same if `key1==key2`, whereas in a standard `HashMap` two keys are the same if `key1.equals(key2)`.
+This is an implementation of `Map` that uses a hash table as the `HashMap` implementation, but in this case instead of comparing keys by object equality, it uses reference-equality. This means two keys are the same if `key1==key2`, whereas in a standard `HashMap` two keys are the same if `key1.equals(key2)`.
 
 This implementation has the same performance as a `HashMap`.
 
@@ -358,7 +359,7 @@ This implementation is not thread-safe.
 
 ### NavigableMap
 
-This class provides navigation methods to return the closest matches for given search targets.
+This interface provides navigation methods to return the closest matches for given search targets.
 
 ### TreeMap
 
@@ -370,7 +371,7 @@ The performance of `TreeMap` is the same as the `TreeSet`, `O(log(N))`.
 
 ### ConcurrentHashMap
 
-`ConcurrentHashMap` is an implementation of `ConcurrentMap` and provides thread safety. This class is optimize for retrieval, so reading operations do not block update operations. If an update operation is taking place while you are retrieving object, it will return the object with the state present when the retrieval operation started.
+`ConcurrentHashMap` is an implementation of `ConcurrentMap` and provides thread safety. This class is optimized for retrieval, so reading operations do not block update operations. If an update operation is taking place while you are retrieving object, it will return the object with the state present when the retrieval operation started.
 
 The performance of `ConcurrentHashMap` is similar to `HashMap`.
 

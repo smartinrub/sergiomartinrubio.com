@@ -12,11 +12,11 @@ layout: post
 
 ## How it works
 
-Basically, when an _Integer_ is initialized a cache is created if the number satisfies the range requirements. The default rage is set from -128 to 127, however, it can be tweaked by the `-XX:AutoBoxCacheMax=` option, so that, during VM startup, `java.lang.Integer.IntegerCache.high` will contain the new value and saved in the `sun.misc.VM` class.
+Basically, the cache is not built on demand: `Integer` holds a private static nested `IntegerCache` class whose objects are all created up front, the first time `Integer` is initialized. Boxing a value then only has to check the bounds and return the pre-existing instance from that array. The default range is set from -128 to 127, however, it can be tweaked by the `-XX:AutoBoxCacheMax=` option, so that, during VM startup, `java.lang.Integer.IntegerCache.high` will contain the new value and saved in the `sun.misc.VM` class.
 
 ## Example
 
-As an example, every time we initialize an _Integer_ like `Integer num = 127;` the compiler will use the auto-boxing and convert this line to `Integer num = Integer.valueOf(127);`. This static method will cache the value if it is between -128 and 127.
+As an example, every time we initialize an _Integer_ like `Integer num = 127;` the compiler will use the auto-boxing and convert this line to `Integer num = Integer.valueOf(127);`. This static method will return the cached instance if the value is between -128 and 127.
 
 Since _Java 9_, `Integer(int)` has been deprecated in favor of `valueOf(int)` in order to improve performance. The main difference is that the static method `valueOf(int)` will use cache, whereas the traditional `Integer` constructor will always get a new instance.
 
@@ -44,6 +44,6 @@ true
 
 ## Conclusion
 
-Small integer values occur much more often than big values and therefore it makes sense to avoid the overhead of having different objects for every instance (an `Integer` object consumes 12 bytes of memory), so always avoid the use of the Integer constructor (`new Integer(int)`), which has been deprecated since **Java 9**.
+Small integer values occur much more often than big values and therefore it makes sense to avoid the overhead of having different objects for every instance (on a 64-bit JVM with compressed oops an `Integer` instance consumes 16 bytes: a 12-byte header plus the 4-byte `int`, already aligned), so always avoid the use of the Integer constructor (`new Integer(int)`), which has been deprecated since **Java 9**.
 
-Finally, this feature it not exclusive of `Integer`, other classes like `Byte`, `Short`, `Long`, `Character` are also using cache to improve performance.
+Finally, this feature it not exclusive of `Integer`, other classes like `Boolean`, `Byte`, `Short`, `Long` and `Character` are also using cache to improve performance.
