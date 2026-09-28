@@ -145,7 +145,7 @@ It's recommended to keep your scenarios simple by describing the behaviors with 
 
 Executable specification acts as *acceptance criteria* and guideline for developers, so they are an excellent tool keep track of the progress of a feature. 
 
-You can use tools like [Cucumber](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java) to write the executable specification.
+You can use tools like [Cucumber](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java-and-spring/) to write the executable specification.
 
 ```java
 @Given("a transaction that is stored in our system")
@@ -185,7 +185,7 @@ The implementation details will contain low level specification that interact wi
 
 ## Steps to Implement a Scenario
 
-As we mentioned before Developers should follow an outside-in strategy. You should start from the acceptance criteria and build the implementation details of what is required to make the acceptance criteria pass. Steps (the following examples are using [Cucumber](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java)):
+As we mentioned before Developers should follow an outside-in strategy. You should start from the acceptance criteria and build the implementation details of what is required to make the acceptance criteria pass. Steps (the following examples are using [Cucumber](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java-and-spring/)):
 
 - **Define the high-level acceptance criteria** with the Gherkin syntax.
 

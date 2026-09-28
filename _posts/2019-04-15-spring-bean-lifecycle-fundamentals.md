@@ -49,7 +49,7 @@ All the beans are not the same, and _Spring_ provides a few different recipes to
 - **_application_**: only one instance per `ServletContext`.
 - _**websocket**_: it is tight to the websocket lifecycle.
 
->Do not confuse _Bean_ with scope singleton with the [Singleton Design Pattern](http://sergiomartinrubio.com/articles/creational-patterns-features#singleton-pattern). The latter creates an instance per `ClassLoader`, whereas the singleton Bean creates a bean per _Spring container_.
+>Do not confuse _Bean_ with scope singleton with the [Singleton Design Pattern](https://sergiomartinrubio.com/articles/creational-design-patterns/#singleton). The latter creates an instance per `ClassLoader`, whereas the singleton Bean creates a bean per _Spring container_.
 
 >When using singleton _Bean_ which contains beans with different lifecycles, remember that injection only happens once. We can use beans with different scopes by using `proxyMode = ScopedProxyMode.TARGET_CLASS` in the `@Scope` annotation.
 

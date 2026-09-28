@@ -86,6 +86,7 @@ We are going to use the MUI library for styling, so go ahead and add it to your 
 yarn add --dev @mui/material @emotion/react @emotion/styled
 ```
 
+{% raw %}
 ```javascript
 import {
     Button,
@@ -135,6 +136,7 @@ const HelloWorld = () => {
 
 export default HelloWorld
 ```
+{% endraw %}
 
 >With `await window.ethereum.request({ method: "eth_requestAccounts", })` we are requesting permission to MetaMask.
 
@@ -194,6 +196,7 @@ We can now interact with the `helloWorld` function.
 
 `src/HelloWorld.js`:
 
+{% raw %}
 ```javascript
 import {
     Button,
@@ -263,6 +266,7 @@ const HelloWorld = () => {
 
 export default HelloWorld
 ```
+{% endraw %}
 
 When you click on the "Test" button if everything goes well you should be able to see "Hello World!".
 
@@ -272,6 +276,7 @@ You can also invoke functions to change the state of a Smart Contract. In this c
 
 Again we are going to create an instance of the HelloWorld contract but this time we are going to call `updateFrom()` and then wait for the transaction to finish since we want to make sure the state was updated before calling `helloWorld()`.
 
+{% raw %}
 ```javascript
 import {
     Button,
@@ -368,6 +373,7 @@ const HelloWorld = () => {
 
 export default HelloWorld
 ```
+{% endraw %}
 
 ## Conclusion
 

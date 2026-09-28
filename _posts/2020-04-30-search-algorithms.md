@@ -444,7 +444,7 @@ We can implement a Trie as follows:
     }
     ```
 
-4. We can also implement a lookup method to search words by prefix. The simplest solution is to use [Depth First Search](http://sergiomartinrubio.com/articles/algorithms-to-search-through-lists-and-trees-data-structures#tree-depth-first-search) (DFS) to go down the trie while building strings for each subtrie:
+4. We can also implement a lookup method to search words by prefix. The simplest solution is to use [Depth First Search](https://sergiomartinrubio.com/articles/search-algorithms/#depth-first-search-for-trees) (DFS) to go down the trie while building strings for each subtrie:
 
     ```java
     /**
@@ -485,7 +485,7 @@ We can implement a Trie as follows:
 
 ### Ternary Search Tree
 
-A _Ternary Search Tree_ (TST) is a combination of [binary search trees](http://sergiomartinrubio.com/articles/algorithms-to-search-through-lists-and-trees-data-structures#binary-search-tree) and [tries](http://sergiomartinrubio.com/articles/algorithms-to-search-through-lists-and-trees-data-structures#trie). Unlike tries, TST is more memory efficient since each node only contains pointers to three nodes, but keeping the time efficiency benefits.
+A _Ternary Search Tree_ (TST) is a combination of [binary search trees](https://sergiomartinrubio.com/articles/search-algorithms/#binary-search-tree) and [tries](https://sergiomartinrubio.com/articles/search-algorithms/#trie). Unlike tries, TST is more memory efficient since each node only contains pointers to three nodes, but keeping the time efficiency benefits.
 
  - The node on the left contains the node whose value is less than the value in the current node.
  - The node on the middle contains the node whose value is equals to the value in the current node.

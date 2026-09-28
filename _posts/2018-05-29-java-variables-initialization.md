@@ -66,7 +66,7 @@ private static Object getField() { return OjbectHolder.object; }
 
 By doing this, the static object is initialized only the first time `getField()` is called. In addition, the `getField()` method is not synchronized and it is only a field access, therefore there is no cost of access.
 
-In case you want to use lazy initialization for an instance field use the [Double Check Locking Pattern](https://sergiomartinrubio.com/articles/creational-patterns#double-checked-locking-pattern).
+In case you want to use lazy initialization for an instance field use the [Double Check Locking Pattern](https://sergiomartinrubio.com/articles/creational-design-patterns/#double-checked-locking-pattern).
 
 ```java
 private volatile Object lazyIntanceObject;

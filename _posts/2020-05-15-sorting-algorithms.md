@@ -8,7 +8,7 @@ mermaid: false
 layout: post
 ---
 
-Sorting algorithms are used to arrange elements of a list in descending or ascending order. Sorting is a very important operation in computer science and it can be used to reduce the complexity of a problem. Some use cases are [search operations](http://sergiomartinrubio.com/articles/algorithms-to-search-through-lists-and-trees-data-structures) or [databases](http://sergiomartinrubio.com/articles/mysql-guide).
+Sorting algorithms are used to arrange elements of a list in descending or ascending order. Sorting is a very important operation in computer science and it can be used to reduce the complexity of a problem. Some use cases are [search operations](https://sergiomartinrubio.com/articles/search-algorithms/) or [databases](http://sergiomartinrubio.com/articles/mysql-guide).
 
 Sorting algorithms can be classified based on how simple is its implementation versus efficiency. 
 
