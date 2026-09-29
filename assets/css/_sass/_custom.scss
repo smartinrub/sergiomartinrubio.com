@@ -6,18 +6,24 @@
    full grid width, so long quotes get a comfortable line length. */
 .testimonials {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  // minmax(0, 1fr) rather than 1fr: a bare `1fr` is minmax(auto, 1fr), so each
+  // track is floored at its content's min-content width and long headlines push
+  // the cards wider than the container.
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-gap: 10px;
   align-items: start;
   margin: 1em 0 0;
 
   @include media-query($on-laptop) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .testimonial {
+    min-width: 0;
     padding: 1em 1.1em;
     border-left: 3px solid $grey-color-light;
+    overflow-wrap: break-word;
+    word-wrap: break-word; // for older WebKit
 
     &[open] {
       border-left-color: $brand-color;
@@ -37,6 +43,7 @@
   .head {
     display: flex;
     align-items: center;
+    min-width: 0;
     margin-bottom: 0.6em;
   }
 
@@ -57,7 +64,8 @@
   }
 
   .who {
-    min-width: 0; // lets the headline ellipsis work inside a flex child
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .name {
@@ -73,12 +81,6 @@
     font-size: $small-fs;
     color: $grey-color;
     line-height: 1.35;
-  }
-
-  .role {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .excerpt {
@@ -123,10 +125,6 @@
 
     .name {
       color: $brand-color;
-    }
-
-    .role {
-      white-space: normal; // show the full headline once expanded
     }
   }
 
