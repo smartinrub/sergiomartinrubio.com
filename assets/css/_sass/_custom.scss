@@ -1,1 +1,63 @@
 /* Add your own style here */
+
+/* Testimonials: collapsed by default with <details>/<summary>, so the list stays
+   scannable. No JS involved — Bootstrap's JS bundle is not loaded on this site. */
+.testimonials {
+  .testimonial {
+    padding: 0.75em 1em;
+    margin-bottom: 0.5em;
+  }
+
+  summary {
+    cursor: pointer;
+    position: relative;
+    padding-right: 1.5em;
+    list-style: none; // hides the default marker in Firefox
+
+    &::-webkit-details-marker {
+      display: none; // ...and in Safari / older Chrome
+    }
+
+    &::after {
+      content: "+";
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: $grey-color;
+    }
+  }
+
+  .testimonial[open] > summary {
+    &::after {
+      content: "\2212"; // minus sign
+    }
+
+    .name {
+      color: $brand-color;
+    }
+  }
+
+  .name {
+    display: block;
+    font-family: $head-ff;
+    font-weight: 600;
+  }
+
+  .role,
+  .date {
+    display: block;
+    font-size: $small-fs;
+    color: $grey-color;
+  }
+
+  .review {
+    margin: 0.75em 0 0;
+    font-style: italic;
+
+    .fa-quote-left,
+    .fa-quote-right {
+      color: $grey-color-light;
+      font-style: normal;
+    }
+  }
+}

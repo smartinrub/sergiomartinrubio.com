@@ -1,11 +1,86 @@
+# LinkedIn recommendations, most recent first.
+# `title` is the recommender's current LinkedIn headline; `date` is when the
+# recommendation was given. Reviews are quoted verbatim.
+
+- name: Piotr Kucharski
+  title: Providing software that will boost your business
+  date: June 2026
+  review: >-
+    I had the pleasure of working with Sergio on our engineering team. What stood out most
+    was his work ethic and reliability. Sergio consistently showed up prepared, met his
+    commitments, and was always approachable and easy to collaborate with — qualities that
+    always appreciated and especially in technical environments. He does his best work in
+    structured settings with well-defined scope, where his diligence and attention to
+    detail can really shine. I wish Sergio well in his next role and am confident he'll be
+    a dependable member of any team.
+
 - name: Dan Kindler
-  review: Working with Sergio in his capacity as a senior engineer has been an incredibly delightful experience. I can confidently affirm his exceptional technical knowledge and problem-solving capabilities. Sergio possesses extensive expertise in Java and microservices architecture, and his knack for discovering innovative solutions to intricate issues has proven to be an invaluable asset to Bound. Sergio excels in leading collaborative projects with fellow team members and consistently delivers outcomes within designated timeframes. His remarkable talent lies in effectively conveying technical information and collaborating seamlessly with non-technical colleagues. Sergio led the development of a project that became one of Bound’s most profitable products, highlighting both his technical prowess and exceptional interpersonal abilities.
+  title: "Founder at Bound | Currency hedging on cruise control"
+  date: July 2023
+  review: >-
+    Working with Sergio in his capacity as a senior engineer has been an incredibly
+    delightful experience. I can confidently affirm his exceptional technical knowledge and
+    problem-solving capabilities. Sergio possesses extensive expertise in Java and
+    microservices architecture, and his knack for discovering innovative solutions to
+    intricate issues has proven to be an invaluable asset to Bound. Sergio excels in
+    leading collaborative projects with fellow team members and consistently delivers
+    outcomes within designated timeframes. His remarkable talent lies in effectively
+    conveying technical information and collaborating seamlessly with non-technical
+    colleagues. Sergio led the development of a project that became one of Bound’s most
+    profitable products, highlighting both his technical prowess and exceptional
+    interpersonal abilities.
 
 - name: Gonzalo Bahut
-  review: During the time Sergio worked for Ravenpack, he showed a great professionalism and excellent attitude. Sergio is a fast learner and a competent engineer with a will to deliver high quality code in time. In addition to his technical qualities, Sergio demonstrated good social and teamwork skills.
+  title: Director of Engineering
+  date: October 2021
+  review: >-
+    During the time Sergio worked for Ravenpack, he showed a great professionalism and
+    excellent attitude. Sergio is a fast learner and a competent engineer with a will to
+    deliver high quality code in time. In addition to his technical qualities, Sergio
+    demonstrated good social and teamwork skills.
 
 - name: Hanson Chow
-  review: It was an absolute pleasure to work with Sergio for the past year. Sergio is one of the best teammates that you can find, as he always find time to do what is necessary and do it right. Sergio always takes feedback on board as well and contributes to discussions constructively, which really helped us grow the engineering culture in our team. It's going to be difficult for us to find another Sergio!
+  title: "CTO @ Kneu Health | Building Regulated Health Tech | Backend & Platform Engineer"
+  date: November 2020
+  review: >-
+    It was an absolute pleasure to work with Sergio for the past year. Sergio is one of the
+    best teammates that you can find, as he always find time to do what is necessary and do
+    it right. Sergio always takes feedback on board as well and contributes to discussions
+    constructively, which really helped us grow the engineering culture in our team. It's
+    going to be difficult for us to find another Sergio!
 
 - name: Antonio Masucci
-  review: “Smiling learner” that’s what comes to my mind when I think about Sergio. Sergio reported to me during my time at Gamesys as a software engineer and he demonstrated to be a brilliant team player and a very capable engineer. He tackles the hardest problems and gives always 110%. I would recommend Sergio as an excellent software engineer to any company.
+  title: Helping businesses design, build and scale AI systems
+  date: July 2018
+  review: >-
+    “Smiling learner” that’s what comes to my mind when I think about Sergio. Sergio
+    reported to me during my time at Gamesys as a software engineer and he demonstrated to
+    be a brilliant team player and a very capable engineer. He tackles the hardest problems
+    and gives always 110%. I would recommend Sergio as an excellent software engineer to
+    any company.
+
+- name: Mallory Rowan
+  title: "130K+ Digital Community | Speaker | Creator | Build without Burnout"
+  date: May 2015
+  review: >-
+    Sergio played a major role in launching our digital analytics efforts. He has a great
+    attention to detail and always provided exemplary reports. He is an independent worker
+    with great initiative to tackle new projects, and a pleasure to work with.
+
+- name: Marty Krátký-Katz
+  title: Exited Tech Founder
+  date: May 2015
+  review: >-
+    Sergio worked with us at MicroMetrics for 4 months, and it was a pleasure to oversee &
+    manage his work; he brings a positive attitude to everything he does, and always showed
+    great initiative in taking on new tasks & projects. He worked with us in a digital
+    marketing role, conducting research on our competitors’ digital marketing efforts with
+    the aim of shaping & guiding our own digital marketing strategy, as well as making
+    recommendations relating to digital marketing best practices. In his role, he showed
+    very strong market research skills, as well as proficiency with the typical computer &
+    web competencies that were expected of the role. He always communicated very well with
+    everybody on the team, and very capably led periodic briefing sessions to present his
+    latest research findings. We often tasked him with research projects to take the lead
+    on, and he always performed above & beyond expectations, showing great attention to
+    detail, and enthusiasm for his work. He was a pleasure to work with, and I would be
+    very happy to have him on the team again in the future!
