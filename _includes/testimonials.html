@@ -1,23 +1,32 @@
-<h2 class="m0a" data-aos="fade-up">Testimonials:</h2>
+<h2 class="m0a" data-aos="fade-up">Recommendations:</h2>
 <p class="m0">
   <small>
-    Recommendations from
-    <a href="{{ site.data.main.social.linkedin.link }}">LinkedIn</a> — select one to read it.
+    {{ site.data.testimonials | size }} recommendations from managers and colleagues on
+    <a href="{{ site.data.main.social.linkedin.link }}">LinkedIn</a>.
   </small>
 </p>
-<div class="testimonials py-3">
+
+<div class="testimonials">
   {% for item in site.data.testimonials %}
+  {%- assign parts = item.name | split: " " -%}
+  {%- capture initials -%}
+    {%- for part in parts limit: 2 -%}{{ part | slice: 0 }}{%- endfor -%}
+  {%- endcapture -%}
   <details class="testimonial borders cards rounded" data-aos="fade-up">
     <summary>
-      <span class="name">{{ item.name }}</span>
-      {% if item.title %}<span class="role">{{ item.title }}</span>{% endif %}
-      {% if item.date %}<span class="date">{{ item.date }}</span>{% endif %}
+      <span class="head">
+        <span class="avatar" aria-hidden="true">{{ initials }}</span>
+        <span class="who">
+          <span class="name">{{ item.name }}</span>
+          {%- if item.title %}<span class="role">{{ item.title }}</span>{% endif -%}
+          {%- if item.date %}<span class="date">{{ item.date }}</span>{% endif -%}
+        </span>
+      </span>
+      <span class="excerpt">{{ item.review | truncate: 150 }}</span>
+      <span class="more">Read more</span>
+      <span class="less">Show less</span>
     </summary>
-    <p class="review">
-      <i class="fas fa-quote-left"></i>
-      {{ item.review }}
-      <i class="fas fa-quote-right"></i>
-    </p>
+    <p class="review">{{ item.review }}</p>
   </details>
   {% endfor %}
 </div>
