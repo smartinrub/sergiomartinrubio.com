@@ -1,5 +1,7 @@
 ---
-name: Build your Own Web Chat Application with XMPP
+title: Build your Own Web Chat Application with XMPP
+description: Build an instant messaging web application with XMPP and Smack, using Spring Boot and WebSocket on the backend and ReactJS with Redux on the frontend.
+author: Sergio Martin Rubio
 image: https://lh3.googleusercontent.com/pw/AM-JKLUy-M8aXv7j5uoW706ppG678IwT1YOYK1qVTgOMeeKQ_ngKnXGgk5x9y0exkDXSNfcln_ZeERUCui4eZZedLU0U5MajzSi1frZKLDp-wil1F7LqnbdbIi5Ik4WwEg1Qbc2jTMCcQ-nPm30wVsmbtMXu=w2798-h1562-no?authuser=1
 company: Side Project
 date:  2021-05-27
@@ -37,11 +39,11 @@ XMPP follows a client/server architecture and XMPP clients can only communicate 
 
 {% include elements/video.html id="Wp8gXDY6cfk" %}
 
-{% include elements/figure.html image="https://lh3.googleusercontent.com/pw/AM-JKLUWlfZQqIw1eoFmyT9r97djSjoypIlh94qRU9k4XAdIHAPlg_p_H3EXQ5ns5NJWFg7HC-xpe-XCFdq867y55MCtviKktqsHcQZqJ4WQTtojucg3NksWk5H7cVJmKLDTWeBMiq91VXMf9MWjMlFLaTch=w1201-h558-no?authuser=1" caption="Fitzing Diagram" %}
+{% include elements/figure.html image="https://lh3.googleusercontent.com/pw/AM-JKLUWlfZQqIw1eoFmyT9r97djSjoypIlh94qRU9k4XAdIHAPlg_p_H3EXQ5ns5NJWFg7HC-xpe-XCFdq867y55MCtviKktqsHcQZqJ4WQTtojucg3NksWk5H7cVJmKLDTWeBMiq91VXMf9MWjMlFLaTch=w1201-h558-no?authuser=1" caption="Architecture Diagram" %}
 
 ### XMPP Server
 
-You can find [a list of XMPP servers at the official XMPP site](https://xmpp.org/software/servers.html). For this project we are going to use [Openfire](https://hub.docker.com/r/quantumobject/docker-openfire)
+You can find [a list of XMPP servers at the official XMPP site](https://xmpp.org/software/servers.html). For this project we are going to use [Openfire](https://www.igniterealtime.org/projects/openfire/).
 
 ### Backend Application
 
@@ -94,7 +96,7 @@ We will structure our Spring Boot application in multiple layers to separate the
   }
   ```
 
-  The `open` method expects an *username* and *password* that will be use to authenticate the user.
+  The `open` method expects a *username* and *password* that will be used to authenticate the user.
 
   Given a websocket `Session` we can send back a message like this:
 
@@ -449,15 +451,15 @@ We are going to use docker to run all the backend services:
 
 ### Front-end
 
-For the frontend we have chosen [ReactJS](https://reactjs.org) with [Redux](https://redux.js.org). React allows you to create a frontend application by components that manage their state and to get a little help with managing the state of all the components we decided to use Redux, which basically centralize the application's state.
+For the frontend we have chosen [ReactJS](https://reactjs.org) with [Redux](https://redux.js.org). React allows you to create a frontend application by components that manage their state and to get a little help with managing the state of all the components we decided to use Redux, which basically centralizes the application's state.
 
-In order to run the fronent application we need *NPM*. NPM comes with *Node*, so on a *MacOs* we can simply run `brew install node`. Then to start the application we have to run `npm start`.
+In order to run the frontend application we need *NPM*. NPM comes with *Node*, so on *macOS* we can simply run `brew install node`. Then to start the application we have to run `npm start`.
 
 The React application files are structured by features:
 
 - **User**: includes the components related to login and logout.
 - **Home**: this is the parent component for the rest of components.
-- **Contacts**: includes the components for displaying the list of users returned by the J *roster* and the component for adding new users to the *roster*.
+- **Contacts**: includes the components for displaying the list of users returned by the *roster* and the component for adding new users to the *roster*.
 - **Messages**: here we have all the components that are responsible for displaying the messages and sending new messages.
 
 The React applicatiion is using **React Router** for the navigation between components. 

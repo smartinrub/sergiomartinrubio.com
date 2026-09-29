@@ -9,17 +9,17 @@ mermaid: false
 layout: post
 ---
 
-A **MDB** (*Message-Driven Bean*) is a bean used by [JMS](https://sergiomartinrubio.com/articles/understanding-messaging-pattern-with-jms) to listen to new asynchronous messages. In the same way as any other Java EE enterprise bean, the [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) container in which the MDB runs takes of the bean lifecycle so you do not have to configure a listener by yourself and add all the required boilerplate.
+A **MDB** (*Message-Driven Bean*) is a bean used by [JMS](https://sergiomartinrubio.com/articles/understanding-messaging-pattern-with-jms) to listen to new asynchronous messages. In the same way as any other Java EE enterprise bean, the [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) container in which the MDB runs takes care of the bean lifecycle so you do not have to configure a listener by yourself and add all the required boilerplate.
 
 The main difference between regular session beans and MDBs is that clients don't access message-driven beans through interfaces, instead MDBs are listening to messages published by a JMS application.
 
 ## MDB Class
 
-MDBs are regular Java classes that implement `javax.jms.MessageListener`  and are annotated with `@MessageDrive`. The `MessageListener` requires that you implement the `onMessage()` method that is invoked when a message arrives, so we can process the message. You will have to cast the message to one of the five JMS message types (`BytesMessage`, `MapMessage`,  `ObjectMessage`, `StreamMessage`, `TextMessage`).
+MDBs are regular Java classes that implement `javax.jms.MessageListener`  and are annotated with `@MessageDriven`. The `MessageListener` requires that you implement the `onMessage()` method that is invoked when a message arrives, so we can process the message. You will have to cast the message to one of the five JMS message types (`BytesMessage`, `MapMessage`,  `ObjectMessage`, `StreamMessage`, `TextMessage`).
 
 Messages are delivered in a transaction context, in other words, if for some reason an exception is thrown, the message will be redelivered.
 
-Message-driven bean classes allows you to set configuration properties to specify things like destination name and destination type. You can define a `@ActivationConfigProperty ` as a value of the parameter `activationConfig` that is accepted by `@MessageDrive` to set `destination` and `destinationType` . i.e.
+Message-driven bean classes allow you to set configuration properties to specify things like destination name and destination type. You can define a `@ActivationConfigProperty ` as a value of the parameter `activationConfig` that is accepted by `@MessageDriven` to set `destination` and `destinationType` . i.e.
 
 ```java
 @MessageDriven(activationConfig = {
@@ -43,7 +43,7 @@ public class MyMessageDrivenBean implements MessageListener {
 }
 ```
 
-> The destination type can also be a topi if you specify as the property value `javax.jms.Topic`.
+> The destination type can also be a topic if you specify as the property value `javax.jms.Topic`.
 
 ## Other Configuration Properties
 
@@ -51,9 +51,10 @@ public class MyMessageDrivenBean implements MessageListener {
 | -------------------------- | ---------------------------- | ------------------------------------------------------------ |
 | `acknowledgeMode`          | `AUTO_ACKNOWLEDGE` <br />(default) | An acknowledge message <br />is sent automatically                 |
 | `acknowledgeMode`          | `DUPS_OK_ACKNOWLEDGE`        | An acknowledgment message <br />is not sent to the client right away. <br />This is good for performance. |
-| `acknowledgeMode`          | `CLIENT_ACKNOWLEDGE`         | The client is responsible <br />for manually acknowledge the message |
 | `subscriptionDurability`   | `NonDurable` <br />(default)       | If nobody is listening to <br />the topic the message is missed    |
-| ``subscriptionDurability`` | `Durable`                    | Ensures that messages sent to <br />a topic are not missed         |
+| `subscriptionDurability`   | `Durable`                    | Ensures that messages sent to <br />a topic are not missed         |
+
+> Acknowledgment for an MDB is managed by the container, so only the two automatic modes above apply — `CLIENT_ACKNOWLEDGE` is not a valid `acknowledgeMode` for a message-driven bean.
 
 ## Lifecycle Callbacks and Interceptors
 
@@ -62,7 +63,7 @@ MDBs are compatible with enterprise bean [lifecycle methods](https://sergiomarti
 - `@PostConstruct`: the method is invoked before the first message is received by the MDB.
 - `@PreDestroy`:  the method is invoked when the MDB is removed from the pool or destroyed.
 
-[Interceptors](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works#session-bean-interceptor) are also allowed. We can define our interceptor  a method annotated with `@AroundInvoke` . These methods will be invoke before and after the execution of the `onMessage()` method.
+[Interceptors](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works#session-bean-interceptor) are also allowed. We can define our interceptor as a method annotated with `@AroundInvoke`. These methods will be invoked before and after the execution of the `onMessage()` method.
 
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/message-driven-bean-example.git" text="Examples" %}

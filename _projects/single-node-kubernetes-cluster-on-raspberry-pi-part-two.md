@@ -1,5 +1,7 @@
 ---
-name: Single Node Kubernetes Cluster on Raspberry Pi - Part Two
+title: Single Node Kubernetes Cluster on Raspberry Pi - Part Two
+description: Issue trusted SSL/TLS certificates for a MicroK8s cluster on a Raspberry Pi with cert-manager and Let's Encrypt, and harden it with Fail2Ban and NGINX rate limiting.
+author: Sergio Martin Rubio
 image: https://lh3.googleusercontent.com/pw/AM-JKLUJVWu6q6QIJc48pts7PM7yMfSMhZzdri7r-JatwQqccSuFt7alnW2ubdB17zr2gUNlMh0OybbFXnWitfhMU31gHwFCs4hFAehV5P_aQFdclk24ojGLorvXmfTXFpHDsHVzOKjK0ihgQaXGJ_DTzfON=w640-h427-no?authuser=0
 company: Side Project
 date:  2022-07-01
@@ -8,9 +10,9 @@ layout: post
 
 ## Single Node Kubernetes Cluster on Raspberry Pi - Part Two
 
-In the [first part](https://sergiomartinrubio.com/projects/single-node-kubernetes-cluster-on-raspberry-pi/) we configured a Kubernetes cluster, deployed a Spring Boot application, configured a firewall and exposed the cluster to the world. However, there was something else I would like to cover. Kubernetes generates a self signed SSL/TSL certificate for HTTPS requests and this is not very nice, specially because you will see an ugly warning on your browser saying that the certificate is not trusted 😢.
+In the [first part](https://sergiomartinrubio.com/projects/single-node-kubernetes-cluster-on-raspberry-pi/) we configured a Kubernetes cluster, deployed a Spring Boot application, configured a firewall and exposed the cluster to the world. However, there was something else I would like to cover. Kubernetes generates a self signed SSL/TLS certificate for HTTPS requests and this is not very nice, specially because you will see an ugly warning on your browser saying that the certificate is not trusted 😢.
 
-On this part we will cover how to issue a trusted SSL/TSL certificate with cert-manager and Let's Encrypt! 🚀
+On this part we will cover how to issue a trusted SSL/TLS certificate with cert-manager and Let's Encrypt! 🚀
 
 ### Quick intro
 
@@ -36,19 +38,19 @@ There are [multiple ways of installing cert-manager](https://cert-manager.io/doc
 	```shell
 	kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.crds.yaml
 	```
-	> this is installing version `v1.8.0` but a newer version might be available.
+	> this is installing version `v1.8.2` but a newer version might be available.
 
 4. Install cert-manager in the Kubernetes cluster:
 
 	```shell
-	helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.8.0
+	helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.8.2
 	```
 
 ### Issue an ACME certificate using HTTP validation
 
-Now that cert-manager is running in our Kubernetes cluster we can start issues our certificates.
+Now that cert-manager is running in our Kubernetes cluster we can start issuing our certificates.
 
-We are going to create to issuers, one for staging and one for production, so we can test the one for staging before issuing the production certification one because there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
+We are going to create two issuers, one for staging and one for production, so we can test the one for staging before issuing the production certification one because there is a rate limiting in the number of certificates that Let's Encrypt issues per day.
 
 1. Create `ClusterIssuer` resource definition.
 
@@ -78,22 +80,22 @@ We are going to create to issuers, one for staging and one for production, so we
 	apiVersion: cert-manager.io/v1
 	kind: ClusterIssuer
 	metadata:
-	name: letsencrypt-prod
+	  name: letsencrypt-prod
 	spec:
-	acme:
-		server: https://acme-v02.api.letsencrypt.org/directory
-		email: <your_email> # it should be a valid one
-		privateKeySecretRef:
-		name: letsencrypt-prod
-		solvers:
-		- selector: {}
-		http01:
-			ingress:
-			class: public # the built-in ingress class is called public in MicroK8s, not nginx
+	  acme:
+	    server: https://acme-v02.api.letsencrypt.org/directory
+	    email: <your_email> # it should be a valid one
+	    privateKeySecretRef:
+	       name: letsencrypt-prod
+	    solvers:
+	     - selector: {}
+	       http01:
+	         ingress:
+	           class: public # the built-in ingress class is called public in MicroK8s, not nginx
 	```
-	
-> IMPORTANT: The selected ingress class is called `public` instead of `nginx`. This is specific for a MicroK8s cluster.
-	
+
+	> IMPORTANT: The selected ingress class is called `public` instead of `nginx`. This is specific for a MicroK8s cluster.
+
 2. Apply the issuers:
 
 	- For staging:
@@ -111,7 +113,7 @@ We are going to create to issuers, one for staging and one for production, so we
 	- For production:
 
 	```
-	kubectl apply -f prod-issuer.yaml
+	kubectl apply -f production-issuer.yaml
 	```
 
 	Check the issuer is ready:
@@ -213,7 +215,7 @@ sudo systemctl status fail2ban
 
 If it showing as `inactive (dead)` try to restart Fail2Ban with `sudo systemctl restart fail2ban`.
 
-Fail2Ban comes with a default configuration but you can create your own configuration for services like SSH. The convention is to create separate configuration files for each service. For example, for SSH we would create a file named `sshd.conf` under `/etc/fail2ban/fail.d/`.
+Fail2Ban comes with a default configuration but you can create your own configuration for services like SSH. The convention is to create separate configuration files for each service. For example, for SSH we would create a file named `sshd.conf` under `/etc/fail2ban/jail.d/`.
 
 ```shell
 sudo nano /etc/fail2ban/jail.d/sshd.conf
@@ -258,27 +260,27 @@ You can configure the [Kubernetes NGINX Ingress Controller with annotations](htt
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-	name: spring-boot-demo-ingress
-	annotations:
-		nginx.ingress.kubernetes.io/rewrite-target: /$1 # this is required when having a pathType=Prefix
-		nginx.ingress.kubernetes.io/limit-rps: "3"
-    	nginx.ingress.kubernetes.io/limit-rpm: "60"
-    	nginx.ingress.kubernetes.io/limit-connections: "5"
-		cert-manager.io/cluster-issuer: "letsencrypt-staging"
+  name: spring-boot-demo-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1 # this is required when having a pathType=Prefix
+    nginx.ingress.kubernetes.io/limit-rps: "3"
+    nginx.ingress.kubernetes.io/limit-rpm: "60"
+    nginx.ingress.kubernetes.io/limit-connections: "5"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
-	tls:
-	- hosts:
-		- <your_dns>
-		secretName: tls-secret
-	rules:
-	- host: <your_dns> # this is required to make the certificate work
-		http:
-		paths:
-			- path: /
-			pathType: Prefix
-			backend:
-				service:
-				name: spring-boot-demo-service
-				port:
-					number: 8080
+  tls:
+  - hosts:
+    - <your_dns>
+    secretName: tls-secret
+  rules:
+  - host: <your_dns> # this is required to make the certificate work
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: spring-boot-demo-service
+              port:
+                number: 8080
 ```

@@ -399,7 +399,7 @@ This is similar to the previous singleton creation and it is only adding **threa
 2. The client can get the object from the singleton class:
 
     ```java
-    MySingleton mySingleton= LazyInitializationAndDoubleCheckLocking.getInstance();
+    MySingleton mySingleton = MySingleton.getInstance();
 
     mySingleton.setValue(300);
     System.out.println(mySingleton.getValue());
@@ -408,8 +408,10 @@ This is similar to the previous singleton creation and it is only adding **threa
 ##### Double-Checked Locking Pattern
 
 - A **_static volatile_** field is created to hold the instance. The variable is stored in the main memory, so reading or writing to the volatile variable will be on the main memory and not only on the CPU cache. This ensures that the singleton will never be half initialized.
-- The first check is not synchronized to improve performance and enable reordering of **_JVM_**.
-- The second _synchronized_ check is executed only once during the lifespan of the singleton. By doing this you get a performance boost because locking only happens once.
+- The first check is not synchronized so that the common path — the instance already exists — costs nothing but a read, with no lock acquired.
+- The second check is needed because several threads can pass the first check while `instance` is still null; they then queue on the monitor one at a time, and only the first of them finds `instance` null and creates it.
+- Once initialization has happened no thread reaches the synchronized block again, so the lock is only ever contended during startup.
+- The `volatile` modifier is what makes this correct: without it the JVM is free to reorder the write that publishes the reference ahead of the constructor finishing, so another thread could observe a non-null but half-initialized instance.
 
 #### Singleton With Enum
 
@@ -437,7 +439,7 @@ This is the preferred way.
 2. The client can get the object from the singleton enum:
 
     ```java
-    MySingleton mySingleton = EnumSingleton.INSTANCE;
+    MySingleton mySingleton = MySingleton.INSTANCE;
 
     mySingleton.setValue(400);
     System.out.println(mySingleton.getValue());
@@ -452,14 +454,6 @@ This is the preferred way.
 
 **Disadvantages**:
 
-- Your singleton **only can extend a Enum** superclass
-
-### Builder
-
-// TODO
-
-### Prototype
-
-// TODO
+- Your singleton **cannot extend another class**, since an `enum` already extends `java.lang.Enum` (it can still implement interfaces)
 
 Image by <a href="https://pixabay.com/users/foundry-923783/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=869221">Foundry Co</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=869221">Pixabay</a>

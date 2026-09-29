@@ -13,7 +13,7 @@ layout: post
 
 ## What is a mock?
 
-A **mock** is a proxy to the original object, so if a method of a proxy object is called, then the proxy object will decide what to do. When you do something like `Mockito.mock(Foo.class)` you are simply creating a proxy object of the _Foo_ class.
+A **mock** is a stand-in for the original object: _Mockito_ generates a subclass at runtime whose methods have no real implementation, so every call is intercepted and the mock decides what to do (returning a default such as `null` or `0` until you stub it). When you do something like `Mockito.mock(Foo.class)` you are creating such an object — note it does **not** delegate to a real `Foo`; that is what a spy does, covered further down.
 
 **Mockito** uses [CGLIB](https://github.com/cglib/cglib){:target="_blank"} which is based on [ASM](https://asm.ow2.io){:target="_blank"}. **CGLIB** generates proxy classes by extending the original class, and all the overridden methods will call `MethodInterceptor.intercept()` if the proxy callback is not null, otherwise the super method (original method) will be called. This brings limitations:
 
@@ -59,7 +59,9 @@ FooRepository fooRepository = Mockito.mock(FooRepository.class);
 private FooRepository fooRepository;
 ```
 
-`@Mock` annotation requires either `MockitoAnnotations.initMocks(testClass)` or `@ExtendWith(MockitoExtension.class)` if you are using [Junit 5](https://sergiomartinrubio.com/articles/take-unit-testing-to-the-next-level-with-junit-5). In JUnit 4 is `@RunWith(MockitoJUnitRunner.class)`.
+`@Mock` annotation requires either `MockitoAnnotations.initMocks(testClass)` or `@ExtendWith(MockitoExtension.class)` if you are using [Junit 5](https://sergiomartinrubio.com/articles/take-unit-testing-to-the-next-level-with-junit-5). In JUnit 4 it is `@RunWith(MockitoJUnitRunner.class)`.
+
+>NOTE: `MockitoAnnotations.initMocks()` was deprecated in _Mockito 3.4_ — use `MockitoAnnotations.openMocks(this)` instead, which returns an `AutoCloseable` so the mocks can be released after the test.
 
 ```java
 @Mock
@@ -96,7 +98,7 @@ Any mocking framework allows you to return the desired value when a particular m
 when(fooRepository.getFooMessage()).thenReturn("Hello");
 ```
 
-**How does is work?** A proxy is dynamically defined, so when the static method `Mockito.when()` is called, the method passed is stored. Then, when `thenReturn()` is called, the value is also stored in the saved method. Finally, if the same proxy method with the same parameters is called again it will return the stored value this time.
+**How does it work?** A proxy is dynamically defined, so when the static method `Mockito.when()` is called, the method passed is stored. Then, when `thenReturn()` is called, the value is also stored in the saved method. Finally, if the same proxy method with the same parameters is called again it will return the stored value this time.
 
 You can also stub the same method multiple times:
 
@@ -143,7 +145,7 @@ For void methods you can use:
 
 | Name                 | Description                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------- |
-| `doReturn(Object)`   | In case you cannnot use `when()`. e.g. spy objects                                       |
+| `doReturn(Object)`   | In case you cannot use `when()`. e.g. spy objects                                       |
 | `doThrow(Throwable)` | Used when the void method will throw an exception                                        |
 | `doAnswer(Answer)`   | Stubs a void method with a generic answer                                                |
 | `doNothing()`        | By default void methods do nothing but it can be uselful when stubbing consecutive calls |
@@ -182,14 +184,14 @@ By default `verify(mock)` checks if a given method was called once. But this can
 
 | Name                             | Description                                               |
 | -------------------------------- | --------------------------------------------------------- |
-| `times(int)`                     | The method is called the n times                          |
+| `times(int)`                     | The method is called exactly n times                      |
 | `never()`                        | The method from the mock is never called                  |
-| `verifyNoInteractions(mock)`     | Verifies no interaction with any method of the given mock |
-| `verifyNoMoreInteractions(mock)` | Checks if the given mock has any unverified interaction   |
+| `verifyNoInteractions(mock)`     | Verifies no interaction with any method of the given mock (standalone call, not passed to `verify()`) |
+| `verifyNoMoreInteractions(mock)` | Checks the given mock has no unverified interaction left (also standalone) |
 | `atLeastOnce()`                  | The method called at least once                           |
 | `atLeast(int)`                   | The method called at least n times                        |
-| `atMost(int)`                    | The method called at motst n times                        |
-| `only()`                         | Checks if the given method was the only called            |
+| `atMost(int)`                    | The method called at most n times                         |
+| `only()`                         | Checks the given method was the only one called           |
 
 The following example verifies if the method `getNumber` with any integer was called three times.
 

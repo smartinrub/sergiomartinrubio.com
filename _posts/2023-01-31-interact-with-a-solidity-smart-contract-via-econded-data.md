@@ -123,12 +123,12 @@ In the previous section we used the `abi.encodeWithSignature(string memory signa
 
 ```solidity
 function encodeString() public pure returns(bytes memory) {
-    bytes memory someString = abi.encode("hello world);
+    bytes memory someString = abi.encode("hello world");
     return someString;
 }
 ```
 
-- `abi.encodePacked(...) returns (bytes memory)`. Also encodes the provided argument, but it creates a compact version by removing the leading and trailing zeros. For example the function below will return the packed encoding of `hello world`: `0x68656c6c6f20776f726c64`. [Packed encoded can be ambiguous in some scenarios](https://docs.soliditylang.org/en/v0.6.10/abi-spec.html#abi-packed-mode){:target="_blank"}.
+- `abi.encodePacked(...) returns (bytes memory)`. Also encodes the provided argument, but it creates a compact version: instead of padding every value out to a 32 byte slot the way `abi.encode` does, each value is written in its own natural width and dynamic types lose their length prefix. For example the function below will return the packed encoding of `hello world`: `0x68656c6c6f20776f726c64`. [Packed encoded can be ambiguous in some scenarios](https://docs.soliditylang.org/en/v0.6.10/abi-spec.html#abi-packed-mode){:target="_blank"}.
 
 ```solidity
 function encodePackedString() public pure returns(bytes memory) {

@@ -9,7 +9,7 @@ mermaid: false
 layout: post
 ---
 
-[Solidity](https://docs.soliditylang.org/en/v0.8.17/){:target="_blank"} is an object oriented programming that shares many of its syntax with other statically typed languages like *Java*, and does the process of verifying and enforcing the constraints at compile-time as opposed to run-time like *Python*.
+[Solidity](https://docs.soliditylang.org/en/v0.8.17/){:target="_blank"} is an object oriented programming language that shares many of its syntax with other statically typed languages like *Java*, and does the process of verifying and enforcing the constraints at compile-time as opposed to run-time like *Python*.
 
 This language is used for implementing smart contracts that are deployed on blockchains platforms like Ethereum. Therefore, Solidity has a very specific purpose that is focused on consistency and security.
 
@@ -22,7 +22,7 @@ Some of the main features of a blockchain are:
 1. **Immutability**. The blockchain cannot be altered.
 2. **Distributed**. A copy of the blockchain is shared by many participants.
 3. **Decentralized**. There is no government or organization that is responsible for deciding what happens in the blockchain.
-4. **Secured**. The records in a blockchain are encrypted.
+4. **Secured**. Records are chained together with cryptographic hashes and authorised by digital signatures, which makes tampering detectable. Note this gives integrity, not confidentiality — data on a public blockchain is readable by anyone, so it is not encrypted.
 
 ## Variables
 
@@ -39,7 +39,7 @@ The types in Solidity are:
 - **Address**: `address`. An address represents a 20 byte value, which is the size of an Ethereum address. Address can have the `payable` modifier so it includes two additional operations `transfer` and `send`.
 - **Byte Array**: `bytes`
 - **Arrays**: `uint256[]`:
-  - Declaration: a single-dimension array `uint256 myArray[10] = [1, 2, 3]` and a dynamic array `uint256 myArray[] [1, 2, 3]`.
+  - Declaration: the brackets go *before* the name, unlike C or Java — a fixed-size array `uint256[3] myArray = [1, 2, 3];` and a dynamic array `uint256[] myArray;`.
   - Add element: `myArray.push(1)` where `1` is a value.
   - Get element: `myArray[0]` where `0` is the index.
   - Get length: `myArray.length`.
@@ -75,7 +75,7 @@ contract MyContract {
 As you can see we are including on top of the contract two things:
 
 - A license identifier: `SPDX-License-Identifier`. It is used to indicate the license we are going to use for the contract, which is `MIT`.
-- The solidty version for the contract: `pragma solidity ^0.8.8;` In this case we are saying we can use any version from `0.8.8` for compiling the contract. You could also specify a range like `pragma solidity >=0.8.8 <=0.8.10;`
+- The Solidity version for the contract: `pragma solidity ^0.8.8;` The caret means any `0.8.x` from `0.8.8` up to but excluding `0.9.0`, i.e. `>=0.8.8 <0.9.0`. You could also specify a range like `pragma solidity >=0.8.8 <=0.8.10;`
 
 >Use `//` or `/*   */` for commenting.
 
@@ -104,7 +104,7 @@ contract MyContract {
 Functions are declared like this:
 
 ```solidity
-function myFunction() returns (uint256) {
+function myFunction() public pure returns (uint256) {
     return 1 + 1;
 }
 ```
@@ -119,7 +119,7 @@ function myFunction() public {
 }
 ```
 
-- `external`: makes the function visible inside and outside the contract:
+- `external`: makes the function callable only from outside the contract (internally you would have to go through `this.myFunction()`, which is itself an external call):
 
 ```solidity
 function myFunction() external {
@@ -147,7 +147,7 @@ function myFunction() internal {
 contract MyContract {
     uint x = 1;
 
-    function myFunction(uint y) pure returns (uint) {
+    function myFunction(uint y) public view returns (uint) {
         return x + y; // it's reading x from outside the function
     }
 }
@@ -159,13 +159,13 @@ contract MyContract {
 contract MyContract {
     uint x = 1;
 
-    function myFunction(uint i, uint j) pure returns (uint) {
+    function myFunction(uint i, uint j) public pure returns (uint) {
         return i + j; // it's not reading any variable from outside the function
     }
 }
 ```
 
-- `payable`: payable functions can change the state. Fon any function that will induce a transfer of assets, you must use the `payable` type to the function and address.
+- `payable`: payable functions can change the state. For any function that will induce a transfer of assets, you must use the `payable` type to the function and address.
 
 ```solidity
 receive() external payable {
@@ -173,7 +173,7 @@ receive() external payable {
 }
 ```
 
->Use an underscore (`_`) in front of a function attribute to differentiate it from the ones de declared on the contract scope:
+>Use an underscore (`_`) in front of a function attribute to differentiate it from the ones declared on the contract scope:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -183,7 +183,7 @@ pragma solidity ^0.8.8;
 contract MyContract {
     uint myNumber; // this get assigned to zero
 
-    function myFunction(uint256 _myNumber) returns (uint256) {
+    function myFunction(uint256 _myNumber) public {
         myNumber = _myNumber;
     }
 }
@@ -206,17 +206,17 @@ As you can see above we first execute some code and then we use `_`. Underscore 
 
 Variables can be declared as `storage`, `memory` or `calldata` to explicitly specify the location of the data.
 
-`memory` and `calldata` are used for temporarily store variables and their values. You can only specify `memory` or `calldata` for array, struct, mapping or string types.
+`memory` and `calldata` are used for temporarily storing variables and their values. You can only specify `memory` or `calldata` for array, struct, mapping or string types.
 
->What is the difference between `memory` and `calldata`? `calldata` is only valid for arguments of `external` functions and behaves mostly like `memory`. Any variable defined as `calldata` cannot be modifiable, whereas a variable defined as `memory` can be modified within the function. As a result `calldata` variables definition incur in less gas fees than `memory` variables.
+>What is the difference between `memory` and `calldata`? `calldata` is only valid for arguments of `external` functions and behaves mostly like `memory`. Any variable defined as `calldata` cannot be modified, whereas a variable defined as `memory` can be modified within the function. As a result `calldata` variables definition incur in less gas fees than `memory` variables.
 
 ```solidity
-function myFunction(uint256 _myNumber) returns (uint256) {
+function myFunction(uint256 _myNumber) public {
     myNumber = _myNumber;
 }
 ```
 
-`storage` is used to defined variables that we want to write on the blockchain. These variables are persistent since they are written to the blockchain. `storage` variables can be accessed from anywhere inside and outside the contract. Global variables are `storage` variables by default. Variables defined as `storage` always will incur gas fee.
+`storage` is used to defined variables that we want to write on the blockchain. These variables are persistent since they are written to the blockchain. `storage` variables can be accessed from anywhere inside the contract, and from outside it when their visibility allows. State variables are `storage` by default (the blockchain globals such as `msg` and `block` described below are not storage — they only live for the duration of the call). Variables defined as `storage` always will incur gas fee.
 
 ### Function Returning Values
 
@@ -248,7 +248,7 @@ The `if`, `else if` and `else` statements are also inherited from languages like
 uint a = 1; 
 uint b = 2;
 uint c = 3;
-uint result
+uint result;
 
 if( a > b && a > c) {
     result = a;
@@ -271,16 +271,25 @@ require(msg.value.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spen
 
 `assert()` works similarly to `require()`, but it's used for internal errors.
 
-The main difference between `assert()` and `require()` is that the former uses up all the remaining gas and reverts all the changes made whereas the later also reverts back all the changes made to the contract but does refund all the remaining gas fees. 
+Before Solidity 0.8.0 the difference was about gas: `assert()` consumed all the remaining gas while `require()` refunded it. Since 0.8.0 `assert()` also compiles down to `revert` and refunds the unused gas, so the difference is now about intent and the error raised: a failing `assert()` produces a `Panic(uint256)` and signals a bug that should be impossible, whereas `require()` produces an `Error(string)` and validates inputs or external conditions. 
 
-An improvement over `assert()` and `require()` would be to use `revert()`. You can declare an error and then call `revert()` with the error when a particular condition is not met. This is more gas efficient because strings use storage.
+An improvement over `assert()` and `require()` would be to use `revert()`. You can declare an error and then call `revert()` with the error when a particular condition is not met. This is more gas efficient because a revert string has to be embedded in the contract bytecode and returned on failure, whereas a custom error is identified by a four byte selector.
 
 ```solidity
 error NotOwner();
 
 contract MyContract {
-    if(msg.sender != i_owner) {
-        revert NotOwner();
+    address public immutable i_owner;
+
+    constructor() {
+        i_owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        if (msg.sender != i_owner) {
+            revert NotOwner();
+        }
+        _;
     }
 }
 ```
@@ -295,7 +304,7 @@ Libraries look similar to contracts but they are not contracts and the purpose i
 pragma solidity ^0.8.0;
 
 library MyLibrary {
-    function getSum(uint256 value1, uint256 value2) external view returns (uint256) {
+    function getSum(uint256 value1, uint256 value2) internal pure returns (uint256) {
         return value1 + value2;
     }
 }
@@ -310,15 +319,15 @@ contract MyContract {
     using MyLibrary for uint256;
 
     uint256 a = 3;
-    uint256 b= 5;
+    uint256 b = 5;
 
-    function printSum() public {
-        print(a.getConversionRate(b));
+    function sum() public view returns (uint256) {
+        return a.getSum(b);
     }
 }
 ```
 
-As you can see above, when you call a library function, the function receives the object they are called on as its first parameter, then you can pass the rest of the parameters are function arguments.
+As you can see above, when you call a library function, the function receives the object they are called on as its first parameter, then you can pass the rest of the parameters as function arguments.
 
 ## Type Casting
 
@@ -334,10 +343,10 @@ value = uint256(msg.value);
 
 You can fund your contracts by declaring functions with the access modifier `payable`. If you try to send ether to a function without a `payable` modifier, the transaction will fail.
 
-Call the following function some Ether to fund the contract where the function is defined.
+Call the following function with some Ether to fund the contract where the function is defined.
 
 ``` solidity
-function deposit() payable {
+function deposit() public payable {
 }
 ```
 
@@ -358,7 +367,7 @@ bool sendSuccess = payable(msg.sender).send(address(this).balance);
 require(sendSuccess, "Send failed"); // revert if it fails
 ```
 
-3. `call()`. This is the recommended way of transferring Ether and there is not gas limit. It returns the status as a boolean.
+3. `call()`. This is the recommended way of transferring Ether and no 2300 gas stipend is imposed, so you can forward as much or as little as you choose. It returns the status as a boolean.
 
 ```solidity
 (bool callSuccess, bytes memory data) = payable(msg.sender).call{ gas: 10000, value: address(this).balance }("");
@@ -367,7 +376,7 @@ require(callSuccess, "Call failed"); // revert if it fails
 
 ## Blockchain Specific Variables
 
-You can fetch information from the blockchain itself and use that date in your functions. Two variables are used : `msg` and `block`.
+You can fetch information from the blockchain itself and use that data in your functions. The most commonly used are `msg`, `block` and `tx`.
 
 
 ```solidity

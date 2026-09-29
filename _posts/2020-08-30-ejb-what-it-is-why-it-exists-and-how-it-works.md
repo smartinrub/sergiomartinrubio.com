@@ -39,8 +39,8 @@ Session beans implement the business logic. EJB containers manage the session be
 ### Session Bean Types
 
 - **Stateless**: A stateless bean **does not maintain any state** of the interaction between the bean and the client. When the method execution completes the state is removed. e.g. search for an item
-- **Stateful**: A stateful session bean **maintains the state** of the interaction between the bean the client. An instance of the bean is associated with a particular client request. e.g. keep a shopping basket
-- **Singleton**: A singleton bean is **instantiate only once per application**. It maintains the state between client calls. e.g. keep a counter.
+- **Stateful**: A stateful session bean **maintains the state** of the interaction between the bean and the client. An instance of the bean is associated with a particular client request. e.g. keep a shopping basket
+- **Singleton**: A singleton bean is **instantiated only once per application**. It maintains the state between client calls. e.g. keep a counter.
 
 ### Session Bean Lifecycle Methods
 
@@ -74,7 +74,7 @@ public void preDestroy() {
 
 ### Stateless Session Bean
 
-A stateless session bean is a Java class annotated with `@Stateless` (alternatively you can use a deployment descriptors, `ebb-jar.xml`. Deployment descriptors take precedence over annotations).
+A stateless session bean is a Java class annotated with `@Stateless` (alternatively you can use a deployment descriptor, `ejb-jar.xml`. Deployment descriptors take precedence over annotations).
 
 ```java
 @Stateless
@@ -130,7 +130,7 @@ Stateful session beans provide transaction annotations that can be used to run b
 
 ### Singleton Session Bean
 
-A stateful session bean is a Java class annotated with `@Singleton`.
+A singleton session bean is a Java class annotated with `@Singleton`.
 
 ```java
 @Singleton

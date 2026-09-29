@@ -22,7 +22,7 @@ This pattern **is used to reflect changes in an object when there are changes in
 
 It's important to highlight that if we have many observers and observables, the communication between them can become complex.
 
-An Observable object needs to be created and then, the observers subscribe to the observable. Each time the observable state changes, attached observers are notified .
+An Observable object needs to be created and then, the observers subscribe to the observable. Each time the observable state changes, attached observers are notified.
 
 ### Implementation
 

@@ -12,7 +12,7 @@ layout: post
 
 A **Java Servlet** is simply a class that extends from one of the classes in `javax.servlet.http` or `javax.servlet` packages and is used in applications to handle network communication like _HTTP request-response_ model.
 
-A **Container** is an interface between a component (_Servlet_, data persistance...) and the low-level functionalities that supports the component. Web containers receive network requests and redirect those requests to a servlet object by mapping the URL path contained in the request to the servlet. A URL path contains the context root and, optionally, a URL pattern:
+A **Container** is an interface between a component (_Servlet_, data persistence...) and the low-level functionalities that supports the component. Web containers receive network requests and redirect those requests to a servlet object by mapping the URL path contained in the request to the servlet. A URL path contains the context root and, optionally, a URL pattern:
 
 http://host:port/context-root[/url-pattern] 
 
@@ -36,7 +36,7 @@ _Servlet_ containers handle many tedious tasks like opening sockets; transformat
 
 ## Servlet Lifecycle
 
-The servlet container is responsible for controlling the _Servlet_ lifecycle. What happen when a request comes in?
+The servlet container is responsible for controlling the _Servlet_ lifecycle. What happens when a request comes in?
 
 1. If an instance of the _Servlet_ does not exist, the web container:
     - Loads the servlet class.
@@ -59,7 +59,7 @@ Use the `@WebServlet(name = "ConvertServlet")` annotation or the deployment desc
 </servlet>
 ```
 
-Both the annotated servlet or the _XML_ servlet declaration must specify at least one URL pattern. In case of annotation use the `urlPatterns` attribute when other attributes are also used. For XML declaration:
+Both the annotated servlet and the _XML_ servlet declaration must specify at least one URL pattern. In case of annotation use the `urlPatterns` attribute when other attributes are also used. For XML declaration:
 
 ```xml
 <servlet-mapping>
@@ -79,11 +79,11 @@ public class IpAddressConverterServlet extends HttpServlet {
 
 >From now on most of the servlet definitions will be shown with annotations.
 
-The servlet initialization process can be customize if you override the `init()` method of the `Servlet` interface, or if you use the `initParams` anotation attribute in combination with `@WebInitParam` annotation.
+The servlet initialization process can be customized if you override the `init()` method of the `Servlet` interface, or if you use the `initParams` annotation attribute in combination with `@WebInitParam` annotation.
 
 ```java
 @WebServlet(urlPatterns = "/convert", name = "ConvertServlet", initParams = {
-        @WebInitParam(name = "param2", value = "hello"),
+        @WebInitParam(name = "param1", value = "hello"),
         @WebInitParam(name = "param2", value = "goodbye")
 })
 ```

@@ -12,7 +12,7 @@ The **Java Class Loader** is a fundamental component of the **JVM**, so it is im
 
 ## What is the Java Class Loader?
 
-The _Java_ compiler creates binary files with the `.class` extension for each source file. Each class file contains the definition and implementation code and are loaded into memory on demand. The **Java Class Loader** is responsible for loading the class files into memory.
+The _Java_ compiler creates binary files with the `.class` extension for each source file. Each class file contains the definition and implementation code and is loaded into memory on demand. The **Java Class Loader** is responsible for loading the class files into memory.
 
 ## Class Loaders
 
@@ -40,7 +40,7 @@ layer.modules().forEach(module -> {
 1. **Loading**: finds and imports the binary data for a type by its name and creating a class or interface from that binary representation.
 2. **Linking**: performs verification, preparation and, optionally, resolution.
     - **Verification**: checks the correctness of the imported type.
-    - **Preparation**: allocates memory for class variables and initialize the memory to default values.
+    - **Preparation**: allocates memory for class variables and initializes the memory to default values.
     - **Resolution**: transforms symbolic references from the type into direct references.
 3. **Initialization**: execute the code that initializes class variables to their starting values.
 
@@ -52,16 +52,16 @@ The **Java class loading mechanism** is based on **class-loading delegation**. C
 2. The previous step repeats recursively.
 3. If the parent returns `null` or throws a `ClassNotFoundException`, then the class loader searches for the class on the class path.
 
->A class loader only see classes loaded by itself or its parent; it cannot see classes loaded by its children.
+>A class loader only sees classes loaded by itself or its parent; it cannot see classes loaded by its children.
 
-## Writing You Own Class Loader
+## Writing Your Own Class Loader
 
 You can simply create your own class loader by extending the `ClassLoader` class and override the method `findClass`.
 
-When you create you own `ClassLoader` you have to:
+When you create your own `ClassLoader` you have to:
 
 1. Load the class as byte-code from your class path or any other place.
-2. Call `defineClass` from the `ClassLoder` superclass convert of an array of bytes into an instance of a class.
+2. Call `defineClass` from the `ClassLoader` superclass to convert an array of bytes into an instance of a class.
 
 ```java
 public class PathFileClassLoader extends ClassLoader {

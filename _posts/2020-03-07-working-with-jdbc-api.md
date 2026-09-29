@@ -101,7 +101,7 @@ Statement statement = connection.createStatement()
 
 ### Prepared Statements
 
-When your queries involve variables you should use prepared statements so you do not have to worry about quotes and you can avoid injection attacks. Use `PrepartedStatement` class to bind variables to actual values with a `set` method. 
+When your queries involve variables you should use prepared statements so you do not have to worry about quotes and you can avoid injection attacks. Use the `PreparedStatement` class to bind variables to actual values with a `set` method. 
 
 e.g.
 
@@ -120,7 +120,7 @@ try (Connection connection = getConnection();
 }
 ```
 
-Multiple `Statement` objects can be created at the same time so we can run statements concurrently, but remember to check how many statements are allowed by the chosen database vendor.
+Multiple `Statement` objects can be open on the same `Connection` at once, but a `Connection` is not thread-safe and work on it is serialized, so running statements genuinely concurrently means using a separate connection per thread. Remember to check how many open statements are allowed by the chosen database vendor.
 
 > IMPORTANT: `Connection`, `Statement` and `ResultSet` should be closed at the end. You can use a **try-with-resources** statement to automatically close the resources for you.
 
@@ -262,7 +262,7 @@ Statement statement = connection.createStatement(
 | `CONCUR_READ_ONLY` | `ResultSet` cannot be used to update the database |
 | `CONCUR_UPDATABLE` | `ResultSet` can be used to update the database    |
 
-Move forward, backward and to a absolute or relative position:
+Move forward, backward and to an absolute or relative position:
 
 ```java
 try (ResultSet result = statement.executeQuery("SELECT * FROM user")) {

@@ -1,5 +1,7 @@
 ---
-name: Single Node Kubernetes Cluster on Raspberry Pi
+title: Single Node Kubernetes Cluster on Raspberry Pi
+description: Set up a single node Kubernetes cluster on a Raspberry Pi with Ubuntu Server and MicroK8s, deploy a Spring Boot app and expose it to the public network.
+author: Sergio Martin Rubio
 image: https://lh3.googleusercontent.com/CjZf0nniOuxT3FxIB2vgFlbFvhKgz41ogZkTIaqcH77NUO-CC5aHdISlOVpC0cmlpyHXKXm-u6ZjDdyND2VzlSZbMf6RqTDDfYUquyZb0sZV_DhmakY1V4DIQ8jRZznuqFAdcKp8Cw=w700
 company: Side Project
 date:  2020-07-02
@@ -17,14 +19,14 @@ We've been thinking about improving my _Kubernetes_ skills and we thought that s
 1. [Raspberry Pi (4 Model B with 4GB RAM is recommended)](https://thepihut.com/products/raspberry-pi-4-model-b?variant=20064052740158&src=raspberrypi)
 2. _MicroSD_ card (128GB or greater is recommended)
 3. Keyboard
-4. HDMI cable (micro HDMI to HDMI if you by the Raspberry Pi 4 Model B)
+4. HDMI cable (micro HDMI to HDMI if you buy the Raspberry Pi 4 Model B)
 5. MicroSD adapter
 
 ### Getting Started
 
 #### Ubuntu Server
 
-Once you have all the required components you can start setting up you Raspberry Pi with the [latest Ubuntu Server image](https://ubuntu.com/download/raspberry-pi) compatible with your Raspberry Pi version.
+Once you have all the required components you can start setting up your Raspberry Pi with the [latest Ubuntu Server image](https://ubuntu.com/download/raspberry-pi) compatible with your Raspberry Pi version.
 
 > 25/03/2020: We chose _Ubuntu 20.04.2_ after trying _Ubuntu 18.04.4 LTS_ and having some issues.
 
@@ -34,15 +36,15 @@ Now you can copy the Ubuntu image into the micro SD card (**on MacOS**):
 2. Unmount the SD card.
 3. Copy the image into the SD card.
 
-```shell
-diskutil list
-diskutil unmountDisk /dev/disk2
-sudo sh -c 'gunzip -c ~/Downloads/ubuntu-19.10.1-preinstalled-server-arm64+raspi3.img.xz | sudo dd of=/dev/disk2 bs=32m'
-```
+   ```shell
+   diskutil list
+   diskutil unmountDisk /dev/disk2
+   sudo sh -c 'gunzip -c ~/Downloads/ubuntu-19.10.1-preinstalled-server-arm64+raspi3.img.xz | sudo dd of=/dev/disk2 bs=32m'
+   ```
 
-​	The next step is to plug the Raspberry Pi and change the default password.
+   The next step is to plug in the Raspberry Pi and change the default password.
 
-> Default username/password for _Ubuntu 20.04.2_ is ubuntu/ubuntu.
+   > Default username/password for _Ubuntu 20.04.2_ is ubuntu/ubuntu.
 
 4. Configure the WIFI connection:
 
@@ -81,7 +83,7 @@ sudo sh -c 'gunzip -c ~/Downloads/ubuntu-19.10.1-preinstalled-server-arm64+raspi
 
    Now it should have access to the internet.
 
-   Run `ip a` to find out the IP of your Rasbperry Pi.
+   Run `ip a` to find out the IP of your Raspberry Pi.
 
    From now on you can access the Raspberry Pi through SSH.
 
@@ -119,7 +121,7 @@ To take the security a step further you can use SSH public key authentication:
 
 #### MicroK8s
 
-[MicroK8s](https://microk8s.io) is a lightweight Kubernetes which is great for hardware with limited resources like Raspberry Pi. They recommend you to have at least 20G of disk space and 4G of memory are recommended.
+[MicroK8s](https://microk8s.io) is a lightweight Kubernetes which is great for hardware with limited resources like Raspberry Pi. They recommend having at least 20G of disk space and 4G of memory.
 
 Installation & configuration:
 
@@ -270,7 +272,7 @@ kubectl get deployments --all-namespaces
 - `ingress`: Configure an ingress controller to expose your services to outside the cluster.
 - `storage`: Create a default storage class which allocates storage from a host directory.
 - `registry`: Deploy a private image registry and expose it on `localhost:32000`.
-- Other available add-ons are [cilium](http://docs.cilium.io/en/stable/intro/), [fluentd](https://microk8s.io/docs/addon-fluentd), [gpu](https://microk8s.io/docs/addon-gpu), [helm](https://helm.sh), [istio](https://istio.io/docs/), [jaeger](https://github.com/jaegertracing/jaeger-operator), [juju](https://juju.is/docs/what-is-juju), [knative](https://knative.dev), [kubeflow](https://www.kubeflow.org)
+- Other available add-ons are [cilium](http://docs.cilium.io/en/stable/intro/), [fluentd](https://microk8s.io/docs/addon-fluentd), [gpu](https://microk8s.io/docs/addon-gpu), [helm](https://helm.sh), [istio](https://istio.io/docs/), [jaeger](https://github.com/jaegertracing/jaeger-operator), [juju](https://juju.is/docs), [knative](https://knative.dev), [kubeflow](https://www.kubeflow.org)
 
 #### Deploying an App
 
@@ -339,7 +341,7 @@ If the image contains _RPI_ or _ARM_ in the name or description, it can usually 
 4. Push image to Docker Hub
 
    ```shell
-   docker push
+   docker push smartinrub/raspberrypimicrok8sjava
    ```
 
    > You need to run `docker login` first.
@@ -409,20 +411,20 @@ If the image contains _RPI_ or _ARM_ in the name or description, it can usually 
    apiVersion: networking.k8s.io/v1
    kind: Ingress
    metadata:
-   name: spring-boot-demo-ingress
-   annotations:
-      nginx.ingress.kubernetes.io/rewrite-target: /
+     name: spring-boot-demo-ingress
+     annotations:
+       nginx.ingress.kubernetes.io/rewrite-target: /
    spec:
-   ingressClassName: spring-boot-demo-ingress
-   rules:
-      - http:
-         paths:
-            - path: /
+     ingressClassName: public # the built-in ingress class is called public in MicroK8s, not nginx
+     rules:
+       - http:
+           paths:
+             - path: /
                pathType: Prefix
                backend:
-               service:
-                  name: spring-boot-demo-service
-                  port:
+                 service:
+                   name: spring-boot-demo-service
+                   port:
                      number: 8080
    ```
 
@@ -501,8 +503,8 @@ sudo ufw enable
    sudo /usr/sbin/ddclient -daemon 300 -syslog
    ```
 
-4. Now you can hit your app with the chosen domain name `https://<domain_name>/uppercase/hello`. However Kubernetes generated a self signed SSL/TLS certificate and browsers will warn you about this. Therefore, next is to generate a trusted SSL/TSL certificate and attach it to the ingress.
+4. Now you can hit your app with the chosen domain name `https://<domain_name>/uppercase/hello`. However Kubernetes generated a self signed SSL/TLS certificate and browsers will warn you about this. Therefore, next is to generate a trusted SSL/TLS certificate and attach it to the ingress.
 
-> Remember that you have to upate your NAT Forwarding configuration on your router to point to your raspberry pi on a specific port.
+> Remember that you have to update your NAT Forwarding configuration on your router to point to your raspberry pi on a specific port.
 
 Check out [Part Two](https://sergiomartinrubio.com/projects/single-node-kubernetes-cluster-on-raspberry-pi-part-two/) for issuing a trusted SSL/TLS certificate!

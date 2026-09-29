@@ -1,5 +1,7 @@
 ---
-name: Reparto Manager
+title: Reparto Manager
+description: An Android app for delivery companies that optimizes order management by location, price and priority, backed by SQLite and Google Maps.
+author: Sergio Martin Rubio
 image: https://lh3.googleusercontent.com/0PzrQ70-l6hrv7BBvi28TLGaLmqvAo0bJmG4rlJpUSZ3SzeIN-YRbqBYV9UXyfarLcsr_lr4bbGlhonYzbuyiDjAlI32ls2RlDoblXTrlyB4wQorS_lNUV9MWDWrr_dirkj5zzBufA=w600
 company: Samsung Course
 date:  2018-01-15
@@ -17,7 +19,7 @@ layout: post
 Automate delivery of products through the following operations:
 - Register a new order given customer_name , Postcode, distance, price, phone and email.
 - Choose the best order to deliver: The closest one will be selected; then, by the highest price; and then by date. The order can be removed, call the customer or send an email.
-- Choose the best group of orders. A group of orders is composed for those who have the same cod_postal. The group price is the sum of all orders from a particular group, and the selected group will be the one with the highest price. All orders from a group can be deleted or can be selected individually to obtain individual information.
+- Choose the best group of orders. A group of orders is composed of those that have the same `codigo_postal`. The group price is the sum of all orders from a particular group, and the selected group will be the one with the highest price. All orders from a group can be deleted or can be selected individually to obtain individual information.
 - Show a map with orders locations grouped by zip code and display a delivery route.
 
 ### Technologies
@@ -26,7 +28,7 @@ Automate delivery of products through the following operations:
 2. **Geolocation**: **Google Maps**
 
 #### Database
-A database is used to store orders with the respective customer information, such as name, zip code, distance, price, phone and email. This information can be retrieve by SQL queries.
+A database is used to store orders with the respective customer information, such as name, zip code, distance, price, phone and email. This information can be retrieved by SQL queries.
 
 _SQL_ has been used, since this application can host a large amount of information, and this technology also makes it easier for us to run complex queries using techniques of nested subqueries or derived tables.
 
@@ -44,7 +46,7 @@ db.rawQuery("SELECT codigo_postal, MAX(derivada.total) FROM
 db.rawQuery("SELECT _id, nombre, telefono, email FROM pedidos WHERE codigo_postal = " + codigoPostalMejorGrupo() ,null);
 ```
 
-There previous two query are the same as:
+The previous two queries are the same as:
 ```sql
 SELECT _id, nombre, codigo_postal, distancia, precio
 FROM pedidos WHERE codigo_postal = (SELECT
@@ -65,7 +67,7 @@ Moreover, when clicking on one of the personalized markers, a message will pop u
 
 ### Functional Description
 
-Reparto Manager is composed by 6 different views, including the Splash screen which runs during start up. Views:
+Reparto Manager is composed of 6 different views, including the Splash screen which runs during start up. Views:
 
 1.	**Splash** (Splash)
 2.	**Main** (Main)

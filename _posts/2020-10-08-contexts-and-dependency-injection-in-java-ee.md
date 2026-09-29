@@ -16,7 +16,7 @@ As the name says CDI provides a context feature and a dependency injection featu
 
 ## CDI Beans
 
-You can create your CDI beans by adding one of the bean scope annotation to your Java class.
+You can create your CDI beans by adding one of the bean scope annotations to your Java class.
 
 ```java
 @ApplicationScoped
@@ -33,7 +33,7 @@ The scope of a bean dictates when a bean instance is created and when is destroy
 - **Dependent** pseudo-scoped: This is the default scope and the lifecycle of the bean annotated with `@Dependent` is bound to the bean that injects the dependent bean.
 - **Application**: A class annotated with `@ApplicationScoped` is created only once for the application.
 - **Request**: A class annotated with `@RequestScoped` is created once in each request and shared throughout the request. 
-- **Session**: Beans annotated with `@SessionScoped` are shared during the all the requests that belong to the same HTPP session.
+- **Session**: Beans annotated with `@SessionScoped` are shared across all the requests that belong to the same HTTP session.
 - **Conversation**: A bean annotated with `@ConversationScoped` can track a conversation with a client. A conversation can include multiple linked HTTP requests where a *JSF* generates a URL containing a conversation ID.
 
 ## Dependency Injection
@@ -212,13 +212,13 @@ public class MyInjectListController extends HttpServlet {
 }
 ```
 
-You can also use  `@Named`  to define a bean implementation and behaves in the same was as `@Qualifer` but additionally it allows you to give a name to the implementation.
+You can also use  `@Named`  to define a bean implementation and behaves in the same way as `@Qualifier` but additionally it allows you to give a name to the implementation.
 
 ## CDI vs EJB
 
 Both CDI bean and [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) can be injected and the both are complementary. CDI bean is heavily focused in separation of concerns whereas EJB main purpose is to provide container services. CDI can be seen as a simplified version of EJB, since EJB provides all the dependency injection features and container features. As as rule of thumb you will usually create a CDI bean and include EJB features when is required. 
 
-By default all session beans have `@Dependant`. You can also combine session beans with CDI scopes but there is some incompatibilities like a `@Stateless` EJB cannot have an `@ApplicationScoped` annotation or a `@Singleton` is incompatible with `@RequestScoped`.
+By default all session beans have `@Dependent`. You can also combine session beans with CDI scopes but there are some incompatibilities: for example a `@Stateless` EJB cannot have an `@ApplicationScoped` annotation or a `@Singleton` is incompatible with `@RequestScoped`.
 
 <p class="text-center">
 {% include elements/button.html link="https://github.com/smartinrub/cdi-javaee-example.git" text="Examples" %}

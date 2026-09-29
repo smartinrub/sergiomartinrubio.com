@@ -21,11 +21,11 @@ There are two types of messaging techniques:
 The differences are:
 
 
-| Feature | Point-to-Point | Publishes/Subscriber |
+| Feature | Point-to-Point | Publisher/Subscriber |
 | - | - | - |
 | **Middleware** | Queue | Topic |
 | **Timing** | No timing dependency | Timing dependency |
-| **Consumers** | Single consumer | Multiple consumers |
+| **Consumers** | Many may listen, but only one receives each message | Every subscriber receives the message |
 | **Mechanism** | Pull | Push |
 | **Persistence** | Yes | No |
 | **Ordered** | Messages are consumed in order | Messages are NOT consumed in order |
@@ -37,11 +37,11 @@ In a **point-to-point** model messages are usually stored in a staging area wher
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/tZcegl5e9NhUZQClD25OTwSF2G3dcwK-3iyrRvxEAoxYoL3e1IMfUFTT4MOdU93GfI2IG8S81D0df1NFDAJBTtOEITBPkJvm3qipzeZz2-6yl8pHENNwBtQ4Kphiipbm5JNr4QufRw=w800" caption="Publisher/Subscriber Diagram" %}
 
-On the other hand, a **publisher/subscriber** model does not store messages, and as a result if no consumers are available, the published message is lost, so it requires that the consumer is present at the time the message is ready to be delivered, unless it has durable subscription for inactive consumers. This model allows multiple clients to subscribe to a topic, but there is no guarantee that the messages are delivered in order. This technique is usually used in a fan-out strategy when we want to send a message to multiple applications.
+On the other hand, a **publisher/subscriber** model does not store messages, and as a result if no consumers are available, the published message is lost, so it requires that the consumer is present at the time the message is ready to be delivered, unless it has a durable subscription for inactive consumers. This model allows multiple clients to subscribe to a topic, but there is no guarantee that the messages are delivered in order. This technique is usually used in a fan-out strategy when we want to send a message to multiple applications.
 
 ## JMS (Java Message Service)
 
-_JMS_ allows _Java_ applications to communicate with messaging systems through a set of interfaces. _JMS_ supports both messaging model, _point-to-point_ and _publisher/subscriber_.
+_JMS_ allows _Java_ applications to communicate with messaging systems through a set of interfaces. _JMS_ supports both messaging models, _point-to-point_ and _publisher/subscriber_.
 
 ### JMS Model
 
@@ -50,9 +50,9 @@ The JMS model consists of:
 - **Provider**: _JMS_ system that implements the _JMS_ specification.
 - **Clients**: _Java_ applications that send and receive messages.
 - **Administered objects**: Preconfigured _JMS_ objects that are created by an administrator for the use of _JMS_ clients.
-- **Messages**: objects that are sent are received and contain _header_, _properties_ and _body_:
+- **Messages**: objects that are sent and received and contain _header_, _properties_ and _body_:
   - **Header**: it's mandatory and contains some metadata like priority, correlation ID, expiration or destination.
-  - **Properties**: they are optional and you can set attributes by adding the prefix `.jmx`.
+  - **Properties**: they are optional. Alongside your own application properties, the JMS-defined ones use the `JMSX` prefix (e.g. `JMSXGroupID`, `JMSXUserID`) and provider-specific ones use `JMS_<vendor>`.
   - **Body**: the body is also optional and contains the data we want to exchange. JMS defines six different message types: `Message`, `StreamMessage`, `MapMessage`, `TextMessage`, `ObjectMessage`, `BytesMessage`.
 
 ### JMS Architecture

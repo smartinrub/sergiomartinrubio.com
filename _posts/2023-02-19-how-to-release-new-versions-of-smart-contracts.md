@@ -173,9 +173,10 @@ contract V2 {
         value = _value + 1;
     }
 
-    // this function can't never be called 
-    // because the Proxy contract has a function upgradeTo(address)
-    function upgradeTo() {
+    // this function can never be called
+    // because the Proxy contract has a function with the same
+    // selector: upgradeTo(address)
+    function upgradeTo(address) public {
 
     }
 }

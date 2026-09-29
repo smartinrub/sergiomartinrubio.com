@@ -9,7 +9,7 @@ mermaid: false
 layout: post
 ---
 
-The **Java Persistence API** (*JPA*) is responsible for performing CRUD operations and is built on top of *Hibernate*. JPA has been designed to replace EJB 2.1 entity beans and has started as a part of the EJB 3 specification. JPA is now outside of an [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) container and has its own specification, but it's still part of the [EJB specification](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works), since a compliant EJB 3 container has to provide a JPA implementation, which integrates into the transaction handling of the container.
+The **Java Persistence API** (*JPA*) is a specification for managing relational data and performing CRUD operations. It is not an implementation: *Hibernate* is the most widely used provider that implements it, so JPA sits above Hibernate rather than on top of it. JPA has been designed to replace EJB 2.1 entity beans and has started as a part of the EJB 3 specification. JPA is now outside of an [EJB](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works) container and has its own specification, but it's still part of the [EJB specification](https://sergiomartinrubio.com/articles/ejb-what-it-is-why-it-exists-and-how-it-works), since a compliant EJB 3 container has to provide a JPA implementation, which integrates into the transaction handling of the container.
 
 ## Entities
 
@@ -21,7 +21,6 @@ You can define an entity as follows:
 
 ```java
 @Entity
-@IdClass(FooPK.class)
 @Table(name = "FOO")
 public class Foo {
 
@@ -30,7 +29,6 @@ public class Foo {
     @Column(name = "id")
     private Long id;
 
-    @Id
     @Basic(fetch = FetchType.EAGER)
     private String name;
 
@@ -50,7 +48,7 @@ Entity class requirements:
 
 Other entity annotations are:
 
-- `@Table`: The table name defaults to the name class unless `@Table` is used with a given name.
+- `@Table`: The table name defaults to the class name unless `@Table` is used with a given name.
 - `@Column`: Column names default to field names declared in the entity class unless `@Column` is used with a given name. This annotation also support other attributes like `unique`, `nullable`, `insertable` or `updatable`.
 - `@Basic`: This annotation is used to mark a field as a basic type so Hibernate will use the standard mapping. The `fetch` property can have `FetchType.EAGER` or `FetchType.LAZY` (use with expensive fields).
 - `@Transient`: This annotation is used to indicate that a field should not be persisted.
@@ -182,7 +180,7 @@ public class Bar {
 >     
 >     // fetch strategy is lazy by default
 >     @JsonIgnoreProperties("bar")
->     @OneToMany(mappedBy = "bar", , fetch = FetchType.EAGER)
+>     @OneToMany(mappedBy = "bar", fetch = FetchType.EAGER)
 >     private List<Foo> foos;
 >     
 >     // getters, setters...
@@ -245,7 +243,7 @@ public class FooChild {
 
 ### Field Bindings
 
-`@OneToMany` and `@ManyToMany` has `FetchType.LAZY` as the default value for the annotation attribute `fetch`, however, `@ManyToOne`, `@OneToOne` use an eager strategy as default,  `FetchType.EAGER`. When an eager strategy is used it could trigger an *N+1 query issue*.
+`@OneToMany` and `@ManyToMany` have `FetchType.LAZY` as the default value for the annotation attribute `fetch`, however, `@ManyToOne`, `@OneToOne` use an eager strategy as default,  `FetchType.EAGER`. When an eager strategy is used it could trigger an *N+1 query issue*.
 
 The *N+1 query issue* could also happen even with `FetchType.LAZY` if you do something like:
 
@@ -267,17 +265,17 @@ JPA provides cascade types to propagate an operation from a parent to a child en
 - `PERSIST`: children entities are also saved
 - `MERGE`: updates children entities
 - `REMOVE`: children entities associated to the same id are also removed
-- `REFRESH`: removes both the parent and child entity from the persistence context
-- `DETACH`: children entities get reloaded when the parent entity is refreshed
+- `REFRESH`: children entities get reloaded from the database when the parent entity is refreshed
+- `DETACH`: children entities are also removed from the persistence context when the parent is detached
 
 ## Persistence Unit
 
-A persistence unit is the configuration required by JPA and allows you to instantiate an entity manager. Persistence units are declared in a file `META-INF/persistence.xml` where you can configure things like the name of each persistence unit, managed classes included in your persistence unit, how classes are mapped to database tables, the datasource use to connect to the database... however, you can also configure a persistence unit programmatically by implementing the `PersistenceUnitInfo` interface.
+A persistence unit is the configuration required by JPA and allows you to instantiate an entity manager. Persistence units are declared in a file `META-INF/persistence.xml` where you can configure things like the name of each persistence unit, managed classes included in your persistence unit, how classes are mapped to database tables, the datasource used to connect to the database... however, you can also configure a persistence unit programmatically by implementing the `PersistenceUnitInfo` interface.
 
 There are two transaction types:
 
-- `RESOURCE_LOCAL`: you are responsible for managing the `EntityManger` lifespan. You need to take care of beginning and ending the transaction logic.
-- `JTA`: the transactions are managed by the application server. It requires the application server provides support. This limits the flexibility over transactions.
+- `RESOURCE_LOCAL`: you are responsible for managing the `EntityManager` lifespan. You need to take care of beginning and ending the transaction logic.
+- `JTA`: the transactions are managed by the application server. It requires that the application server provides support. This limits the flexibility over transactions.
 
 You can define a container-managed persistence unit as follows:
 

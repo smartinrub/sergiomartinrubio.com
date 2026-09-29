@@ -14,7 +14,7 @@ The Java Naming and Directory Interface is a Java API that allows Java applicati
 
 ## Architecture
 
-Your application can use the JNDI API to perform operations on the naming service, then what happens inside it depends on what service provider (SPI) is plugged in. To declare one of the SPI you want to use in your application you have to specify a class that is part of the specific SPI.
+Your application can use the JNDI API to perform operations on the naming service, then what happens inside it depends on what service provider (SPI) is plugged in. To declare one of the SPIs you want to use in your application you have to specify a class that is part of the specific SPI.
 
 JDK contains out-of-the-box four service providers: _LDAP_, _DNS_, _RMI_ and _CORBA_. However, you can create your own service provider for your custom services.
 
@@ -47,7 +47,7 @@ NamingEnumeration<NameClassPair> contextData = jndi.list("contextName");
 
 ### Name
 
-The `Name` interface represents a name which consist of a list of sorted strings name separated by a marker. Each component is separated by the forward slash character (`/`).
+The `Name` interface represents a name as an ordered sequence of string components. The separator is not fixed — it belongs to the naming system, so LDAP uses `,` between the components of a distinguished name while DNS uses `.` (see Federation below).
 
 ### Federation
 

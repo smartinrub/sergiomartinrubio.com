@@ -16,7 +16,7 @@ These patters are about providing different ways to create a class structure wit
 
 ## Adapter
 
-**Adapter** pattern wraps a interface in another interface that is required by the client, so it works as a bridge between to classes.
+**Adapter** pattern wraps an interface in another interface that is required by the client, so it works as a bridge between two classes.
 
 It is usually used when a specific interface is required by the client. This pattern can be applied when the target interface and the one required by the client are very similar.
 
@@ -91,7 +91,7 @@ Client ..> Target
 
 **Proxy** pattern encapsulates an object to control references to it, so you can control the access to resources.
 
-One of the use cases is when the object creation involves a heavy computation task, like calculation prime numbers. This pattern will allow you to lazily perform the computation only when the data is needed.
+One of the use cases is when the object creation involves a heavy computation task, like calculating prime numbers. This pattern will allow you to lazily perform the computation only when the data is needed.
 
 The Proxy pattern hides the behavior of the original class. Therefore, the risk of using this pattern is that you might not be aware of what is happening under the hood.
 
@@ -257,9 +257,9 @@ Keep in mind that many decorators can be hard to maintain and debug since the be
 
 ## Bridge
 
-**Bridge** pattern decouples abstraction from its implementation and avoids class explosion. This pattern give you the freedom of developing abstraction and implementation independently and create multiple combinations. The client only has access to the abstraction and does not need to know anything about the implementation.
+**Bridge** pattern decouples abstraction from its implementation and avoids class explosion. This pattern gives you the freedom of developing abstraction and implementation independently and create multiple combinations. The client only has access to the abstraction and does not need to know anything about the implementation.
 
-On the other hand, Bridge pattern increases complexity due to the fact that it uses composition over inheritance
+On the other hand, Bridge pattern increases complexity due to the fact that it uses composition over inheritance.
 
 ### Implementation
 

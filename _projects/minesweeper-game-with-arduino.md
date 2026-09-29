@@ -1,12 +1,14 @@
 ---
-name: Minesweeper Game With Arduino
+title: Minesweeper Game With Arduino
+description: An Arduino UNO recreation of Minesweeper on a Nokia 5110 LCD, with wiring diagram and source code.
+author: Sergio Martin Rubio
 image: https://lh3.googleusercontent.com/TnE35S8YdXw_ISAV4wBAxStYTEfpKr-D--Dl24ypYyEA1fX7L7Xl_nbYmecgBikhLSNnkIWqPAkakR-WWBS2mzb4bTh30xE7LFOQSqwmoI-6zFeh_Z3kJAiOTkVQzngZ8_rzSFXThg=w600
 company: Side Project
 date:  2017-09-02
 layout: post
 ---
 
-# Minesweeper Game With Arduino
+## Minesweeper Game With Arduino
 
 {% include elements/video.html id="sQQOTCDn0Gk" %}
 
@@ -25,7 +27,7 @@ Things that you'll need:
 - 3 x Pushbuttons
 - 1 x Analog Thumb Joystick
 - Jumper Cables
-- Breadborad (protoboard)
+- Breadboard (protoboard)
 - 1 x USB cable
 - Resistors:
     - 7 x $$10k\Omega$$
@@ -33,7 +35,7 @@ Things that you'll need:
     - 1 x $$330\Omega$$
     - 1 x $$47\Omega$$
 
-{% include elements/figure.html image="https://lh3.googleusercontent.com/1W9kb8q2G5n9EIzb2AaGu4qtWYroyM8ueB3VDd0EUpFX-WxcOyXEKIEv9N82eb29k-I2XP7UQwolmBtqU4jHGhnJOapwuRrNH_Wi11hcar7gRpCizIAoLQ6m8Y5VKGdN7-iat8Zaww=w800" caption="Fitzing Diagram" %}
+{% include elements/figure.html image="https://lh3.googleusercontent.com/1W9kb8q2G5n9EIzb2AaGu4qtWYroyM8ueB3VDd0EUpFX-WxcOyXEKIEv9N82eb29k-I2XP7UQwolmBtqU4jHGhnJOapwuRrNH_Wi11hcar7gRpCizIAoLQ6m8Y5VKGdN7-iat8Zaww=w800" caption="Fritzing Diagram" %}
 
 
 ## Assembling the Parts
@@ -59,7 +61,7 @@ Just add $$10k\Omega$$ resistors between the RST, DC, DIN and SCLK pins and a $$
 
 Finally, we connect the rest of the components:
 
-- LED and buzzer are connected in serie with a $$47\Omega$$ resistor.
+- LED and buzzer are connected in series with a $$47\Omega$$ resistor.
 - Buttons are connected to the Arduino board with a resistor of $$10k\Omega$$.
 - Analog Thumb Joystick is connected to the board.
 
@@ -75,4 +77,4 @@ Additionally we can also install [Adafruit GFX Library](https://github.com/adafr
 
 Connect the Arduino to your computer using the USB cable. This will provide power to the Arduino/game and allow you to upload your program to the Arduino.
 
-Finally, load the code on the Arduino board by selecting File, Upload. You should see two welcome screens and the game starts after six-seconds!
+Finally, load the code on the Arduino board by selecting File, Upload. You should see two welcome screens and the game starts after six seconds!

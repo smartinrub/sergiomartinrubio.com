@@ -26,7 +26,7 @@ When [migrating from JUnit 4](https://junit.org/junit5/docs/current/user-guide/#
 </dependency>
 ```
 
-- Replace `@BeforeClass`, `@Before`, `@AfterClass` and `@After` annotations with `@BeforeAll`, `@BeforeEach`, `@AfterAll` and `@AfterEach` alternatively.
+- Replace `@BeforeClass`, `@Before`, `@AfterClass` and `@After` annotations with `@BeforeAll`, `@BeforeEach`, `@AfterAll` and `@AfterEach` respectively.
 
 ```java
 @BeforeAll
@@ -60,7 +60,7 @@ void skippedTest() {
 }
 
 @Test
-@EnabledIf(value = "true", reason = "test runs because is true")
+@EnabledIf(value = "true", reason = "test runs because it is true")
 void isExecuted() {
 }
 
@@ -71,7 +71,9 @@ void sometimesIsExecuted() {
 }
 ```
 
-- `@Category` need to be replaced with `@Tag`.
+>NOTE: the script-based `@EnabledIf`/`@DisabledIf` shown above were experimental, deprecated in _JUnit 5.5_ and **removed in 5.6**, so they no longer compile on current versions. Today those annotations take the name of a condition method instead of a script, and anything more involved belongs in a custom `ExecutionCondition` registered with `@ExtendWith`.
+
+- `@Category` needs to be replaced with `@Tag`.
 
 ```java
 @Tag("myTestSuite")
@@ -116,8 +118,8 @@ Assertions include four new improvements:
 
 ```java
 assertEquals(
-        Stream.of(1, 4, 5).mapToInt(Integer::intValue).sum(),
         10,
+        Stream.of(1, 4, 5).mapToInt(Integer::intValue).sum(),
         "Sum should be 10");
 ```
 

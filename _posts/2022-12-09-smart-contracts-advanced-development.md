@@ -39,14 +39,13 @@ then you can add your rules on the generated file `.solhint.json`:
 To run the linter execute: `yarn solhint contracts/*.sol` and it will display something like:
 
 ```bash
-   2:1   error    Compiler version ^0.8.9 does not satisfy the ^0.5.8 semver requirement                             compiler-version
   13:5   warning  Explicitly mark visibility in function (Set ignoreConstructors to true if using solidity >=0.7.0)  func-visibility
   14:9   warning  Error message for require is too long                                                              reason-string
   15:13  warning  Avoid to make time-based decisions in your business logic                                          not-rely-on-time
   27:17  warning  Avoid to make time-based decisions in your business logic                                          not-rely-on-time
   30:48  warning  Avoid to make time-based decisions in your business logic                                          not-rely-on-time
 
-✖ 6 problems (1 error, 5 warnings)
+✖ 5 problems (0 errors, 5 warnings)
 ```
 
 ## hardhat-deploy
@@ -148,7 +147,7 @@ Functions should be grouped according to their visibility and ordered:
 4. external
 5. public
 6. internal
-6. private
+7. private
 
 The modifier order for a function should be:
 
@@ -212,4 +211,4 @@ Depending on the operation you perform on your Smart Contract a different gas co
 
 Learning about opcodes is important in order to optimize the gas consumption of your Smart Contracts.
 
-When using storage variable the convention is to append a `s_` so we don't forget that those variables are using a lot of gas.
+When using storage variables the convention is to prefix them with `s_` so we don't forget that those variables are using a lot of gas.

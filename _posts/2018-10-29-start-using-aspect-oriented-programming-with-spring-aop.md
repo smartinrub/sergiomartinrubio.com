@@ -16,9 +16,9 @@ Why _aspects_? When we have a concern which is cross domain, _aspects_ are a goo
 
 [AspectJ](https://www.eclipse.org/aspectj/){:target="_blank"} is the _AOP Java framework_ commonly used when we want to use aspects on our application.
 
-How does _AspectJ_ work? The AOP framework does not look at you actual code, it looks at the byte code, so we give patterns to search for, and _AspectJ_ inserts the code where the match is found.
+How does _AspectJ_ work? The AOP framework does not look at your actual code, it looks at the byte code, so we give patterns to search for, and _AspectJ_ inserts the code where the match is found.
 
-There are other _AOP_ implementations such as [Spring AOP](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html){:target="_blank"} or [JBoss AOP](http://jbossaop.jboss.org/){:target="_blank"} that are built on top of _AspectJ_ and simplify its use.
+There are other _AOP_ implementations such as [Spring AOP](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html){:target="_blank"} or [JBoss AOP](http://jbossaop.jboss.org/){:target="_blank"}. These are not built on top of _AspectJ_: Spring AOP reuses AspectJ's annotations and pointcut expression language, but it weaves nothing at the bytecode level — it builds a runtime proxy around the bean instead (JDK dynamic proxies, or CGLIB subclasses for classes without an interface). That difference is what the advantages and disadvantages at the end of this article come down to.
 
 ## Spring AOP
 
@@ -67,8 +67,8 @@ public class JoinPoints {
 ### Advice Types
 
 - `@Before`: it runs before a _join point_.
-- `@After`: it runs after a method call
-- `@AfterReturning`: it runs when a _join point_ completes successfully and after `@After`.
+- `@After`: it runs after a method call, whether it returned normally or threw (*after finally* semantics).
+- `@AfterReturning`: it runs only when a _join point_ completes successfully, so it is skipped when the method throws.
 - `@AfterThrowing`: it runs when a method exits because of an _exception_.
 - `@Around`: it runs before and after the method execution. It allows us to proceed to the _join point_, return its own object or throw an _exception_.
 
@@ -118,7 +118,7 @@ public void afterThrowing(JoinPoint joinPoint, IllegalArgumentException ex) {
 }
 ```
 
-This example shows how to run some code when an _exception_ is thrown, and expose the exception in your _advice_ body. We have to do the same as we did for `@AfterReturing`, but in this case the annotation attribute is _throwing_.
+This example shows how to run some code when an _exception_ is thrown, and expose the exception in your _advice_ body. We have to do the same as we did for `@AfterReturning`, but in this case the annotation attribute is _throwing_.
 
 #### @Around
 
@@ -140,12 +140,12 @@ This is the most complex _advice_. `@Around` includes _before_, _after_, _throwi
 
 The first parameter of this _advice_ must be `ProceedingJoinPoint`, and needs to be called with `proceed()` to execute the method. The value returned by the _advice_ will be the same as the value of the target method.
 
-In this examples we also make use of an annotation as a _join point_ pattern, so this advice will be only executed when the annotation `TrackTime` is found.
+In this example we also make use of an annotation as a _join point_ pattern, so this advice will be only executed when the annotation `TrackTime` is found.
 
 ```java
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-    public @interface TrackTime {   
+public @interface TrackTime {
 }
 ```
 

@@ -13,11 +13,11 @@ mermaid: false
 layout: post
 ---
 
-Ethereum also supports events and these can very important for notifying external applications. Events are part of the transaction receipts and they are executed by clients. Events are stored as logs in the blockchain so you can retrieve them.
+Ethereum also supports events and these can be very important for notifying external applications. Events are recorded as logs in the transaction receipt, where external clients can retrieve them.
 
 >The event logs are not accessible from within [smart contracts](https://sergiomartinrubio.com/articles/deploy-your-first-smart-contract-with-ethersjs/), so you need an external client to listen to these events.
 
-[Solidity](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) has a built-in type `event` that we can use for defining our events.
+[Solidity](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) has a built-in `event` keyword that we can use for declaring our events.
 
 ## Event Definition
 
@@ -59,9 +59,9 @@ contract MyContract {
 
 ## Listening to Events
 
-As we mentioned before events cannot be consumed by Smart Contract, therefore we have to build a external application.
+As we mentioned before events cannot be consumed by a Smart Contract, therefore we have to build an external application.
 
-We are going to use HardHat and run local Ethereum node to showcase how *Ethereum* events work.
+We are going to use HardHat and run a local Ethereum node to showcase how *Ethereum* events work.
 
 Prerequisites:
 - [Node.js](https://nodejs.org/en/download/){:target="_blank"}

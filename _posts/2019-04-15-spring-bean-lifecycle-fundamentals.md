@@ -9,7 +9,7 @@ mermaid: false
 layout: post
 ---
 
-**Bean** is one of the angular stones in the **Spring Framework** and it is very important to know how it works. However, the concept of _bean_ it is not very clear and the [Bean definition given by the official Spring documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-introduction){:target="_blank"} is not easy to understand.
+**Bean** is one of the cornerstones of the **Spring Framework** and it is very important to know how it works. However, the concept of _bean_ it is not very clear and the [Bean definition given by the official Spring documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-introduction){:target="_blank"} is not easy to understand.
 
 >In Spring, the **objects** that form the backbone of your application and that are **managed by the Spring IoC container** are called beans. **A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container**. Otherwise, **a bean is simply one of many objects in your application**. Beans, and the dependencies among them, are reflected in the configuration metadata used by a container.
 
@@ -43,11 +43,11 @@ The definition of _DI_ given by _Spring_ is very straightforward, and simply say
 All the beans are not the same, and _Spring_ provides a few different recipes to modify the scope. In total there are six scopes:
 
 - **_singleton_** (default): creates one instance for each **IoC container** (`ApplicationContext`). 
-- **_prototype_**: a new instance is created every time the bean is called.
+- **_prototype_**: a new instance is created every time the bean is requested from the container or injected.
 - **_request_**: creates a single instance per HTTP request.
 - **_session_**: one instance for each web session.
 - **_application_**: only one instance per `ServletContext`.
-- _**websocket**_: it is tight to the websocket lifecycle.
+- _**websocket**_: it is tied to the websocket lifecycle.
 
 >Do not confuse _Bean_ with scope singleton with the [Singleton Design Pattern](https://sergiomartinrubio.com/articles/creational-design-patterns/#singleton). The latter creates an instance per `ClassLoader`, whereas the singleton Bean creates a bean per _Spring container_.
 
@@ -61,11 +61,11 @@ All the beans are not the same, and _Spring_ provides a few different recipes to
 
 1. Instantiate Bean
 2. **Spring IoC container add metadata to the bean**
-3. If `BeanNameAware` is implemented, _Spring_ will set the name pass as parameter in `setBeanName()`.
+3. If `BeanNameAware` is implemented, _Spring_ will set the name passed as parameter in `setBeanName()`.
 4. If `BeanFactoryAware` is implemented, _Spring_ will call `setBeanFactory()`.
 5. If `ApplicationContextAware` is implemented, _Spring_ will pass a reference to the `ApplicationContext` in `setApplicationContext()` method.
-6. If `BeanPostProcessor` is implemented, it will run `ProcessBeforeInitialization()` method.
-7. If `@PostConstruct` is used, `InitializingBean` is implemented, or `init()` is implicitly called, _Spring_ calls `afterPropertiesSet()` method.
+6. If `BeanPostProcessor` is implemented, it will run `postProcessBeforeInitialization()` method.
+7. The initialization callbacks run in this order: the `@PostConstruct` annotated method first, then `afterPropertiesSet()` if `InitializingBean` is implemented, then any custom init method declared via `@Bean(initMethod = ...)` or the XML `init-method` attribute.
 8. If `BeanPostProcessor` is implemented, _Spring_ will run `postProcessAfterInitialization()` method.
 9. The bean now can be used and remains in the application context until it is destroyed.
 
@@ -74,11 +74,11 @@ All the beans are not the same, and _Spring_ provides a few different recipes to
 {% include elements/figure.html image="https://lh3.googleusercontent.com/_zltXkTlijU1wZpQL5WvH1r82nMEmekAavT3O_nPC1xBVaoxv-hQmcv3fxeiBW7HLArDWfTK5CQqVeXQNiqDeWFVU2chCbhnbL2uggQsjZgiTueQDJRRU2d_WBL4wDuPQcaPxTvHXA=w300" caption="Spring Bean Destruction Lifecycle" %}
 
 1. **Spring IoC container is shutdown**.
-2. If `@PreDestroy` is used, `DisposableBean` is implemented, or `destroy()` method is implicitly called, _Spring_ will run `destroy()` method.
+2. The destruction callbacks run in this order: the `@PreDestroy` annotated method first, then `destroy()` if `DisposableBean` is implemented, then any custom destroy method declared via `@Bean(destroyMethod = ...)` or the XML `destroy-method` attribute.
 
 ### Lifecycle Callbacks
 
-_Spring_ recommend us to use `@PostConstruct` and `@PreDestroy` annotations to perform work during bean initialization and bean destruction.
+_Spring_ recommends using `@PostConstruct` and `@PreDestroy` annotations to perform work during bean initialization and bean destruction.
 
 >In case of **XML** configuration we can use the _init-method_ or _destroy-method_ attributes.
 
@@ -122,7 +122,7 @@ Call init method from Annotation
 Call init method from afterPropertiesSet
 2019-04-16 18:07:16.925  INFO 25181 --- [           main] c.s.s.SpringBeanLifecycleApplication     : Started SpringBeanLifecycleApplication in 0.453 seconds (JVM running for 0.845)
 Call destroy method from Annotation
-Call destroy method from destroy
+Call destroy method from destroy implementation
 ```
 
 As we showed before, annotations are executed first and then, overridden methods.

@@ -9,10 +9,10 @@ mermaid: true
 layout: post
 ---
 
-[Solidity Smart contracts](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) have two built in fallback functions that are triggered when no other function in the contract matches the specified function in the call. This can happen for multiple reasons like a type, the use of [Smart Contract Proxies](https://sergiomartinrubio.com/articles/how-to-release-new-versions-of-smart-contracts/) or for [Re-Entrancy](https://solidity-by-example.org/hacks/re-entrancy/) attacks.
+[Solidity Smart contracts](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) have two built in fallback functions that are triggered when no other function in the contract matches the specified function in the call. This can happen for multiple reasons like a typo, the use of [Smart Contract Proxies](https://sergiomartinrubio.com/articles/how-to-release-new-versions-of-smart-contracts/) or for [Re-Entrancy](https://solidity-by-example.org/hacks/re-entrancy/) attacks.
 
 There are two fallback functions:
-* `received()`
+* `receive()`
 * `fallback()`
 
 ```mermaid
@@ -21,7 +21,7 @@ flowchart TD;
     CALLDATA --> A
     A{is msg.data empty?} --> |yes|B{receive exists?};
     A --> |no|C{function selector match?}
-    B --> |yes|G((received))
+    B --> |yes|G((receive))
     B --> |no|D{fallback exists?}
     D --> |yes|H((fallback))
     D --> |no|F((transaction is reverted))
