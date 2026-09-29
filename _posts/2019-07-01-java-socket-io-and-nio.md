@@ -18,7 +18,7 @@ _Java_ offers a blocking and non blocking alternative to create sockets, and dep
 
 The _Java_ blocking IO API is included in **JDK** under the package `java.net` and is generally the simplest to use.
 
-This API is based on flows of byte streams and character streams that can be read or written. There is not an index that you can use to move back and forth, like in an array, it is simply a continuous flow of data.
+This API is based on flows of byte streams and character streams that can be read or written. There is no index that you can use to move back and forth, like in an array, it is simply a continuous flow of data.
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/B5e8q-Kn1kzI_apnfLbX8n2abY-uJzTzaFevpdr7ewQBarkSDut0zdpDQeqVUo6cPAqTieIa9S8U0GVgB7DMPHqPU3n386ZIM5g_KzZktCj0iCTn7tsUZxubg4ESaEIwNShIPoXiuw=w600" caption="Java Blocking IO" %}
 
@@ -58,22 +58,23 @@ If you want to allow multiple connections, you have to create a **Thread Pool**:
 ```java
 ExecutorService threadPool = Executors.newFixedThreadPool(100);
 
- threadPool.execute(() -> {
-     // SOCKET CREATION
- });
+while (true) {
+    Socket client = serverSocket.accept();
+    threadPool.execute(() -> handleClient(client)); // one task per accepted client
+}
 ```
 
-As you can see, this API has some limitations. You will not be able to accept more connections than threads available in you machine. Therefore, if you are expecting to have many connections, you need an alternative.
+As you can see, this API has some limitations. You will not be able to accept more connections than threads available in your machine. Therefore, if you are expecting to have many connections, you need an alternative.
 
 ## Java NIO
 
-**java.nio** is a non blocking API for socket connections which means you are not tight to the number of threads available. With this library one thread can handle multiple connections at once.
+**java.nio** is a non blocking API for socket connections which means you are not tied to the number of threads available. With this library one thread can handle multiple connections at once.
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/UPsm3Jc2Gicv6fHuIqnSjOrwvXhO73u5bDYcWMU2WtuCKM9Q6ePPEGoJPKxKA0dl9DQwrkr5B3YNcQ505xgQUtwZB-jKnSx3uetK0bkRK01g9S1lsWWAPZ-hSfVfeP0ZpvL7ap3RrA=w600" caption="Java NIO" %}
 
 **Elements**:
 
-- **Channel**: channels are a combination of input and output streams, so they allow you to read and write, and they use buffers to do this operations.
+- **Channel**: channels are a combination of input and output streams, so they allow you to read and write, and they use buffers to do these operations.
 - **Buffer**: it is a block of memory used to read from a `Channel` and write into it. When you want to read data from a `Buffer` you need to invoke`flip()`, so that it will set `pos` to 0.
 
     ```java
@@ -93,8 +94,8 @@ As you can see, this API has some limitations. You will not be able to accept mo
     3. On line 5, it reads from `Buffer` one byte at a time up to the limit.
     4. On line 7, finally it clears the `Buffer`.
 
-- **Selector**: A `Selector` can register multiple Channels and will check which ones are ready for accepting new connections. Similar to `accept()` method of blocking IO, when `select()` is invoked it will block the application until a `Channel` is ready to do an operation. Because a `Selector` can register many channels, only one thread is required to handler multiple connections.
-- **Selection Key**: It contains properties for a particular **Channel** (interest set, ready set, selector/channel and an optional attached object). Selection keys are mainly use to know the current interest of the channel (`isAcceptable()`, `isReadable()`, `isWritable()`), get the channel and do operations with that channel.
+- **Selector**: A `Selector` can register multiple Channels and will report which ones are ready for one of the operations they registered interest in — accept, connect, read or write. Similar to `accept()` method of blocking IO, when `select()` is invoked it will block the application until a `Channel` is ready to do an operation. Because a `Selector` can register many channels, only one thread is required to handle multiple connections.
+- **Selection Key**: It contains properties for a particular **Channel** (interest set, ready set, selector/channel and an optional attached object). Selection keys are mainly used to know the current interest of the channel (`isAcceptable()`, `isReadable()`, `isWritable()`), get the channel and do operations with that channel.
 
 ### Example
 
@@ -127,9 +128,9 @@ while (true) {
 }
 ```
 
-1. From lines 1 to 3 a `ServerSocketChannel` is created, and you have to set it to non-blocking mode explicitly. The socket is also configure to listen on _port 8080_.
+1. From lines 1 to 3 a `ServerSocketChannel` is created, and you have to set it to non-blocking mode explicitly. The socket is also configured to listen on _port 8080_.
 2. On line 5 and 6, a `Selector` is created and `ServerSocketChannel` is registered on the `Selector` with a `SelectionKey` pointing to ACCEPT operations.
-3. To keep the application listening all the time the blocking method `select()` is inside an infinite while loop, and `select()` will return when at least one channel is selected `wakeup()` is invoked or the thread is interrupted.
+3. To keep the application listening all the time the blocking method `select()` is inside an infinite while loop, and `select()` will return when at least one channel is selected, when `wakeup()` is invoked, or when the thread is interrupted.
 4. Then on line 10 a set of keys are returned from the `Selector` and it will iterate through them in order to execute the ready channels.
 
 ```java

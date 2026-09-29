@@ -8,7 +8,7 @@ mermaid: false
 layout: post
 ---
 
-[GraalVM](https://www.graalvm.org){:target="_blank"} is one of the virtual machines to run applications written in multiple languages like JavaScript, Python or Java. One of the main features of GraalVM is [Native Images](https://www.graalvm.org/reference-manual/native-image/){:target="_blank"}. GraalVM allows you to generate a native image of your Java code, so it does not need to run on the JVM, and includes all the necessary componentes.
+[GraalVM](https://www.graalvm.org){:target="_blank"} is one of the virtual machines to run applications written in multiple languages like JavaScript, Python or Java. One of the main features of GraalVM is [Native Images](https://www.graalvm.org/reference-manual/native-image/){:target="_blank"}. GraalVM allows you to generate a native image of your Java code, so it does not need to run on the JVM, and includes all the necessary components.
 
 ## Build a Native Java Application
 

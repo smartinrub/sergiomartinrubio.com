@@ -11,7 +11,7 @@ layout: post
 
 Every developer should ensure code quality and follow language conventions, otherwise [Technical Debt](https://medium.com/existek/what-is-technical-debt-and-how-to-calculate-it-80193e4e746d){:target="_blank"} is created, and at some point in the future you will have to revisit that smelly piece of code.
 
-**Code Debt** can be created without even realizing when: 
+**Code Debt** can be created without even realizing it, when: 
 
 - development has to be done before a deadline; you do not have enough experience; 
 - or simply you are having a bad day. 
@@ -20,10 +20,10 @@ Because of this, it is very important that before merging changes into master we
 
 ## SpotBugs
 
-- [SpotBugs](https://spotbugs.github.io/){:target="_blank"} helps you analize your **Java** code to find bugs.
+- [SpotBugs](https://spotbugs.github.io/){:target="_blank"} helps you analyze your **Java** code to find bugs.
 - Free open source tool which was previously named [FindBugs](http://findbugs.sourceforge.net/){:target="_blank"}.
 - It is a plugin available for _Maven_, _Gradle_, _Eclipse_, _Ant_...
-- It looks at your source code and runs a static analysis.
+- It runs a static analysis over the compiled **bytecode** rather than the source, so your project has to be built before _SpotBugs_ can inspect it.
 
 ### How To Use It
 

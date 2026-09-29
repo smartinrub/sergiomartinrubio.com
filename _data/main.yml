@@ -64,6 +64,79 @@ designations:
   - Contractor
   - Consultant
 
+# Work history shown on the home page. Most recent first.
+experience:
+  - role: Software Engineer
+    company: Bitclear AG
+    type: Contract
+    location: Remote
+    period: Jun 2024 - Jun 2026
+    summary: >-
+      Backend engineer on a crypto fintech microservices platform, leading end-to-end
+      delivery across the compliance, brokerage and payments domains. Led the EU Travel
+      Rule compliance integration, designed a multi-asset liquidity planner that builds
+      fee-optimized execution plans, and delivered a crypto-to-FIAT card payment
+      integration that increased cashflow by 20%.
+    stack: Java, Spring Boot, TypeScript, NestJS, PostgreSQL
+
+  - role: Software Engineer
+    company: Bound
+    type: Contract
+    location: Remote
+    period: Oct 2021 - Jun 2023
+    summary: >-
+      Built new products and services from scratch alongside product managers, and
+      integrated accounting, invoicing and banking services to bring customers one step
+      closer to a fully automated currency hedging solution.
+    stack: Java, AWS
+
+  - role: Java Developer
+    company: RavenPack
+    location: Marbella, Spain
+    period: Dec 2020 - Sep 2021
+    summary: >-
+      Worked on a microservices architecture and made architectural decisions. Migrated
+      Java applications to serverless, and reviewed and reduced AWS operating costs.
+    stack: Java, Python, AWS Lambda
+
+  - role: Software Engineer
+    company: Marshmallow
+    location: London, United Kingdom
+    period: Nov 2019 - Nov 2020
+    summary: >-
+      Built back-office automation that reduced operational costs by 80%. Improved the
+      authentication mechanism and shipped self-service features that cut customer
+      support requests by 30%. Onboarded and mentored new engineers.
+    stack: Java, Spring Boot
+
+  - role: Software Development Engineer
+    company: Expedia Group
+    location: London, United Kingdom
+    period: Oct 2018 - Nov 2019
+    summary: >-
+      Adapted microservices APIs to support new features, redesigned the caching
+      architecture around in-memory data structures, and ran a GraphQL proof of concept.
+    stack: Java, ReactJS, GraphQL
+
+  - role: Software Engineer
+    company: Gamesys
+    location: London, United Kingdom
+    period: Oct 2017 - Oct 2018
+    summary: >-
+      Redesigned the authentication and authorization infrastructure to handle millions
+      of users. Practised TDD and pair programming daily, and maintained the Kubernetes
+      cluster and CI tooling across the department.
+    stack: Java, Spring Security, Kubernetes
+
+  - role: Full Stack Developer Intern
+    company: Accenture
+    location: Málaga, Spain
+    period: Mar 2017 - Sep 2017
+    summary: >-
+      Designed and implemented new features with Java EE technologies, and built a Go
+      service that used Spring Batch to rehash and process millions of records.
+    stack: Java EE, Go, AngularJS
+
 expertise:
   # - title: Java 8+
   #   level: 100

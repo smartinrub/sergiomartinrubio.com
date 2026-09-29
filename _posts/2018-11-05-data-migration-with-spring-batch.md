@@ -12,7 +12,7 @@ layout: post
 
 [Spring Batch](https://docs.spring.io/spring-batch/trunk/reference/html/){:target="_blank"} is a batch framework designed to process large volumes of data. You can run either chunks or tasklets (single task per step).
 
-This framework is lightweight and very easy to use, so it is very recommended for tasks that will run for a long time and you want to forget about it.
+This framework is lightweight and very easy to use, so it is a good fit for tasks that will run for a long time and you want to forget about it.
 
 ## Features
 
@@ -23,7 +23,7 @@ This framework is lightweight and very easy to use, so it is very recommended fo
 - _Java_ or _XML_ based configuration.
 - All the _Spring_ features like _DI_, _AOP_, testability, etc.
 - It is open source.
-- Many scalable options and allows us to use _multithreding_.
+- Many scalable options and allows us to use _multithreading_.
 - Support for _big data_.
 
 ## Use Case
@@ -32,6 +32,8 @@ Spring Batch allows us to run database migrations without hassle. For this examp
 
 1. Read from database.
 2. Write plain text passwords on a backup table.
+
+    >Treat that backup table as a liability, not a safety net: it holds every password in the clear. Restrict access to it and drop it as soon as the migration is verified.
 3. Hash plain text passwords.
 4. Update passwords on the original table.
 

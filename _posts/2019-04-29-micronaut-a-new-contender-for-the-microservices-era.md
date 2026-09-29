@@ -10,11 +10,11 @@ layout: post
 
 [Micronaut](https://micronaut.io/){:target="_blank"} is a web framework similar to **Spring Boot**, which started at [OCI](https://objectcomputing.com/){:target="_blank"} and was initially developed by _Groovy_ and _Rails_ developers from **Pivotal**.
 
-_Micronaut_ is really a competitor for _Spring Boot_, and if you are comfortable with _Spring Boot_, _Micronaut_ provides a Spring-like way of creating web applications. It uses _JAX-RS_ annotations and specific _Micronaut_ annotations similar to the _Spring Boot_ ones (sometimes the only difference is the package name (`io.micronaut`)).
+_Micronaut_ is really a competitor for _Spring Boot_, and if you are comfortable with _Spring Boot_, _Micronaut_ provides a Spring-like way of creating web applications. It uses the standard _JSR-330_ (`javax.inject`) annotations for dependency injection plus its own HTTP annotations, which are similar to the _Spring Boot_ ones (sometimes the only difference is the package name, `io.micronaut`). _JAX-RS_ annotations are available too, but through a separate `micronaut-jaxrs` module rather than by default.
 
 ## Getting Started
 
-A **CLI tool** similar to the one provided by _Spring_ is available to create your _Micronaut_ applications. The simplest way to start using the _CLI_ tool is to install it through _SDKMAM_.
+A **CLI tool** similar to the one provided by _Spring_ is available to create your _Micronaut_ applications. The simplest way to start using the _CLI_ tool is to install it through _SDKMAN_.
 
 ```shell
 curl -s https://get.sdkman.io | bash
@@ -29,7 +29,7 @@ Now you can create your first _Micronaut_ project:
 mn create-app com.sergiomartinrubio.micronaut-example --build maven
 ```
 
-By default, it uses **Gradle** build system and _Java_ as the main language, however, you can tweak these setting by using these two flags: `--build` [gradle, maven] and `--lang` [java, groovy, kotlin]. You can also add features to the project, like **GraalVM** support, [**Zipkin**](http://sergiomartinrubio.com/articles/troubleshooting-tools-for-microservices-architecture) for tracing, type of rendering...
+By default, it uses **Gradle** build system and _Java_ as the main language, however, you can tweak these settings by using these two flags: `--build` [gradle, maven] and `--lang` [java, groovy, kotlin]. You can also add features to the project, like **GraalVM** support, [**Zipkin**](http://sergiomartinrubio.com/articles/troubleshooting-tools-for-microservices-architecture) for tracing, type of rendering...
 
 >**GraalVM**: it is an ecosystem which supports many languages and allows you to run your applications like a native one, so in the case of _Java_, it will translate your bytecode into machine code.
 

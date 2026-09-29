@@ -10,20 +10,20 @@ mermaid: false
 layout: post
 ---
 
-Nowadays Microservices architecture is the facto choice for building medium or large web applications, and this tendency is very align with Agile methodologies since having services that are loosely coupled give engineers more freedom to make faster modifications to them and as a result you can get quick feedback.
+Nowadays Microservices architecture is the de facto choice for building medium or large web applications, and this trend is well aligned with Agile methodologies since having services that are loosely coupled gives engineers more freedom to make faster modifications to them and as a result you can get quick feedback.
 
-I've been developing microservices with Java and Spring for quite a while and I'd like to condense on an article the fundamental ingredients for creating a Java microservice from scratch.
+I've been developing microservices with Java and Spring for quite a while and I'd like to condense into an article the fundamental ingredients for creating a Java microservice from scratch.
 
 ## Before You Start
 
-When creating a microservice there are a few **things to need to take into account**:
+When creating a microservice there are a few **things you need to take into account**:
 
 1. **Identify the business domain**. <u>It's very important to understand the business domain so the microservice has the right level of responsibility</u>. 
-   - A **too** **course-grained** microservice will make the service difficult to maintain and will add constraints when multiple engineers are working on a particular feature, mainly because code changes might overlap.
+   - A **too** **coarse-grained** microservice will make the service difficult to maintain and will add constraints when multiple engineers are working on a particular feature, mainly because code changes might overlap.
    - A **too** **fine-grained** microservice will increase the overall complexity of the system and a service can become a simple abstraction layer with no logic.
 2. **Decide API communication style**: some common *API* architecture styles are:
    - **REST** (Representational state transfer): is probably the most common communication style nowadays for microservices communication and the reason of this can be because of low complexity and the formats allowed (*XML*, *JSON*, plain text...). 
-   - **RPC **(Remote Procedure Call): this is a protocol with a strict specification and at the same time is high performance. It's a good candidate for microservices but take into account that is difficult to debug, since it required special tools for using the protocol unlike *REST*, which is a simple *HTTP* request that you can even make from your browser.
+   - **RPC** (Remote Procedure Call): this is a protocol with a strict specification and at the same time is high performance. It's a good candidate for microservices but take into account that is difficult to debug, since it requires special tools for using the protocol unlike *REST*, which is a simple *HTTP* request that you can even make from your browser.
    - [GraphQL](https://sergiomartinrubio.com/articles/moving-beyond-rest-with-graphql/): this can be seen as an evolution of *REST*, and it consist of a single *HTTP* endpoint that is used for executing operations, and solves the issue of  “overfetching” or “underfetching”. *GraphQL* might be a good candidate for edge services, since it provides a simple way to consume an API and it provides documentation capabilities. On the other hand, *GraphQL* might not be the best for the communication between microservices and the reason is that there is an extra overhead, caching is difficult to implement or adds more complexity.
    - **SOAP** (Simple Object Access Protocol): this is the least used protocol for new applications. It's a protocol itself unlike *REST*, which is using *HTTP* protocol, and provides a standardized communication. However, it only supports *XML* format and this makes the communication quite verbose, is more complex and heavy weight. Because of all of these disadvantages this protocol is not the best candidate for microservices communication.
 3. **Configuration management**: this is about where you are planning to keep the configuration of the microservices. You might want to keep the configuration inside a file in your application, inject it as part of a deployment job with Jenkins, centralize the configuration with something like [Spring Cloud Config Server](https://sergiomartinrubio.com/articles/centralized-configuration-with-spring-cloud-config-server/)...

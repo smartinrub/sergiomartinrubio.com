@@ -12,15 +12,15 @@ layout: post
 
 The **Java Module System** is a feature that was released with *Java 9* and was part of the project *Jigsaw*.
 
-The reason for having the the Java Module System is to offer a greater level of granularity in terms of class visibility. As a result, this allows a better separation of concerns. Before Java 9 the only mechanism to control which classes can see which other classes was through Java packages, but this is not enough, specially when building large applications because sometimes you might want to make classes available only for specific purposes. 
+The reason for having the Java Module System is to offer a greater level of granularity in terms of class visibility. As a result, this allows a better separation of concerns. Before Java 9 the only mechanism to control which classes can see which other classes was through Java packages, but this is not enough, especially when building large applications because sometimes you might want to make classes available only for specific purposes. 
 
-For example, let's say you have a `PlayerRepository` class that should be only used by the service layer, but it shouldn't be used directly by the api layer. With Java Modules you can simply create separate modules for each layer or concern and define the boundaries of each class. The solution is to have a module for your *API* layer and other modules that will export the specific classes required by the *API* layer and nothing else. As you can see this increases greatly the level of encapsulation.
+For example, let's say you have a `PlayerRepository` class that should be only used by the service layer, but it shouldn't be used directly by the api layer. With Java Modules you can simply create separate modules for each layer or concern and define the boundaries of each class. The solution is to have a module for your *API* layer and other modules that will export the specific classes required by the *API* layer and nothing else. As you can see this greatly increases the level of encapsulation.
 
 When designing modules you can choose the level of granularity, from having each package defined in a separate module to having all the packages in a single module.
 
 ## Getting Started
 
-You can define a module by creating a `model-info.java` file with the following estructure:
+You can define a module by creating a `module-info.java` file with the following structure:
 
 ```java
 module com.sergiomartinrubio.persistence {
@@ -28,7 +28,7 @@ module com.sergiomartinrubio.persistence {
 }
 ```
 
-This file will be place in the root of the module's source-code:
+This file will be placed in the root of the module's source-code:
 
 ```
 |-persistence
@@ -112,7 +112,7 @@ This is similar to `open` but with an extra level of visibility control. Instead
 
 ## Automatic Modules
 
-You might want to use third party libraries within your *Java Modules* application and as you can imagine not all the libraries out there are migrated to *Java Modules System*. Fortunately, Java automatically convert *JARs* into automatic modules. A `module-info.java` is generated automatically for *JAR* files on the module path and all the packages are exported by default.
+You might want to use third party libraries within your *Java Modules* application and as you can imagine not all the libraries out there are migrated to *Java Modules System*. Fortunately, Java treats any such *JAR* placed on the module path as an **automatic module**. Nothing is generated — there is no `module-info.java` for it. The module system derives the module name from the `Automatic-Module-Name` manifest entry, or failing that from the *JAR* filename, and it exports all of its packages and reads every other module.
 
 ## Java Modules with Spring Boot
 

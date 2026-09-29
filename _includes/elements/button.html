@@ -4,6 +4,9 @@
   {%- assign block_style = "" -%}
 {%- endif -%}
 
-<a class="m-1 btn btn-{{ include.style | default: 'outline-primary' }} btn-{{ include.size | default: 'md' }} {{ block_style }}" href="{{ include.link | default: '#' }}">
+<!-- Pass the Bootstrap size as `btn_size` (sm/lg), not `size`: Liquid resolves
+     `include.size` to the number of parameters given, which emitted `btn-2`. -->
+
+<a class="m-1 btn btn-{{ include.style | default: 'outline-primary' }}{% if include.btn_size %} btn-{{ include.btn_size }}{% endif %} {{ block_style }}" href="{{ include.link | default: '#' }}">
   {{ include.text | default: "Button" }}
 </a>

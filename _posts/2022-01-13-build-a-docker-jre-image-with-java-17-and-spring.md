@@ -9,7 +9,7 @@ mermaid: false
 layout: post
 ---
 
-From Java 11 no *JRE* images have been released so far (2021-12-31) -- this translates into heavier Java images when building your application to be released to production. Before you could build a *Docker* image with a size of less than 80MB -- this was easily achieve with a multi-stage Docker build.
+From Java 11 no *JRE* images have been released so far (2021-12-31) -- this translates into heavier Java images when building your application to be released to production. Before you could build a *Docker* image with a size of less than 80MB -- this was easily achieved with a multi-stage Docker build.
 
 In the meantime the only choice for building a JRE is to use `jlink`.
 
@@ -22,7 +22,7 @@ In the meantime the only choice for building a JRE is to use `jlink`.
 ```bash
 mkdir jre-build-example
 cd jre-build-example
-gradle init --type java-application // default selections should be fine
+gradle init --type java-application # default selections should be fine
 ```
 
 Once the project is created we can continue with adding some dependencies.

@@ -12,15 +12,15 @@ layout: post
 
 [**GraphQL**](https://graphql.org/){:target="_blank"} is a **query language** that matches up with **Domain Driven Design**, so you can use your existing entities or models in your _GraphQL_ design.
 
-This query language was created by _Facebook_ and open sourced later in 2015, and since then it has been maitained by the community.
+This query language was created by _Facebook_ and open sourced later in 2015, and since then it has been maintained by the community.
 
-To start using _GraphQL_ you will have to learn a new specification, because it is not a simple implementation, however it is pretty simple and if you are familiar with other query languages it will take you a few hours to understand how it works. Also the [GraphQL spec](https://graphql.github.io/graphql-spec/June2018/#){:target="_blank"} is very well documented and shows you how to use operations like queries or mutations, define schemas or what good practicies you should follow.
+To start using _GraphQL_ you will have to learn a new specification, because it is not a simple implementation, however it is pretty simple and if you are familiar with other query languages it will take you a few hours to understand how it works. Also the [GraphQL spec](https://graphql.github.io/graphql-spec/June2018/#){:target="_blank"} is very well documented and shows you how to use operations like queries or mutations, define schemas or what good practices you should follow.
 
 ## How it works
 
 This _API Query Language_ allows you to retrieve data from a service in one go. How can you do that? A single endpoint is exposed by _GraphQL_, and given a schema which contains your models and operations, you can make _HTTP_ requests to `/graphql` by providing operation names, a payload and variables. 
 
-_GraphQL_ supports both, _GET_ and _POST_ _HTTP_ methods. In case of _GET_, we have to use a query parameter (`?query={operationName{field}}`). On the other hand, we could do a standard _POST_ request with a _JSON_ payload.
+_GraphQL_ supports both _GET_ and _POST_ _HTTP_ methods. In case of _GET_, we have to use a query parameter (`?query={operationName{field}}`). On the other hand, we could do a standard _POST_ request with a _JSON_ payload.
 
 e.g.
 
@@ -28,6 +28,7 @@ e.g.
 {
   "query": "...",
   "operationName": "...",
+  "variables": { }
 }
 ```
 
@@ -50,9 +51,9 @@ query {
 }
 ```
 
-The _findHotelById_ is the operation of the query, and everything else inside the operation is called _payload_. You can use arguments like the one in the previos example (id: 2), that will return the Hotel with id 2.
+The _findHotelById_ is the field being queried, and the set of fields requested inside it is called the _selection set_. You can use arguments like the one in the previous example (id: 2), that will return the Hotel with id 2.
 
-Queries also support _dynamic_ arguments, and provides a way to pass them as JSON in the operation. You will use them like this:
+Queries also support _dynamic_ arguments, and provide a way to pass them as JSON in the operation. You will use them like this:
 
 ```graphql
 query MyQuery($hotelId:ID) {
@@ -114,7 +115,7 @@ Just like in queries, if a mutation returns an object type, you can ask for nest
 
 ### Subscription
 
-_GraphQL_ _subscriptions_ are a way to **stream data** from the server to the clients that are listening. In the same way as queries, subscriptions allow you to ask for a set of fields, but instead of making a stateless _HTTP_ request, a **websocket connection is used to have a stream of data coming from the server, so that every time there is a change on the server, results are sent to the client, or in other words, when a client runs a _mutation_ the subscription is triggered.
+_GraphQL_ _subscriptions_ are a way to **stream data** from the server to the clients that are listening. In the same way as queries, subscriptions allow you to ask for a set of fields, but instead of making a stateless _HTTP_ request, a **websocket** connection is used to have a stream of data coming from the server, so that every time there is a change on the server, results are sent to the client, or in other words, when a client runs a _mutation_ the subscription is triggered.
 
 >"Executing a _subscription_ creates a persistent function on the server that maps an underlying Source Stream to a returned Response Stream."
 

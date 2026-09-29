@@ -17,7 +17,7 @@ layout: post
 
 - Fully managed _NoSQL_.
 - Document or Key-Value.
-- Scales to any workload. _DynamoDB_ allows you to auto-scaling, so the throughput adapts to your actual traffic.
+- Scales to any workload. _DynamoDB_ supports auto-scaling, so the throughput adapts to your actual traffic.
 - Fast and consistent.
 - Provides access control.
 - Enables _Event Driven Programming_.

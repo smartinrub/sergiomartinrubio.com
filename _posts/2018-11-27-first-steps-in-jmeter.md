@@ -26,7 +26,7 @@ However, we will only cover the HTTP functionalities of **JMeter**.
 
 Performance tests are required to make sure your application will not crash under heavy traffic, and survive dates such as _Black Friday_ or _Christmas_. Therefore, it is a very important phase of the web development process.
 
-**JMeter** is an open source and _Java_ based that provides an _GUI_ to create your test plans, and simulates browser behavior by sending customized request to your website.
+**JMeter** is an open source, _Java_ based tool that provides a _GUI_ to create your test plans, and simulates browser behavior by sending customized requests to your website.
 
 ## JMeter
 

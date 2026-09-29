@@ -12,7 +12,7 @@ layout: post
 **Microservices architecture** is the way to go when you want to release new features multiple times per day, however most of the time microservices need to connect to each other. This is when _Kubernetes_ comes in to orchestrate the life and networking of _Dockerized_ microservices, and on top of that, it is reliable and performs very well. However, when developers want to debug or test a small change in a service that depends on other services located in a remote _Kubernetes_ cluster, dev cycles can become a lot slower. A developer needs to do the following to see the changes:
 
 1. Write code locally.
-2. Create a _container image_ and then push it to the _container register_.
+2. Create a _container image_ and then push it to the _container registry_.
 3. Apply the _Kubernetes_ configuration with the updated _container image_.
 
 Fortunately, there is an open-source tool called [Telepresence](https://www.telepresence.io){:target="_blank"} which helps developers in this matter. _Telepresence_ creates a fake deployment, starts a proxy inside your _Kubernetes_ cluster, and forwards all your requests from the cluster to your local process. The following example shows how to use this excellent tool.

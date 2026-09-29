@@ -1,0 +1,22 @@
+<h2 class="m0a" data-aos="fade-up">Where I've Worked:</h2>
+<div class="py-3">
+  {% for item in site.data.main.experience %}
+  <div class="borders cards rounded pds mb-3" data-aos="fade-up">
+    <div class="d-flex flex-wrap justify-content-between">
+      <h3 class="m0">{{ item.role }} &middot; {{ item.company }}</h3>
+      <p class="m0"><small>{{ item.period }}</small></p>
+    </div>
+    <p class="m0">
+      <small>{% if item.type %}{{ item.type }} &middot; {% endif %}{{ item.location }}</small>
+    </p>
+    <p class="mt-2 mb-2">{{ item.summary }}</p>
+    {% if item.stack %}
+    {% assign techs = item.stack | split: ", " %}
+    <p class="m0">
+      {% for tech in techs %}<span class="badge badge-light borders">{{ tech }}</span>
+      {% endfor %}
+    </p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

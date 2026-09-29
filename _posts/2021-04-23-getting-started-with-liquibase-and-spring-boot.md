@@ -8,9 +8,9 @@ mermaid: false
 layout: post
 ---
 
-[Liquibase](https://www.liquibase.org){:target="_blank"} is a popular library for versioning and deploying database changes. This is an open source library and widely use in the *Java ecosystem* or as part of a  *Jenkins* build.
+[Liquibase](https://www.liquibase.org){:target="_blank"} is a popular library for versioning and deploying database changes. This is an open source library and widely used in the *Java ecosystem* or as part of a  *Jenkins* build.
 
-Manual *SQL* schema updates are commonly used but they are not recommended if you want to keep track of the changes in your database. With Liquibase you can know what changes have been applied and when they were made so you could easily roll back the SQL schema to a previous state.
+Manual *SQL* schema updates are commonly used but they are not recommended if you want to keep track of the changes in your database. With Liquibase you can know what changes have been applied and when they were made so you can easily roll back the SQL schema to a previous state.
 
 ## The Internals
 

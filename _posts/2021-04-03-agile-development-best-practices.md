@@ -9,23 +9,23 @@ mermaid: false
 layout: post
 ---
 
-I've been practicing *Agile* development methodologies for a while in different teams and companies and I clearly see the benefits of them. Agile methodologies were formally described in 2001 and they emerged as a *Software Development* Manifesto. This manifesto consist of a set of methodologies like **Extreme Programming**, **SCRUM** or **Feature-Driven Development**. The goal was to achieve a faster feedback  from the user by developing features in small iterations, in contrast to the waterfall model, where everything is planned at the start of the project before writing any code.
+I've been practicing *Agile* development methodologies for a while in different teams and companies and I clearly see the benefits of them. Agile methodologies were formally described in 2001 and they emerged as a *Software Development* Manifesto. The manifesto itself is a short set of values and principles rather than a process; the methodologies that put it into practice include **Extreme Programming**, **SCRUM** and **Feature-Driven Development**. The goal was to achieve faster feedback from the user by developing features in small iterations, in contrast to the waterfall model, where everything is planned at the start of the project before writing any code.
 
 ## Agile Methods and Practices
 
 ### SCRUM
 
-SCRUM is one of the Agile frameworks which goal is to help teams develop and deliver complex features in short iterations. Some SCRUM concepts are:
+SCRUM is one of the Agile frameworks whose goal is to help teams develop and deliver complex features in short iterations. Some SCRUM concepts are:
 
-- ***Sprint***. It's a period of time of around **2 week long** in which a small team of **4 to 8 members** participate in an end to end lifecycle of a feature or product. Why is the length two weeks? 2 weeks is usually enough time to deliver a feature that the team can *demo* (we will talk about *demo* later on) and provide some value to the business. Also, it's important that the team is not either too small or too big. 
+- ***Sprint***. It's a period of time of around **2 weeks long** in which a small team of **4 to 8 members** participate in an end to end lifecycle of a feature or product. Why is the length two weeks? 2 weeks is usually enough time to deliver a feature that the team can *demo* (we will talk about *demo* later on) and provide some value to the business. Also, it's important that the team is not either too small or too big. 
 
 - **Team structure**: Scrum teams should be self-organized to avoid the traditional hierarchical roles such as lead developer and decisions should be taken by a common consensus. After my experience in different companies that range from big enterprises to start-ups I consider an ideal agile team those with the following team members:
 
-  - **3-5 engineers**, including either backend engineers or frontend engineers. You might want to have a mix of personality types, so they complement each other.
+  - **3-5 engineers**, covering both backend and frontend. You might want to have a mix of personality types, so they complement each other.
 
-  - **Product owner**. A product owner is a person whose got a business and technical mind. He is responsible for defining the sprint goal and making sure that the team is on track to deliver value. He will be in continuous communication with the business side of the company (*stakeholders*).
+  - **Product owner**. A product owner is a person who has got a business and technical mind. They are responsible for defining the sprint goal and making sure that the team is on track to deliver value, and they will be in continuous communication with the business side of the company (*stakeholders*).
 
-  - **Scrum master (Optional)**.  From my point of view the scrum master role should be present if the team is quite inexperience in Agile practices, so he will make sure that the sprint lifecycle goes smoothly.
+  - **Scrum master (Optional)**.  From my point of view the scrum master role should be present if the team is quite inexperienced in Agile practices, so they will make sure that the sprint lifecycle goes smoothly.
 
   - **Quality Assurance (Optional)**. There are two types of Quality Assurance (QA) roles: technical and non-technical. Those who are QA engineers build functional tests with automation tools. On the other hand, the non-technical QA role is focused on manual testing. Some teams might require this role due to the risk and complexity of the product, however for most of the teams, engineers should be the best people to write acceptance tests.
 
@@ -35,7 +35,7 @@ SCRUM is one of the Agile frameworks which goal is to help teams develop and del
 
   - **Planning**. Sprint planning is a meeting that is used to kick off the *sprint*. During this meeting the team discuss the goal of the *sprint*, how it will be achieved and what *user stories* (we will talk about user stories later) will be part of the *sprint*. It shouldn't be longer than an hour.
 
-  - **Grooming or refinement**. During this session the Scrum team will go through the items on the backlog to add details to the existing items, remove the ones that are not relevant anymore or create new ones. Also, as part of this meeting items are estimated with *story points*. The estimation process is called *planning poker*. **Planning poker** consist of using numbered cards to provide size of each individual task. The estimation given by each team member is discussed in detail to identify the reasons behind their estimation in order to reach a group consensus for the task. **Story points** represent the difficulty of implementing a story and is a combination of complexity, amount of work and uncertainty. I have seen some teams using time (number of days, hours...) as story points and this is a huge mistake for multiple reasons:
+  - **Grooming or refinement**. During this session the Scrum team will go through the items on the backlog to add details to the existing items, remove the ones that are not relevant anymore or create new ones. Also, as part of this meeting items are estimated with *story points*. The estimation process is called *planning poker*. **Planning poker** consists of using numbered cards to provide size of each individual task. The estimation given by each team member is discussed in detail to identify the reasons behind their estimation in order to reach a group consensus for the task. **Story points** represent the difficulty of implementing a story and is a combination of complexity, amount of work and uncertainty. I have seen some teams using time (number of days, hours...) as story points and this is a huge mistake for multiple reasons:
 
     - Dates are not taking into account things like **auxiliary work** engineers need to do to complete tasks, such as meetings, emails or conversations with other engineers. 
     - Team members should be **rewarded by the completion of tasks based on difficulty**, not time spent.
@@ -70,13 +70,13 @@ SCRUM is one of the Agile frameworks which goal is to help teams develop and del
 
 ### Pair Programming
 
-**Pair programming** is a technique mainly used by software engineers in order to share knowledge between team members. This practice is specially  useful for junior engineers and new team members. Pair programming consist of having two programmers, one of them writing the code and the other  providing feedback and/or guidance. 
+**Pair programming** is a technique mainly used by software engineers in order to share knowledge between team members. This practice is especially useful for junior engineers and new team members. Pair programming consists of having two programmers, one of them writing the code and the other providing feedback and/or guidance. 
 
 *Mob programming* is a similar software development technique in which more than two engineers work on the same piece of code at the same time and on the same computer.
 
 ### Test Driven Development (TDD)
 
-*TDD* is a software development technique to improve code quality, maintainability and testability. This practice consist of writing a failing test first, then making the test past by writing the implementation details and finally refactoring the solution.
+*TDD* is a software development technique to improve code quality, maintainability and testability. This practice consists of writing a failing test first, then making the test pass by writing the implementation details and finally refactoring the solution.
 
 I've been using this technique for quite a while and encourages and promotes you to follow some **SOLID** principles.
 

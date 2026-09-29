@@ -10,11 +10,11 @@ mermaid: false
 layout: post
 ---
 
-The best way to start using [BDD](https://sergiomartinrubio.com/articles/bdd-fundamentals) with Java is by using one of the BDD test frameworks like Cucumber which allows you to write your test cases using the Gherkin syntax
+The best way to start using [BDD](https://sergiomartinrubio.com/articles/bdd-fundamentals) with Java is by using one of the BDD test frameworks like Cucumber which allows you to write your test cases using the Gherkin syntax.
 
 [Cucumber](https://cucumber.io){:target="_blank"}  is an open source BDD framework that supports many languages like Java, JavaScript, Ruby, C++, Golang or Kotlin.
 
-When using *BDD* with a framework like *Cucumber* you will have to write executable specification which translates to the requirements. This specification is written in a language called *Gherkin* (introduced in the previous section).
+When using *BDD* with a framework like *Cucumber* you will have to write executable specifications which translate to the requirements. These specifications are written in a language called *Gherkin*, covered in the [BDD fundamentals article](https://sergiomartinrubio.com/articles/bdd-fundamentals/#gherkin-syntax).
 
 ## Dependencies
 

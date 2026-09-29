@@ -10,7 +10,7 @@ mermaid: true
 layout: post
 ---
 
-Smart contracts are no upgradable by nature, so this means that once deployed on the blockchain, there is no way to make any modifications. There are scenarios where [deploying a new version of the smart contract](https://sergiomartinrubio.com/articles/how-to-release-new-versions-of-smart-contracts/) is necessary for multiple reasons like vulnerabilities or extension of the smart contract - and this can be done through Smart Contract proxies.
+Smart contracts are not upgradable by nature, so this means that once deployed on the blockchain, there is no way to make any modifications. There are scenarios where [deploying a new version of the smart contract](https://sergiomartinrubio.com/articles/how-to-release-new-versions-of-smart-contracts/) is necessary for multiple reasons like vulnerabilities or extension of the smart contract - and this can be done through Smart Contract proxies.
 
 [Hardhat](https://sergiomartinrubio.com/articles/hardhat-a-smart-contract-developoment-framework/) deploy plugin provides support for upgrading smart contracts through proxies, and we just need to specify that we are going to use a proxy on our deployment script 🙌, so let's see how it works with an example.
 

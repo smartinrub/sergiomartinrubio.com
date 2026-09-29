@@ -11,7 +11,7 @@ layout: post
 
 Traditionally Front-end is deployed on a centralized provider like *AWS*, *Google Cloud* or *Microsoft Azure*.
 
-*But what is decentralization when we are talking about software?* it can be defined as the distribution of control to multiple nodes or entities. But don't confuse with "distributed". In a distributed network the data ownership and computer power is managed by a centralized company, whereas in a decentralized network the information ownership and arithmetic power are equally distributed among all nodes in the network.
+*But what is decentralization when we are talking about software?* it can be defined as the distribution of control to multiple nodes or entities. But don't confuse it with "distributed". Being distributed is about *where* the work runs — data and computing power spread across many machines, which can still all belong to one company. Being decentralized is about *who controls it*: no single entity owns the data or the computing power, and both are spread among the independent nodes of the network.
 
 Here we are going to show you how to deploy your [Smart Contract UI](https://sergiomartinrubio.com/articles/interact-with-smart-contracts-from-the-ui/) to a decentralized network with [IPFS](https://ipfs.tech/){:target="_blank"}.
 
@@ -19,7 +19,7 @@ Here we are going to show you how to deploy your [Smart Contract UI](https://ser
 
 ## How does IPFS work?
 
-The idea behind *IPFS* is that your file is hashed so you get an unique identifier that anyone can use to look up your file. *IPFS* nodes can cache a copy of your file so they become a provider of your file, similar to a [blockchain](https://sergiomartinrubio.com/articles/getting-started-with-solidity/), however *IPFS* nodes can decide what data they want to cache, and they can decide what to pin or discard to save space, so nodes only store the content they are interested in. Another difference between a blockchain and *IPFS* is that IPFS is simply a decentralized storage, therefore there is no execution.
+The idea behind *IPFS* is that your file is hashed so you get a unique identifier that anyone can use to look up your file. *IPFS* nodes can cache a copy of your file so they become a provider of your file, similar to a [blockchain](https://sergiomartinrubio.com/articles/getting-started-with-solidity/), however *IPFS* nodes can decide what data they want to cache, and they can decide what to pin or discard to save space, so nodes only store the content they are interested in. Another difference between a blockchain and *IPFS* is that IPFS is simply a decentralized storage, therefore there is no execution.
 
 ## Hosting on IPFS
 

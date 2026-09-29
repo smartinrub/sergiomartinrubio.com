@@ -222,7 +222,7 @@ CREATE TABLE pet(
 
 For this particular example if one of the records is deleted from `client`, all the entries in the table `pet` with the matching client `id` will be deleted. In case of an update all the pet entries with the same client `id` will be set to 0. Alternatively you could set the foreign key as `NO ACTION`, and nothing will change in the `pet` table when changes are made on `client` table.
 
-> Note: On delete and on update only work for with tables with store engines that support foreign keys like InnoDB.
+> Note: On delete and on update only work with tables whose storage engine supports foreign keys, like InnoDB.
 
 - `AUTO_INCREMENT`:
 
@@ -335,13 +335,13 @@ CREATE TABLE <table_name>(
 
 Each DB engine has different features like table structure, therefore you have to decide which one is better for your use case.
 
-1. **InnoDB**: Generates three files for each table, allows foreign keys, transactions, entry blocks, integrity control... and as a result the performance is lower.
+1. **InnoDB**: supports foreign keys, transactions, integrity control and **row-level locking**, plus crash recovery. With `innodb_file_per_table` (the default) each table gets its own `.ibd` tablespace file.
 
-2. **MyISAM**: Creates a single file for each table and other files in shared folders. The performance is higher than InnoDB since it contains fewer checks. One of the main disadvantages is that it does not allow foreign keys.
+2. **MyISAM**: stores each table as separate data and index files (`.MYD` and `.MYI`, historically alongside a `.frm` definition file). It does fewer checks, but it has no transactions, no foreign keys and only **table-level locking**, so a single write blocks every reader of that table. Treat it as legacy.
 
-3. **MemoryEngine**: It uses volatile memory and as a result is much faster, however everything is gone after each session.
+3. **MEMORY** (formerly `HEAP`): It uses volatile memory and as a result is much faster, however everything is gone when the server restarts.
 
-> The default engine in _Linux OS_ is _MyISAM_ and in _Windows OS_ is _InnoDB_.
+> The default engine is **InnoDB** on every platform, and has been since _MySQL 5.5_. It is also generally the faster choice under concurrent load, despite doing more work per statement, because MyISAM's table-level locking serialises writers.
 
 ## Load Databases
 
@@ -570,11 +570,11 @@ It is also called cross join because each row of each table is crossed with each
 The `JOIN` syntax is an alternative to the full join with conditions. Some of the options are:
 
 1. `INNER JOIN`: same as full join but replace `WHERE` with `ON`;
-2. `NATURAL JOIN`: it will match columns from two tables which have same name.
+2. `NATURAL JOIN`: it will match columns from two tables which have the same name.
 3. `RIGHT OUTER JOIN` and `LEFT OUTER JOIN`: they will return the matched rows and the unmatched rows from the right or left.
 
 e.g.
-Return all the pets even if some they do not have an owner.
+Return all the pets even if some of them do not have an owner.
 
 ```sql
 SELECT *
@@ -582,10 +582,10 @@ SELECT *
     ON pet.owner=owner.id;
 ```
 
-4. `UNION`: to combine `RIGHT OUTER JOIN` and `LEFT OUTER JOIN`.
+4. `UNION`: combining a `LEFT OUTER JOIN` with a `RIGHT OUTER JOIN` is how you emulate a `FULL OUTER JOIN`, which _MySQL_ does not support natively. `UNION` also removes duplicate rows, which is what stops the matched rows appearing twice — use `UNION ALL` if you want them kept.
 
 e.g.
-Return all the owners without pets and all the pets without owners.
+Return every pet and every owner: the matched pairs, plus the pets with no owner and the owners with no pet. (If you want *only* the unmatched rows, add `WHERE owner.id IS NULL` and `WHERE pet.owner IS NULL` to the two halves.)
 
 ```sql
 SELECT * FROM pet LEFT OUTER JOIN owner ON pet.owner=owner.id

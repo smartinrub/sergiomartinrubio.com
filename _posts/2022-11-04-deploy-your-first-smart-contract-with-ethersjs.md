@@ -11,7 +11,7 @@ mermaid: false
 layout: post
 ---
 
-We have previously talked about *Blockchain* and *Solidity* on a previous post, so if you don't know what *Blockchain*, *Smart Contracts* or *Solidity* are, go ahead and take a look at [Getting Started with Solidity](https://sergiomartinrubio.com/articles/getting-started-with-solidity/).
+We have already talked about *Blockchain* and *Solidity*, so if you don't know what *Blockchain*, *Smart Contracts* or *Solidity* are, go ahead and take a look at [Getting Started with Solidity](https://sergiomartinrubio.com/articles/getting-started-with-solidity/).
 
 The goal is to deploy a *Smart Contract* written in *Solidity* with *JavaScript*!
 

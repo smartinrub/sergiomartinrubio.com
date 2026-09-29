@@ -10,13 +10,13 @@ layout: post
 
 [Akka](https://akka.io){:target="_blank"} is a library for Java and Scala that allows you to develop applications that involve running asynchronous processes in distributed systems.
 
-This open source library supports clustering and reactive streams, as well as, it's easy to maintain and performs very well.
+This open source library supports clustering and reactive streams, and it is easy to maintain and performs very well.
 
-Akka makes use of something called the *actor model*. This model solves some issues that comes with OOP (Object Oriented Programming) like concurrency, since *OOP* languages were not designed for that and it is easy to introduce race conditions. On the other hand, the actor model do not share any state between actors and it follows a "fire and forget" strategy (similar to a [message queue system](https://sergiomartinrubio.com/articles/understanding-messaging-pattern-with-jms/)), therefore it works better on distributed systems. However, the actor model has **some drawbacks**: it's harder to get "return values"; it might add more complexity.
+Akka makes use of something called the *actor model*. This model solves some issues that come with OOP (Object Oriented Programming) like concurrency, since *OOP* languages were not designed for that and it is easy to introduce race conditions. On the other hand, the actor model does not share any state between actors and it follows a "fire and forget" strategy (similar to a [message queue system](https://sergiomartinrubio.com/articles/understanding-messaging-pattern-with-jms/)), therefore it works better on distributed systems. However, the actor model has **some drawbacks**: it's harder to get "return values"; it might add more complexity.
 
-Actors can receive and send messages, this means each actor can delegate work to other actors. When a return value is expected, the actor delivers the results in a reply message.
+Actors can receive and send messages, which means each actor can delegate work to other actors. When a return value is expected, the actor delivers the results in a reply message.
 
-# Getting Started
+## Getting Started
 
 The following examples will show you how to start creating Akka actors with Java.
 
@@ -204,7 +204,7 @@ system.tell(new FirstTypedActor.FooMessage("hello world"));
 system.terminate();
 ```
 
-# Conclusion
+## Conclusion
 
 In this article we only covered the basic features of Akka actors and this library provides many other features that can be found in the [official documentation](https://doc.akka.io/docs/akka/current/index.html){:target="_blank"}.
 

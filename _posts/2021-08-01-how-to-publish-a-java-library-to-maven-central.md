@@ -9,7 +9,7 @@ mermaid: false
 layout: post
 ---
 
-The process of publishing a Java library to Maven Central is not as straightforward as you might think and we will go through all the required steps to share your new shiny Java library with the  of world.
+The process of publishing a Java library to Maven Central is not as straightforward as you might think and we will go through all the required steps to share your new shiny Java library with the rest of the world.
 
 ## Steps
 
@@ -18,7 +18,7 @@ The process of publishing a Java library to Maven Central is not as straightforw
 Maven central requires having a unique Group ID that is usually a domain name reversed. If you own a domain, you can use it e.g. `com.sergiomartinrubio`, otherwise you can simply use your GitHub account e.g. `com.github.sergiomartinrubio`.
 
 1. Create a [Sonatype Jira account](https://issues.sonatype.org/secure/Signup!default.jspa){:target="_blank"}. Use your email address from your domain if possible.
-2. [Create Create a new Jira Issue](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134){:target="_blank"} as follows:
+2. [Create a new Jira Issue](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134){:target="_blank"} as follows:
    - **Summary**: can be something like `Create new com.sergiomartinrubio project`.
    - **Group Id**: will be something like `com.sergiomartinrubio` or `com.github.sergiomartinrubio`.
    - **Project URL**: can be your website or where you document the library (e.g. GitHub account).

@@ -22,9 +22,9 @@ Until now [`spring-boot-devtools`](https://docs.spring.io/spring-boot/docs/curre
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/N1opxIOgiarGIzMUA1RnI7P7HpNaasTqWMFpUIUZQYB3McAmqwMqC3p7cM41PxlrfGYorBRHWvD8zjU3p0bVWNVQBH1t5QgkoSR-H_Ig5guR_nxEwkJtBeeA8-oIE-w-uA8-ZxZ6=w2400" caption="IntelliJ Registry" %}
 
-Another alternative offered by **DevTools** is to explicitly tell **IntelliJ IDEA** to run “*Build Project*” (*CRLT+9* in **Ubuntu 18.04**) to build the target classpath. This feature is also available since **Spring Boot 2** when running the application in *Debug Mode*.
+Another alternative offered by **DevTools** is to explicitly tell **IntelliJ IDEA** to run “*Build Project*” (*CTRL+9* in **Ubuntu 18.04**) to build the target classpath. This feature is also available since **Spring Boot 2** when running the application in *Debug Mode*.
 
-On the other hand, the latest _Spring Boot_ version offers an additional alternative. With the version 2.2 your beans can be initialized lazily by setting a *System Property*.
+On the other hand, the latest _Spring Boot_ version offers an additional alternative. With the version 2.2 your beans can be initialized lazily by setting an application *property*.
 
 ```properties
 spring.main.lazy-initialization=true

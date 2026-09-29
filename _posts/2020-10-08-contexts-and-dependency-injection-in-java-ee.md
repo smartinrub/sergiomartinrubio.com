@@ -8,11 +8,11 @@ mermaid: false
 layout: post
 ---
 
-**CDI** (*Contexts and Dependency Injection*) is one of the core features of *Java EE*. CDI allows you to glue the different componentes of your Java EE application in a loosely coupled way.
+**CDI** (*Contexts and Dependency Injection*) is one of the core features of *Java EE*. CDI allows you to glue the different components of your Java EE application in a loosely coupled way.
 
 Commonly you have a web tier, enterprise tier and persistence tier and you can use CDI to join these three layers.
 
-As the name says CDI provides a context feature and a dependency injection feature. The **context** is used to bind stateful componentes whereas the **dependency injection** allows you to inject a class instance without having to do the initialization by yourself.
+As the name says CDI provides a context feature and a dependency injection feature. The **context** is used to bind stateful components whereas the **dependency injection** allows you to inject a class instance without having to do the initialization by yourself.
 
 ## CDI Beans
 

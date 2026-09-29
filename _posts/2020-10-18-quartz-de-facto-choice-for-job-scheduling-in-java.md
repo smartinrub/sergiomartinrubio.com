@@ -18,7 +18,7 @@ Schedulers are sometimes required for recurring tasks like reminding customers t
 
 - Schedule jobs at a particular time
 - Repeat job executions
-- Suports [JTA transactions](https://sergiomartinrubio.com/articles/jpa-introduction-to-java-persistence-api#persistence-unit)
+- Supports [JTA transactions](https://sergiomartinrubio.com/articles/jpa-introduction-to-java-persistence-api#persistence-unit)
 - Store jobs in a relational database via [JDBC](https://sergiomartinrubio.com/articles/working-with-jdbc-api)
 - Supports clustering
 - [Quartz Spring integration](https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/boot-features-quartz.html)
@@ -28,15 +28,15 @@ Schedulers are sometimes required for recurring tasks like reminding customers t
 
 ### Scheduler
 
-The `Scheduler` interface is the main class of Quartz scheduler and its role is to take care of the lifecycle of the jobs. It allows you to schedule a new job, check if a job exists, retrieve the details of an existing job, delete a job...
+The `Scheduler` interface is the main entry point of the Quartz scheduler and its role is to take care of the lifecycle of the jobs. It allows you to schedule a new job, check if a job exists, retrieve the details of an existing job, delete a job...
 
 ### Job
 
 The `Job` interface is implemented by the classes that contain the business logic that we schedule with the `Scheduler`.
 
-### JobDetails
+### JobDetail
 
-The `JobDetails` is created through the `JobBuilder` and it holds all the data related to the job.
+The `JobDetail` is created through the `JobBuilder` and it holds all the data related to the job.
 
 ### Trigger
 
@@ -155,7 +155,7 @@ public void scheduleJob(String jobName, SchedulerParams schedulerParams) throws 
 }
 ```
 
-When you schedule a job you will usually provide a `Trigger` and  `JobDetails`. 
+When you schedule a job you will usually provide a `Trigger` and a `JobDetail`. 
 
 ```java
 private Trigger getTrigger(ZonedDateTime jobDateTime) {

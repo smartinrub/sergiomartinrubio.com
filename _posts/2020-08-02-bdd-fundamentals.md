@@ -10,20 +10,20 @@ layout: post
 
 *Behavior Driven Development* (BDD) provides techniques that can help you manage software development uncertainty and risk. BDD is about building the right software.
 
-> BDD was originally defined by [Dan North](https://dannorth.net){:target="_blank"} in 2009 in London as an extension of TDD (Test Driven Development) that describes a cycle of interactions with particular outputs.
+> BDD was originally defined by [Dan North](https://dannorth.net){:target="_blank"}, who began developing it in 2003 and published *Introducing BDD* in 2006, as an extension of TDD (Test Driven Development) that describes a cycle of interactions with particular outputs.
 
-> TDD is a technique used to make sure the code you write does what you expect. It consist of writing a failing test first and implementing the minimal amount of code that makes the test pass afterward. Then you will refactor the code to make it clean and apply design patterns. You will have to repeat the process for other scenarios or edge cases.
+> TDD is a technique used to make sure the code you write does what you expect. It consists of writing a failing test first and implementing the minimal amount of code that makes the test pass afterward. Then you will refactor the code to make it clean and apply design patterns. You will have to repeat the process for other scenarios or edge cases.
 
-BDD techniques consist in identifying business goals and looking for features that will help deliver these goals, so that you should prioritize those features that will deliver the most value.
+BDD techniques consist of identifying business goals and looking for features that will help deliver these goals, so that you should prioritize those features that will deliver the most value.
 
-Behavior Driver Development can be applied to the UI layer and non-UI layers. When BDD is applied to the non-UI in a MVC application, you can easily apply these techniques to the controller layer.
+Behavior Driven Development can be applied to the UI layer and non-UI layers. When BDD is applied to the non-UI in a MVC application, you can easily apply these techniques to the controller layer.
 
 **BDD advantages**:
 
 - Allows developers to focus on building features that will provide business value.
 - Reduces the number of bugs and the cost of fixing them.
 - Makes it easier to make changes in your application, since the specification can be used by the stakeholders to understand what the application does.
-- Reduces the risk of regression tests.
+- Reduces the risk of regressions.
 - Speeds up the release cycle since it reduces the amount of testing required by QA engineers.
 
 **BDD disadvantages**:
@@ -46,7 +46,7 @@ Additionally, you can use **And** or **But** when multiple conditions or expecta
 Given a transaction that is stored in our system with date before today
 When I check the status from ATM channel
 Then the system returns the status SETTLED
-And the amount substracting the fee
+And the amount subtracting the fee
 ```
 
 ## BDD Steps
@@ -138,7 +138,7 @@ Feature: Return transaction status # feature title
     Given a transaction that is stored in our system with date today
     When I check the status from CLIENT channel
     Then the system returns the status PENDING
-    And the amount substracting the fee
+    And the amount subtracting the fee
 ```
 
 It's recommended to keep your scenarios simple by describing the behaviors with tables.
@@ -176,7 +176,7 @@ Scenario: Get transaction stored in our system given a channel
   Given a transaction that is stored in our system with date before today
   When John Smith checks the status from CLIENT channel
   Then the system returns the status SETTLED
-  And John Smith should see the amount substracting the fee
+  And John Smith should see the amount subtracting the fee
 ```
 
 ### Business Logic
@@ -194,7 +194,7 @@ Scenario: Get transaction stored in our system given a channel
   Given a transaction that is stored in our system with date before today
   When I check the status from CLIENT channel
   Then the system returns the status SETTLED
-  And the amount substracting the fee
+  And the amount subtracting the fee
 ```
 
 - **Implement the step definitions** and set them as pending.

@@ -11,7 +11,7 @@ layout: post
 
 [LDAP](https://ldapwiki.com/wiki/LDAP){:target="_blank"} (Lightweight Directory Access Protocol) is a directory service in which you can store data. The information stored in LDAP is structured in a tree hierarchy and each directory object is called an entry. An entry contains the following components:
 
-- `DN` (_Distinguished Name_): identifies an entry and consists of single entries names separated by a comma and ordered right-to-left.
+- `DN` (_Distinguished Name_): identifies an entry and consists of the names of the individual entries above it, separated by commas, with the most specific component first so the hierarchy reads right-to-left.
 - Object classes: An object class is the schema of an entry that organizes and determines the content of the entry.
 - Attributes: contain the actual data.
 
@@ -31,7 +31,7 @@ cn=Sergio
 
 1. [Download Apache Directory Studio](http://directory.apache.org){:target="_blank"}
 
-    >Apache Directory Studio association 2.0.0-M15 requires Java 8. Make sure you do not have any other _Java_ version under `/Library/Java/JavaVirtualMachines` on MacOS.
+    >Apache Directory Studio version 2.0.0-M15 requires Java 8. Make sure you do not have any other _Java_ version under `/Library/Java/JavaVirtualMachines` on MacOS.
 
 2. Go to _LDAP Servers_ tab in the bottom left corner and click on _New LDAP Server_.
 3. Select latest version and click on _Finish_.

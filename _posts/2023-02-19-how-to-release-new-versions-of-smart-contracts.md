@@ -24,7 +24,7 @@ The main advantage of this strategy is that is very simple to implement, but on 
 
 ## Social Migration
 
-This strategy consist of asking people to start using the new version of the smart contract. This method ensures a higher degree of decentralization since it's up to the people to decide what version of the contract they want to use. However, there is a big disadvantage which is the fact that a new smart contract address must be use and you need to somehow reach out everyone to start using the new address. Another pain point is moving the state, like balances, from the old to the new smart contract, specially because it might require a lot of work. You can find more details about how to migrate the data from one smart contract to another on ["How contract migration works - Flash Sheridan" article](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/){:target="_blank"}.
+This strategy consists of asking people to start using the new version of the smart contract. This method ensures a higher degree of decentralization since it's up to the people to decide what version of the contract they want to use. However, there is a big disadvantage which is the fact that a new smart contract address must be used and you need to somehow reach out to everyone to start using the new address. Another pain point is moving the state, like balances, from the old to the new smart contract, especially because it might require a lot of work. You can find more details about how to migrate the data from one smart contract to another on ["How contract migration works - Flash Sheridan" article](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/){:target="_blank"}.
 
 ## Proxies
 

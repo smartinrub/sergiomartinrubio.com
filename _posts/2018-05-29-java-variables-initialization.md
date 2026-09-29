@@ -8,7 +8,7 @@ mermaid: false
 layout: post
 ---
 
-There are two ways of initialize a field, eagerly and lazily. Lazy initialization is based on initializing the field when the value is needed, whereas the eager initialization is based on initializing the variable when it is declared.
+There are two ways of initializing a field, eagerly and lazily. Lazy initialization is based on initializing the field when the value is needed, whereas the eager initialization is based on initializing the variable when it is declared.
 
 Both choices are compatible with _static_ and _instance fields_, however the implementations may differ when trying to achieve performance improvement.
 
@@ -32,7 +32,7 @@ Lazy initialization is recommended when:
 - **You want to improve performance**
 - **You want to reduce access from instances of a class**
 - **It is costly to initialize**
-- There are not many threads** (when there are two o more threads, _synchronization_ might be required)
+- **There are not many threads** (when there are two or more threads, _synchronization_ might be required)
 
     e.g. 
 
@@ -56,12 +56,12 @@ As you can see it is really important to know the context of the field and how i
 When **lazy initialization** and **static** fields are combined, the lazy initialization holder class idiom is recommended.
 
 ```java
-private static class OjbectHolder {
+private static class ObjectHolder {
 
     static final Object object = new Object();
 }
 
-private static Object getField() { return OjbectHolder.object; }
+private static Object getField() { return ObjectHolder.object; }
 ```
 
 By doing this, the static object is initialized only the first time `getField()` is called. In addition, the `getField()` method is not synchronized and it is only a field access, therefore there is no cost of access.

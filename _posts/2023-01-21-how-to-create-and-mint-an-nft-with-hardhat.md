@@ -14,13 +14,13 @@ mermaid: false
 layout: post
 ---
 
-A NFT (Non-Fungible Token) is a unique token that cannot be replicated unlike fungible tokens like [ERC-20](https://sergiomartinrubio.com/articles/mint-your-first-erc20-token-with-hardhat-and-openzeppelin/), this means NFTs cannot be used for commercial transactions. Usually NFTs represent some kind of digital art or complement  real-world items, like digital tickets, the ownership of intellectual property, patterns or sensitive data (e.g. medical records, real estate ownership, music), ensuring the authenticity of a product, tracking (e.g. supply chain) or gaming (e.g. trading of weapons).
+An NFT (Non-Fungible Token) is a unique token that cannot be replicated, unlike fungible tokens like [ERC-20](https://sergiomartinrubio.com/articles/mint-your-first-erc20-token-with-hardhat-and-openzeppelin/). Non-fungible means each token is distinct and not interchangeable one-for-one with another — it does not mean they cannot be bought and sold, and in practice trading them is the most common use. Usually NFTs represent some kind of digital art or complement real-world items, like digital tickets, the ownership of intellectual property, patterns or sensitive data (e.g. medical records, real estate ownership, music), ensuring the authenticity of a product, tracking (e.g. supply chain) or gaming (e.g. trading of weapons).
 
 ## ERC-721
 
 A Non-Fungible Token is just another Ethereum standard, the [EIP-721](https://eips.ethereum.org/EIPS/eip-721){:target="_blank"}.
 
-A NFT contract must implement the following interfaces:
+An NFT contract must implement the following interfaces:
 - `ERC721`. Defines the following events and methods:
   - `event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId`
   - `event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId`

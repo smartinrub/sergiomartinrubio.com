@@ -13,7 +13,7 @@ mermaid: false
 layout: post
 ---
 
-A smart contract development framework makes it easy to create smart contracts fast. We have previously gone through the [Solidity fundamentals](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) and [how to deploy Smart Contract with Ethers.js](https://sergiomartinrubio.com/articles/deploy-your-first-smart-contract-with-ethersjs/), but now we want to speed up the process of creating a smart contracts with [Hardhat](https://hardhat.org){:target="_blank"}. We are choosing *Hardhat* because it is one of the most used smart contract development framework at the time of writing this article.
+A smart contract development framework makes it easy to create smart contracts fast. We have previously gone through the [Solidity fundamentals](https://sergiomartinrubio.com/articles/getting-started-with-solidity/) and [how to deploy Smart Contract with Ethers.js](https://sergiomartinrubio.com/articles/deploy-your-first-smart-contract-with-ethersjs/), but now we want to speed up the process of creating smart contracts with [Hardhat](https://hardhat.org){:target="_blank"}. We are choosing *Hardhat* because it is one of the most used smart contract development frameworks at the time of writing this article.
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ A smart contract development framework makes it easy to create smart contracts f
 4. Create Hardhat project: `yarn hardhat`. You can click on enter for all the values. It creates:
    - `contracts` folder: this is where you put your Smart Contracts.
    - `scripts` folder: this is where you put your scripts for deploying contracts or interacting with them.
-   - `.gitignore`: git file for avoiding committing some file or folders.
+   - `.gitignore`: git file for avoiding committing some files or folders.
    - `hardhat.config.js`: this is where you place the HardHat configuration, plugins, and tasks.
    - `README.md`: this is to document your project.
    - `test` folder: this is where you will create your smart contract tests.

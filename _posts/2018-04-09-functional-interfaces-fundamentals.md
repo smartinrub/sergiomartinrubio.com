@@ -39,7 +39,7 @@ Foo foo = string -> string + "world!";
 System.out.println(foo.method("Hello "));
 ```
 
-It is important to mention that **Java 8** already provides some functional interfaces out-of-the-box in `Function<T,R>` from the `java.util.function` package. Therefore, in some cases, like the one explained previously, we can make use of them.
+It is important to mention that **Java 8** already provides a set of functional interfaces out-of-the-box in the `java.util.function` package — `Function<T,R>`, `Supplier<T>`, `Consumer<T>`, `Predicate<T>` and friends. Therefore, in some cases, like the one explained previously, we can make use of them.
 
 ```java
 Function<String, String> function = string -> string + "world!";
@@ -48,7 +48,7 @@ System.out.println(function.apply("Hello "));
 
 ## Default methods
 
-**Default methods** are allowed in functional interfaces since they are not abstract methods.
+**Default methods** are allowed in functional interfaces since they are not abstract methods. Static methods are allowed for the same reason, and neither counts towards the single-abstract-method rule.
 
 ```java
 @FunctionalInterface
