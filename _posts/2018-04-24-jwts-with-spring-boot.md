@@ -10,7 +10,7 @@ mermaid: false
 layout: post
 ---
 
-[JWT](https://jwt.io/){:target="_blank"} (_JSON Web Token_) is an open-source standard commonly used to transmit data between two services in a compact and secure way. This standard offers a wide range of libraries to generate _JWTs_, including libraries for platforms such as _.NET_, _Python_, _Node.js_, _Java_, _JavaScript_, _Perl_, _Ruby_, _Elixir_, _Golang_, _Groovy_, and _Haskell_.
+[JWT](https://jwt.io/){:target="_blank"} (_JSON Web Token_) is an open standard ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519){:target="_blank"}) commonly used to transmit data between two services in a compact and secure way. This standard offers a wide range of libraries to generate _JWTs_, including libraries for platforms such as _.NET_, _Python_, _Node.js_, _Java_, _JavaScript_, _Perl_, _Ruby_, _Elixir_, _Golang_, _Groovy_, and _Haskell_.
 
 ## Features
 
@@ -23,7 +23,7 @@ layout: post
 
 {% include elements/figure.html image="https://lh3.googleusercontent.com/6C42ufo6FCCFM40a24XGl4SkJ7a4IDlM-8C5iGGTwfB2W7oj6JBSZPx9QeF4QZnba4TXQTdNZsldVeIkWQ=w800" caption="JWT Communication" %}
 
-1. _JWTs_ can be added to the URL, sent via _POST_ as part of a parameter, or included in the HTTP request header.
+1. _JWTs_ can be added to the URL, sent via _POST_ as part of a parameter, or included in the HTTP request header. In practice use the header: a token in a URL ends up in server access logs, browser history and `Referer` headers, which is how bearer tokens leak.
 2. It contains a payload with information about the sender, issued date, expiration date, etc.
 3. _JWTs_ are usually generated during the authentication phase. Once the user is logged in, the previously generated _JWT_ allows access to resources without additional calls to databases.
 4. They can be used to exchange information between services securely, ensuring that it was not modified during transmission. This is possible because the signature is calculated using the header and payload.
@@ -40,7 +40,7 @@ Authorization: Bearer <token>
 
 **JWTs** are structured in three parts separated by dots:
 
-- **Header**: Contains the **token type** (_jwt_) and the **hashing algorithm** like _SHA256_ or _RSA_.
+- **Header**: Contains the **token type** (_jwt_) and the **signing algorithm** in the `alg` field — for example `HS256` (HMAC using SHA-256, with a shared secret) or `RS256` (RSA signature using SHA-256, with a private/public key pair). Note these are signature algorithms, not plain hash functions: a bare hash would prove nothing about who produced the token.
 - **Payload**: Contains claims, which are metadata (subjects, senders, expiration date). There are three kinds of claims: registered, public, and private.
 - **Signature**: The combination of the **header**, **payload**, **secret**, and the **algorithm** specified in the header. The signature ensures that nothing has changed.
 

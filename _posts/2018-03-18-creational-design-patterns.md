@@ -456,4 +456,242 @@ This is the preferred way.
 
 - Your singleton **cannot extend another class**, since an `enum` already extends `java.lang.Enum` (it can still implement interfaces)
 
+## Builder
+
+```mermaid
+classDiagram
+class Email {
+	<<immutable>>
+}
+Email: -String from
+Email: -String to
+Email: -String subject
+Email: -String body
+Email: +builder(String from, String to) Builder
+
+class Builder {
+	
+}
+Builder: +subject(String subject) Builder
+Builder: +body(String body) Builder
+Builder: +cc(String address) Builder
+Builder: +build() Email
+
+class Client {
+	
+}
+
+Email ..> Builder : declares as nested class
+Client --> Builder : sets one field at a time
+Builder --> Email : creates on build()
+```
+
+It lets you construct an object step by step, so the code that assembles the object is separated from the object itself.
+
+This pattern solves the problem of a class with many constructor parameters, most of them optional. Without it you end up with **telescoping constructors** — a chain of overloads taking two, then three, then four arguments — which are painful to read at the call site, because `new Email(from, to, null, null, subject)` gives the reader no clue which argument is which. The alternative of a no-arg constructor plus setters is no better: it forces the class to be mutable and leaves the object in a half-built state in between.
+
+A builder gives you named, chainable methods and lets the object stay **immutable**, since all the values are collected first and handed over in one go.
+
+>Keep in mind that a builder means writing and maintaining a second class that mirrors the fields of the first one. For a class with two or three required fields and nothing optional, a plain constructor is the better choice.
+
+### Implementation
+
+1. Make the target class immutable and give it a private constructor that takes the builder:
+
+    ```java
+    public class Email {
+
+        private final String from;
+        private final String to;
+        private final String subject;
+        private final String body;
+        private final List<String> cc;
+
+        private Email(Builder builder) {
+            this.from = builder.from;
+            this.to = builder.to;
+            this.subject = builder.subject;
+            this.body = builder.body;
+            this.cc = List.copyOf(builder.cc);
+        }
+
+        public static Builder builder(String from, String to) {
+            return new Builder(from, to);
+        }
+
+        // getters...
+    }
+    ```
+
+2. Add the builder as a static nested class. Required values go in its constructor, optional ones get a method that returns the builder itself so calls can be chained:
+
+    ```java
+    public static class Builder {
+
+        private final String from;
+        private final String to;
+        private String subject = "";
+        private String body = "";
+        private final List<String> cc = new ArrayList<>();
+
+        private Builder(String from, String to) {
+            this.from = Objects.requireNonNull(from, "from is required");
+            this.to = Objects.requireNonNull(to, "to is required");
+        }
+
+        public Builder subject(String subject) {
+            this.subject = subject;
+            return this;
+        }
+
+        public Builder body(String body) {
+            this.body = body;
+            return this;
+        }
+
+        public Builder cc(String address) {
+            this.cc.add(address);
+            return this;
+        }
+
+        public Email build() {
+            return new Email(this);
+        }
+    }
+    ```
+
+    >`build()` is the right place for any validation that involves more than one field, since it is the only point at which the whole object is known.
+
+3. The client reads as a description of what it is building:
+
+    ```java
+    Email email = Email.builder("me@example.com", "you@example.com")
+            .subject("Design patterns")
+            .body("Have a look at the builder pattern")
+            .cc("team@example.com")
+            .build();
+    ```
+
+**Advantages**:
+
+- The call site is **self-documenting**, so you do not have to count arguments.
+- The built object can be **immutable**.
+- Optional fields cost nothing — you only mention the ones you want.
+
+**Disadvantages**:
+
+- **More code to maintain**, and the builder has to be kept in sync with the fields of the target class.
+- The object is only validated at `build()` time rather than at compile time, so a missing required field is a runtime failure unless you put it in the builder's constructor as above.
+
+## Prototype
+
+```mermaid
+classDiagram
+class Document {
+	
+}
+Document: -String title
+Document: -List sections
+Document: +clone() Document
+
+class Client {
+	
+}
+
+Client --> Document : asks an existing instance to copy itself
+Document --> Document : clone() returns a new instance
+```
+
+It creates new objects by copying an existing instance instead of building one from scratch.
+
+This is worth reaching for when creating an object is expensive — it needs a database round trip, parses a file, or does heavy computation — and you need many objects that only differ slightly. You pay the cost once to produce a fully initialized *prototype*, then copy it.
+
+In _Java_ the language-level support for this is `Cloneable` and `Object.clone()`, but be aware that it is a famously awkward API: `Cloneable` is a marker interface that declares no methods, `clone()` is `protected` on `Object`, and it throws a checked `CloneNotSupportedException` that you almost always have to swallow.
+
+>Because of that, a **copy constructor** or a static **copy factory** is usually the better option in _Java_ — they are ordinary code with no checked exception, no cast and no reliance on `super.clone()`. _Effective Java_ recommends them over `Cloneable` for exactly these reasons. Both are shown below.
+
+### Implementation
+
+1. The `Cloneable` approach. The important part is the **shallow copy trap**: `super.clone()` copies field values, so every reference field in the copy still points at the *same* object as the original. Any mutable field has to be copied explicitly:
+
+    ```java
+    public class Document implements Cloneable {
+
+        private String title;
+        private List<String> sections;
+
+        public Document(String title, List<String> sections) {
+            this.title = title;
+            this.sections = sections;
+        }
+
+        @Override
+        public Document clone() {
+            try {
+                Document copy = (Document) super.clone();
+                // without this line both documents would share one list
+                copy.sections = new ArrayList<>(this.sections);
+                return copy;
+            } catch (CloneNotSupportedException e) {
+                throw new AssertionError("Document is Cloneable", e);
+            }
+        }
+
+        public void addSection(String section) {
+            this.sections.add(section);
+        }
+    }
+    ```
+
+    The difference is easy to demonstrate:
+
+    ```java
+    Document original = new Document("Patterns", new ArrayList<>(List.of("Intro")));
+    Document copy = original.clone();
+
+    copy.addSection("Builder");
+    // with the list copied:   original has 1 section, copy has 2
+    // without it:            both have 2, because they share the same list
+    ```
+
+    >`String` needs no special handling here because it is immutable — sharing it between the two objects is harmless. Only **mutable** reference fields have to be copied.
+
+2. The copy constructor, which is the idiomatic alternative and lets the class stay immutable:
+
+    ```java
+    public class Document {
+
+        private final String title;
+        private final List<String> sections;
+
+        public Document(String title, List<String> sections) {
+            this.title = title;
+            this.sections = List.copyOf(sections);
+        }
+
+        public Document(Document other) {
+            this(other.title, other.sections);
+        }
+
+        public Document withTitle(String newTitle) {
+            return new Document(newTitle, this.sections);
+        }
+    }
+    ```
+
+    ```java
+    Document original = new Document("Patterns", List.of("Intro"));
+    Document renamed = original.withTitle("Creational Patterns");
+    ```
+
+**Advantages**:
+
+- Avoids **repeating expensive initialization** for every new object.
+- The client can copy an object **without knowing its concrete class**, when `clone()` is exposed through an interface.
+
+**Disadvantages**:
+
+- Deciding **how deep the copy should go** is the hard part, and getting it wrong produces objects that quietly share state.
+- `Cloneable` **bypasses constructors**, so any invariant your constructor enforces is not applied to the copy — another reason to prefer a copy constructor.
+
 Image by <a href="https://pixabay.com/users/foundry-923783/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=869221">Foundry Co</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=869221">Pixabay</a>

@@ -10,13 +10,15 @@ mermaid: false
 layout: post
 ---
 
-Storing passwords is a difficult task when we need to satisfy all the data protection laws, and it is getting even tougher with the rise of [GDPR](https://eugdpr.org/){:target="_blank"}, the new European regulation in data privacy. Therefore, we have to make sure all your sensitive data is encrypted and, to do that, we can use hashing algorithms.
+Storing passwords is a difficult task when we need to satisfy all the data protection laws, and it is getting even tougher with the rise of [GDPR](https://eugdpr.org/){:target="_blank"}, the new European regulation in data privacy. Therefore, we have to make sure all our sensitive data is protected, and for passwords specifically that means hashing rather than encrypting them.
+
+>Hashing is not encryption. Encryption is reversible — whoever holds the key can recover the original value — whereas a hash is a one-way function with no way back. That is exactly the property you want for passwords: you never need to read a password back, only to check whether a supplied one matches, so a leaked database of hashes does not hand the attacker the passwords themselves.
 
 When we want to hash passwords to store them in a database, Bcrypt is the way to go and there are many libraries for different languages.
 
 ## Java Implementation
 
-If you language of choice is Java you can use BCrypt with the library included in the **Spring Security** module.
+If your language of choice is Java you can use BCrypt with the library included in the **Spring Security** module.
 
 ```xml
 <dependency>      
@@ -51,13 +53,13 @@ Operations:
     BCrypt.checkpw(unencryptedPassword, hashPassword)
     ```
 
-    This method checks that an unencrypted password matches the one that was previously hashed and ensures that it is stored somewhere.
+    This method hashes the supplied plaintext password using the salt it reads out of `hashPassword`, then compares the two hashes and returns whether they match.
 
 ## Conclusion
 
-*BCrypt* is very good hash algorithm for preventing **rainbow table attacks** by keeping the *salt* as part of the output from the *BCrypt* function. The idea is that every password has an unique *salt* that is incorporated in the password hash so a hacker cannot create a rainbow table for every password, since a rainbow table works on the principle that more than one plain text password can have the same hash value. If a rainbow table wants to be generated, it will take an enormous amount of time, so it makes brute-forcing pointless.
+*BCrypt* is a very good hash algorithm for preventing **rainbow table attacks**, because it keeps the *salt* as part of the output from the *BCrypt* function. The idea is that every password gets a unique *salt* that is incorporated into the hash, so the same password produces a different hash for every user. A precomputed table is only useful against one salt, so an attacker would have to build a separate table per password — which is what makes the approach infeasible rather than merely slow.
 
-> A Rainbow table is a precomputed table that contains plaintext passwords and their corresponding hash values that can be used to find the text that generates a particular hash. Hackers can use it for cracking hashed passwords stored in a database.
+> A Rainbow table is a precomputed structure that maps hash values back to the plaintext that produced them, letting an attacker reverse a stolen hash by lookup instead of by guessing. It trades memory for time by storing chains of repeated hash-and-reduce steps rather than every pair outright. Hackers can use it for cracking unsalted hashed passwords stored in a database.
 
 **Bcrypt** is 10,000 times slower than _sha1_ to run. If we have a machine that is able to run it in 100ms, this is probably fast enough for login, but it might be too slow if we want to execute _Bcrypt_ against a long list of passwords. In consequence, if a hacker wants to run _Bcrypt_ a billion times by using the same computational power, it will take 27,777 hours.
 
