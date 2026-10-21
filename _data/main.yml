@@ -34,10 +34,8 @@ menu:
   - title: Blog
     link: /articles/
 
-  - title: Contact
-    link: /contact/
-
-smart-forms: https://smartforms.dev/submit/60453f2ab81854118fd4172f
+# Contact form removed: the site no longer collects email submissions.
+# smart-forms: https://smartforms.dev/submit/60453f2ab81854118fd4172f
 # formspree-url: https://formspree.io/f/mbjpvwvd
 
 # Social icons in the sidebar
